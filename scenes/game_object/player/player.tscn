@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=6 format=3 uid="uid://bt0gofikr4hk1"]
 
-[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_qthq0"]
-[ext_resource type="Texture2D" uid="uid://b1whw6aqbcova" path="res://scenes/player/player.png" id="2_8jy7g"]
+[ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
+[ext_resource type="Texture2D" uid="uid://b1whw6aqbcova" path="res://scenes/game_object/player/player.png" id="2_8jy7g"]
 [ext_resource type="PackedScene" uid="uid://dn43l46e1c2ia" path="res://scenes/abilities/sword_ability_controller/sword_ability_controller.tscn" id="2_kwagp"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xg3yu"]
+radius = 13.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_5pqvn"]
-radius = 5.09902
+radius = 7.07107
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 0
@@ -15,10 +18,17 @@ script = ExtResource("1_qthq0")
 
 [node name="SwordAbilityController" parent="AbilityManager" instance=ExtResource("2_kwagp")]
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_xg3yu")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
 texture = ExtResource("2_8jy7g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -5)
+position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_5pqvn")
