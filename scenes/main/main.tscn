@@ -1,12 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://boh3510we3axq"]
+[gd_scene load_steps=13 format=3 uid="uid://boh3510we3axq"]
 
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="1_2mbce"]
+[ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_time_manager.tscn" id="1_qlqaq"]
 [ext_resource type="TileSet" uid="uid://dwsf4rskaeij1" path="res://resources/tileset.tres" id="2_fnx2h"]
+[ext_resource type="PackedScene" uid="uid://dxfu1qsn6132b" path="res://scenes/manager/experience_manager.tscn" id="2_ne1l0"]
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="3_hl5nt"]
+[ext_resource type="PackedScene" uid="uid://ikj4gkqleps3" path="res://scenes/UI/experience_bar.tscn" id="3_najmh"]
+[ext_resource type="PackedScene" uid="uid://cyrb5xnbn6ue3" path="res://scenes/manager/upgrade_manager.tscn" id="3_ykbaa"]
+[ext_resource type="Resource" uid="uid://cnhr4njlfqo3o" path="res://resources/upgrades/sword_rate.tres" id="4_3ldsn"]
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="4_om0pk"]
 [ext_resource type="PackedScene" uid="uid://cvge35d7xmioq" path="res://scenes/game_object/experience_vial/experience_vial.tscn" id="5_w386v"]
+[ext_resource type="PackedScene" uid="uid://dwtexgju11qmh" path="res://scenes/UI/arena_time/arena_time_ui.tscn" id="6_nxqro"]
+[ext_resource type="PackedScene" uid="uid://begx3mv0xqkc8" path="res://scenes/spawner/enemy_spawner.tscn" id="10_jt7o2"]
 
 [node name="Main" type="Node2D"]
+
+[node name="Managers" type="Node" parent="."]
+
+[node name="ArenaTimeManager" parent="Managers" instance=ExtResource("1_qlqaq")]
+
+[node name="ExperienceManager" parent="Managers" instance=ExtResource("2_ne1l0")]
+
+[node name="UpgradeManager" parent="Managers" node_paths=PackedStringArray("experience_manager") instance=ExtResource("3_ykbaa")]
+upgrade_pool = Array[Resource("res://resources/upgrades/ability_upgrade.gd")]([ExtResource("4_3ldsn")])
+experience_manager = NodePath("../ExperienceManager")
+
+[node name="UI" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="ArenaTimeUI" parent="UI" node_paths=PackedStringArray("arena_time_manager") instance=ExtResource("6_nxqro")]
+arena_time_manager = NodePath("../../Managers/ArenaTimeManager")
+
+[node name="ExperienceBar" parent="UI" node_paths=PackedStringArray("experience_manager") instance=ExtResource("3_najmh")]
+experience_manager = NodePath("../../Managers/ExperienceManager")
 
 [node name="GameCamera" parent="." instance=ExtResource("1_2mbce")]
 
@@ -23,3 +49,12 @@ position = Vector2(173, 142)
 
 [node name="Node2D" parent="." instance=ExtResource("5_w386v")]
 position = Vector2(223, 116)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("10_jt7o2")]
+position = Vector2(111, 248)
+
+[node name="EnemySpawner2" parent="." instance=ExtResource("10_jt7o2")]
+position = Vector2(242, 296)
+
+[node name="EnemySpawner3" parent="." instance=ExtResource("10_jt7o2")]
+position = Vector2(474, 228)

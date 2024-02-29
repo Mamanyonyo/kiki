@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var enemy_scene: PackedScene = preload("res://scenes/enemies/basic_enemy/basic_enemy.tscn")
+@export var enemy_scene: PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

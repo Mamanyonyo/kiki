@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://uaspwlkb042h"]
+
+[ext_resource type="Script" path="res://scenes/UI/ability_upgrade_card.gd" id="1_8evxb"]
+
+[node name="AbilityUpgradeCard" type="PanelContainer" node_paths=PackedStringArray("name_label", "description_label")]
+process_mode = 3
+custom_minimum_size = Vector2(200, 150)
+script = ExtResource("1_8evxb")
+name_label = NodePath("VBoxContainer/Name")
+description_label = NodePath("VBoxContainer/Description")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Name"
+
+[node name="Description" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Description"
+autowrap_mode = 2
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

@@ -1,17 +1,8 @@
 extends Node
 
 @export var sword_ability: PackedScene
-
+@export var damage: float = 5
 @export var max_range: float = 150
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
 
 
 func _on_timer_timeout():
@@ -28,7 +19,8 @@ func _on_timer_timeout():
 		return a_distance < b_distance
 	)
 	var closest_enemy = enemies[0] as Node2D
-	var sword_instance = sword_ability.instantiate() as Node2D
+	var sword_instance = sword_ability.instantiate() as SwordAbility
+	sword_instance.hitbox_component.damage = damage
 	var direction_to_enemy = closest_enemy.global_position - sword_instance.global_position
 	sword_instance.rotation = direction_to_enemy.angle()
 	sword_instance.global_position += Vector2.RIGHT.rotated(randf_range(0, TAU)) * 4

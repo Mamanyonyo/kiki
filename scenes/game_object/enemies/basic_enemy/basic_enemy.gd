@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 const MAX_SPEED = 40
 
+@export var health_component: HealthComponent
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -16,7 +18,3 @@ func _process(_delta):
 func get_direction_to_player():
 	var player_node = get_tree().get_first_node_in_group("Player") as Node2D
 	return (player_node.global_position - global_position).normalized()
-
-
-func _on_area_2d_area_entered(_area):
-	queue_free()

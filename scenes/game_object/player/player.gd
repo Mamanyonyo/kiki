@@ -3,6 +3,8 @@ extends CharacterBody2D
 const MAX_SPEED = 125
 const ACCELERATION_SMOOTHING = 25
 
+@onready var health_component: HealthComponent = $HealthComponent
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -20,3 +22,7 @@ func get_movement_vector():
 	var x_movement = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var y_movement = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	return Vector2(x_movement, y_movement)
+
+func _on_area_2d_area_entered(area):
+	print("asd")
+	health_component.damage(5)
