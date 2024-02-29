@@ -10,7 +10,9 @@ radius = 4.0
 radius = 8.0
 
 [node name="BasicEnemy" type="CharacterBody2D" groups=["Enemy"]]
-collision_layer = 0
+collision_layer = 8
+collision_mask = 9
+motion_mode = 1
 script = ExtResource("1_ms8tp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
