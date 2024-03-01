@@ -1,19 +1,12 @@
-extends CharacterBody2D
+class_name BasicEnemy extends CharacterBody2D
 
-const MAX_SPEED = 40
-
-@export var health_component: HealthComponent
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
+@onready var health_component = $HealthComponent
+@onready var velocity_component = $VelocityComponent
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	var direction = get_direction_to_player()
-	velocity = direction * MAX_SPEED
-	move_and_slide()
+	velocity_component.accelerate_to_player()
+	velocity_component.move(self)
 
 func get_direction_to_player():
 	var player_node = get_tree().get_first_node_in_group("Player") as Node2D

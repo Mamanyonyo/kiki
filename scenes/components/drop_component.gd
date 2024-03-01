@@ -1,7 +1,7 @@
 extends Node
 
 @export var droppeable: PackedScene = preload("res://scenes/game_object/experience_vial/experience_vial.tscn")
-@export var health_component: HealthComponent
+@export var health_component:HealthComponent
 
 func _ready():
 	health_component.died.connect(on_death)

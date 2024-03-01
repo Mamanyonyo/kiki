@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c2jj2brx37ewn"]
+
+[ext_resource type="FontFile" uid="uid://tlnueg7rxgib" path="res://resources/theme/Times-New-Roman-MT-Std-Bold-Condensed.otf" id="1_sivgw"]
+
+[resource]
+default_font = ExtResource("1_sivgw")
+default_font_size = 16

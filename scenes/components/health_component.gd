@@ -13,7 +13,7 @@ func _ready():
 
 func damage(incoming_damage: float):
 	health -= incoming_damage
-	health_changed.emit()
+	health_changed.emit(health, max_health)
 	Callable(check_death).call_deferred()
 	
 func check_death():

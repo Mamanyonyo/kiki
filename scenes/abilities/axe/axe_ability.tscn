@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://5uuivlmn8b7"]
+
+[ext_resource type="Texture2D" uid="uid://dhfeibut6kgcm" path="res://free_assets/Tiles/tile_0118.png" id="1_7obit"]
+[ext_resource type="Script" path="res://scenes/abilities/axe/axe_ability.gd" id="1_v6wpk"]
+
+[node name="AxeAbility" type="Node2D"]
+script = ExtResource("1_v6wpk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_7obit")
