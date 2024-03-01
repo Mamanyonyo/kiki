@@ -1,9 +1,15 @@
 extends Node
 
+@export var timer_ref: Timer 
+
 @export var sword_ability: PackedScene
 @export var damage: float = 5
 @export var max_range: float = 150
+@export var base_wait_time: float = 2.5
 
+func _ready():
+	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
+	timer_ref.wait_time = base_wait_time
 
 func _on_timer_timeout():
 	var player = get_tree().get_first_node_in_group("Player") as Node2D
@@ -24,5 +30,13 @@ func _on_timer_timeout():
 	var direction_to_enemy = closest_enemy.global_position - sword_instance.global_position
 	sword_instance.rotation = direction_to_enemy.angle()
 	sword_instance.global_position += Vector2.RIGHT.rotated(randf_range(0, TAU)) * 4
-	player.get_parent().add_child(sword_instance)
+	var foreground_layer = get_tree().get_first_node_in_group("foreground_layer")
+	foreground_layer.add_child(sword_instance)
 	sword_instance.global_position = closest_enemy.global_position
+	
+func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
+	if upgrade.id != "sword_rate": return
+		
+	var percent_reduction = current_upgrades["sword_rate"]["quantity"] * .1
+	timer_ref.wait_time = base_wait_time * (1 - percent_reduction)
+	timer_ref.start()

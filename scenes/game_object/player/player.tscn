@@ -1,39 +1,86 @@
-[gd_scene load_steps=7 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=10 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
 [ext_resource type="Texture2D" uid="uid://b1whw6aqbcova" path="res://scenes/game_object/player/player.png" id="2_8jy7g"]
 [ext_resource type="PackedScene" uid="uid://dn43l46e1c2ia" path="res://scenes/abilities/sword_ability_controller/sword_ability_controller.tscn" id="2_kwagp"]
 [ext_resource type="PackedScene" uid="uid://cquarnyd0pw5t" path="res://scenes/components/health_component.tscn" id="2_s8m81"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3c6nl"]
+bg_color = Color(0.247059, 0.117647, 0.0666667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tqgmx"]
+bg_color = Color(1, 0, 0.168627, 1)
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color(0.247059, 0.117647, 0.0666667, 1)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_xg3yu"]
 radius = 13.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5pqvn"]
-radius = 7.07107
+[sub_resource type="CircleShape2D" id="CircleShape2D_hg7kp"]
+radius = 7.0
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_5pqvn"]
+radius = 5.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "damage_timer", "hp_bar") groups=["Player"]]
 collision_layer = 0
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_qthq0")
+health_component = NodePath("HealthComponent")
+damage_timer = NodePath("DamageIntervalTimer")
+hp_bar = NodePath("HealthBar")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_s8m81")]
+max_health = 15.0
 
 [node name="AbilityManager" type="Node" parent="."]
 
 [node name="SwordAbilityController" parent="AbilityManager" instance=ExtResource("2_kwagp")]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="DamageIntervalTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(16, 2)
+offset_left = -8.0
+offset_right = 8.0
+offset_bottom = 4.0
+pivot_offset = Vector2(8, 2)
+theme_override_styles/background = SubResource("StyleBoxFlat_3c6nl")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tqgmx")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="PickupArea2D" type="Area2D" parent="."]
 collision_layer = 16
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="PickupArea2D"]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_xg3yu")
+
+[node name="CollisionArea2D" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea2D"]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_hg7kp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
 texture = ExtResource("2_8jy7g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -7)
+position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_5pqvn")
+
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="timeout" from="DamageIntervalTimer" to="." method="_on_damage_interval_timer_timeout"]
+[connection signal="body_entered" from="CollisionArea2D" to="." method="_on_collision_area_2d_body_entered"]
+[connection signal="body_exited" from="CollisionArea2D" to="." method="_on_collision_area_2d_body_exited"]

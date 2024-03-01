@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://scenes/abilities/sword_ability_controller/sword_ability_controller.gd" id="1_l2dbw"]
 [ext_resource type="PackedScene" uid="uid://bf0sbumom56ba" path="res://scenes/abilities/sword/sword_ability.tscn" id="2_8l2k3"]
 
-[node name="SwordAbilityController" type="Node"]
+[node name="SwordAbilityController" type="Node" node_paths=PackedStringArray("timer_ref")]
 script = ExtResource("1_l2dbw")
+timer_ref = NodePath("Timer")
 sword_ability = ExtResource("2_8l2k3")
 
 [node name="Timer" type="Timer" parent="."]

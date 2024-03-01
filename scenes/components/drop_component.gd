@@ -10,5 +10,6 @@ func on_death():
 	if droppeable == null: return
 	var spawn_position = owner.global_position
 	var drop_instance = droppeable.instantiate() as Node2D
-	owner.get_parent().add_child(drop_instance)
+	var entities_layer = get_tree().get_first_node_in_group("entities_layer") as Node2D
+	entities_layer.add_child(drop_instance)
 	drop_instance.global_position = spawn_position

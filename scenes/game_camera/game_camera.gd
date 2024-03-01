@@ -14,4 +14,5 @@ func _process(delta):
 
 func acquire_target():
 	var player_node = get_tree().get_first_node_in_group("Player") as Node2D;
+	if player_node == null: return
 	target_position = player_node.global_position;

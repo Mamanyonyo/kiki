@@ -3,11 +3,16 @@ extends CharacterBody2D
 const MAX_SPEED = 125
 const ACCELERATION_SMOOTHING = 25
 
-@onready var health_component: HealthComponent = $HealthComponent
+@export var health_component: HealthComponent
+@export var damage_timer: Timer
+
+@export var hp_bar: ProgressBar
+
+var colliding_bodies = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	update_health_display()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,3 +31,24 @@ func get_movement_vector():
 func _on_area_2d_area_entered(area):
 	print("asd")
 	health_component.damage(5)
+
+func check_deal_damage():
+	if colliding_bodies == 0 || !damage_timer.is_stopped(): return
+	health_component.damage(1)
+	damage_timer.start()
+
+func update_health_display():
+	hp_bar.value = health_component.get_health_percent()
+
+func _on_collision_area_2d_body_entered(body: Node2D) -> void:
+	colliding_bodies += 1
+	check_deal_damage()
+
+func _on_collision_area_2d_body_exited(body: Node2D) -> void:
+	colliding_bodies -= 1
+
+func _on_damage_interval_timer_timeout() -> void:
+	check_deal_damage()
+
+func _on_health_component_health_changed() -> void:
+	update_health_display()
