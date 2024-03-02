@@ -1,11 +1,82 @@
-[gd_scene load_steps=3 format=3 uid="uid://mh4nvhc0ty7i"]
+[gd_scene load_steps=7 format=3 uid="uid://mh4nvhc0ty7i"]
 
 [ext_resource type="PackedScene" uid="uid://uaspwlkb042h" path="res://scenes/UI/ability_upgrade_card.tscn" id="1_7kdav"]
 [ext_resource type="Script" path="res://scenes/UI/upgrade_screen.gd" id="1_efi7m"]
 
-[node name="UpgradeScreen" type="CanvasLayer"]
+[sub_resource type="Animation" id="Animation_qppgg"]
+resource_name = "in"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_iriwx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_c544t"]
+resource_name = "out"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uwpml"]
+_data = {
+"RESET": SubResource("Animation_iriwx"),
+"in": SubResource("Animation_qppgg"),
+"out": SubResource("Animation_c544t")
+}
+
+[node name="UpgradeScreen" type="CanvasLayer" node_paths=PackedStringArray("animation_player")]
+process_mode = 3
 script = ExtResource("1_efi7m")
 upgrade_card_scene = ExtResource("1_7kdav")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uwpml")
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.678431, 1, 0.113725)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15

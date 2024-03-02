@@ -29,7 +29,6 @@ func get_movement_vector():
 	return Vector2(x_movement, y_movement)
 
 func _on_area_2d_area_entered(area):
-	print("asd")
 	health_component.damage(5)
 
 func check_deal_damage():

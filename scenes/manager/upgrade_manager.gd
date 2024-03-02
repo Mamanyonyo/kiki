@@ -10,11 +10,9 @@ func _ready():
 	experience_manager.leveled_up.connect(on_level_up)
 	
 func on_level_up(_on_level_up: float):
-	var chosen_upgrade = upgrade_pool.pick_random() as AbilityUpgrade
-	if chosen_upgrade == null: return
 	var upgrade_screen_instance = upgrade_screen_scene.instantiate()
 	ui_ref.add_child(upgrade_screen_instance)
-	upgrade_screen_instance.set_ability_upgrades([chosen_upgrade] as Array[AbilityUpgrade])
+	upgrade_screen_instance.set_ability_upgrades(upgrade_pool)
 	upgrade_screen_instance.upgrade_selected.connect(on_upgrade_selected)
 	
 

@@ -4,5 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://mh4nvhc0ty7i" path="res://scenes/UI/upgrade_screen.tscn" id="2_7rt61"]
 
 [node name="UpgradeManager" type="Node"]
+process_mode = 3
 script = ExtResource("1_yg61x")
 upgrade_screen_scene = ExtResource("2_7rt61")

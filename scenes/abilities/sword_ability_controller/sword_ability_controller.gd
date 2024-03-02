@@ -34,9 +34,17 @@ func _on_timer_timeout():
 	foreground_layer.add_child(sword_instance)
 	sword_instance.global_position = closest_enemy.global_position
 	
-func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
-	if upgrade.id != "sword_rate": return
-		
+func speed_upgrade(current_upgrades):
 	var percent_reduction = current_upgrades["sword_rate"]["quantity"] * .1
 	timer_ref.wait_time = base_wait_time * (1 - percent_reduction)
 	timer_ref.start()
+	
+func damage_upgrade(current_upgrades):
+	var percent = current_upgrades["sword_damage"]["quantity"] * .1
+	damage = damage * (1 + percent)
+	
+func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
+	match upgrade.id:
+		"sword_rate": speed_upgrade(current_upgrades)
+		"sword_damage": damage_upgrade(current_upgrades)
+		_: return

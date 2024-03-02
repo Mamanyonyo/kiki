@@ -21,9 +21,9 @@ func level_up_check():
 	
 func level_up():
 	current_level += 1
-	current_experience = 0 + current_experience - next_level_xp
 	next_level_xp = 10 + current_level * 5
 	leveled_up.emit(current_level)
+	current_experience = 0 + current_experience - next_level_xp
 	
 
 func on_experience_vial_collected(exp: float):
