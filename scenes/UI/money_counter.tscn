@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccg3esjfw0jcg"]
+
+[ext_resource type="Script" path="res://scenes/UI/money_counter.gd" id="1_v2v22"]
+
+[node name="MoneyCounter" type="CanvasLayer" node_paths=PackedStringArray("label")]
+script = ExtResource("1_v2v22")
+label = NodePath("MarginContainer/Label")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+text = "$0"

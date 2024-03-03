@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbhqp6kk7g2ke"]
+[gd_scene load_steps=3 format=3 uid="uid://dbhqp6kk7g2ke"]
 
 [ext_resource type="TileSet" uid="uid://dwsf4rskaeij1" path="res://resources/tileset.tres" id="1_n0vqv"]
 [ext_resource type="PackedScene" uid="uid://8tpg5227nwx7" path="res://scenes/game_object/door.tscn" id="2_tjjf3"]
-[ext_resource type="PackedScene" uid="uid://c10hgqyheml4o" path="res://scenes/areas/hallway.tscn" id="3_8f2nb"]
 
 [node name="MainArea" type="Node2D"]
 
@@ -15,5 +14,4 @@ layer_1/tile_data = PackedInt32Array()
 
 [node name="Door" parent="." instance=ExtResource("2_tjjf3")]
 position = Vector2(328, -400)
-unlocks_area = ExtResource("3_8f2nb")
-price = 1
+scene_area_path = "res://scenes/areas/hallway.tscn"
