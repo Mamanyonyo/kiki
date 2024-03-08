@@ -1,4 +1,4 @@
-extends Node
+class_name VelocityComponent extends Node
 
 @export var max_speed: int = 40
 @export var acceleration: float = 5

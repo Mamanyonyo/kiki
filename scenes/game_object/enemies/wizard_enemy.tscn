@@ -15,7 +15,7 @@ radius = 4.0
 
 [node name="WizardEnemy" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 8
-collision_mask = 9
+collision_mask = 73
 script = ExtResource("1_jmrdh")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_rsl6b")]

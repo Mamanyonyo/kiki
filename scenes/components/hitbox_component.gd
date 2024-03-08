@@ -1,4 +1,5 @@
 extends Area2D
 class_name HitboxComponent
 
-var damage: float
+@export var damage: float = 20
+@export_enum("PLAYER", "ENEMY", "EVERYONE") var target : int = 0

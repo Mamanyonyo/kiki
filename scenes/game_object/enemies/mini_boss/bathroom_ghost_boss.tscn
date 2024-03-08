@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://ceadovw1lg8su"]
+
+[ext_resource type="Script" path="res://scenes/game_object/enemies/mini_boss/bathroom_ghost_boss.gd" id="1_6qcya"]
+[ext_resource type="PackedScene" uid="uid://cquarnyd0pw5t" path="res://scenes/components/health_component.tscn" id="1_57cup"]
+[ext_resource type="PackedScene" uid="uid://c1ooxaf6n4m4" path="res://scenes/components/velocity_component.tscn" id="2_grfn0"]
+[ext_resource type="PackedScene" uid="uid://civstynml3v51" path="res://scenes/components/hurtbox_component.tscn" id="3_irxdf"]
+[ext_resource type="Texture2D" uid="uid://dfh8xqth57l17" path="res://assets/enemy/ghost.png" id="5_cpmfm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o76m4"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kgmmg"]
+radius = 9.05539
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bv1co"]
+radius = 7.0
+
+[node name="BathroomGhostBoss" type="CharacterBody2D" node_paths=PackedStringArray("event_shape", "JumpCDTimer", "area_cd_timer", "sprite")]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_6qcya")
+event_shape = NodePath("Sprite2D/EventArea2D/CollisionShape2D2")
+JumpCDTimer = NodePath("JumpCD")
+area_cd_timer = NodePath("Timer")
+sprite = NodePath("Sprite2D")
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_57cup")]
+max_health = 120.0
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_grfn0")]
+max_speed = 50
+acceleration = 10.0
+
+[node name="JumpCD" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.11
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("5_cpmfm")
+hframes = 3
+vframes = 2
+
+[node name="EventArea2D" type="Area2D" parent="Sprite2D"]
+position = Vector2(0, 9)
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Sprite2D/EventArea2D"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_o76m4")
+disabled = true
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_irxdf")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, -13)
+shape = SubResource("CircleShape2D_kgmmg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_bv1co")
+
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="timeout" from="JumpCD" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_area_cd_timeout"]
+[connection signal="body_entered" from="Sprite2D/EventArea2D" to="." method="_on_event_area_2d_body_entered"]
+[connection signal="body_exited" from="Sprite2D/EventArea2D" to="." method="_on_event_area_2d_body_exited"]

@@ -6,6 +6,9 @@ var floating_text_scene: PackedScene = preload("res://scenes/UI/floating_text.ts
 
 func _on_area_entered(other_area: Area2D):
 	if not other_area is HitboxComponent || health_component == null: return
+	if other_area.is_in_group("projectile"):
+		other_area.pierced += 1
+		if other_area.pierced >= other_area.max_pierce: other_area.queue_free()
 	
 	var hitbox_component = other_area as HitboxComponent
 	health_component.damage(hitbox_component.damage)
