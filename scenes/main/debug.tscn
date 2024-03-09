@@ -47,6 +47,10 @@ money_manager = NodePath("../../Managers/MoneyManager")
 
 [node name="BossRoom" parent="Areas" instance=ExtResource("11_imdw0")]
 
+[node name="TileMap" parent="Areas/BossRoom" index="0"]
+layer_1/tile_data = PackedInt32Array(524301, 655361, 0, 589837, 655361, 0, 655373, 655361, 0, 720909, 655361, 0, 786445, 655361, 0, 851981, 655361, 0, 917517, 655361, 0, 524312, 720897, 0, 589848, 720897, 0, 655384, 720897, 0, 720920, 720897, 0, 786456, 720897, 0, 851992, 720897, 0, 917528, 720897, 0, 983053, 655361, 0, 458766, 589825, 0, 1048590, 589825, 1, 458767, 589825, 0, 1048591, 589825, 1, 458768, 589825, 0, 1048592, 589825, 1, 458769, 589825, 0, 1048593, 589825, 1, 1048594, 589825, 1, 1048595, 589825, 1, 458772, 589825, 0, 1048596, 589825, 1, 458773, 589825, 0, 1048597, 589825, 1, 458774, 589825, 0, 1048598, 589825, 1, 458775, 589825, 0, 1048599, 589825, 1, 983064, 720897, 0, 458765, 655361, 0, 458776, 720897, 0, 1048600, 720897, 0, 1048589, 655361, 0)
+layer_3/tile_data = PackedInt32Array()
+
 [node name="Marker2D" parent="Areas/BossRoom/TileMap/Area2D/CollisionShape2D" index="0"]
 position = Vector2(-32, 24)
 
@@ -64,6 +68,6 @@ position = Vector2(141, 288)
 [node name="GameEvents" parent="." instance=ExtResource("14_ghljg")]
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(176, 144)
+position = Vector2(176, 131)
 
 [editable path="Areas/BossRoom"]
