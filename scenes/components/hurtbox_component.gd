@@ -17,4 +17,4 @@ func _on_area_entered(other_area: Area2D):
 	get_tree().get_first_node_in_group("foreground_layer").add_child(floating_text)
 	
 	floating_text.global_position = global_position
-	floating_text.start(str(hitbox_component.damage))
+	floating_text.start(str(hitbox_component.damage - health_component.max_resistance - health_component.bonus_resistance))

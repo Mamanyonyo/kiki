@@ -285,6 +285,7 @@ hitbox = NodePath("Sprite2D/BookHitbox")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_s8m81")]
 max_health = 15.0
+max_resistance = 0.0
 
 [node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("3_xj72i")
@@ -355,7 +356,6 @@ vframes = 9
 frame = 25
 
 [node name="Middle" type="Marker2D" parent="Sprite2D"]
-position = Vector2(1, 6)
 
 [node name="BookHitbox" parent="Sprite2D" instance=ExtResource("7_6vy27")]
 monitoring = false

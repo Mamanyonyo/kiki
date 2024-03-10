@@ -6,7 +6,7 @@ extends BasicEnemy
 @export var sprite: Sprite2D
 
 @export var percentage_to_activate_attack: float = 0.75
-@export var min_random_time_range: float = 1.50
+@export var min_random_time_range: float = 1
 @export var max_random_time_range: float = 3
 
 var tilemap: TileMap
@@ -14,7 +14,7 @@ var tilemap: TileMap
 enum{
 	DEFAULT,
 	CHASING_CLOSEST_TOILET,
-	CORRECT_POSITION,
+	IN_TOILET,
 	SPECIAL_ATTACK
 }
 
@@ -24,6 +24,7 @@ var objective_direction: Vector2 = Vector2(0, 0)
 var selected_toilet_tilemap_pos: Vector2i
 var closest_toilet_pos: Vector2
 
+var jumped = 0
 
 
 
@@ -36,12 +37,10 @@ func _process(_delta):
 		CHASING_CLOSEST_TOILET:
 			velocity_component.accelerate_in_direction(objective_direction)
 			velocity_component.move(self)
-		CORRECT_POSITION:
-			global_position = closest_toilet_pos
-			var player_center = get_tree().get_first_node_in_group("Player").get_node("Sprite2D/Middle").global_position
-			sprite.look_at(player_center)
 		SPECIAL_ATTACK:
-			pass
+			velocity = objective_direction * (velocity_component.max_speed + velocity_component.bonus_speed)
+			move_and_slide()
+		IN_TOILET: pass
 		_:
 			velocity_component.accelerate_to_player()
 			velocity_component.move(self)
@@ -68,32 +67,55 @@ func sort_closest(a, b):
 	return global_position.distance_squared_to(a["position"]) < global_position.distance_squared_to(b["position"])
 
 func _on_event_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	if !body.is_in_group("player") && (state == CHASING_CLOSEST_TOILET || state == SPECIAL_ATTACK):
+	var tilemap_pos = tilemap.get_coords_for_body_rid(body_rid)
+	var not_in_the_same_axis = tilemap_pos.x != selected_toilet_tilemap_pos.x && tilemap_pos.y != selected_toilet_tilemap_pos.y
+	var distance_between_toilets = abs(abs(tilemap_pos.x - selected_toilet_tilemap_pos.x) - abs(tilemap_pos.y - selected_toilet_tilemap_pos.y))
+	var is_opposite_side = distance_between_toilets == 9 || distance_between_toilets == 11
+	if !body.is_in_group("player") && state != DEFAULT && (state == CHASING_CLOSEST_TOILET || state == SPECIAL_ATTACK) && (not_in_the_same_axis || is_opposite_side) || jumped == 0 && state != IN_TOILET:
+		if jumped == 3:
+			velocity_component.max_speed += 25
+			return return_to_default()
+		state = IN_TOILET
 		objective_direction = Vector2(0, 0)
-		#visible = false
+		visible = false
+		sprite.frame_coords.x = 0
 		sprite.frame_coords.y = 1
-		
-		selected_toilet_tilemap_pos = tilemap.get_coords_for_body_rid(body_rid)
+		sprite.position.y = 0
+		selected_toilet_tilemap_pos = tilemap_pos
 		change_tile_based_on_tilemap_pos(selected_toilet_tilemap_pos)
 		closest_toilet_pos = tilemap.global_position + Vector2(tilemap.local_to_map(tilemap.map_to_local(selected_toilet_tilemap_pos))) * 16 + Vector2(8, 8)
-		
-		velocity_component.max_speed = 500
-		JumpCDTimer.start()
-		state = CORRECT_POSITION
+		velocity_component.bonus_speed = 500
+		event_shape.set_deferred("disabled", true)
+		var rng = RandomNumberGenerator.new()
+		var random_time = rng.randi_range(min_random_time_range, max_random_time_range)
+		health_component.bonus_resistance = 3
+		JumpCDTimer.start(random_time)
 
-func _on_timer_timeout() -> void:
-	state = CHASING_CLOSEST_TOILET
-	global_position = closest_toilet_pos
+func return_to_default():
+	visible = true
+	sprite.frame_coords.y = 0
+	sprite.frame_coords.x = 0
+	velocity_component.bonus_speed = 0
+	sprite.rotation_degrees = 0
+	sprite.rotation = 0
+	sprite.position.y = -16
 	change_tile_based_on_tilemap_pos(selected_toilet_tilemap_pos, true)
 	event_shape.set_deferred("disabled", true)
+	jumped = 0
+	health_component.bonus_resistance = 0
+	state = DEFAULT
+
+func _on_timer_timeout() -> void:
+	health_component.bonus_resistance = -3
+	jumped += 1
+	state = SPECIAL_ATTACK
+	global_position = closest_toilet_pos
+	change_tile_based_on_tilemap_pos(selected_toilet_tilemap_pos, true)
+	event_shape.set_deferred("disabled", false)
 	var player_center = get_tree().get_first_node_in_group("Player").get_node("Sprite2D/Middle").global_position
-	objective_direction = (player_center - closest_toilet_pos).normalized()
+	objective_direction = (player_center - global_position).normalized()
 	sprite.look_at(player_center)
 	visible = true
-	area_cd_timer.start()
-
-func _on_area_cd_timeout() -> void:
-	event_shape.set_deferred("disabled", false)
 	
 func change_tile_based_on_tilemap_pos(pos: Vector2i, reset = false):
 	var new_tile: Vector2i
@@ -110,3 +132,10 @@ func change_tile_based_on_tilemap_pos(pos: Vector2i, reset = false):
 		new_tile.y -= 2
 		
 	tilemap.set_cell(3, pos, 1, new_tile)
+
+
+func _on_health_component_died():
+	change_tile_based_on_tilemap_pos(selected_toilet_tilemap_pos, true)
+	tilemap.clear_layer(1)
+	tilemap.clear_layer(2)
+	tilemap.clear_layer(3)
