@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://dkmhph2o7eeb5"
+path="res://.godot/imported/aloha.dialogue-d178560816ed91a0fa76ab7fe5e150d4.tres"
+
+[deps]
+
+source_file="res://resources/dialogue/aloha.dialogue"
+dest_files=["res://.godot/imported/aloha.dialogue-d178560816ed91a0fa76ab7fe5e150d4.tres"]
+
+[params]
+
+defaults=true

@@ -16,6 +16,8 @@ var colliding_bodies = 0
 var previous_dir = Vector2.ZERO
 var attacking = false
 var facing_str = "down"
+var absolute_dir : Vector2 = Vector2.ZERO
+var direction : Vector2 = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,11 +26,8 @@ func _ready() -> void:
 	sprite.frame_coords.y = 0
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	var movement_vector = get_movement_vector()
-	var direction = movement_vector.normalized()
-	var absolute_dir = Vector2(ceil(direction.x), ceil(direction.y))
+
+func _process(delta):
 	if !attacking:
 		match absolute_dir:
 			Vector2(0, -1): 
@@ -59,9 +58,13 @@ func _process(delta: float) -> void:
 	
 	previous_dir = absolute_dir
 	var target_velocity = direction * MAX_SPEED
-	velocity = velocity.lerp(target_velocity, 1 - exp(-delta * ACCELERATION_SMOOTHING))
+	velocity = velocity.lerp(target_velocity, 1 - exp(-get_physics_process_delta_time() * ACCELERATION_SMOOTHING))
 	move_and_slide()
 	
+func _unhandled_input(event):
+	var movement_vector = get_movement_vector()
+	direction = movement_vector.normalized()
+	absolute_dir = Vector2(ceil(direction.x), ceil(direction.y))
 
 func get_movement_vector():
 	var x_movement = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")

@@ -13,7 +13,7 @@ func _ready() -> void:
 	player_animator = player.movement_animator
 	foreground_layer = get_tree().get_first_node_in_group("foreground_layer")
 
-func _process(delta: float) -> void:
+func _unhandled_input(event):
 	melee_atack_listen("book_attack")
 	range_atack_listen("book_attack_spell_aimed")
 
