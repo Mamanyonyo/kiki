@@ -17,6 +17,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 func fight_start():
 	var ghost_instance = bathroom_ghost_boss_scene.instantiate()
 	var entities_layer = get_tree().get_first_node_in_group("entities_layer")
-	entities_layer.add_child(ghost_instance)
+	entities_layer.call_deferred("add_child", ghost_instance)
 	ghost_instance.global_position = boss_spawn_point.global_position
 	ghost_instance.tilemap = tilemap

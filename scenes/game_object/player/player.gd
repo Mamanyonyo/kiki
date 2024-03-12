@@ -12,6 +12,8 @@ const ACCELERATION_SMOOTHING = 25
 
 @export var hitbox: Area2D
 
+@export var middle: Marker2D
+
 var colliding_bodies = 0
 var previous_dir = Vector2.ZERO
 var attacking = false
@@ -65,6 +67,17 @@ func _unhandled_input(event):
 	var movement_vector = get_movement_vector()
 	direction = movement_vector.normalized()
 	absolute_dir = Vector2(ceil(direction.x), ceil(direction.y))
+	check_interaction()
+
+func check_interaction():
+	if Input.is_action_just_pressed("attack"):
+		var space_state = get_world_2d().direct_space_state
+		var query = PhysicsRayQueryParameters2D.create(middle.global_position, middle.global_position + get_facing_direction() * 20)
+		query.collide_with_areas = true
+		var result = space_state.intersect_ray(query)
+		if result != { }:
+			if result.collider.has_method("on_interact"):
+				result.collider.on_interact()
 
 func get_movement_vector():
 	var x_movement = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -78,6 +91,16 @@ func check_deal_damage():
 	if colliding_bodies == 0 || !damage_timer.is_stopped(): return
 	health_component.damage(1)
 	damage_timer.start()
+	
+func get_facing_direction():
+	match facing_str:
+		"up":
+			return Vector2.UP
+		"down":
+			return Vector2.DOWN
+		_: 
+			if(sprite.scale.x == -1): return Vector2.LEFT
+			return Vector2.RIGHT
 	
 func get_rotation_in_degrees():
 	match facing_str:
