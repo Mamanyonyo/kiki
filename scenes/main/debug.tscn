@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b7myo6d3f82mh"]
+[gd_scene load_steps=14 format=3 uid="uid://b7myo6d3f82mh"]
 
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_time_manager.tscn" id="1_7wu2c"]
 [ext_resource type="PackedScene" uid="uid://dxfu1qsn6132b" path="res://scenes/manager/experience_manager.tscn" id="2_mta20"]
@@ -10,10 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://ikj4gkqleps3" path="res://scenes/UI/experience_bar.tscn" id="8_yt6cc"]
 [ext_resource type="PackedScene" uid="uid://ccg3esjfw0jcg" path="res://scenes/UI/money_counter.tscn" id="9_87nju"]
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="10_rdd6q"]
-[ext_resource type="PackedScene" uid="uid://myyxjkn2ktkh" path="res://scenes/areas/bathroom/boss_room.tscn" id="11_imdw0"]
+[ext_resource type="PackedScene" uid="uid://dgndrfwq422ym" path="res://scenes/areas/bathroom/south.tscn" id="11_jbvxm"]
 [ext_resource type="PackedScene" uid="uid://bprfphm5du6i3" path="res://autoload/game_events.tscn" id="14_ghljg"]
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="15_x5174"]
-[ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="16_asw6o"]
 
 [node name="Main" type="Node2D"]
 
@@ -45,13 +44,8 @@ money_manager = NodePath("../../Managers/MoneyManager")
 
 [node name="Areas" type="Node2D" parent="." groups=["areas_node"]]
 
-[node name="BossRoom" parent="Areas" instance=ExtResource("11_imdw0")]
-
-[node name="TileMap" parent="Areas/BossRoom" index="0"]
-layer_1/tile_data = PackedInt32Array(524301, 655361, 0, 589837, 655361, 0, 655373, 655361, 0, 720909, 655361, 0, 786445, 655361, 0, 851981, 655361, 0, 917517, 655361, 0, 524312, 720897, 0, 589848, 720897, 0, 655384, 720897, 0, 720920, 720897, 0, 786456, 720897, 0, 851992, 720897, 0, 917528, 720897, 0, 983053, 655361, 0, 458766, 589825, 0, 1048590, 589825, 1, 458767, 589825, 0, 1048591, 589825, 1, 458768, 589825, 0, 1048592, 589825, 1, 458769, 589825, 0, 1048593, 589825, 1, 1048594, 589825, 1, 1048595, 589825, 1, 458772, 589825, 0, 1048596, 589825, 1, 458773, 589825, 0, 1048597, 589825, 1, 458774, 589825, 0, 1048598, 589825, 1, 458775, 589825, 0, 1048599, 589825, 1, 983064, 720897, 0, 458765, 655361, 0, 458776, 720897, 0, 1048600, 720897, 0, 1048589, 655361, 0)
-
-[node name="Marker2D" parent="Areas/BossRoom/TileMap/Area2D/CollisionShape2D" index="0"]
-position = Vector2(-32, 24)
+[node name="BathroomSouth" parent="Areas" instance=ExtResource("11_jbvxm")]
+position = Vector2(288, -512)
 
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 y_sort_enabled = true
@@ -59,14 +53,9 @@ y_sort_enabled = true
 [node name="Player" parent="Entities" instance=ExtResource("15_x5174")]
 position = Vector2(255, 56)
 
-[node name="BasicEnemy" parent="Entities" instance=ExtResource("16_asw6o")]
-position = Vector2(141, 288)
-
 [node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]
 
 [node name="GameEvents" parent="." instance=ExtResource("14_ghljg")]
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0.109, -0.994)
-
-[editable path="Areas/BossRoom"]
