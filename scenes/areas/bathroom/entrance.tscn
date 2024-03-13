@@ -67,7 +67,7 @@ rotation = 1.5708
 [node name="CollisionShape2D" parent="Entities/Door2/Sprite2D/StaticBody2D" index="0"]
 position = Vector2(-9, -2.5)
 
-[node name="ToiletMimic" parent="." instance=ExtResource("7_ki1af")]
+[node name="ToiletMimic2" parent="Entities" instance=ExtResource("7_ki1af")]
 position = Vector2(920, -162)
 
 [editable path="Entities/Door2"]

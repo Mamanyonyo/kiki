@@ -1,4 +1,4 @@
-extends Node2D
+extends Area
 
 @export var dialogue : DialogueResource
 

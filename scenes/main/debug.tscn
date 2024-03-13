@@ -43,6 +43,7 @@ money_manager = NodePath("../../Managers/MoneyManager")
 [node name="GameCamera" parent="." instance=ExtResource("10_rdd6q")]
 
 [node name="Areas" type="Node2D" parent="." groups=["areas_node"]]
+z_index = -1
 
 [node name="BathroomEntrance" parent="Areas" instance=ExtResource("11_1h4vq")]
 position = Vector2(-576, 32)

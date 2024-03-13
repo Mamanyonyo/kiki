@@ -1,4 +1,4 @@
-extends Node2D
+extends Area
 
 @export var tilemap: TileMap
 @export var area_node: Area2D
