@@ -7,8 +7,3 @@ class_name BasicEnemy extends CharacterBody2D
 func _process(_delta):
 	velocity_component.accelerate_to_player()
 	velocity_component.move(self)
-
-func get_direction_to_player():
-	var player_node = get_tree().get_first_node_in_group("Player") as Node2D
-	if player_node == null: return Vector2.ZERO
-	return (player_node.global_position - global_position).normalized()

@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqum04ci6tbk3"]
+
+[ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="1_b2u0a"]
+[ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="2_gux6c"]
+[ext_resource type="Script" path="res://assets/enemy/toilet_mimic.gd" id="2_iis20"]
+[ext_resource type="Texture2D" uid="uid://xq83mnoiuwwj" path="res://assets/enemy/toilet_mimic.png" id="3_qsfml"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i8mdv"]
+resource_local_to_scene = true
+shader = ExtResource("2_gux6c")
+shader_parameter/lerp_percent = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v8xpa"]
+radius = 7.0
+
+[node name="ToiletMimic" instance=ExtResource("1_b2u0a")]
+script = ExtResource("2_iis20")
+range_trigger = 200
+
+[node name="HealthComponent" parent="." index="0"]
+max_health = 100.0
+
+[node name="VelocityComponent" parent="." index="2"]
+max_speed = 120
+acceleration = 40.0
+
+[node name="HitFlashComponent" parent="." index="3"]
+hit_flash_material = SubResource("ShaderMaterial_i8mdv")
+
+[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_v8xpa")
+
+[node name="Sprite2D" parent="." index="5"]
+texture = ExtResource("3_qsfml")
+hframes = 2
+
+[node name="CollisionShape2D" parent="." index="6"]
+position = Vector2(0, -5)
+
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]

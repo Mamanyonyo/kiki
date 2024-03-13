@@ -1,0 +1,24 @@
+~ default
+It smells
+=> END!
+~ complete
+Kiki: (I don't have anything to do with this guy anymore).
+=> END!
+~ flushed
+You try to flush the toilet, but it looks like it's still recharging.
+Kiki: Boring.
+=> END!
+~ flush
+You flush the toilet and watch as the water swirls down to the bottom.
+Kiki: It never gets old.
+if correct_toilets >= 9:
+	=> solve
+=> END!
+~ solve
+It looks like you've unlocked something.
+Kiki: This was an easy puzzle... too easy to be a normal and innocent puzzle.
+Kiki: The process of selection of the right pieces pertaining to the puzzle reveal its true nature.
+Kiki: This might be bad...
+set toilet_complete = true
+do emit_toilet_puzzle_complete()
+=> END!

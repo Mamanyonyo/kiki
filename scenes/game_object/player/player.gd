@@ -68,12 +68,17 @@ func _unhandled_input(event):
 	direction = movement_vector.normalized()
 	absolute_dir = Vector2(ceil(direction.x), ceil(direction.y))
 	check_interaction()
+	check_tp()
+	
+func check_tp():
+	if Input.is_action_just_pressed("teleport"):
+		global_position = get_global_mouse_position()
 
 func check_interaction():
 	if Input.is_action_just_pressed("attack"):
 		var space_state = get_world_2d().direct_space_state
 		var query = PhysicsRayQueryParameters2D.create(middle.global_position, middle.global_position + get_facing_direction() * 20)
-		query.collide_with_areas = true
+		query.collision_mask = 0x80
 		var result = space_state.intersect_ray(query)
 		if result != { }:
 			if result.collider.has_method("on_interact"):

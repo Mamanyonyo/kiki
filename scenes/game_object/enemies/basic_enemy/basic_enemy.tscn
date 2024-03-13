@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bonqxkxt3m2w5" path="res://scenes/UI/hit_flash_component.tscn" id="5_07d4w"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="6_x8svc"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fnbn5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gmqpm"]
 resource_local_to_scene = true
 shader = ExtResource("6_x8svc")
 shader_parameter/lerp_percent = 0.0
@@ -36,7 +36,7 @@ health_component = NodePath("../HealthComponent")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("5_07d4w")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_fnbn5")
+hit_flash_material = SubResource("ShaderMaterial_gmqpm")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_to2db")]
 health_component = NodePath("../HealthComponent")

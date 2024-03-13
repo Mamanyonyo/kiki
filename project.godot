@@ -28,6 +28,7 @@ gdscript/warnings/unused_parameter=0
 
 general/balloon_path="res://scenes/UI/balloon.tscn"
 general/custom_test_scene_path="res://scenes/UI/test_dialogue.tscn"
+general/states=["GameEvents"]
 
 [display]
 
@@ -89,10 +90,15 @@ attack2={
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(88, 22),"global_position":Vector2(92, 63),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":true,"script":null)
 ]
 }
+teleport={
+"deadzone": 0.5,
+"events": [null, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":true,"meta_pressed":false,"button_mask":1,"position":Vector2(416, 17),"global_position":Vector2(419, 49),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://resources/dialogue/aloha.dialogue")
+locale/translations_pot_files=PackedStringArray("res://resources/dialogue/aloha.dialogue", "res://resources/dialogue/interact/bathroom/manji.dialogue", "res://resources/dialogue/interact/bathroom/toilet.dialogue")
 
 [layer_names]
 

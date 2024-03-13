@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://potni4op01ji"
+path="res://.godot/imported/manji.dialogue-5dcdd5e270ace63d5a2c0a68ffd8b16e.tres"
+
+[deps]
+
+source_file="res://resources/dialogue/interact/bathroom/manji.dialogue"
+dest_files=["res://.godot/imported/manji.dialogue-5dcdd5e270ace63d5a2c0a68ffd8b16e.tres"]
+
+[params]
+
+defaults=true
