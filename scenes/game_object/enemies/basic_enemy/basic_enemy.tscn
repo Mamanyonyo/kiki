@@ -1,15 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://cqurns0kyxmsl"]
+[gd_scene load_steps=13 format=3 uid="uid://cqurns0kyxmsl"]
 
 [ext_resource type="Texture2D" uid="uid://bktwmghtn2a6d" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.png" id="1_enlj8"]
 [ext_resource type="Script" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.gd" id="1_ms8tp"]
 [ext_resource type="PackedScene" uid="uid://cquarnyd0pw5t" path="res://scenes/components/health_component.tscn" id="2_5w0eh"]
+[ext_resource type="PackedScene" uid="uid://46gkkjx61fwg" path="res://scenes/components/stats_component.tscn" id="2_tx4kg"]
 [ext_resource type="PackedScene" uid="uid://c8y0bthj1r56h" path="res://scenes/components/drop_component.tscn" id="3_4vh70"]
 [ext_resource type="PackedScene" uid="uid://c1ooxaf6n4m4" path="res://scenes/components/velocity_component.tscn" id="4_eac18"]
 [ext_resource type="PackedScene" uid="uid://civstynml3v51" path="res://scenes/components/hurtbox_component.tscn" id="4_to2db"]
 [ext_resource type="PackedScene" uid="uid://bonqxkxt3m2w5" path="res://scenes/UI/hit_flash_component.tscn" id="5_07d4w"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="6_x8svc"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gmqpm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kwicr"]
 resource_local_to_scene = true
 shader = ExtResource("6_x8svc")
 shader_parameter/lerp_percent = 0.0
@@ -26,19 +27,26 @@ collision_mask = 73
 motion_mode = 1
 script = ExtResource("1_ms8tp")
 
-[node name="HealthComponent" parent="." instance=ExtResource("2_5w0eh")]
+[node name="StatsComponent" parent="." instance=ExtResource("2_tx4kg")]
+max_damage = 2
+max_speed = 100.0
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_5w0eh")]
+stats_component = NodePath("../StatsComponent")
 
 [node name="DropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_4vh70")]
 health_component = NodePath("../HealthComponent")
 
-[node name="VelocityComponent" parent="." instance=ExtResource("4_eac18")]
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("4_eac18")]
+stats_component = NodePath("../StatsComponent")
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("5_07d4w")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_gmqpm")
+hit_flash_material = SubResource("ShaderMaterial_kwicr")
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_to2db")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("stats_component", "health_component") instance=ExtResource("4_to2db")]
+stats_component = NodePath("../StatsComponent")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
@@ -52,3 +60,5 @@ texture = ExtResource("1_enlj8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_4ndia")
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

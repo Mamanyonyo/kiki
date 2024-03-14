@@ -4,30 +4,22 @@ class_name HealthComponent
 signal died
 signal health_changed
 
-@export var max_health: float = 20
-@export var max_resistance: float = 1
-@export var bonus_resistance: float = 0
-
-var health
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	health = max_health
+@export var stats_component : StatsComponent
 
 func damage(incoming_damage: float):
-	var final_damage = incoming_damage - max_resistance - bonus_resistance
+	var final_damage = incoming_damage - stats_component.resistance
 	if final_damage < 0: final_damage = 0
-	health -= final_damage
+	stats_component.health -= final_damage
 	health_changed.emit()
 	Callable(check_death).call_deferred()
 	
 func check_death():
-	if health <= 0: death()
+	if stats_component.health <= 0: death()
 	
 func get_health_percent():
-	if max_health <= 0: return 0
-	return health/max_health
+	if stats_component.max_health <= 0: return 0
+	var division : float = stats_component.health/stats_component.max_health
+	return division
 
 func death():
 	died.emit()
-	owner.queue_free()

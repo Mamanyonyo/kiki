@@ -17,25 +17,24 @@ radius = 7.0
 script = ExtResource("2_iis20")
 range_trigger = 200
 
-[node name="HealthComponent" parent="." index="0"]
-max_health = 100.0
+[node name="StatsComponent" parent="." index="0"]
+max_damage = 7
 
-[node name="VelocityComponent" parent="." index="2"]
-max_speed = 120
+[node name="VelocityComponent" parent="." index="3"]
 acceleration = 40.0
 
-[node name="HitFlashComponent" parent="." index="3"]
+[node name="HitFlashComponent" parent="." index="4"]
 hit_flash_material = SubResource("ShaderMaterial_i8mdv")
 
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_v8xpa")
 
-[node name="Sprite2D" parent="." index="5"]
+[node name="Sprite2D" parent="." index="6"]
 texture = ExtResource("3_qsfml")
 hframes = 2
 
-[node name="CollisionShape2D" parent="." index="6"]
+[node name="CollisionShape2D" parent="." index="7"]
 position = Vector2(0, -5)
 
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]

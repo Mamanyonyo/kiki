@@ -1,7 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=27 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
+[ext_resource type="PackedScene" uid="uid://dced3yrcptsre" path="res://scenes/components/collision_hurt_component.tscn" id="2_7ygai"]
 [ext_resource type="PackedScene" uid="uid://cquarnyd0pw5t" path="res://scenes/components/health_component.tscn" id="2_s8m81"]
+[ext_resource type="PackedScene" uid="uid://46gkkjx61fwg" path="res://scenes/components/stats_component.tscn" id="2_t86h5"]
 [ext_resource type="Script" path="res://scenes/game_object/player/WeaponManager.gd" id="3_xj72i"]
 [ext_resource type="Texture2D" uid="uid://di40knpu0ut51" path="res://assets/character/kiki.png" id="4_3kvbw"]
 [ext_resource type="Script" path="res://scenes/game_object/player/book_controller.gd" id="4_qkfhb"]
@@ -271,22 +273,30 @@ size = Vector2(7, 14.4375)
 [sub_resource type="CircleShape2D" id="CircleShape2D_5pqvn"]
 radius = 5.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "damage_timer", "movement_animator", "sprite", "hp_bar", "hitbox", "middle") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "movement_animator", "sprite", "hp_bar", "book_hitbox", "middle", "stats_component") groups=["Player"]]
 collision_layer = 2
 collision_mask = 65
 motion_mode = 1
 script = ExtResource("1_qthq0")
 health_component = NodePath("HealthComponent")
-damage_timer = NodePath("DamageIntervalTimer")
 movement_animator = NodePath("PlayerAnimator")
 sprite = NodePath("Sprite2D")
 hp_bar = NodePath("HealthBar")
-hitbox = NodePath("Sprite2D/BookHitbox")
+book_hitbox = NodePath("Sprite2D/BookHitbox")
 middle = NodePath("Sprite2D/Middle")
+stats_component = NodePath("StatsComponent")
 
-[node name="HealthComponent" parent="." instance=ExtResource("2_s8m81")]
-max_health = 15.0
-max_resistance = 0.0
+[node name="CollisionHurtComponent" parent="." node_paths=PackedStringArray("health_component", "hurtbox", "stats_component") instance=ExtResource("2_7ygai")]
+health_component = NodePath("../HealthComponent")
+hurtbox = NodePath("../PlayerHurtbox")
+stats_component = NodePath("../StatsComponent")
+
+[node name="StatsComponent" parent="." instance=ExtResource("2_t86h5")]
+max_speed = 125.0
+max_health = 20.0
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_s8m81")]
+stats_component = NodePath("../StatsComponent")
 
 [node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("3_xj72i")
@@ -306,10 +316,6 @@ position = Vector2(16, 1)
 
 [node name="GenericBulletSpawn" type="Marker2D" parent="ProjectileMarkers"]
 position = Vector2(-3, 19)
-
-[node name="DamageIntervalTimer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
 
 [node name="PlayerAnimator" type="AnimationPlayer" parent="."]
 libraries = {
@@ -340,12 +346,12 @@ collision_mask = 0
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_xg3yu")
 
-[node name="PlayerEnemyCollision" type="Area2D" parent="."]
+[node name="PlayerHurtbox" type="Area2D" parent="."]
 position = Vector2(0, -7)
 collision_layer = 0
-collision_mask = 8
+collision_mask = 264
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerEnemyCollision"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_hg7kp")
 
@@ -361,6 +367,7 @@ frame = 25
 [node name="BookHitbox" parent="Sprite2D" instance=ExtResource("7_6vy27")]
 monitoring = false
 monitorable = false
+target = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/BookHitbox"]
 position = Vector2(-9, 16)
@@ -370,9 +377,7 @@ shape = SubResource("RectangleShape2D_xeg0d")
 position = Vector2(0, -12)
 shape = SubResource("CircleShape2D_5pqvn")
 
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
-[connection signal="timeout" from="DamageIntervalTimer" to="." method="_on_damage_interval_timer_timeout"]
 [connection signal="animation_finished" from="PlayerAnimator" to="." method="_on_player_animator_animation_finished"]
 [connection signal="animation_finished" from="PlayerAnimator" to="WeaponManager/BookController" method="_on_player_animator_animation_finished"]
-[connection signal="body_entered" from="PlayerEnemyCollision" to="." method="_on_collision_area_2d_body_entered"]
-[connection signal="body_exited" from="PlayerEnemyCollision" to="." method="_on_collision_area_2d_body_exited"]

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dced3yrcptsre"]
+
+[ext_resource type="Script" path="res://scenes/components/collision_hurt_component.gd" id="1_nwtbo"]
+
+[node name="CollisionHurtComponent" type="Node" node_paths=PackedStringArray("damage_timer")]
+script = ExtResource("1_nwtbo")
+damage_timer = NodePath("DamageIntervalTimer")
+
+[node name="DamageIntervalTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="DamageIntervalTimer" to="." method="_on_damage_interval_timer_timeout"]

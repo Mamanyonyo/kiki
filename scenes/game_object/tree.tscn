@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://dhne4hrlxos48"]
+
+[ext_resource type="Texture2D" uid="uid://b45l0njxy453s" path="res://assets/environment/core.png" id="1_kfos8"]
+[ext_resource type="Script" path="res://scenes/game_object/tree.gd" id="1_mru27"]
+[ext_resource type="PackedScene" uid="uid://46gkkjx61fwg" path="res://scenes/components/stats_component.tscn" id="1_wesx4"]
+[ext_resource type="PackedScene" uid="uid://civstynml3v51" path="res://scenes/components/hurtbox_component.tscn" id="1_wmtxb"]
+[ext_resource type="PackedScene" uid="uid://cquarnyd0pw5t" path="res://scenes/components/health_component.tscn" id="2_pdr4v"]
+[ext_resource type="PackedScene" uid="uid://dced3yrcptsre" path="res://scenes/components/collision_hurt_component.tscn" id="2_ry08u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gi54j"]
+size = Vector2(74, 69)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnc03"]
+size = Vector2(60, 56)
+
+[node name="Tree" type="StaticBody2D" groups=["tree"]]
+script = ExtResource("1_mru27")
+
+[node name="CollisionHurtComponent" parent="." node_paths=PackedStringArray("health_component", "hurtbox", "stats_component") instance=ExtResource("2_ry08u")]
+health_component = NodePath("../HealthComponent")
+hurtbox = NodePath("../HurtboxComponent")
+stats_component = NodePath("../StatsComponent")
+
+[node name="StatsComponent" parent="." instance=ExtResource("1_wesx4")]
+max_damage = 1
+max_magic_damage = 1
+max_health = 500.0
+max_resistance = 0.0
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_pdr4v")]
+stats_component = NodePath("../StatsComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+texture = ExtResource("1_kfos8")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("stats_component", "health_component") instance=ExtResource("1_wmtxb")]
+collision_mask = 264
+stats_component = NodePath("../StatsComponent")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(-1, -31.5)
+shape = SubResource("RectangleShape2D_gi54j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -30)
+shape = SubResource("RectangleShape2D_qnc03")
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="body_entered" from="HurtboxComponent" to="." method="_on_hurtbox_component_body_entered"]

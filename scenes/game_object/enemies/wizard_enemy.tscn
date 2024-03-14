@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://d147nhqjglei8"]
+[gd_scene load_steps=11 format=3 uid="uid://d147nhqjglei8"]
 
 [ext_resource type="Script" path="res://scenes/game_object/enemies/wizard_enemy.gd" id="1_jmrdh"]
 [ext_resource type="PackedScene" uid="uid://cquarnyd0pw5t" path="res://scenes/components/health_component.tscn" id="1_rsl6b"]
 [ext_resource type="PackedScene" uid="uid://c1ooxaf6n4m4" path="res://scenes/components/velocity_component.tscn" id="2_6caod"]
 [ext_resource type="Texture2D" uid="uid://bm2bfj5e7e54v" path="res://free_assets/Tiles/tile_0111.png" id="2_55a00"]
+[ext_resource type="PackedScene" uid="uid://46gkkjx61fwg" path="res://scenes/components/stats_component.tscn" id="2_rchkw"]
 [ext_resource type="PackedScene" uid="uid://civstynml3v51" path="res://scenes/components/hurtbox_component.tscn" id="3_c6ulj"]
 [ext_resource type="PackedScene" uid="uid://c8y0bthj1r56h" path="res://scenes/components/drop_component.tscn" id="4_r8ruh"]
 [ext_resource type="PackedScene" uid="uid://cb5esr22j2dkv" path="res://scenes/game_object/money.tscn" id="5_3bmju"]
@@ -18,11 +19,14 @@ collision_layer = 8
 collision_mask = 73
 script = ExtResource("1_jmrdh")
 
-[node name="HealthComponent" parent="." instance=ExtResource("1_rsl6b")]
+[node name="StatsComponent" parent="." instance=ExtResource("2_rchkw")]
 
-[node name="VelocityComponent" parent="." instance=ExtResource("2_6caod")]
-max_speed = 60
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("1_rsl6b")]
+stats_component = NodePath("../StatsComponent")
+
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_6caod")]
 acceleration = 2.0
+stats_component = NodePath("../StatsComponent")
 
 [node name="DropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_r8ruh")]
 droppeable = ExtResource("5_3bmju")
@@ -36,8 +40,8 @@ texture = ExtResource("2_55a00")
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_rts8k")
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_c6ulj")]
-collision_mask = 4
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("stats_component", "health_component") instance=ExtResource("3_c6ulj")]
+stats_component = NodePath("../StatsComponent")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://boh3510we3axq"]
+[gd_scene load_steps=17 format=3 uid="uid://boh3510we3axq"]
 
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="1_2mbce"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_time_manager.tscn" id="1_qlqaq"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://d147nhqjglei8" path="res://scenes/game_object/enemies/wizard_enemy.tscn" id="10_4ld5l"]
 [ext_resource type="PackedScene" uid="uid://begx3mv0xqkc8" path="res://scenes/spawner/enemy_spawner.tscn" id="10_jt7o2"]
 [ext_resource type="PackedScene" uid="uid://dbhqp6kk7g2ke" path="res://scenes/areas/main_area.tscn" id="11_sxqim"]
+[ext_resource type="PackedScene" uid="uid://dhne4hrlxos48" path="res://scenes/game_object/tree.tscn" id="14_hm0kj"]
 
 [node name="Main" type="Node2D"]
 
@@ -61,6 +62,9 @@ position = Vector2(0, 433)
 
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 y_sort_enabled = true
+
+[node name="Tree" parent="Entities" instance=ExtResource("14_hm0kj")]
+position = Vector2(328, 256)
 
 [node name="Player" parent="Entities" instance=ExtResource("3_hl5nt")]
 position = Vector2(319, 64)

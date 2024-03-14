@@ -7,11 +7,13 @@ var foreground_layer
 @export var fireball_scene : PackedScene
 @export var generic_bullet_spawn : Marker2D
 @export var generic_bullet_spawn_side : Marker2D
+@export var stats_component : StatsComponent
 
 func _ready() -> void:
 	player = get_parent().player
 	player_animator = player.movement_animator
 	foreground_layer = get_tree().get_first_node_in_group("foreground_layer")
+	stats_component = player.stats_component
 
 func _unhandled_input(event):
 	melee_atack_listen("book_attack")
@@ -19,7 +21,8 @@ func _unhandled_input(event):
 
 func melee_atack_listen(animation_name: String):
 	if Input.is_action_just_pressed("attack") && !player.attacking:
-		player.hitbox.monitorable = true
+		player.book_hitbox.monitorable = true
+		player.book_hitbox.damage = player.stats_component.damage
 		play_and_set_attacking_state(animation_name)
 		check_if_animation_worked(animation_name)
 
@@ -27,7 +30,8 @@ func range_atack_listen(animation_name: String):
 	if Input.is_action_just_pressed("attack2") && !player.attacking:
 		play_and_set_attacking_state(animation_name)
 		check_if_animation_worked(animation_name)
-		var bullet_instance = fireball_scene.instantiate() as Area2D
+		var bullet_instance = fireball_scene.instantiate() as HitboxComponent
+		bullet_instance.damage = stats_component.magic_damage
 		match player.get_rotation_in_degrees():
 			90: bullet_instance.global_position = generic_bullet_spawn.global_position
 			0: bullet_instance.global_position = generic_bullet_spawn_side.global_position

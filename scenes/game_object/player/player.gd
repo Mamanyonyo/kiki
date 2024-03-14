@@ -1,20 +1,19 @@
 class_name Player extends CharacterBody2D
 
-const MAX_SPEED = 125
 const ACCELERATION_SMOOTHING = 25
 
 @export var health_component: HealthComponent
-@export var damage_timer: Timer
 @export var movement_animator: AnimationPlayer
 @export var sprite: Sprite2D
 
 @export var hp_bar: ProgressBar
 
-@export var hitbox: Area2D
+@export var book_hitbox: Area2D
 
 @export var middle: Marker2D
 
-var colliding_bodies = 0
+@export var stats_component: StatsComponent
+
 var previous_dir = Vector2.ZERO
 var attacking = false
 var facing_str = "down"
@@ -59,7 +58,7 @@ func _process(delta):
 				facing_str = "side"
 	
 	previous_dir = absolute_dir
-	var target_velocity = direction * MAX_SPEED
+	var target_velocity = direction * stats_component.speed
 	velocity = velocity.lerp(target_velocity, 1 - exp(-get_physics_process_delta_time() * ACCELERATION_SMOOTHING))
 	move_and_slide()
 	
@@ -91,11 +90,6 @@ func get_movement_vector():
 
 func _on_area_2d_area_entered(area):
 	health_component.damage(5)
-
-func check_deal_damage():
-	if colliding_bodies == 0 || !damage_timer.is_stopped(): return
-	health_component.damage(1)
-	damage_timer.start()
 	
 func get_facing_direction():
 	match facing_str:
@@ -131,22 +125,19 @@ func correct_sprite_on_facing_str():
 			sprite.frame_coords.x = 6
 		"up":
 			sprite.frame_coords.x = 3
-			
+
 func _on_player_animator_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("attack"):
 		attacking = false
-		hitbox.monitorable = false
+		book_hitbox.monitorable = false
 		correct_sprite_on_facing_str()
-
-func _on_collision_area_2d_body_entered(body: Node2D) -> void:
-	colliding_bodies += 1
-	check_deal_damage()
-
-func _on_collision_area_2d_body_exited(body: Node2D) -> void:
-	colliding_bodies -= 1
-
-func _on_damage_interval_timer_timeout() -> void:
-	check_deal_damage()
 
 func _on_health_component_health_changed() -> void:
 	update_health_display()
+
+func _on_health_component_died():
+	if GameEvents.tree:
+		stats_component.health = stats_component.max_health / 2
+		update_health_display()
+		global_position = get_tree().get_first_node_in_group("tree").global_position + Vector2.DOWN * 30
+	else: queue_free()
