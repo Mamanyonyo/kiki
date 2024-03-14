@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bonqxkxt3m2w5" path="res://scenes/UI/hit_flash_component.tscn" id="5_07d4w"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="6_x8svc"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kwicr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p7cr5"]
 resource_local_to_scene = true
 shader = ExtResource("6_x8svc")
 shader_parameter/lerp_percent = 0.0
@@ -25,6 +25,7 @@ radius = 4.0
 collision_layer = 8
 collision_mask = 73
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_ms8tp")
 
 [node name="StatsComponent" parent="." instance=ExtResource("2_tx4kg")]
@@ -37,13 +38,20 @@ stats_component = NodePath("../StatsComponent")
 [node name="DropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_4vh70")]
 health_component = NodePath("../HealthComponent")
 
-[node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("4_eac18")]
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component", "navigation_agent") instance=ExtResource("4_eac18")]
 stats_component = NodePath("../StatsComponent")
+navigation_agent = NodePath("../NavigationAgent2D")
 
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("5_07d4w")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_kwicr")
+hit_flash_material = SubResource("ShaderMaterial_p7cr5")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("stats_component", "health_component") instance=ExtResource("4_to2db")]
 stats_component = NodePath("../StatsComponent")
@@ -62,3 +70,4 @@ position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_4ndia")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="timeout" from="Timer" to="VelocityComponent" method="_on_timer_timeout"]

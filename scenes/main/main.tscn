@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://boh3510we3axq"]
+[gd_scene load_steps=16 format=3 uid="uid://boh3510we3axq"]
 
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="1_2mbce"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_time_manager.tscn" id="1_qlqaq"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://cpbg6qshhpf5y" path="res://scenes/manager/money_manager.tscn" id="6_g8io0"]
 [ext_resource type="PackedScene" uid="uid://dwtexgju11qmh" path="res://scenes/UI/arena_time/arena_time_ui.tscn" id="6_nxqro"]
 [ext_resource type="PackedScene" uid="uid://ccg3esjfw0jcg" path="res://scenes/UI/money_counter.tscn" id="9_qoi0h"]
-[ext_resource type="PackedScene" uid="uid://d147nhqjglei8" path="res://scenes/game_object/enemies/wizard_enemy.tscn" id="10_4ld5l"]
 [ext_resource type="PackedScene" uid="uid://begx3mv0xqkc8" path="res://scenes/spawner/enemy_spawner.tscn" id="10_jt7o2"]
 [ext_resource type="PackedScene" uid="uid://dbhqp6kk7g2ke" path="res://scenes/areas/main_area.tscn" id="11_sxqim"]
 [ext_resource type="PackedScene" uid="uid://dhne4hrlxos48" path="res://scenes/game_object/tree.tscn" id="14_hm0kj"]
@@ -53,7 +52,6 @@ position = Vector2(242, 296)
 
 [node name="EnemySpawner3" parent="." instance=ExtResource("10_jt7o2")]
 position = Vector2(474, 228)
-enemy_scene = ExtResource("10_4ld5l")
 
 [node name="Areas" type="Node2D" parent="." groups=["areas_node"]]
 

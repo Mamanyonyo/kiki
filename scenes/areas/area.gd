@@ -3,7 +3,7 @@ class_name Area extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var entities_node = get_node("Entities")
+	var entities_node = get_node("TileMap/Entities")
 	if entities_node != null:
 		var entities_node_array = entities_node.get_children()
 		var main_entities_node = get_tree().get_first_node_in_group("entities_layer")
