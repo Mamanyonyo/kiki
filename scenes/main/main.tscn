@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://boh3510we3axq"]
+[gd_scene load_steps=15 format=3 uid="uid://boh3510we3axq"]
 
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="1_2mbce"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_time_manager.tscn" id="1_qlqaq"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://ikj4gkqleps3" path="res://scenes/UI/experience_bar.tscn" id="3_najmh"]
 [ext_resource type="PackedScene" uid="uid://cyrb5xnbn6ue3" path="res://scenes/manager/upgrade_manager.tscn" id="3_ykbaa"]
 [ext_resource type="Resource" uid="uid://cnhr4njlfqo3o" path="res://resources/upgrades/sword_rate.tres" id="4_3ldsn"]
-[ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="4_om0pk"]
 [ext_resource type="Resource" uid="uid://qmv8t13qncoe" path="res://resources/upgrades/sword_damage.tres" id="5_m7jqr"]
 [ext_resource type="PackedScene" uid="uid://cpbg6qshhpf5y" path="res://scenes/manager/money_manager.tscn" id="6_g8io0"]
 [ext_resource type="PackedScene" uid="uid://dwtexgju11qmh" path="res://scenes/UI/arena_time/arena_time_ui.tscn" id="6_nxqro"]
@@ -45,13 +44,10 @@ money_manager = NodePath("../../Managers/MoneyManager")
 [node name="GameCamera" parent="." instance=ExtResource("1_2mbce")]
 
 [node name="EnemySpawner" parent="." instance=ExtResource("10_jt7o2")]
-position = Vector2(111, 248)
+position = Vector2(39, 55)
 
 [node name="EnemySpawner2" parent="." instance=ExtResource("10_jt7o2")]
-position = Vector2(242, 296)
-
-[node name="EnemySpawner3" parent="." instance=ExtResource("10_jt7o2")]
-position = Vector2(474, 228)
+position = Vector2(588, 60)
 
 [node name="Areas" type="Node2D" parent="." groups=["areas_node"]]
 
@@ -66,8 +62,5 @@ position = Vector2(328, 256)
 
 [node name="Player" parent="Entities" instance=ExtResource("3_hl5nt")]
 position = Vector2(319, 64)
-
-[node name="BasicEnemy" parent="Entities" instance=ExtResource("4_om0pk")]
-position = Vector2(141, 288)
 
 [node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]

@@ -24,10 +24,8 @@ area_cd_timer = NodePath("Timer")
 sprite = NodePath("Sprite2D")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_57cup")]
-max_health = 200.0
 
 [node name="VelocityComponent" parent="." instance=ExtResource("2_grfn0")]
-max_speed = 50
 acceleration = 10.0
 
 [node name="JumpCD" type="Timer" parent="."]
