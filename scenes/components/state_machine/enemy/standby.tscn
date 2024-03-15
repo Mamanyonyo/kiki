@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfcxncwexfjgb"]
+
+[ext_resource type="Script" path="res://scenes/components/state_machine/enemy/standby_state.gd" id="1_ioqab"]
+
+[node name="Standby" type="Node" node_paths=PackedStringArray("enemy")]
+script = ExtResource("1_ioqab")
+enemy = NodePath("")

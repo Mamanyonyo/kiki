@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://boh3510we3axq"]
+[gd_scene load_steps=18 format=3 uid="uid://boh3510we3axq"]
 
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="1_2mbce"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_time_manager.tscn" id="1_qlqaq"]
@@ -14,6 +14,13 @@
 [ext_resource type="PackedScene" uid="uid://begx3mv0xqkc8" path="res://scenes/spawner/enemy_spawner.tscn" id="10_jt7o2"]
 [ext_resource type="PackedScene" uid="uid://dbhqp6kk7g2ke" path="res://scenes/areas/main_area.tscn" id="11_sxqim"]
 [ext_resource type="PackedScene" uid="uid://dhne4hrlxos48" path="res://scenes/game_object/tree.tscn" id="14_hm0kj"]
+[ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="15_sflkx"]
+[ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="16_j40vi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1akqu"]
+resource_local_to_scene = true
+shader = ExtResource("16_j40vi")
+shader_parameter/lerp_percent = 0.0
 
 [node name="Main" type="Node2D"]
 
@@ -63,4 +70,15 @@ position = Vector2(328, 256)
 [node name="Player" parent="Entities" instance=ExtResource("3_hl5nt")]
 position = Vector2(319, 64)
 
+[node name="BasicEnemy" parent="Entities" instance=ExtResource("15_sflkx")]
+position = Vector2(53, 326)
+
+[node name="HitFlashComponent" parent="Entities/BasicEnemy" index="4"]
+hit_flash_material = SubResource("ShaderMaterial_1akqu")
+
+[node name="Sprite2D" parent="Entities/BasicEnemy" index="10"]
+modulate = Color(1, 0.521569, 0, 1)
+
 [node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]
+
+[editable path="Entities/BasicEnemy"]

@@ -1,6 +1,7 @@
 class_name BasicEnemy extends CharacterBody2D
 
 @export var wave_spawned : bool = false
+@export var detection_range : float = 100
 
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var velocity_component: VelocityComponent = $VelocityComponent

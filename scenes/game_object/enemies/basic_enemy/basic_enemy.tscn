@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cqurns0kyxmsl"]
+[gd_scene load_steps=18 format=3 uid="uid://cqurns0kyxmsl"]
 
 [ext_resource type="Texture2D" uid="uid://bktwmghtn2a6d" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.png" id="1_enlj8"]
 [ext_resource type="Script" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.gd" id="1_ms8tp"]
@@ -9,9 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://civstynml3v51" path="res://scenes/components/hurtbox_component.tscn" id="4_to2db"]
 [ext_resource type="PackedScene" uid="uid://bonqxkxt3m2w5" path="res://scenes/UI/hit_flash_component.tscn" id="5_07d4w"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="6_x8svc"]
-[ext_resource type="Script" path="res://scenes/game_object/enemies/basic_enemy/BasicStateMachine.gd" id="8_yme5u"]
+[ext_resource type="PackedScene" uid="uid://cgg4xs0wrjk6d" path="res://scenes/components/state_machine.tscn" id="8_pewd8"]
+[ext_resource type="PackedScene" uid="uid://cfcxncwexfjgb" path="res://scenes/components/state_machine/enemy/standby.tscn" id="9_yntl2"]
+[ext_resource type="PackedScene" uid="uid://lgvxbfwjgvxl" path="res://scenes/components/state_machine/enemy/chase_tree.tscn" id="10_w8i0j"]
+[ext_resource type="PackedScene" uid="uid://bvhmy0cf8uhf2" path="res://scenes/components/state_machine/enemy/chase_player.tscn" id="11_iup4t"]
+[ext_resource type="PackedScene" uid="uid://dmh2u33x3o0cn" path="res://scenes/components/state_machine/enemy/back_to_original_position.tscn" id="12_yqsxc"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oh0j2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qafj3"]
 resource_local_to_scene = true
 shader = ExtResource("6_x8svc")
 shader_parameter/lerp_percent = 0.0
@@ -46,13 +50,27 @@ navigation_agent = NodePath("../NavigationAgent2D")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("5_07d4w")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_oh0j2")
+hit_flash_material = SubResource("ShaderMaterial_qafj3")
 
 [node name="ObjectiveComponent" type="Node" parent="."]
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("velocity_component")]
-script = ExtResource("8_yme5u")
-velocity_component = NodePath("../VelocityComponent")
+[node name="BasicEnemyStateMachine" parent="." node_paths=PackedStringArray("current_state") instance=ExtResource("8_pewd8")]
+current_state = NodePath("Standby")
+
+[node name="Standby" parent="BasicEnemyStateMachine" node_paths=PackedStringArray("enemy") instance=ExtResource("9_yntl2")]
+enemy = NodePath("../..")
+
+[node name="ChaseTree" parent="BasicEnemyStateMachine" node_paths=PackedStringArray("velocity_component", "enemy") instance=ExtResource("10_w8i0j")]
+velocity_component = NodePath("../../VelocityComponent")
+enemy = NodePath("../..")
+
+[node name="ChasePlayer" parent="BasicEnemyStateMachine" node_paths=PackedStringArray("velocity_component", "enemy") instance=ExtResource("11_iup4t")]
+velocity_component = NodePath("../../VelocityComponent")
+enemy = NodePath("../..")
+
+[node name="BackToOriginalPosition" parent="BasicEnemyStateMachine" node_paths=PackedStringArray("velocity_component", "enemy") instance=ExtResource("12_yqsxc")]
+velocity_component = NodePath("../../VelocityComponent")
+enemy = NodePath("../..")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3

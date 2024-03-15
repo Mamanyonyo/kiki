@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmh2u33x3o0cn"]
+
+[ext_resource type="Script" path="res://scenes/components/state_machine/enemy/back_to_original_pos.gd" id="1_tkm34"]
+
+[node name="BackToOriginalPosition" type="Node"]
+script = ExtResource("1_tkm34")
