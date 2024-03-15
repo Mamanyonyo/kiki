@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqum04ci6tbk3"]
+[gd_scene load_steps=9 format=3 uid="uid://cqum04ci6tbk3"]
 
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="1_b2u0a"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="2_gux6c"]
 [ext_resource type="Script" path="res://assets/enemy/toilet_mimic.gd" id="2_iis20"]
 [ext_resource type="Texture2D" uid="uid://xq83mnoiuwwj" path="res://assets/enemy/toilet_mimic.png" id="3_qsfml"]
+[ext_resource type="Script" path="res://scenes/components/state_machine/enemy/standby_mimic.gd" id="4_bfyjt"]
+[ext_resource type="Script" path="res://scenes/components/state_machine/enemy/chase_player_mimic.gd" id="5_so4fu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i8mdv"]
 resource_local_to_scene = true
@@ -13,9 +15,9 @@ shader_parameter/lerp_percent = 0.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_v8xpa"]
 radius = 7.0
 
-[node name="ToiletMimic" instance=ExtResource("1_b2u0a")]
+[node name="ToiletMimic" node_paths=PackedStringArray("state_machine") instance=ExtResource("1_b2u0a")]
 script = ExtResource("2_iis20")
-range_trigger = 200
+state_machine = NodePath("BasicEnemyStateMachine")
 
 [node name="StatsComponent" parent="." index="0"]
 max_damage = 7
@@ -26,15 +28,27 @@ acceleration = 40.0
 [node name="HitFlashComponent" parent="." index="4"]
 hit_flash_material = SubResource("ShaderMaterial_i8mdv")
 
+[node name="Standby" parent="BasicEnemyStateMachine" index="0" node_paths=PackedStringArray("sprite")]
+script = ExtResource("4_bfyjt")
+sprite = NodePath("../../Sprite2D")
+
+[node name="ChasePlayer" parent="BasicEnemyStateMachine" index="2" node_paths=PackedStringArray("sprite")]
+script = ExtResource("5_so4fu")
+sprite = NodePath("../../Sprite2D")
+range_mod = 3.0
+
+[node name="NavigationAgent2D" parent="." index="8"]
+debug_enabled = true
+
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_v8xpa")
 
-[node name="Sprite2D" parent="." index="6"]
+[node name="Sprite2D" parent="." index="10"]
 texture = ExtResource("3_qsfml")
 hframes = 2
 
-[node name="CollisionShape2D" parent="." index="7"]
+[node name="CollisionShape2D" parent="." index="11"]
 position = Vector2(0, -5)
 
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]

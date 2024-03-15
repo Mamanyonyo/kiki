@@ -40,6 +40,7 @@ position = Vector2(1256, 808)
 
 [node name="Door2" parent="TileMap/Entities" instance=ExtResource("4_xh3u3")]
 position = Vector2(928, 352)
+scene_area_path = "res://scenes/areas/bathroom/boss_room.tscn"
 
 [node name="Sprite2D" parent="TileMap/Entities/Door2" index="0"]
 rotation = 3.14159
