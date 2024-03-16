@@ -37,18 +37,15 @@ script = ExtResource("5_so4fu")
 sprite = NodePath("../../Sprite2D")
 range_mod = 3.0
 
-[node name="NavigationAgent2D" parent="." index="8"]
-debug_enabled = true
-
 [node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_v8xpa")
 
-[node name="Sprite2D" parent="." index="10"]
+[node name="Sprite2D" parent="." index="9"]
 texture = ExtResource("3_qsfml")
 hframes = 2
 
-[node name="CollisionShape2D" parent="." index="11"]
+[node name="CollisionShape2D" parent="." index="10"]
 position = Vector2(0, -5)
 
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]

@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bvhmy0cf8uhf2" path="res://scenes/components/state_machine/enemy/chase_player.tscn" id="11_iup4t"]
 [ext_resource type="PackedScene" uid="uid://dmh2u33x3o0cn" path="res://scenes/components/state_machine/enemy/back_to_original_position.tscn" id="12_yqsxc"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b7lbf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rle1c"]
 resource_local_to_scene = true
 shader = ExtResource("6_x8svc")
 shader_parameter/lerp_percent = 0.0
@@ -35,7 +35,7 @@ script = ExtResource("1_ms8tp")
 
 [node name="StatsComponent" parent="." instance=ExtResource("2_tx4kg")]
 max_damage = 2
-max_speed = 100.0
+max_speed = 80.0
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_5w0eh")]
 stats_component = NodePath("../StatsComponent")
@@ -50,9 +50,7 @@ navigation_agent = NodePath("../NavigationAgent2D")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("5_07d4w")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_b7lbf")
-
-[node name="ObjectiveComponent" type="Node" parent="."]
+hit_flash_material = SubResource("ShaderMaterial_rle1c")
 
 [node name="BasicEnemyStateMachine" parent="." node_paths=PackedStringArray("current_state") instance=ExtResource("8_pewd8")]
 current_state = NodePath("Standby")
