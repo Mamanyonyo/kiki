@@ -3,11 +3,12 @@
 [ext_resource type="Script" path="res://scenes/spawner/enemy_spawner.gd" id="1_l6ae8"]
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="2_g3ha2"]
 
-[node name="EnemySpawner" type="Node2D"]
+[node name="EnemySpawner" type="Node2D" node_paths=PackedStringArray("timer") groups=["spawner"]]
 script = ExtResource("1_l6ae8")
 enemy_scene = ExtResource("2_g3ha2")
+timer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="."]
-autostart = true
+wait_time = 2.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

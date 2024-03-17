@@ -7,7 +7,7 @@ extends CanvasLayer
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if arena_time_manager == null: return
-	var time_elapsed = arena_time_manager.get_time_elapsed() as float
+	var time_elapsed = arena_time_manager.get_remaining_time() as float
 	time_display.text = timer_format(time_elapsed)
 	
 func timer_format(seconds: float) -> String:

@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://4cdhdu7q1t6b"]
+[gd_scene load_steps=11 format=3 uid="uid://4cdhdu7q1t6b"]
 
 [ext_resource type="Script" path="res://scenes/areas/bathroom/entrance.gd" id="1_11t6b"]
 [ext_resource type="TileSet" uid="uid://dwsf4rskaeij1" path="res://resources/tileset/bathroom_tileset.tres" id="1_udgdm"]
 [ext_resource type="PackedScene" uid="uid://8tpg5227nwx7" path="res://scenes/game_object/door.tscn" id="2_xl0l5"]
 [ext_resource type="PackedScene" uid="uid://bws23s3k4deoc" path="res://scenes/game_object/door_side.tscn" id="3_4cjn1"]
+[ext_resource type="PackedScene" uid="uid://begx3mv0xqkc8" path="res://scenes/spawner/enemy_spawner.tscn" id="3_avtcf"]
 [ext_resource type="PackedScene" uid="uid://dfqauk0kslf7r" path="res://scenes/game_object/npc/bathroom_girl_npc.tscn" id="3_h3erb"]
 [ext_resource type="PackedScene" uid="uid://divmskqbylt27" path="res://scenes/game_object/interaction/bathrooms/toilet_puzzle.tscn" id="3_nw1ya"]
 [ext_resource type="PackedScene" uid="uid://cw7lc3f4loa8l" path="res://scenes/game_object/interaction/generic_interactable.tscn" id="6_81tjq"]
@@ -24,6 +25,9 @@ layer_3/tile_data = PackedInt32Array(-1179482, 65537, 2, -1179481, 131073, 2, -1
 [node name="Entities" type="Node2D" parent="TileMap"]
 position = Vector2(48, 16)
 
+[node name="EnemySpawner" parent="TileMap/Entities" instance=ExtResource("3_avtcf")]
+position = Vector2(336, 96)
+
 [node name="Door2" parent="TileMap/Entities" instance=ExtResource("3_4cjn1")]
 position = Vector2(1872, -80)
 scene_area_path = "res://scenes/areas/bathroom/south.tscn"
@@ -38,13 +42,14 @@ scene_area_path = "res://scenes/areas/bathroom/north.tscn"
 
 [node name="ToiletMimic" parent="TileMap/Entities" instance=ExtResource("7_ki1af")]
 position = Vector2(2680, -307)
-range_trigger = 100
+detection_range = 100.0
 
 [node name="BathroomGirlNPC" parent="TileMap/Entities" instance=ExtResource("3_h3erb")]
 position = Vector2(1776, -265)
 
 [node name="ToiletMimic2" parent="TileMap/Entities" instance=ExtResource("7_ki1af")]
 position = Vector2(920, -162)
+detection_range = 100.0
 
 [node name="GenericInteractable" parent="TileMap" instance=ExtResource("6_81tjq")]
 position = Vector2(1112, -248)

@@ -1,10 +1,21 @@
-extends Node2D
+class_name EnemySpawner extends Node2D
 
 @export var enemy_scene: PackedScene
+@export var active = false
+@export var timer : Timer
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _ready():
+	GameEvents.emit_new_spawner(self)
+	
+func disable():
+	timer.autostart = false
+	active = false
+	timer.stop()
+	
+func enable():
+	timer.autostart = true
+	active = true
+	timer.start()
 
 func _on_timer_timeout() -> void:
 	var enemy_instance = enemy_scene.instantiate() as Node2D

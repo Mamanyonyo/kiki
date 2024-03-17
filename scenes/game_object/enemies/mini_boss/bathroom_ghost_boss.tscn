@@ -1,13 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://cijr8ph2qia6t"]
+[gd_scene load_steps=13 format=3 uid="uid://cijr8ph2qia6t"]
 
 [ext_resource type="Script" path="res://scenes/game_object/enemies/mini_boss/bathroom_ghost_boss.gd" id="1_6qcya"]
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="1_wfog3"]
-[ext_resource type="PackedScene" uid="uid://civstynml3v51" path="res://scenes/components/hurtbox_component.tscn" id="3_irxdf"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="3_jlwp6"]
 [ext_resource type="Script" path="res://scenes/components/state_machine/enemy/bathroom_ghost_boss/ghost_chase.gd" id="4_sqh22"]
 [ext_resource type="Script" path="res://scenes/components/state_machine/enemy/bathroom_ghost_boss/in_toilet.gd" id="5_blthg"]
 [ext_resource type="Texture2D" uid="uid://dfh8xqth57l17" path="res://assets/enemy/ghost.png" id="5_cpmfm"]
 [ext_resource type="Script" path="res://scenes/components/state_machine/enemy/bathroom_ghost_boss/chase_closest_toilet.gd" id="5_tmgdx"]
+[ext_resource type="Script" path="res://scenes/components/state_machine/enemy/bathroom_ghost_boss/ghost_jump_attack.gd" id="7_6r6dc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rdtpk"]
 resource_local_to_scene = true
@@ -15,25 +15,24 @@ shader = ExtResource("3_jlwp6")
 shader_parameter/lerp_percent = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kgmmg"]
-radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tgimq"]
 radius = 1.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ho02t"]
-radius = 9.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_bv1co"]
-radius = 7.07107
+radius = 8.06226
 
 [node name="BathroomGhostBoss" node_paths=PackedStringArray("state_machine") instance=ExtResource("1_wfog3")]
 collision_mask = 0
 script = ExtResource("1_6qcya")
 state_machine = NodePath("BasicEnemyStateMachine")
+permanent_speed_increment = 30.0
 detection_range = 200.0
 
 [node name="StatsComponent" parent="." index="0"]
 max_speed = 100.0
+max_health = 150.0
+max_resistance = 2.0
 
 [node name="HitFlashComponent" parent="." index="4"]
 hit_flash_material = SubResource("ShaderMaterial_rdtpk")
@@ -41,11 +40,13 @@ hit_flash_material = SubResource("ShaderMaterial_rdtpk")
 [node name="BasicEnemyStateMachine" parent="." index="5" node_paths=PackedStringArray("current_state")]
 current_state = NodePath("ChasePlayer")
 
-[node name="ChasePlayer" parent="BasicEnemyStateMachine" index="2" node_paths=PackedStringArray("stats", "health_component")]
+[node name="ChasePlayer" parent="BasicEnemyStateMachine" index="2" node_paths=PackedStringArray("stats", "health_component", "shape", "sprite")]
 script = ExtResource("4_sqh22")
 stats = NodePath("../../StatsComponent")
 health_component = NodePath("../../HealthComponent")
 percentage_to_activate_attack = 0.25
+shape = NodePath("../../Sprite2D/EventArea2D/CollisionShape2D2")
+sprite = NodePath("../../Sprite2D")
 
 [node name="ChaseClosestToilet" type="Node" parent="BasicEnemyStateMachine" index="4" node_paths=PackedStringArray("event_shape", "boss", "velocity")]
 script = ExtResource("5_tmgdx")
@@ -53,9 +54,22 @@ event_shape = NodePath("../../Sprite2D/EventArea2D/CollisionShape2D2")
 boss = NodePath("../..")
 velocity = NodePath("../../VelocityComponent")
 
-[node name="InToilet" type="Node" parent="BasicEnemyStateMachine" index="5" node_paths=PackedStringArray("boss")]
+[node name="InToilet" type="Node" parent="BasicEnemyStateMachine" index="5" node_paths=PackedStringArray("boss", "sprite", "JumpCDTimer", "stats")]
 script = ExtResource("5_blthg")
 boss = NodePath("../..")
+sprite = NodePath("../../Sprite2D")
+JumpCDTimer = NodePath("../../JumpCD")
+stats = NodePath("../../StatsComponent")
+bonus_resistance = 5.0
+
+[node name="JumpAttack" type="Node" parent="BasicEnemyStateMachine" index="6" node_paths=PackedStringArray("boss", "sprite", "shape", "collision_shape", "velocity_component", "stats_component")]
+script = ExtResource("7_6r6dc")
+boss = NodePath("../..")
+sprite = NodePath("../../Sprite2D")
+shape = NodePath("../../Sprite2D/EventArea2D/CollisionShape2D2")
+collision_shape = NodePath("../../CollisionShape2D")
+velocity_component = NodePath("../../VelocityComponent")
+stats_component = NodePath("../../StatsComponent")
 
 [node name="JumpCD" type="Timer" parent="." index="7"]
 wait_time = 2.5
@@ -81,16 +95,9 @@ position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_tgimq")
 disabled = true
 
-[node name="HurtboxComponent" parent="Sprite2D" index="1" node_paths=PackedStringArray("stats_component", "health_component") instance=ExtResource("3_irxdf")]
-stats_component = NodePath("../../StatsComponent")
-health_component = NodePath("../../HealthComponent")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HurtboxComponent" index="0"]
-position = Vector2(0, 1)
-shape = SubResource("CircleShape2D_ho02t")
-
 [node name="CollisionShape2D" parent="." index="11"]
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_bv1co")
 
+[connection signal="timeout" from="JumpCD" to="BasicEnemyStateMachine/InToilet" method="_on_jump_cd_timeout"]
 [connection signal="body_shape_entered" from="Sprite2D/EventArea2D" to="." method="_on_event_area_2d_body_shape_entered"]

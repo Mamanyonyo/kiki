@@ -1,7 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://boh3510we3axq"]
+[gd_scene load_steps=15 format=3 uid="uid://boh3510we3axq"]
 
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="1_2mbce"]
-[ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_time_manager.tscn" id="1_qlqaq"]
+[ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_qlqaq"]
 [ext_resource type="PackedScene" uid="uid://dxfu1qsn6132b" path="res://scenes/manager/experience_manager.tscn" id="2_ne1l0"]
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="3_hl5nt"]
 [ext_resource type="PackedScene" uid="uid://ikj4gkqleps3" path="res://scenes/UI/experience_bar.tscn" id="3_najmh"]
@@ -10,17 +10,10 @@
 [ext_resource type="Resource" uid="uid://qmv8t13qncoe" path="res://resources/upgrades/sword_damage.tres" id="5_m7jqr"]
 [ext_resource type="PackedScene" uid="uid://cpbg6qshhpf5y" path="res://scenes/manager/money_manager.tscn" id="6_g8io0"]
 [ext_resource type="PackedScene" uid="uid://dwtexgju11qmh" path="res://scenes/UI/arena_time/arena_time_ui.tscn" id="6_nxqro"]
+[ext_resource type="PackedScene" uid="uid://ca2gvkwc20xwd" path="res://scenes/manager/spawn_manager.tscn" id="7_oq6j0"]
+[ext_resource type="Script" path="res://scenes/manager/spawn_manager.gd" id="8_xrb60"]
 [ext_resource type="PackedScene" uid="uid://ccg3esjfw0jcg" path="res://scenes/UI/money_counter.tscn" id="9_qoi0h"]
-[ext_resource type="PackedScene" uid="uid://begx3mv0xqkc8" path="res://scenes/spawner/enemy_spawner.tscn" id="10_jt7o2"]
 [ext_resource type="PackedScene" uid="uid://dbhqp6kk7g2ke" path="res://scenes/areas/main_area.tscn" id="11_sxqim"]
-[ext_resource type="PackedScene" uid="uid://dhne4hrlxos48" path="res://scenes/game_object/tree.tscn" id="14_hm0kj"]
-[ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="15_sflkx"]
-[ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="16_j40vi"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1akqu"]
-resource_local_to_scene = true
-shader = ExtResource("16_j40vi")
-shader_parameter/lerp_percent = 0.0
 
 [node name="Main" type="Node2D"]
 
@@ -36,6 +29,9 @@ experience_manager = NodePath("../ExperienceManager")
 
 [node name="MoneyManager" parent="Managers" instance=ExtResource("6_g8io0")]
 
+[node name="SpawnManager" parent="Managers" instance=ExtResource("7_oq6j0")]
+script = ExtResource("8_xrb60")
+
 [node name="UI" type="Node" parent="."]
 unique_name_in_owner = true
 
@@ -50,12 +46,6 @@ money_manager = NodePath("../../Managers/MoneyManager")
 
 [node name="GameCamera" parent="." instance=ExtResource("1_2mbce")]
 
-[node name="EnemySpawner" parent="." instance=ExtResource("10_jt7o2")]
-position = Vector2(39, 55)
-
-[node name="EnemySpawner2" parent="." instance=ExtResource("10_jt7o2")]
-position = Vector2(588, 60)
-
 [node name="Areas" type="Node2D" parent="." groups=["areas_node"]]
 
 [node name="MainArea" parent="Areas" instance=ExtResource("11_sxqim")]
@@ -64,21 +54,7 @@ position = Vector2(0, 433)
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 y_sort_enabled = true
 
-[node name="Tree" parent="Entities" instance=ExtResource("14_hm0kj")]
-position = Vector2(328, 256)
-
 [node name="Player" parent="Entities" instance=ExtResource("3_hl5nt")]
 position = Vector2(319, 64)
 
-[node name="BasicEnemy" parent="Entities" instance=ExtResource("15_sflkx")]
-position = Vector2(53, 326)
-
-[node name="HitFlashComponent" parent="Entities/BasicEnemy" index="4"]
-hit_flash_material = SubResource("ShaderMaterial_1akqu")
-
-[node name="Sprite2D" parent="Entities/BasicEnemy" index="10"]
-modulate = Color(1, 0.521569, 0, 1)
-
 [node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]
-
-[editable path="Entities/BasicEnemy"]

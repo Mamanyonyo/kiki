@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://b7myo6d3f82mh"]
 
-[ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_time_manager.tscn" id="1_7wu2c"]
+[ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_7wu2c"]
 [ext_resource type="PackedScene" uid="uid://dxfu1qsn6132b" path="res://scenes/manager/experience_manager.tscn" id="2_mta20"]
 [ext_resource type="PackedScene" uid="uid://cyrb5xnbn6ue3" path="res://scenes/manager/upgrade_manager.tscn" id="3_7ih68"]
 [ext_resource type="Resource" uid="uid://cnhr4njlfqo3o" path="res://resources/upgrades/sword_rate.tres" id="4_vwayh"]
@@ -46,13 +46,15 @@ money_manager = NodePath("../../Managers/MoneyManager")
 z_index = -1
 
 [node name="BossRoom" parent="Areas" instance=ExtResource("11_d8cmt")]
-position = Vector2(-128, -1)
+
+[node name="TileMap" parent="Areas/BossRoom" index="0"]
+position = Vector2(0, 0)
 
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 y_sort_enabled = true
 
 [node name="Player" parent="Entities" instance=ExtResource("15_x5174")]
-position = Vector2(175, 64)
+position = Vector2(305, 135)
 
 [node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]
 

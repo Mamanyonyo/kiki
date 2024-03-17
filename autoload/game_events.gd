@@ -4,6 +4,7 @@ var door_amount = 0
 var correct_toilets = 0
 var toilet_complete = false
 var tree = true
+var wave_in_course = false
 
 signal experience_vial_collected(exp: float)
 signal money_collected(money: int)
@@ -13,6 +14,13 @@ signal open_door(id: int)
 signal toilet_puzzle_fail
 signal toilet_puzzle_complete
 signal tree_destroyed
+signal wave_start(wave: int)
+signal wave_end(wave: int)
+signal new_spawner(spawner: EnemySpawner)
+signal enemy_died(wave_spawned: bool)
+
+func emit_new_spawner(spawner):
+	new_spawner.emit(spawner)
 
 func emit_money_collected(money: int):
 	money_collected.emit(money)
@@ -34,6 +42,15 @@ func emit_toilet_puzzle_fail():
 
 func emit_toilet_puzzle_complete():
 	toilet_puzzle_complete.emit()
-	
+
 func emit_tree_destroyed():
 	tree_destroyed.emit()
+
+func emit_wave_start(wave: int):
+	wave_start.emit(wave)
+	
+func emit_wave_end(wave: int):
+	wave_end.emit(wave)
+
+func emit_enemy_died(wave_spawned: bool):
+	enemy_died.emit(wave_spawned)
