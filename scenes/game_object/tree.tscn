@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhne4hrlxos48"]
+[gd_scene load_steps=10 format=3 uid="uid://dhne4hrlxos48"]
 
 [ext_resource type="Texture2D" uid="uid://b45l0njxy453s" path="res://assets/environment/core.png" id="1_kfos8"]
 [ext_resource type="Script" path="res://scenes/game_object/tree.gd" id="1_mru27"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://civstynml3v51" path="res://scenes/components/hurtbox_component.tscn" id="1_wmtxb"]
 [ext_resource type="PackedScene" uid="uid://cquarnyd0pw5t" path="res://scenes/components/health_component.tscn" id="2_pdr4v"]
 [ext_resource type="PackedScene" uid="uid://dced3yrcptsre" path="res://scenes/components/collision_hurt_component.tscn" id="2_ry08u"]
+[ext_resource type="PackedScene" uid="uid://b7hih6ibl1le8" path="res://scenes/UI/health_bar.tscn" id="6_cvfmo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gi54j"]
 size = Vector2(74, 69)
@@ -33,6 +34,14 @@ stats_component = NodePath("../StatsComponent")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -32)
 texture = ExtResource("1_kfos8")
+
+[node name="HealthBar" parent="Sprite2D" node_paths=PackedStringArray("health_component") instance=ExtResource("6_cvfmo")]
+anchors_preset = -1
+anchor_left = -0.375
+anchor_right = 0.375
+offset_top = 35.0
+offset_bottom = 39.0
+health_component = NodePath("../../HealthComponent")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("stats_component", "health_component") instance=ExtResource("1_wmtxb")]
 collision_mask = 264

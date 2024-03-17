@@ -20,6 +20,10 @@ func get_health_percent():
 	if stats_component.max_health <= 0: return 0
 	var division : float = stats_component.health/stats_component.max_health
 	return division
+	
+func set_hp(new_hp: float):
+	stats_component.health = new_hp
+	health_changed.emit()
 
 func death():
 	died.emit()

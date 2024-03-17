@@ -22,7 +22,6 @@ var direction : Vector2 = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	update_health_display()
 	sprite.frame_coords.x = 0
 	sprite.frame_coords.y = 0
 
@@ -110,11 +109,6 @@ func get_rotation_in_degrees():
 		_: 
 			if(sprite.scale.x == -1): return 180
 			return 0
-			
-		
-
-func update_health_display():
-	hp_bar.value = health_component.get_health_percent()
 	
 func correct_sprite_on_facing_str():
 	sprite.frame_coords.y = 0
@@ -132,12 +126,9 @@ func _on_player_animator_animation_finished(anim_name: StringName) -> void:
 		book_hitbox.monitorable = false
 		correct_sprite_on_facing_str()
 
-func _on_health_component_health_changed() -> void:
-	update_health_display()
-
 func _on_health_component_died():
 	if GameEvents.tree:
 		stats_component.health = stats_component.max_health / 2
-		update_health_display()
+		health_component.health_changed.emit()
 		global_position = get_tree().get_first_node_in_group("tree").global_position + Vector2.DOWN * 30
 	else: queue_free()
