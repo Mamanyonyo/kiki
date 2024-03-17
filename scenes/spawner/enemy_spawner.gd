@@ -24,3 +24,4 @@ func _on_timer_timeout() -> void:
 	enemy_instance.global_position = global_position
 	enemy_instance.get_node("VelocityComponent").original_position = global_position
 	enemy_instance.wave_spawned = true
+	GameEvents.wave_enemy_spawned.emit()

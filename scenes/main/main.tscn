@@ -19,7 +19,7 @@
 
 [node name="Managers" type="Node" parent="."]
 
-[node name="ArenaTimeManager" parent="Managers" instance=ExtResource("1_qlqaq")]
+[node name="ArenaManager" parent="Managers" instance=ExtResource("1_qlqaq")]
 
 [node name="ExperienceManager" parent="Managers" instance=ExtResource("2_ne1l0")]
 
@@ -36,7 +36,7 @@ script = ExtResource("8_xrb60")
 unique_name_in_owner = true
 
 [node name="ArenaTimeUI" parent="UI" node_paths=PackedStringArray("arena_time_manager") instance=ExtResource("6_nxqro")]
-arena_time_manager = NodePath("../../Managers/ArenaTimeManager")
+arena_time_manager = NodePath("../../Managers/ArenaManager")
 
 [node name="ExperienceBar" parent="UI" node_paths=PackedStringArray("experience_manager") instance=ExtResource("3_najmh")]
 experience_manager = NodePath("../../Managers/ExperienceManager")

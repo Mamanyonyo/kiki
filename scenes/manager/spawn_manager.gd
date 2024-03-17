@@ -9,6 +9,7 @@ func _ready():
 	GameEvents.tree_destroyed.connect(on_tree_destroyed)
 	GameEvents.wave_start.connect(on_wave_start)
 	GameEvents.wave_end.connect(on_wave_end)
+	GameEvents.wave_enemy_limit_reached.connect(on_wave_enemy_limit_reached)
 	#var initial_spawners_in_scene = get_tree().get_nodes_in_group("spawner")
 	#spawner_queue = spawner_queue + initial_spawners_in_scene
 	#active_spawner_queue = active_spawner_queue + spawner_queue
@@ -22,7 +23,7 @@ func disable_all_active():
 		spawner.disable()
 
 func on_new_spawner(spawner: EnemySpawner):
-	if GameEvents.tree && GameEvents.wave_in_course: spawner.enable()
+	if GameEvents.tree && GameEvents.wave_in_course && !GameEvents.wave_limit: spawner.enable()
 	active_spawner_queue.push_back(spawner)
 	if active_spawner_queue.size() > min_active_spawner_amount:
 		var first_active = active_spawner_queue.pop_front() as EnemySpawner
@@ -36,7 +37,7 @@ func on_wave_end(wave):
 	disable_all_active()
 
 func on_tree_destroyed():
-	for spawner in active_spawner_queue:
-		spawner.disable()
-		
+	disable_all_active()
 
+func on_wave_enemy_limit_reached():
+	disable_all_active()

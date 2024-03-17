@@ -5,6 +5,8 @@ var correct_toilets = 0
 var toilet_complete = false
 var tree = true
 var wave_in_course = false
+var wave_limit = false
+var wave = 0
 
 signal experience_vial_collected(exp: float)
 signal money_collected(money: int)
@@ -18,6 +20,8 @@ signal wave_start(wave: int)
 signal wave_end(wave: int)
 signal new_spawner(spawner: EnemySpawner)
 signal enemy_died(wave_spawned: bool)
+signal wave_enemy_spawned
+signal wave_enemy_limit_reached
 
 func emit_new_spawner(spawner):
 	new_spawner.emit(spawner)
@@ -46,11 +50,14 @@ func emit_toilet_puzzle_complete():
 func emit_tree_destroyed():
 	tree_destroyed.emit()
 
-func emit_wave_start(wave: int):
+func emit_wave_start():
 	wave_start.emit(wave)
 	
-func emit_wave_end(wave: int):
+func emit_wave_end():
 	wave_end.emit(wave)
 
 func emit_enemy_died(wave_spawned: bool):
 	enemy_died.emit(wave_spawned)
+
+func emit_wave_enemy_limit_reached():
+	wave_enemy_limit_reached.emit()
