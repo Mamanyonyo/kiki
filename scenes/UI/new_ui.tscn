@@ -1,10 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://du25e0wl2obi1"]
+[gd_scene load_steps=4 format=3 uid="uid://du25e0wl2obi1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g880s"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3e2rf"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s58cr"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.509804, 0.886275, 0.780392, 1)
+shadow_color = Color(0.301961, 0.819608, 0.662745, 0.733333)
+shadow_size = 2
+anti_aliasing = false
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -47,12 +58,28 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+text = "5"
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_g880s")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3e2rf")
 value = 50.0
 show_percentage = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 15
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_s58cr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
