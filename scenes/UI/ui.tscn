@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bu33gem76vwcd"]
+
+[ext_resource type="PackedScene" uid="uid://dwtexgju11qmh" path="res://scenes/UI/arena_time/arena_time_ui.tscn" id="1_gyus0"]
+[ext_resource type="PackedScene" uid="uid://ikj4gkqleps3" path="res://scenes/UI/experience_bar.tscn" id="2_62epy"]
+[ext_resource type="PackedScene" uid="uid://ccg3esjfw0jcg" path="res://scenes/UI/money_counter.tscn" id="3_jc0w4"]
+
+[node name="UI" type="Node"]
+
+[node name="ArenaTimeUI" parent="." instance=ExtResource("1_gyus0")]
+
+[node name="MoneyCounter" parent="." instance=ExtResource("3_jc0w4")]
+
+[node name="ExperienceBar" parent="." instance=ExtResource("2_62epy")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[editable path="ArenaTimeUI"]
+[editable path="MoneyCounter"]
+[editable path="ExperienceBar"]

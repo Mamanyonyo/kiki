@@ -13,17 +13,20 @@ func _ready():
 
 func increment_experience(exp):
 	current_experience += exp
-	level_up_check()
 	experience_updated.emit(current_experience, next_level_xp)
+	level_up_check()
 	
 func level_up_check():
 	if current_experience >= next_level_xp: level_up()
 	
 func level_up():
+	var sobra = current_experience - next_level_xp
+	if sobra < 0: sobra = 0
 	current_level += 1
 	next_level_xp = 10 + current_level * 5
 	leveled_up.emit(current_level)
-	current_experience = 0 + current_experience - next_level_xp
+	current_experience = 0 + sobra
+	level_up_check()
 	
 
 func on_experience_vial_collected(exp: float):

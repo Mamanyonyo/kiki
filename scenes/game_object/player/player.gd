@@ -6,8 +6,6 @@ const ACCELERATION_SMOOTHING = 25
 @export var movement_animator: AnimationPlayer
 @export var sprite: Sprite2D
 
-@export var hp_bar: ProgressBar
-
 @export var book_hitbox: Area2D
 
 @export var middle: Marker2D

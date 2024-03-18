@@ -1,6 +1,6 @@
 class_name quantifiable_drop extends Node2D
 
-@export var value:int = 1
+@export var value : int = 1
 
 func tween_collect(percent: float, start_position):
 	var player = get_tree().get_first_node_in_group("Player")
