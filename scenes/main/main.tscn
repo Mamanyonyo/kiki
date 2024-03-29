@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://boh3510we3axq"]
 
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="1_2mbce"]
-[ext_resource type="PackedScene" uid="uid://du25e0wl2obi1" path="res://scenes/UI/new_ui.tscn" id="1_hfgd7"]
+[ext_resource type="PackedScene" uid="uid://du25e0wl2obi1" path="res://scenes/UI/ui.tscn" id="1_hfgd7"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_qlqaq"]
 [ext_resource type="PackedScene" uid="uid://dxfu1qsn6132b" path="res://scenes/manager/experience_manager.tscn" id="2_ne1l0"]
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="3_hl5nt"]
@@ -28,8 +28,17 @@ ui_box = NodePath("../UI/CanvasLayer/BoxContainer")
 
 [node name="UI" parent="." instance=ExtResource("1_hfgd7")]
 
-[node name="ProgressBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/HBoxContainer/GridContainer" index="0" node_paths=PackedStringArray("stat_component")]
-stat_component = NodePath("../../../../../../../../Entities/Player/HealthComponent")
+[node name="MarginContainer" parent="UI/CanvasLayer" index="0" node_paths=PackedStringArray("arena_time_manager")]
+arena_time_manager = NodePath("../../../Managers/ArenaManager")
+
+[node name="HBoxContainer" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer4" index="0" node_paths=PackedStringArray("experience_manager")]
+experience_manager = NodePath("../../../../../../../Managers/ExperienceManager")
+
+[node name="MarginContainer" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer" index="1" node_paths=PackedStringArray("money_manager")]
+money_manager = NodePath("../../../../../../Managers/MoneyManager")
+
+[node name="ProgressBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" index="0" node_paths=PackedStringArray("stat_component")]
+stat_component = NodePath("../../../../../../../../../Entities/Player/HealthComponent")
 
 [node name="Areas" type="Node2D" parent="." groups=["areas_node"]]
 

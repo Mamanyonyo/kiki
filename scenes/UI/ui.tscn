@@ -1,19 +1,135 @@
-[gd_scene load_steps=4 format=3 uid="uid://bu33gem76vwcd"]
+[gd_scene load_steps=8 format=3 uid="uid://du25e0wl2obi1"]
 
-[ext_resource type="PackedScene" uid="uid://dwtexgju11qmh" path="res://scenes/UI/arena_time/arena_time_ui.tscn" id="1_gyus0"]
-[ext_resource type="PackedScene" uid="uid://ikj4gkqleps3" path="res://scenes/UI/experience_bar.tscn" id="2_62epy"]
-[ext_resource type="PackedScene" uid="uid://ccg3esjfw0jcg" path="res://scenes/UI/money_counter.tscn" id="3_jc0w4"]
+[ext_resource type="Script" path="res://scenes/UI/arena_time_ui.gd" id="1_lhbw1"]
+[ext_resource type="Script" path="res://scenes/UI/experience_bar.gd" id="1_ly1kd"]
+[ext_resource type="PackedScene" uid="uid://mhhhmw8qvidn" path="res://scenes/UI/quantifiable_stat_bar.tscn" id="1_u05ll"]
+[ext_resource type="Script" path="res://scenes/UI/money_counter.gd" id="3_bmyku"]
 
-[node name="UI" type="Node"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g880s"]
+bg_color = Color(0, 0, 0, 1)
 
-[node name="ArenaTimeUI" parent="." instance=ExtResource("1_gyus0")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3e2rf"]
+bg_color = Color(1, 1, 1, 1)
 
-[node name="MoneyCounter" parent="." instance=ExtResource("3_jc0w4")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s58cr"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.509804, 0.886275, 0.780392, 1)
+shadow_color = Color(0.301961, 0.819608, 0.662745, 0.733333)
+shadow_size = 2
+anti_aliasing = false
 
-[node name="ExperienceBar" parent="." instance=ExtResource("2_62epy")]
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[editable path="ArenaTimeUI"]
-[editable path="MoneyCounter"]
-[editable path="ExperienceBar"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 23
+theme_override_constants/margin_right = 145
+script = ExtResource("1_lhbw1")
+
+[node name="TimeDisplay" type="Label" parent="CanvasLayer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Timer
+"
+
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BoxContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer4"]
+layout_mode = 2
+script = ExtResource("1_ly1kd")
+
+[node name="Label" type="Label" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer4/HBoxContainer"]
+layout_mode = 2
+text = "1
+"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_g880s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3e2rf")
+value = 50.0
+show_percentage = false
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 25
+script = ExtResource("3_bmyku")
+
+[node name="Label" type="Label" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "$0"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_s58cr")
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="ProgressBar" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" instance=ExtResource("1_u05ll")]
+layout_mode = 2

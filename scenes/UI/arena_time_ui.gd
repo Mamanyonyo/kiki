@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends MarginContainer
 
 @onready var time_display: Label = %TimeDisplay
 
