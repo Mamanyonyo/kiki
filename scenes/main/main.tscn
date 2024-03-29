@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://boh3510we3axq"]
 
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="1_2mbce"]
+[ext_resource type="PackedScene" uid="uid://du25e0wl2obi1" path="res://scenes/UI/new_ui.tscn" id="1_hfgd7"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_qlqaq"]
 [ext_resource type="PackedScene" uid="uid://dxfu1qsn6132b" path="res://scenes/manager/experience_manager.tscn" id="2_ne1l0"]
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="3_hl5nt"]
-[ext_resource type="PackedScene" uid="uid://bu33gem76vwcd" path="res://scenes/UI/ui.tscn" id="6_83o0o"]
 [ext_resource type="PackedScene" uid="uid://cpbg6qshhpf5y" path="res://scenes/manager/money_manager.tscn" id="6_g8io0"]
 [ext_resource type="PackedScene" uid="uid://ca2gvkwc20xwd" path="res://scenes/manager/spawn_manager.tscn" id="7_oq6j0"]
 [ext_resource type="Script" path="res://scenes/manager/spawn_manager.gd" id="8_xrb60"]
@@ -23,19 +23,10 @@
 [node name="SpawnManager" parent="Managers" instance=ExtResource("7_oq6j0")]
 script = ExtResource("8_xrb60")
 
-[node name="UI" parent="." instance=ExtResource("6_83o0o")]
-unique_name_in_owner = true
+[node name="UI" parent="." instance=ExtResource("1_hfgd7")]
 
-[node name="ArenaTimeUI" parent="UI" index="0" node_paths=PackedStringArray("arena_time_manager")]
-arena_time_manager = NodePath("../../Managers/ArenaManager")
-
-[node name="MoneyCounter" parent="UI" index="1" node_paths=PackedStringArray("money_manager")]
-money_manager = NodePath("../../Managers/MoneyManager")
-
-[node name="ExperienceBar" parent="UI" index="2" node_paths=PackedStringArray("experience_manager")]
-experience_manager = NodePath("../../Managers/ExperienceManager")
-
-[node name="GameCamera" parent="." instance=ExtResource("1_2mbce")]
+[node name="GameCamera" parent="." node_paths=PackedStringArray("ui_box") instance=ExtResource("1_2mbce")]
+ui_box = NodePath("../UI/CanvasLayer/BoxContainer")
 
 [node name="Areas" type="Node2D" parent="." groups=["areas_node"]]
 
