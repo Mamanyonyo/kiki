@@ -6,6 +6,9 @@ signal health_changed
 
 @export var stats_component : StatsComponent
 
+func _ready():
+	health_changed.emit()
+
 func damage(incoming_damage: float):
 	var final_damage = incoming_damage - stats_component.resistance
 	if final_damage < 0: final_damage = 0

@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://mhhhmw8qvidn"]
+
+[ext_resource type="Script" path="res://scenes/UI/quantifiable_stat_bar.gd" id="1_jhv01"]
+
+[node name="ProgressBar" type="ProgressBar"]
+custom_minimum_size = Vector2(55, 10)
+max_value = 1.0
+value = 1.0
+show_percentage = false
+script = ExtResource("1_jhv01")
+stat_name = "health"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -4.0
+offset_right = 11.5
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 11
+text = "10/20"
+horizontal_alignment = 1
+vertical_alignment = 1

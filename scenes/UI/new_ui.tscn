@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://du25e0wl2obi1"]
+[gd_scene load_steps=5 format=3 uid="uid://du25e0wl2obi1"]
+
+[ext_resource type="PackedScene" uid="uid://mhhhmw8qvidn" path="res://scenes/UI/quantifiable_stat_bar.tscn" id="1_u05ll"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g880s"]
 bg_color = Color(0, 0, 0, 1)
@@ -82,4 +84,12 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_s58cr")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="ProgressBar" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/HBoxContainer/GridContainer" instance=ExtResource("1_u05ll")]
 layout_mode = 2

@@ -23,10 +23,13 @@
 [node name="SpawnManager" parent="Managers" instance=ExtResource("7_oq6j0")]
 script = ExtResource("8_xrb60")
 
-[node name="UI" parent="." instance=ExtResource("1_hfgd7")]
-
 [node name="GameCamera" parent="." node_paths=PackedStringArray("ui_box") instance=ExtResource("1_2mbce")]
 ui_box = NodePath("../UI/CanvasLayer/BoxContainer")
+
+[node name="UI" parent="." instance=ExtResource("1_hfgd7")]
+
+[node name="ProgressBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/HBoxContainer/GridContainer" index="0" node_paths=PackedStringArray("stat_component")]
+stat_component = NodePath("../../../../../../../../Entities/Player/HealthComponent")
 
 [node name="Areas" type="Node2D" parent="." groups=["areas_node"]]
 
@@ -42,3 +45,4 @@ position = Vector2(319, 64)
 [node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]
 
 [editable path="UI"]
+[editable path="Entities/Player"]

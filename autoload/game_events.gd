@@ -21,6 +21,7 @@ signal new_spawner(spawner: EnemySpawner)
 signal enemy_died(wave_spawned: bool)
 signal wave_enemy_spawned
 signal wave_enemy_limit_reached
+signal quantifiable_stat_changed(incoming_stat_name : String, current, max, percentage)
 
 func emit_new_spawner(spawner):
 	new_spawner.emit(spawner)
@@ -57,3 +58,6 @@ func emit_enemy_died(wave_spawned: bool):
 
 func emit_wave_enemy_limit_reached():
 	wave_enemy_limit_reached.emit()
+
+func emit_quantifiable_stat_changed(incoming_stat_name: String, current, max, percentage):
+	quantifiable_stat_changed.emit(incoming_stat_name, current, max, percentage)
