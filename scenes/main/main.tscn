@@ -40,6 +40,18 @@ money_manager = NodePath("../../../../../../Managers/MoneyManager")
 [node name="ProgressBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" index="0" node_paths=PackedStringArray("stat_component")]
 stat_component = NodePath("../../../../../../../../../Entities/Player/HealthComponent")
 
+[node name="Stat" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer" index="0" node_paths=PackedStringArray("stats_component")]
+stats_component = NodePath("../../../../../../../../Entities/Player/StatsComponent")
+
+[node name="Stat2" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer" index="1" node_paths=PackedStringArray("stats_component")]
+stats_component = NodePath("../../../../../../../../Entities/Player/StatsComponent")
+
+[node name="Stat3" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer" index="2" node_paths=PackedStringArray("stats_component")]
+stats_component = NodePath("../../../../../../../../Entities/Player/StatsComponent")
+
+[node name="Stat4" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer" index="3" node_paths=PackedStringArray("stats_component")]
+stats_component = NodePath("../../../../../../../../Entities/Player/StatsComponent")
+
 [node name="Areas" type="Node2D" parent="." groups=["areas_node"]]
 
 [node name="MainArea" parent="Areas" instance=ExtResource("11_sxqim")]

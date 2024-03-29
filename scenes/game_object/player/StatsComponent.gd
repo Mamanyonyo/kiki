@@ -24,3 +24,7 @@ func _ready():
 	resistance = max_resistance
 	mana = max_mana
 	mana_reg = max_mana_reg
+	
+func stat_up(name, amount):
+	self[name] += amount
+	self["max_" + name] += amount

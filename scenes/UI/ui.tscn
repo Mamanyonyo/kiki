@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://du25e0wl2obi1"]
+[gd_scene load_steps=9 format=3 uid="uid://du25e0wl2obi1"]
 
 [ext_resource type="Script" path="res://scenes/UI/arena_time_ui.gd" id="1_lhbw1"]
 [ext_resource type="Script" path="res://scenes/UI/experience_bar.gd" id="1_ly1kd"]
 [ext_resource type="PackedScene" uid="uid://mhhhmw8qvidn" path="res://scenes/UI/quantifiable_stat_bar.tscn" id="1_u05ll"]
 [ext_resource type="Script" path="res://scenes/UI/money_counter.gd" id="3_bmyku"]
+[ext_resource type="Script" path="res://scenes/UI/ui_stat.gd" id="5_jo641"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g880s"]
 bg_color = Color(0, 0, 0, 1)
@@ -121,7 +122,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_s58cr")
 
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_top = 15
+theme_override_constants/margin_top = 7
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3"]
 layout_mode = 2
@@ -133,3 +134,101 @@ columns = 2
 
 [node name="ProgressBar" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" instance=ExtResource("1_u05ll")]
 layout_mode = 2
+
+[node name="MarginContainer5" type="MarginContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5"]
+layout_mode = 2
+columns = 2
+
+[node name="Stat" type="HBoxContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("5_jo641")
+stat_name = "damage"
+
+[node name="StatName" type="Label" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer/Stat"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Strength"
+
+[node name="StatPoints" type="Label" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer/Stat"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "1"
+
+[node name="Button" type="Button" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer/Stat"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "+"
+
+[node name="Stat2" type="HBoxContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("5_jo641")
+stat_name = "speed"
+increment = 5.0
+
+[node name="StatName" type="Label" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer/Stat2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Speed"
+
+[node name="StatPoints" type="Label" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer/Stat2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "1"
+
+[node name="Button" type="Button" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer/Stat2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "+"
+
+[node name="Stat3" type="HBoxContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("5_jo641")
+stat_name = "magic_damage"
+
+[node name="StatName" type="Label" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer/Stat3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Magic"
+
+[node name="StatPoints" type="Label" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer/Stat3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "1"
+
+[node name="Button" type="Button" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer/Stat3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "+"
+
+[node name="Stat4" type="HBoxContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("5_jo641")
+stat_name = "resistance"
+
+[node name="StatName" type="Label" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer/Stat4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Resistance"
+
+[node name="StatPoints" type="Label" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer/Stat4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "1"
+
+[node name="Button" type="Button" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer/Stat4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "+"
