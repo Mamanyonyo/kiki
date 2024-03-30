@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://civstynml3v51" path="res://scenes/components/hurtbox_component.tscn" id="4_to2db"]
 [ext_resource type="PackedScene" uid="uid://bonqxkxt3m2w5" path="res://scenes/UI/hit_flash_component.tscn" id="5_07d4w"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="6_x8svc"]
-[ext_resource type="Script" path="res://scenes/components/name_component.gd" id="8_4us4o"]
+[ext_resource type="PackedScene" uid="uid://cw2upt4misqqn" path="res://scenes/components/name_component.tscn" id="8_ndg2k"]
 [ext_resource type="PackedScene" uid="uid://cgg4xs0wrjk6d" path="res://scenes/components/state_machine.tscn" id="8_pewd8"]
 [ext_resource type="PackedScene" uid="uid://cfcxncwexfjgb" path="res://scenes/components/state_machine/enemy/standby.tscn" id="9_yntl2"]
 [ext_resource type="PackedScene" uid="uid://lgvxbfwjgvxl" path="res://scenes/components/state_machine/enemy/chase_tree.tscn" id="10_w8i0j"]
@@ -54,9 +54,7 @@ health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Sprite2D")
 hit_flash_material = SubResource("ShaderMaterial_qfefq")
 
-[node name="NameComponent" type="Node" parent="."]
-script = ExtResource("8_4us4o")
-types = Array[String](["hanny"])
+[node name="NameComponent" parent="." instance=ExtResource("8_ndg2k")]
 
 [node name="BasicEnemyStateMachine" parent="." node_paths=PackedStringArray("current_state") instance=ExtResource("8_pewd8")]
 current_state = NodePath("Standby")
