@@ -15,6 +15,7 @@ func _on_area_entered(other_area: Area2D):
 	var hitbox_component = other_area as HitboxComponent
 	#if hitbox_component.target != 2 && hitbox_component.target != alignment: return
 	health_component.damage(hitbox_component.damage)
+	GameEvents.emit_enemy_hit(get_parent())
 
 	var floating_text = floating_text_scene.instantiate() as Node2D
 	get_tree().get_first_node_in_group("foreground_layer").add_child(floating_text)

@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://du25e0wl2obi1"]
+[gd_scene load_steps=9 format=3 uid="uid://du25e0wl2obi1"]
 
+[ext_resource type="PackedScene" uid="uid://vflia6x4vuuy" path="res://scenes/UI/current_enemy_stats_ui.tscn" id="1_kbd2f"]
 [ext_resource type="Script" path="res://scenes/UI/arena_time_ui.gd" id="1_lhbw1"]
 [ext_resource type="Script" path="res://scenes/UI/experience_bar.gd" id="1_ly1kd"]
 [ext_resource type="PackedScene" uid="uid://mhhhmw8qvidn" path="res://scenes/UI/quantifiable_stat_bar.tscn" id="1_u05ll"]
@@ -27,6 +28,8 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CurrentEnemyStatsUI" parent="CanvasLayer" instance=ExtResource("1_kbd2f")]
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15
