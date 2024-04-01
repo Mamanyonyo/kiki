@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://vflia6x4vuuy"]
+
+[ext_resource type="Script" path="res://scenes/UI/enemy_name_label.gd" id="1_7fcms"]
+[ext_resource type="Script" path="res://scenes/UI/current_enemy_stats_portrait.gd" id="1_33rn7"]
+[ext_resource type="PackedScene" uid="uid://mhhhmw8qvidn" path="res://scenes/UI/quantifiable_stat_bar.tscn" id="1_paqwt"]
+[ext_resource type="Script" path="res://scenes/UI/current_enemy_stat_bar.gd" id="2_nypmc"]
+
+[node name="CurrentEnemyStatsUI" type="CanvasLayer"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 55.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_33rn7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Nombre"
+script = ExtResource("1_7fcms")
+
+[node name="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1_paqwt")]
+custom_minimum_size = Vector2(140, 10)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+script = ExtResource("2_nypmc")

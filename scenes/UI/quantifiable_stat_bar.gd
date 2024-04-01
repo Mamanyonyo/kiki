@@ -1,11 +1,14 @@
-extends ProgressBar
+class_name QuantifiableStatBar extends ProgressBar
 
 @export var stat_component : Node
 @export var stat_name : String
 @onready var label : Label = $Label
 
 func _ready():
-	stat_component[stat_name + "_changed"].connect(on_quantifiable_stat_changed)
+	#if stat_component == null:
+		#push_warning("NO STAT COMPONENT FOR QUANTIFIABLE STAT BAR")
+		#return
+	connect_signal()
 	
 func update_display():
 	value = stat_component.get_health_percent()
@@ -13,3 +16,6 @@ func update_display():
 
 func on_quantifiable_stat_changed():
 	update_display()
+
+func connect_signal():
+	stat_component[stat_name + "_changed"].connect(on_quantifiable_stat_changed)

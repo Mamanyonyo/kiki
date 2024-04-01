@@ -1,0 +1,43 @@
+{
+	"name": {
+		"default": [
+			"DJ",
+			"John",
+			"Dwayne",
+			"George",
+			"Michael",
+			"Peter",
+			"Richard",
+			"Pedro"
+		],
+		"hanny": [
+			"TADA",
+			"Hiya",
+			"Haiya",
+			"Hani",
+			"Haniko",
+			"Puchi",
+			"Kevin"
+		]
+	},
+	"surname": {
+		"default": [
+			"Washington",
+			"Johnson",
+			"Peterson",
+			"Richardson",
+			"Hubert",
+			"Davis",
+			"Garcia",
+			"Miller",
+			"Jones",
+			"Rodriguez",
+			""
+		],
+		"hanny": [
+			"Niwa",
+			"TADAson",
+			"Aiyaaaaa"
+		]
+	}
+}
