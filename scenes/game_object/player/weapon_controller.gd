@@ -18,7 +18,7 @@ func Inputs():
 
 func melee_atack_listen(animation_name: String):
 	if Input.is_action_just_pressed("attack") && !player.attacking:
-		player.book_hitbox.monitorable = true
+		player.book_hitbox.get_child(0).disabled = false
 		player.book_hitbox.damage = player.stats_component.damage
 		play_and_set_attacking_state(animation_name)
 		check_if_animation_worked(animation_name)
@@ -46,3 +46,4 @@ func play_and_set_attacking_state(animation_prefix: String):
 func check_if_animation_worked(animation_name: String):
 	if !player_animator.assigned_animation == animation_name + "_" + player.facing_str:
 		player.attacking = false
+		player.book_hitbox.get_child(0).disabled = true

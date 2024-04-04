@@ -128,7 +128,7 @@ func correct_sprite_on_facing_str():
 func _on_player_animator_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("attack"):
 		attacking = false
-		book_hitbox.monitorable = false
+		book_hitbox.get_child(0).disabled = true
 		correct_sprite_on_facing_str()
 
 func _on_health_component_died():
