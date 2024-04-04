@@ -14,8 +14,7 @@ func _ready() -> void:
 	stats_component = player.stats_component
 
 func Inputs():
-	melee_atack_listen("book_attack")
-	range_atack_listen("book_attack_spell_aimed")
+	pass
 
 func melee_atack_listen(animation_name: String):
 	if Input.is_action_just_pressed("attack") && !player.attacking:

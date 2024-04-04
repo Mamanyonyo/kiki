@@ -1,7 +1,7 @@
 extends WeaponController
 
 func Inputs():
-	#melee_atack_listen("staff_attack")
+	melee_atack_listen("staff_attack")
 	range_atack_listen("staff_attack_spell_aimed")
 
 #func melee_atack_listen(animation_name: String):
