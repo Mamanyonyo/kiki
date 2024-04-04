@@ -7,6 +7,7 @@
 radius = 2.0
 
 [node name="Bullet" type="Area2D" groups=["projectile"]]
+y_sort_enabled = true
 collision_layer = 4
 script = ExtResource("1_fch70")
 max_pierce = 3
