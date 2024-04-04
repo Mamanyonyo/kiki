@@ -9,7 +9,7 @@ var bathroom_ghost_boss_scene: PackedScene = load("res://scenes/game_object/enem
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.get_parent().is_in_group("Player"):
+	if area.get_parent().get_parent().is_in_group("Player"):
 		tilemap.set_layer_enabled(2, true)
 		area_node.queue_free()
 		fight_start()
