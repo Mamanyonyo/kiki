@@ -65,10 +65,17 @@ func _unhandled_input(event):
 	absolute_dir = Vector2(ceil(direction.x), ceil(direction.y))
 	check_interaction()
 	check_tp()
+	check_run()
 	
 func check_tp():
 	if Input.is_action_just_pressed("teleport"):
 		global_position = get_global_mouse_position()
+		
+func check_run():
+	if Input.is_action_just_pressed("run"):
+		stats_component.speed += stats_component.max_speed * 25 / 100
+	elif Input.is_action_just_released("run"):
+		stats_component.speed = stats_component.max_speed
 
 func check_interaction():
 	if Input.is_action_just_pressed("attack"):
