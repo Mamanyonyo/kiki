@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="2_g3ha2"]
 [ext_resource type="Texture2D" uid="uid://bmkqvlj8qsxby" path="res://assets/environment/spawner.png" id="3_4krm0"]
 
+[sub_resource type="Animation" id="Animation_hburq"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_hwpng"]
 resource_name = "rotate"
 length = 0.3
@@ -19,9 +22,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0, 1.5708]
 }
-
-[sub_resource type="Animation" id="Animation_hburq"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bf4so"]
 _data = {

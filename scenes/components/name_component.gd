@@ -20,7 +20,6 @@ func _ready():
 	var random_surname = possible_surnames.pick_random()
 	
 	display_name = random_name + " " + random_surname
-	print(display_name)
 
 func readJSON(json_file_path):
 	var file = FileAccess.open(json_file_path, FileAccess.READ)

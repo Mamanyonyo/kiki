@@ -6,6 +6,5 @@ func _ready():
 
 func on_enemy_hit(enemy : BasicEnemy):
 	if enemy == null: return
-	print(enemy)
 	stat_component = enemy.get_node("HealthComponent")
 	update_display()
