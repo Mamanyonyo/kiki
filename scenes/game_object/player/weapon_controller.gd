@@ -16,6 +16,12 @@ func _ready() -> void:
 func Inputs():
 	pass
 
+func Equip():
+	pass
+	
+func Unequip():
+	pass
+
 func melee_atack_listen(animation_name: String):
 	if Input.is_action_just_pressed("attack") && !player.attacking:
 		player.book_hitbox.get_child(0).disabled = false

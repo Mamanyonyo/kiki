@@ -24,6 +24,7 @@ signal wave_enemy_limit_reached
 signal quantifiable_stat_changed(incoming_stat_name : String, current, max, percentage)
 signal stat_update
 signal enemy_hit(enemy: BasicEnemy)
+signal item_equip(item_name: String)
 
 func emit_new_spawner(spawner):
 	new_spawner.emit(spawner)
@@ -69,3 +70,6 @@ func emit_stat_update():
 
 func emit_enemy_hit(enemy: BasicEnemy):
 	enemy_hit.emit(enemy)
+
+func emit_item_equip(item: String):
+	item_equip.emit(item)
