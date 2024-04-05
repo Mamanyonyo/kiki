@@ -520,7 +520,7 @@ script = ExtResource("5_01x6p")
 [node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("player", "current_weapon_controller")]
 script = ExtResource("3_xj72i")
 player = NodePath("..")
-current_weapon_controller = NodePath("StaffController")
+current_weapon_controller = NodePath("BookController")
 
 [node name="BookController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component")]
 script = ExtResource("4_qkfhb")
