@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://du25e0wl2obi1"]
+[gd_scene load_steps=11 format=3 uid="uid://du25e0wl2obi1"]
 
 [ext_resource type="PackedScene" uid="uid://vflia6x4vuuy" path="res://scenes/UI/current_enemy_stats_ui.tscn" id="1_kbd2f"]
 [ext_resource type="Script" path="res://scenes/UI/arena_time_ui.gd" id="1_lhbw1"]
 [ext_resource type="Script" path="res://scenes/UI/experience_bar.gd" id="1_ly1kd"]
 [ext_resource type="PackedScene" uid="uid://mhhhmw8qvidn" path="res://scenes/UI/quantifiable_stat_bar.tscn" id="1_u05ll"]
 [ext_resource type="Script" path="res://scenes/UI/money_counter.gd" id="3_bmyku"]
+[ext_resource type="Texture2D" uid="uid://cvpamhfcwh8cs" path="res://assets/weapon/raging_heart/icon.png" id="5_gq0i2"]
 [ext_resource type="Script" path="res://scenes/UI/ui_stat.gd" id="5_jo641"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g880s"]
@@ -122,6 +123,13 @@ theme_override_constants/margin_right = 15
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_s58cr")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2/PanelContainer"]
+custom_minimum_size = Vector2(36, 52)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("5_gq0i2")
 
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer"]
 layout_mode = 2
