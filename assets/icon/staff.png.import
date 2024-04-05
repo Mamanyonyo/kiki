@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pteswrehnae2"
-path="res://.godot/imported/icon.png-04627a9520bdd2c25e1b339653da45a2.ctex"
+uid="uid://cvpamhfcwh8cs"
+path="res://.godot/imported/staff.png-f7054e7a4c9baa0a28ad2a4372a6dd86.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/weapon/spellbook/icon.png"
-dest_files=["res://.godot/imported/icon.png-04627a9520bdd2c25e1b339653da45a2.ctex"]
+source_file="res://assets/icon/staff.png"
+dest_files=["res://.godot/imported/staff.png-f7054e7a4c9baa0a28ad2a4372a6dd86.ctex"]
 
 [params]
 

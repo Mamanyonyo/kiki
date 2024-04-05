@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=34 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
 [ext_resource type="PackedScene" uid="uid://dced3yrcptsre" path="res://scenes/components/collision_hurt_component.tscn" id="2_7ygai"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scenes/game_object/player/WeaponManager.gd" id="3_xj72i"]
 [ext_resource type="Texture2D" uid="uid://di40knpu0ut51" path="res://assets/character/kiki.png" id="4_3kvbw"]
 [ext_resource type="Script" path="res://scenes/game_object/player/book_controller.gd" id="4_qkfhb"]
+[ext_resource type="Script" path="res://scenes/game_object/player/inventory_component.gd" id="5_01x6p"]
 [ext_resource type="PackedScene" uid="uid://cgoukns1if586" path="res://scenes/game_object/projectile/bullet.tscn" id="5_k4bht"]
 [ext_resource type="PackedScene" uid="uid://duivxwbgh8hl2" path="res://scenes/components/hitbox_component.tscn" id="7_6vy27"]
 [ext_resource type="Script" path="res://scenes/game_object/player/staff_controller.gd" id="8_o233k"]
@@ -512,6 +513,9 @@ max_health = 20.0
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_s8m81")]
 stats_component = NodePath("../StatsComponent")
+
+[node name="InventoryComponent" type="Node" parent="."]
+script = ExtResource("5_01x6p")
 
 [node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("player", "current_weapon_controller")]
 script = ExtResource("3_xj72i")

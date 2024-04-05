@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvpamhfcwh8cs"
-path="res://.godot/imported/icon.png-a7c26ffb5555a769a3db2879fb582a67.ctex"
+uid="uid://pteswrehnae2"
+path="res://.godot/imported/book.png-a44beb9e030e5836fb96e916d01342fe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/weapon/raging_heart/icon.png"
-dest_files=["res://.godot/imported/icon.png-a7c26ffb5555a769a3db2879fb582a67.ctex"]
+source_file="res://assets/icon/book.png"
+dest_files=["res://.godot/imported/book.png-a44beb9e030e5836fb96e916d01342fe.ctex"]
 
 [params]
 

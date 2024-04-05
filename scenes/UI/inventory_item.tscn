@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2e6i1t6yds5d"]
+
+[ext_resource type="Script" path="res://scenes/UI/inventory_equipable.gd" id="1_pwnym"]
+[ext_resource type="Texture2D" uid="uid://cvpamhfcwh8cs" path="res://assets/icon/staff.png" id="2_hqxvm"]
+
+[node name="InventoryItem" type="MarginContainer" node_paths=PackedStringArray("rect")]
+script = ExtResource("1_pwnym")
+rect = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(36, 52)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_hqxvm")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

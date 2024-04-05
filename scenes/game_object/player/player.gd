@@ -11,6 +11,7 @@ const ACCELERATION_SMOOTHING = 25
 @export var middle: Marker2D
 
 @export var stats_component: StatsComponent
+@onready var inventory_component : InventoryComponent = $InventoryComponent
 
 var previous_dir = Vector2.ZERO
 var attacking = false
@@ -22,7 +23,7 @@ var direction : Vector2 = Vector2.ZERO
 func _ready() -> void:
 	sprite.frame_coords.x = 0
 	sprite.frame_coords.y = 0
-
+	inventory_component.add_item("book")
 
 
 func _process(delta):

@@ -37,6 +37,9 @@ experience_manager = NodePath("../../../../../../../Managers/ExperienceManager")
 [node name="MarginContainer" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer" index="1" node_paths=PackedStringArray("money_manager")]
 money_manager = NodePath("../../../../../../Managers/MoneyManager")
 
+[node name="Inventory" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer" index="0" node_paths=PackedStringArray("inventory_component")]
+inventory_component = NodePath("../../../../../../../../../Entities/Player/InventoryComponent")
+
 [node name="ProgressBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" index="0" node_paths=PackedStringArray("stat_component")]
 stat_component = NodePath("../../../../../../../../../Entities/Player/HealthComponent")
 
