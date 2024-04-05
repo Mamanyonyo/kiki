@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scenes/game_object/player/WeaponManager.gd" id="3_xj72i"]
 [ext_resource type="Texture2D" uid="uid://di40knpu0ut51" path="res://assets/character/kiki.png" id="4_3kvbw"]
 [ext_resource type="Script" path="res://scenes/game_object/player/book_controller.gd" id="4_qkfhb"]
-[ext_resource type="Script" path="res://scenes/game_object/player/inventory_component.gd" id="5_01x6p"]
+[ext_resource type="PackedScene" uid="uid://cgu10pjnl7jka" path="res://scenes/components/inventory_component.tscn" id="5_k2f8i"]
 [ext_resource type="PackedScene" uid="uid://cgoukns1if586" path="res://scenes/game_object/projectile/bullet.tscn" id="5_k4bht"]
 [ext_resource type="PackedScene" uid="uid://duivxwbgh8hl2" path="res://scenes/components/hitbox_component.tscn" id="7_6vy27"]
 [ext_resource type="Script" path="res://scenes/game_object/player/staff_controller.gd" id="8_o233k"]
@@ -514,13 +514,13 @@ max_health = 20.0
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_s8m81")]
 stats_component = NodePath("../StatsComponent")
 
-[node name="InventoryComponent" type="Node" parent="."]
-script = ExtResource("5_01x6p")
+[node name="InventoryComponent" parent="." instance=ExtResource("5_k2f8i")]
 
-[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("player", "current_weapon_controller")]
+[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("player", "current_weapon_controller", "default_controller")]
 script = ExtResource("3_xj72i")
 player = NodePath("..")
 current_weapon_controller = NodePath("BookController")
+default_controller = NodePath("BookController")
 
 [node name="BookController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component")]
 script = ExtResource("4_qkfhb")

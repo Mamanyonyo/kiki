@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dr68fmyh4o88q"]
+[gd_scene load_steps=12 format=3 uid="uid://dr68fmyh4o88q"]
 
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_7wu2c"]
 [ext_resource type="PackedScene" uid="uid://dxfu1qsn6132b" path="res://scenes/manager/experience_manager.tscn" id="2_mta20"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://du25e0wl2obi1" path="res://scenes/UI/ui.tscn" id="7_bo3jd"]
 [ext_resource type="PackedScene" uid="uid://dbhqp6kk7g2ke" path="res://scenes/areas/main_area.tscn" id="8_m0yyj"]
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="9_lndom"]
+[ext_resource type="PackedScene" uid="uid://bxinbjgjiof0b" path="res://scenes/game_object/interaction/animated_pickable.tscn" id="10_ht2ms"]
+[ext_resource type="Texture2D" uid="uid://cvpamhfcwh8cs" path="res://assets/icon/staff.png" id="11_f4gpj"]
 
 [node name="Main" type="Node2D"]
 
@@ -66,7 +68,21 @@ y_sort_enabled = true
 [node name="Player" parent="Entities" instance=ExtResource("9_lndom")]
 position = Vector2(319, 64)
 
+[node name="AnimatedPickable" parent="Entities" instance=ExtResource("10_ht2ms")]
+position = Vector2(256, 71)
+
+[node name="Sprite2D" parent="Entities/AnimatedPickable" index="0"]
+texture = ExtResource("11_f4gpj")
+
+[node name="Pickable" parent="Entities/AnimatedPickable/Sprite2D" index="0"]
+item_id = "staff"
+
+[node name="CollisionShape2D" parent="Entities/AnimatedPickable/Sprite2D/Pickable" index="0"]
+position = Vector2(0, -0.5)
+
 [node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]
 
 [editable path="UI"]
 [editable path="Entities/Player"]
+[editable path="Entities/AnimatedPickable"]
+[editable path="Entities/AnimatedPickable/Sprite2D/Pickable"]
