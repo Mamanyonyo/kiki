@@ -64,6 +64,7 @@ texture = ExtResource("6_ov2c0")
 
 [node name="Pickable" parent="TileMap/Entities/HiddenContainer/AnimatedPickable/Sprite2D" index="0"]
 item_id = "staff"
+title = "staff"
 
 [node name="CollisionShape2D" parent="TileMap/Entities/HiddenContainer/AnimatedPickable/Sprite2D/Pickable" index="0"]
 position = Vector2(0, -0.5)

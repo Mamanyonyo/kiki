@@ -1,5 +1,6 @@
 extends Node
 
+var last_obtained_item = ""
 var door_amount = 0
 var correct_toilets = 0
 var toilet_complete = false
