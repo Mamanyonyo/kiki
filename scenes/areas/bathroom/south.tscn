@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgndrfwq422ym"]
+[gd_scene load_steps=8 format=3 uid="uid://dgndrfwq422ym"]
 
 [ext_resource type="PackedScene" uid="uid://divmskqbylt27" path="res://scenes/game_object/interaction/bathrooms/toilet_puzzle.tscn" id="2_6wjuf"]
 [ext_resource type="Script" path="res://scenes/areas/area.gd" id="2_elqb6"]
 [ext_resource type="TileSet" uid="uid://dwsf4rskaeij1" path="res://resources/tileset/bathroom_tileset.tres" id="3_6t44k"]
 [ext_resource type="PackedScene" uid="uid://bws23s3k4deoc" path="res://scenes/game_object/door_side.tscn" id="4_xh3u3"]
+[ext_resource type="Script" path="res://scenes/areas/bathroom/hidden_container.gd" id="5_7fys0"]
 [ext_resource type="PackedScene" uid="uid://bxinbjgjiof0b" path="res://scenes/game_object/interaction/animated_pickable.tscn" id="5_o3404"]
 [ext_resource type="Texture2D" uid="uid://cvpamhfcwh8cs" path="res://assets/icon/staff.png" id="6_ov2c0"]
 
@@ -52,18 +53,21 @@ position = Vector2(-48, 816)
 scene_area_path = "res://scenes/areas/bathroom/south_west.tscn"
 direction = Vector2(-1, 0)
 
-[node name="AnimatedPickable" parent="TileMap/Entities" instance=ExtResource("5_o3404")]
+[node name="HiddenContainer" type="Node2D" parent="TileMap/Entities"]
+script = ExtResource("5_7fys0")
+
+[node name="AnimatedPickable" parent="TileMap/Entities/HiddenContainer" instance=ExtResource("5_o3404")]
 position = Vector2(712, 1134)
 
-[node name="Sprite2D" parent="TileMap/Entities/AnimatedPickable" index="0"]
+[node name="Sprite2D" parent="TileMap/Entities/HiddenContainer/AnimatedPickable" index="0"]
 texture = ExtResource("6_ov2c0")
 
-[node name="Pickable" parent="TileMap/Entities/AnimatedPickable/Sprite2D" index="0"]
+[node name="Pickable" parent="TileMap/Entities/HiddenContainer/AnimatedPickable/Sprite2D" index="0"]
 item_id = "staff"
 
-[node name="CollisionShape2D" parent="TileMap/Entities/AnimatedPickable/Sprite2D/Pickable" index="0"]
+[node name="CollisionShape2D" parent="TileMap/Entities/HiddenContainer/AnimatedPickable/Sprite2D/Pickable" index="0"]
 position = Vector2(0, -0.5)
 
 [editable path="TileMap/Entities/Door2"]
-[editable path="TileMap/Entities/AnimatedPickable"]
-[editable path="TileMap/Entities/AnimatedPickable/Sprite2D/Pickable"]
+[editable path="TileMap/Entities/HiddenContainer/AnimatedPickable"]
+[editable path="TileMap/Entities/HiddenContainer/AnimatedPickable/Sprite2D/Pickable"]
