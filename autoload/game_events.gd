@@ -25,6 +25,8 @@ signal quantifiable_stat_changed(incoming_stat_name : String, current, max, perc
 signal stat_update
 signal enemy_hit(enemy: BasicEnemy)
 signal item_equip(item_name: String)
+signal show_cg(image_path)
+signal stop_cg()
 
 func emit_new_spawner(spawner):
 	new_spawner.emit(spawner)
@@ -73,3 +75,9 @@ func emit_enemy_hit(enemy: BasicEnemy):
 
 func emit_item_equip(item: String):
 	item_equip.emit(item)
+	
+func emit_show_cg(path: String):
+	show_cg.emit(path)
+
+func emit_stop_cg():
+	stop_cg.emit()

@@ -1,6 +1,6 @@
 extends MarginContainer
 
-@onready var time_display: Label = %TimeDisplay
+@export var time_display: Label
 
 @export var arena_time_manager: Node
 

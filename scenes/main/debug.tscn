@@ -30,9 +30,6 @@ ui_box = NodePath("../UI/CanvasLayer/BoxContainer")
 
 [node name="UI" parent="." instance=ExtResource("7_bo3jd")]
 
-[node name="MarginContainer" parent="UI/CanvasLayer" index="1" node_paths=PackedStringArray("arena_time_manager")]
-arena_time_manager = NodePath("../../../Managers/ArenaManager")
-
 [node name="HBoxContainer" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer4" index="0" node_paths=PackedStringArray("experience_manager")]
 experience_manager = NodePath("../../../../../../../Managers/ExperienceManager")
 

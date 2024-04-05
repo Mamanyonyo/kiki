@@ -1,0 +1,5 @@
+~ default
+do emit_show_cg("res://assets/image/sigil_map.png")
+What is this?
+do emit_stop_cg()
+=> END

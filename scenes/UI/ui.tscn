@@ -1,13 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://du25e0wl2obi1"]
+[gd_scene load_steps=13 format=3 uid="uid://du25e0wl2obi1"]
 
 [ext_resource type="PackedScene" uid="uid://vflia6x4vuuy" path="res://scenes/UI/current_enemy_stats_ui.tscn" id="1_kbd2f"]
 [ext_resource type="Script" path="res://scenes/UI/arena_time_ui.gd" id="1_lhbw1"]
 [ext_resource type="Script" path="res://scenes/UI/experience_bar.gd" id="1_ly1kd"]
 [ext_resource type="PackedScene" uid="uid://mhhhmw8qvidn" path="res://scenes/UI/quantifiable_stat_bar.tscn" id="1_u05ll"]
+[ext_resource type="Texture2D" uid="uid://cbur6iuxfrur2" path="res://assets/image/sigil_map.png" id="3_a6sub"]
 [ext_resource type="Script" path="res://scenes/UI/money_counter.gd" id="3_bmyku"]
+[ext_resource type="Script" path="res://scenes/UI/cg_display.gd" id="4_lkfg0"]
 [ext_resource type="Script" path="res://scenes/UI/Inventory_ui.gd" id="5_hiu8o"]
 [ext_resource type="Script" path="res://scenes/UI/ui_stat.gd" id="5_jo641"]
-[ext_resource type="PackedScene" uid="uid://b2e6i1t6yds5d" path="res://scenes/UI/inventory_item.tscn" id="6_fdvsk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g880s"]
 bg_color = Color(0, 0, 0, 1)
@@ -32,26 +33,42 @@ anchors_preset = 0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CurrentEnemyStatsUI" parent="CanvasLayer" instance=ExtResource("1_kbd2f")]
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="Screen" type="MarginContainer" parent="CanvasLayer" node_paths=PackedStringArray("time_display")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -150.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/margin_top = 23
-theme_override_constants/margin_right = 145
 script = ExtResource("1_lhbw1")
+time_display = NodePath("MarginContainer/TimeDisplay")
 
-[node name="TimeDisplay" type="Label" parent="CanvasLayer/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Screen"]
+layout_mode = 2
+theme_override_constants/margin_top = 25
+
+[node name="TimeDisplay" type="Label" parent="CanvasLayer/Screen/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "Timer
 "
+
+[node name="CurrentEnemyStatsUI" parent="CanvasLayer/Screen" instance=ExtResource("1_kbd2f")]
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Screen"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 35
+
+[node name="CGDisplay" type="TextureRect" parent="CanvasLayer/Screen/MarginContainer2"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_a6sub")
+script = ExtResource("4_lkfg0")
 
 [node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
 anchors_preset = 11
@@ -132,9 +149,6 @@ layout_mode = 2
 layout_mode = 2
 columns = 3
 script = ExtResource("5_hiu8o")
-
-[node name="InventoryItem" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer/Inventory" instance=ExtResource("6_fdvsk")]
-layout_mode = 2
 
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer"]
 layout_mode = 2

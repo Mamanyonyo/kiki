@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://5hq16yrd2p8p"
+path="res://.godot/imported/sigil.dialogue-76fd520b5271692cd57e403e3c18e016.tres"
+
+[deps]
+
+source_file="res://resources/dialogue/interact/bathroom/sigil.dialogue"
+dest_files=["res://.godot/imported/sigil.dialogue-76fd520b5271692cd57e403e3c18e016.tres"]
+
+[params]
+
+defaults=true
