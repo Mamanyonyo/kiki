@@ -22,7 +22,7 @@ func check_deal_damage():
 			var rngy = RandomNumberGenerator.new().randf_range(-30, 30)
 			floating_text.global_position = get_parent().global_position + Vector2(rngx, rngy)
 			floating_text.start(str(body.stats_component.damage - stats_component.resistance))
-			## CAMBIAR ESTE BONDI A UNA SEÑAL/PONERLO EN EL COMPONENTE DE VIDA NO SE
+			#TODO CAMBIAR ESTE BONDI A UNA SEÑAL/PONERLO EN EL COMPONENTE DE VIDA NO SE
 			health_component.damage(body.stats_component.damage)
 			damage_timer.start()
 

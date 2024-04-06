@@ -27,6 +27,7 @@ func _ready() -> void:
 	sprite.frame_coords.x = 0
 	sprite.frame_coords.y = 0
 	inventory_component.add_item("book")
+	book_hitbox.get_node("CollisionShape2D").set_deferred("disabled", true)
 
 
 func _process(delta):
@@ -81,6 +82,10 @@ func check_run():
 		stamina_component.running = true
 		if stamina_component.can_run(): stats_component.speed += stats_component.max_speed * 25 / 100
 		else: stats_component.speed = stats_component.max_speed
+	elif Input.is_action_pressed("run"):
+		if !stamina_component.can_run(): 
+			stats_component.speed = stats_component.max_speed
+			stamina_component.running = false
 	elif Input.is_action_just_released("run"):
 		stats_component.speed = stats_component.max_speed
 		stamina_component.running = false
