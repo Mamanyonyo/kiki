@@ -491,7 +491,7 @@ size = Vector2(25, 30.1094)
 [sub_resource type="CircleShape2D" id="CircleShape2D_5pqvn"]
 radius = 5.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "movement_animator", "sprite", "book_hitbox", "middle", "stats_component") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "movement_animator", "sprite", "book_hitbox", "middle", "markers", "stats_component") groups=["Player"]]
 collision_layer = 2
 collision_mask = 65
 motion_mode = 1
@@ -501,6 +501,7 @@ movement_animator = NodePath("PlayerAnimator")
 sprite = NodePath("Sprite2D")
 book_hitbox = NodePath("Sprite2D/WeaponHitbox")
 middle = NodePath("Sprite2D/Middle")
+markers = NodePath("Sprite2D/PlayerHurtbox/ProjectileMarkers")
 stats_component = NodePath("StatsComponent")
 
 [node name="CollisionHurtComponent" parent="." node_paths=PackedStringArray("health_component", "hurtbox", "stats_component") instance=ExtResource("2_7ygai")]

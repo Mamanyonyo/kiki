@@ -10,6 +10,8 @@ const ACCELERATION_SMOOTHING = 25
 
 @export var middle: Marker2D
 
+@export var markers : Node2D
+
 @export var stats_component: StatsComponent
 @onready var inventory_component : InventoryComponent = $InventoryComponent
 @onready var stamina_component : StaminaComponent = $StaminaComponent
@@ -20,6 +22,8 @@ var attacking = false
 var facing_str = "down"
 var absolute_dir : Vector2 = Vector2.ZERO
 var direction : Vector2 = Vector2.ZERO
+
+#TODO limpiar
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,10 +41,12 @@ func _process(delta):
 				movement_animator.play("walk_up")
 				facing_str = "up"
 				sprite.scale.x = 1
+				markers.scale.y = -1
 			Vector2(0, 1): 
 				movement_animator.play("walk_down")
 				facing_str = "down"
 				sprite.scale.x = 1
+				markers.scale.y = 1
 			Vector2.ZERO:
 				match previous_dir:
 						Vector2.ZERO: 
@@ -58,6 +64,7 @@ func _process(delta):
 					sprite.scale.x = -1
 				else: sprite.scale.x = 1
 				facing_str = "side"
+				markers.scale.y = 1
 	
 	previous_dir = absolute_dir
 	var target_velocity = direction * stats_component.speed
