@@ -12,8 +12,10 @@ const ACCELERATION_SMOOTHING = 25
 
 @export var stats_component: StatsComponent
 @onready var inventory_component : InventoryComponent = $InventoryComponent
+@onready var stamina_component : StaminaComponent = $StaminaComponent
 
 var previous_dir = Vector2.ZERO
+var previous_position : Vector2
 var attacking = false
 var facing_str = "down"
 var absolute_dir : Vector2 = Vector2.ZERO
@@ -21,6 +23,7 @@ var direction : Vector2 = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	previous_position = global_position
 	sprite.frame_coords.x = 0
 	sprite.frame_coords.y = 0
 	inventory_component.add_item("book")
@@ -58,6 +61,7 @@ func _process(delta):
 	previous_dir = absolute_dir
 	var target_velocity = direction * stats_component.speed
 	velocity = velocity.lerp(target_velocity, 1 - exp(-get_physics_process_delta_time() * ACCELERATION_SMOOTHING))
+	previous_position = global_position
 	move_and_slide()
 	
 func _unhandled_input(event):
@@ -74,9 +78,12 @@ func check_tp():
 		
 func check_run():
 	if Input.is_action_just_pressed("run"):
-		stats_component.speed += stats_component.max_speed * 25 / 100
+		stamina_component.running = true
+		if stamina_component.can_run(): stats_component.speed += stats_component.max_speed * 25 / 100
+		else: stats_component.speed = stats_component.max_speed
 	elif Input.is_action_just_released("run"):
 		stats_component.speed = stats_component.max_speed
+		stamina_component.running = false
 
 func check_interaction():
 	if Input.is_action_just_pressed("attack"):

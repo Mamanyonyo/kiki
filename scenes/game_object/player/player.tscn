@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=35 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
 [ext_resource type="PackedScene" uid="uid://dced3yrcptsre" path="res://scenes/components/collision_hurt_component.tscn" id="2_7ygai"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scenes/game_object/player/book_controller.gd" id="4_qkfhb"]
 [ext_resource type="PackedScene" uid="uid://cgu10pjnl7jka" path="res://scenes/components/inventory_component.tscn" id="5_k2f8i"]
 [ext_resource type="PackedScene" uid="uid://cgoukns1if586" path="res://scenes/game_object/projectile/bullet.tscn" id="5_k4bht"]
+[ext_resource type="Script" path="res://scenes/game_object/player/StaminaComponent.gd" id="6_183wu"]
 [ext_resource type="PackedScene" uid="uid://duivxwbgh8hl2" path="res://scenes/components/hitbox_component.tscn" id="7_6vy27"]
 [ext_resource type="Script" path="res://scenes/game_object/player/staff_controller.gd" id="8_o233k"]
 [ext_resource type="PackedScene" uid="uid://b7hih6ibl1le8" path="res://scenes/UI/health_bar.tscn" id="8_tuvcl"]
@@ -510,11 +511,23 @@ stats_component = NodePath("../StatsComponent")
 [node name="StatsComponent" parent="." instance=ExtResource("2_t86h5")]
 max_speed = 125.0
 max_health = 20.0
+max_stamina = 50.0
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_s8m81")]
 stats_component = NodePath("../StatsComponent")
 
 [node name="InventoryComponent" parent="." instance=ExtResource("5_k2f8i")]
+
+[node name="StaminaComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component")]
+script = ExtResource("6_183wu")
+stats_component = NodePath("../StatsComponent")
+
+[node name="DrainTimer" type="Timer" parent="StaminaComponent"]
+wait_time = 0.5
+one_shot = true
+
+[node name="RestoreTimer" type="Timer" parent="StaminaComponent"]
+autostart = true
 
 [node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("player", "current_weapon_controller", "default_controller")]
 script = ExtResource("3_xj72i")
@@ -605,5 +618,7 @@ shape = SubResource("CircleShape2D_5pqvn")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="timeout" from="StaminaComponent/DrainTimer" to="StaminaComponent" method="_on_timer_timeout"]
+[connection signal="timeout" from="StaminaComponent/RestoreTimer" to="StaminaComponent" method="_on_restore_timer_timeout"]
 [connection signal="animation_finished" from="PlayerAnimator" to="." method="_on_player_animator_animation_finished"]
 [connection signal="animation_finished" from="PlayerAnimator" to="WeaponManager/BookController" method="_on_player_animator_animation_finished"]
