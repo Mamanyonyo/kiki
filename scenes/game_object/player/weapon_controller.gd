@@ -7,6 +7,7 @@ var player : Player
 @export var generic_bullet_spawn : Marker2D
 @export var generic_bullet_spawn_side : Marker2D
 @export var stats_component : StatsComponent
+@export var mana_component : ManaComponent
 
 func _ready() -> void:
 	player = get_parent().player
@@ -30,7 +31,9 @@ func melee_atack_listen(animation_name: String):
 		check_if_animation_worked(animation_name)
 
 func range_atack_listen(animation_name: String):
+	var temp_mana_cost = 5
 	if Input.is_action_just_pressed("attack2") && !player.attacking:
+		if !mana_component.cast_and_check(temp_mana_cost): return
 		play_and_set_attacking_state(animation_name)
 		check_if_animation_worked(animation_name)
 		var bullet_instance = fireball_scene.instantiate() as HitboxComponent

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=36 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
 [ext_resource type="PackedScene" uid="uid://dced3yrcptsre" path="res://scenes/components/collision_hurt_component.tscn" id="2_7ygai"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cgu10pjnl7jka" path="res://scenes/components/inventory_component.tscn" id="5_k2f8i"]
 [ext_resource type="PackedScene" uid="uid://cgoukns1if586" path="res://scenes/game_object/projectile/bullet.tscn" id="5_k4bht"]
 [ext_resource type="Script" path="res://scenes/game_object/player/StaminaComponent.gd" id="6_183wu"]
+[ext_resource type="Script" path="res://scenes/game_object/player/mana_component.gd" id="6_w6t64"]
 [ext_resource type="PackedScene" uid="uid://duivxwbgh8hl2" path="res://scenes/components/hitbox_component.tscn" id="7_6vy27"]
 [ext_resource type="Script" path="res://scenes/game_object/player/staff_controller.gd" id="8_o233k"]
 [ext_resource type="PackedScene" uid="uid://b7hih6ibl1le8" path="res://scenes/UI/health_bar.tscn" id="8_tuvcl"]
@@ -512,12 +513,22 @@ stats_component = NodePath("../StatsComponent")
 [node name="StatsComponent" parent="." instance=ExtResource("2_t86h5")]
 max_speed = 125.0
 max_health = 20.0
+max_mana = 30.0
+max_mana_reg = 5.0
 max_stamina = 50.0
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_s8m81")]
 stats_component = NodePath("../StatsComponent")
 
 [node name="InventoryComponent" parent="." instance=ExtResource("5_k2f8i")]
+editor_description = "items iniciales se pasan por el codigo : p"
+
+[node name="ManaComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component")]
+script = ExtResource("6_w6t64")
+stats_component = NodePath("../StatsComponent")
+
+[node name="RestoreTimer" type="Timer" parent="ManaComponent"]
+autostart = true
 
 [node name="StaminaComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component")]
 script = ExtResource("6_183wu")
@@ -536,19 +547,21 @@ player = NodePath("..")
 current_weapon_controller = NodePath("BookController")
 default_controller = NodePath("BookController")
 
-[node name="BookController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component")]
+[node name="BookController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component")]
 script = ExtResource("4_qkfhb")
 fireball_scene = ExtResource("5_k4bht")
 generic_bullet_spawn = NodePath("../../Sprite2D/PlayerHurtbox/ProjectileMarkers/GenericBulletSpawn")
 generic_bullet_spawn_side = NodePath("../../Sprite2D/PlayerHurtbox/ProjectileMarkers/GenericBulletSpawnSide")
 stats_component = NodePath("../../StatsComponent")
+mana_component = NodePath("../../ManaComponent")
 
-[node name="StaffController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component")]
+[node name="StaffController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component")]
 script = ExtResource("8_o233k")
 fireball_scene = ExtResource("5_k4bht")
 generic_bullet_spawn = NodePath("../../Sprite2D/PlayerHurtbox/ProjectileMarkers/StaffBulletSpawn")
 generic_bullet_spawn_side = NodePath("../../Sprite2D/PlayerHurtbox/ProjectileMarkers/StaffBulletSpawnSide")
 stats_component = NodePath("../../StatsComponent")
+mana_component = NodePath("../../ManaComponent")
 
 [node name="PlayerAnimator" type="AnimationPlayer" parent="."]
 libraries = {
@@ -619,6 +632,7 @@ shape = SubResource("CircleShape2D_5pqvn")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="timeout" from="ManaComponent/RestoreTimer" to="ManaComponent" method="_on_restore_timer_timeout"]
 [connection signal="timeout" from="StaminaComponent/DrainTimer" to="StaminaComponent" method="_on_timer_timeout"]
 [connection signal="timeout" from="StaminaComponent/RestoreTimer" to="StaminaComponent" method="_on_restore_timer_timeout"]
 [connection signal="animation_finished" from="PlayerAnimator" to="." method="_on_player_animator_animation_finished"]

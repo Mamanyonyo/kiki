@@ -41,11 +41,14 @@ money_manager = NodePath("../../../../../../Managers/MoneyManager")
 [node name="Inventory" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer" index="0" node_paths=PackedStringArray("inventory_component")]
 inventory_component = NodePath("../../../../../../../../../Entities/Player/InventoryComponent")
 
-[node name="ProgressBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" index="0" node_paths=PackedStringArray("stat_component")]
+[node name="HealthBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" index="0" node_paths=PackedStringArray("stat_component")]
 stat_component = NodePath("../../../../../../../../../Entities/Player/HealthComponent")
 
-[node name="ProgressBar2" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" index="1" node_paths=PackedStringArray("stat_component")]
+[node name="StaminaBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" index="1" node_paths=PackedStringArray("stat_component")]
 stat_component = NodePath("../../../../../../../../../Entities/Player/StaminaComponent")
+
+[node name="ManaBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" index="2" node_paths=PackedStringArray("stat_component")]
+stat_component = NodePath("../../../../../../../../../Entities/Player/ManaComponent")
 
 [node name="Stat" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer" index="0" node_paths=PackedStringArray("stats_component")]
 stats_component = NodePath("../../../../../../../../Entities/Player/StatsComponent")
@@ -73,5 +76,6 @@ position = Vector2(319, 64)
 [node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]
 
 [editable path="UI"]
-[editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/ProgressBar2"]
+[editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/StaminaBar"]
+[editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/ManaBar"]
 [editable path="Entities/Player"]
