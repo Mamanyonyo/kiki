@@ -578,7 +578,7 @@ texture = ExtResource("4_3kvbw")
 offset = Vector2(4, -2)
 hframes = 8
 vframes = 6
-frame = 40
+frame = 28
 region_filter_clip_enabled = true
 
 [node name="EventArea2D" type="Area2D" parent="Sprite2D"]

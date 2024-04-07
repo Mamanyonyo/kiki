@@ -19,6 +19,7 @@ const ACCELERATION_SMOOTHING = 25
 var previous_dir = Vector2.ZERO
 var previous_position : Vector2
 var attacking = false
+var can_move = true
 var facing_str = "down"
 var absolute_dir : Vector2 = Vector2.ZERO
 var direction : Vector2 = Vector2.ZERO
@@ -35,7 +36,7 @@ func _ready() -> void:
 
 
 func _process(delta):
-	if !attacking:
+	if !attacking && can_move:
 		match absolute_dir:
 			Vector2(0, -1): 
 				movement_animator.play("walk_up")
@@ -73,12 +74,13 @@ func _process(delta):
 	move_and_slide()
 	
 func _unhandled_input(event):
-	var movement_vector = get_movement_vector()
-	direction = movement_vector.normalized()
-	absolute_dir = Vector2(ceil(direction.x), ceil(direction.y))
-	check_interaction()
+	if can_move:
+		var movement_vector = get_movement_vector()
+		direction = movement_vector.normalized()
+		absolute_dir = Vector2(ceil(direction.x), ceil(direction.y))
+		check_run()
+		check_interaction()
 	check_tp()
-	check_run()
 	
 func check_tp():
 	if Input.is_action_just_pressed("teleport"):

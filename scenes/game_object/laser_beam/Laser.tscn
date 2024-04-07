@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbwn1wn5fvuo3"]
+
+[ext_resource type="Script" path="res://addons/LaserBeam Node/LaserBeam.gd" id="1_ekgsm"]
+[ext_resource type="Texture2D" uid="uid://dj6f4453iyxu7" path="res://assets/laser.png" id="2_lv3fs"]
+
+[node name="Laser" type="Area2D"]
+position = Vector2(109, 119)
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_ekgsm")
+max_whole_length = 500.0
+speed = 500.0
+expand_on = 1
+collide_with = 3
+casting_mask = 5
+BOUNCE_OFFSET = 10.0
+stay_duration = 1.5
+on_end = 2
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 500, 0)
+width = 16.0
+texture = ExtResource("2_lv3fs")
+texture_mode = 1
+joint_mode = 2
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(500, 0)
+collision_mask = 5
+hit_from_inside = true
+collide_with_areas = true
+
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
