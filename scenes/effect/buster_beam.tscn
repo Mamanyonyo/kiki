@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cf4ksdum3qjq1"]
+
+[ext_resource type="Texture2D" uid="uid://wd2l5bvl065g" path="res://assets/effect/buster_beam.png" id="1_b88jk"]
+[ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="1_isjcd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_todyc"]
+size = Vector2(1164, 402)
+
+[node name="BusterBeam" type="Area2D"]
+script = ExtResource("1_isjcd")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 1104, 0)
+width = 304.0
+texture = ExtResource("1_b88jk")
+texture_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(523, 10)
+shape = SubResource("RectangleShape2D_todyc")
