@@ -27,9 +27,6 @@ func Inputs():
 		player.direction = Vector2.ZERO
 		player.movement_animator.stop()
 		prev_sprite = player.sprite.frame
-		letters_instance = letters_spawner.instantiate() as Node2D
-		player.sprite.add_child(letters_instance)
-		letters_instance.global_position = player.global_position + Vector2.DOWN * 150
 		spawn_circle(Vector2(2.5, 2.5), 0.8)
 		player.movement_animator.play("staff_attack_hyperborea_buster_charge")
 		
@@ -41,7 +38,6 @@ func spawn_circle(size: Vector2, time: float):
 	circle.enter(size, time)
 
 func on_end_beamer():
-	print("end")
 	player.attacking = false
 	player.can_move = true
 	player.sprite.frame = prev_sprite
@@ -61,7 +57,10 @@ func _on_player_animator_animation_finished(anim_name):
 		"staff_attack_hyperborea_buster_charge_limit":
 			charges += 1
 			if charges == buster_charges_required/2:
-				spawn_circle(Vector2(7.5, 7.5), 1)
+				spawn_circle(Vector2(8.5, 8.5), 1)
+				letters_instance = letters_spawner.instantiate() as Node2D
+				player.sprite.add_child(letters_instance)
+				letters_instance.global_position = player.global_position + Vector2.DOWN * 200
 			if charges == buster_charges_required-5:
 				spawn_circle(Vector2(30, 30), buster_timer.wait_time+2)
 			if charges >= buster_charges_required:

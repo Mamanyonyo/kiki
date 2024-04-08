@@ -16,16 +16,7 @@ func _ready():
 func _process(delta):
 	velocity = direction * speed
 	move_and_slide()
-
-func _on_timer_timeout():
-	$RichTextLabel2.text += random[index]
-	var count = 0
-	var my_random_number = rng.randf_range(1, 120)
-	while count < my_random_number:
-		$RichTextLabel2.text += random[index]
-		count += 1
-		if index != random.length()-1: index += 1
-		else: random += quotes.pick_random() + "       " + quotes.pick_random() + "  " + quotes.pick_random()
+	$RichTextLabel2.text += quotes.pick_random() + "       " + quotes.pick_random()
 
 func _on_despawn_timeout():
 	queue_free()

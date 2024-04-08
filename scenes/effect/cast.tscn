@@ -5,22 +5,17 @@
 [node name="Node2D" type="CharacterBody2D"]
 script = ExtResource("1_wql51")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.001
-autostart = true
-
 [node name="Despawn" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 4.5
 autostart = true
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
-offset_right = 256.0
-offset_bottom = 112.0
+offset_right = 240.0
+offset_bottom = 1600.0
 theme_override_font_sizes/normal_font_size = 4
 text = "In the frozen world, a voice awakens the heart, resounding
 Shaking off the fear of loneliness from yesterday, into the whirlpool of the era"
 scroll_active = false
 autowrap_mode = 1
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Despawn" to="." method="_on_despawn_timeout"]
