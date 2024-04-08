@@ -6,7 +6,10 @@ var quotes = ["Beyond the days of being hurt, what awaits? SOULTKAER", "In the f
 var random : String
 var index = 0
 
+var rng = RandomNumberGenerator.new()
+
 func _ready():
+	#transform.si = 
 	random = quotes.pick_random() + "       " + quotes.pick_random() + "  " + quotes.pick_random()
 	$RichTextLabel2.text = ""
 
@@ -17,7 +20,8 @@ func _process(delta):
 func _on_timer_timeout():
 	$RichTextLabel2.text += random[index]
 	var count = 0
-	while count < 6:
+	var my_random_number = rng.randf_range(1, 120)
+	while count < my_random_number:
 		$RichTextLabel2.text += random[index]
 		count += 1
 		if index != random.length()-1: index += 1

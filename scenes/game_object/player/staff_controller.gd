@@ -10,9 +10,9 @@ extends WeaponController
 @onready var circle : PackedScene = load("res://scenes/effect/buster_circle.tscn")
 @onready var buster_timer : Timer = $BusterTimer
 
-var circle_instance
+var circle_instances : Array = []
 var beam_instance
-var letters_instance
+var letters_instance : SpawnerBusterLettersEffect
 
 var prev_sprite : int
 var charges = 0
@@ -27,20 +27,27 @@ func Inputs():
 		player.direction = Vector2.ZERO
 		player.movement_animator.stop()
 		prev_sprite = player.sprite.frame
-		circle_instance = circle.instantiate() as Node2D
-		player.sprite.add_child(circle_instance)
-		circle_instance.global_position = player.global_position
 		letters_instance = letters_spawner.instantiate() as Node2D
 		player.sprite.add_child(letters_instance)
-		letters_instance.global_position = player.global_position
+		letters_instance.global_position = player.global_position + Vector2.DOWN * 150
+		spawn_circle(Vector2(2.5, 2.5), 0.8)
 		player.movement_animator.play("staff_attack_hyperborea_buster_charge")
+		
+func spawn_circle(size: Vector2, time: float):
+	var circle = circle.instantiate()
+	circle_instances.push_back(circle)
+	player.sprite.add_child(circle)
+	circle.global_position = player.global_position
+	circle.enter(size, time)
 
 func on_end_beamer():
 	print("end")
 	player.attacking = false
 	player.can_move = true
 	player.sprite.frame = prev_sprite
-	circle_instance.queue_free()
+	for circle in circle_instances:
+		circle.queue_free()
+	circle_instances = []
 	beam_instance.queue_free()
 	letters_instance.queue_free()
 	charges = 0
@@ -50,8 +57,13 @@ func _on_player_animator_animation_finished(anim_name):
 	match anim_name as String:
 		"staff_attack_hyperborea_buster_charge":
 			player_animator.play("staff_attack_hyperborea_buster_charge_limit")
+			spawn_circle(Vector2(5, 5), 1)
 		"staff_attack_hyperborea_buster_charge_limit":
 			charges += 1
+			if charges == buster_charges_required/2:
+				spawn_circle(Vector2(7.5, 7.5), 1)
+			if charges == buster_charges_required-5:
+				spawn_circle(Vector2(30, 30), buster_timer.wait_time+2)
 			if charges >= buster_charges_required:
 				player_animator.stop()
 				player.sprite.frame = 49
@@ -61,7 +73,7 @@ func _on_player_animator_animation_finished(anim_name):
 				beam_instance.global_position = beam_marker.global_position
 				buster_timer.start()
 				return
-			else: 
+			else:
 				player_animator.play("staff_attack_hyperborea_buster_charge_limit")
 
 
