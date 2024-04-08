@@ -39,6 +39,16 @@ money_manager = NodePath("../../../../../../Managers/MoneyManager")
 [node name="Inventory" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer" index="0" node_paths=PackedStringArray("inventory_component")]
 inventory_component = NodePath("../../../../../../../../../Entities/Player/InventoryComponent")
 
+[node name="HealthBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" index="0" node_paths=PackedStringArray("stat_component")]
+stat_component = NodePath("../../../../../../../../../Entities/Player/HealthComponent")
+
+[node name="StaminaBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" index="1" node_paths=PackedStringArray("stat_component")]
+stat_component = NodePath("../../../../../../../../../Entities/Player/StaminaComponent")
+
+[node name="ManaBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" index="2" node_paths=PackedStringArray("stat_component")]
+theme_override_font_sizes/font_size = 3
+stat_component = NodePath("../../../../../../../../../Entities/Player/ManaComponent")
+
 [node name="Stat" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer" index="0" node_paths=PackedStringArray("stats_component")]
 stats_component = NodePath("../../../../../../../../Entities/Player/StatsComponent")
 

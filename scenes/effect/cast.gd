@@ -16,7 +16,12 @@ func _process(delta):
 
 func _on_timer_timeout():
 	$RichTextLabel2.text += random[index]
-	if index != random.length()-1: index += 1
+	var count = 0
+	while count < 6:
+		$RichTextLabel2.text += random[index]
+		count += 1
+		if index != random.length()-1: index += 1
+		else: random += quotes.pick_random() + "       " + quotes.pick_random() + "  " + quotes.pick_random()
 
 func _on_despawn_timeout():
 	queue_free()

@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://scenes/effect/cast_spawner_buster.gd" id="1_1dd7t"]
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(309, 361)
 script = ExtResource("1_1dd7t")
 interval = 0.4
 
