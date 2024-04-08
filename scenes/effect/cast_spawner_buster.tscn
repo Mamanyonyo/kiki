@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg26j5cjw4wg8"]
+
+[ext_resource type="Script" path="res://scenes/effect/cast_spawner_buster.gd" id="1_1dd7t"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(309, 361)
+script = ExtResource("1_1dd7t")
+interval = 0.4
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
