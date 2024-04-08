@@ -22,7 +22,7 @@ func _on_timer_timeout():
 	add_child(cast2)
 	cast.global_position = Vector2(global_position.x - gap, global_position.y)
 	cast.scale.x = -1
-	cast.speed = speed
+	#cast.speed = speed
 	cast2.global_position = Vector2(global_position.x + gap, global_position.y + 20)
 	cast2.scale.x = 1
-	cast2.speed = speed
+	#cast2.speed = speed
