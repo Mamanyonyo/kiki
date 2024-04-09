@@ -47,6 +47,7 @@ func on_end_beamer():
 	beam_instance.queue_free()
 	letters_instance.queue_free()
 	charges = 0
+	get_tree().get_first_node_in_group("camera").shake = false
 	
 
 func _on_player_animator_animation_finished(anim_name):
@@ -71,6 +72,7 @@ func _on_player_animator_animation_finished(anim_name):
 				beam_instance.rotation = player.get_facing_direction().angle()
 				beam_instance.global_position = beam_marker.global_position
 				buster_timer.start()
+				get_tree().get_first_node_in_group("camera").shake = true
 				return
 			else:
 				player_animator.play("staff_attack_hyperborea_buster_charge_limit")
