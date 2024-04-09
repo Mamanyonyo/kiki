@@ -36,6 +36,7 @@ func spawn_circle(size: Vector2, time: float):
 	player.sprite.add_child(circle)
 	circle.global_position = player.global_position
 	circle.enter(size, time)
+	return circle
 
 func on_end_beamer():
 	player.attacking = false
@@ -54,7 +55,7 @@ func _on_player_animator_animation_finished(anim_name):
 	match anim_name as String:
 		"staff_attack_hyperborea_buster_charge":
 			player_animator.play("staff_attack_hyperborea_buster_charge_limit")
-			spawn_circle(Vector2(5, 5), 1)
+			spawn_circle(Vector2(5, 5), 0.8)
 		"staff_attack_hyperborea_buster_charge_limit":
 			charges += 1
 			if charges == buster_charges_required/2:
@@ -63,7 +64,7 @@ func _on_player_animator_animation_finished(anim_name):
 				get_tree().get_first_node_in_group("foreground_layer").add_child(letters_instance)
 				letters_instance.global_position = player.global_position + Vector2.DOWN * 200
 			if charges == buster_charges_required-5:
-				spawn_circle(Vector2(30, 30), buster_timer.wait_time+2)
+				spawn_circle(Vector2(30, 30), buster_timer.wait_time+2).set_opacity(0.6)
 			if charges >= buster_charges_required:
 				player_animator.stop()
 				player.sprite.frame = 49

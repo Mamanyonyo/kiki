@@ -9,3 +9,7 @@ extends Node2D
 func enter(scale, duration):
 	var tween = create_tween()
 	tween.tween_property(self, "scale", scale, duration)
+
+func set_opacity(value):
+	$Outer.modulate.a = value
+	$Inner.modulate.a = value
