@@ -28,7 +28,7 @@ script = ExtResource("5_mciro")
 [node name="GameCamera" parent="." node_paths=PackedStringArray("ui_box") instance=ExtResource("6_pwvlf")]
 ui_box = NodePath("../UI/CanvasLayer/BoxContainer")
 
-[node name="UI" parent="." instance=ExtResource("7_bo3jd")]
+[node name="UI" parent="." groups=["ui"] instance=ExtResource("7_bo3jd")]
 
 [node name="HBoxContainer" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer4" index="0" node_paths=PackedStringArray("experience_manager")]
 experience_manager = NodePath("../../../../../../../Managers/ExperienceManager")

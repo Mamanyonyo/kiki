@@ -59,7 +59,7 @@ func _on_player_animator_animation_finished(anim_name):
 			if charges == buster_charges_required/2:
 				spawn_circle(Vector2(8.5, 8.5), 1)
 				letters_instance = letters_spawner.instantiate() as Node2D
-				player.sprite.add_child(letters_instance)
+				get_tree().get_first_node_in_group("foreground_layer").add_child(letters_instance)
 				letters_instance.global_position = player.global_position + Vector2.DOWN * 200
 			if charges == buster_charges_required-5:
 				spawn_circle(Vector2(30, 30), buster_timer.wait_time+2)

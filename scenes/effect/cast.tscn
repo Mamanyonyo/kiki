@@ -6,7 +6,7 @@
 script = ExtResource("1_wql51")
 
 [node name="Despawn" type="Timer" parent="."]
-wait_time = 4.5
+wait_time = 5.0
 autostart = true
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
@@ -18,4 +18,9 @@ Shaking off the fear of loneliness from yesterday, into the whirlpool of the era
 scroll_active = false
 autowrap_mode = 1
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.001
+autostart = true
+
 [connection signal="timeout" from="Despawn" to="." method="_on_despawn_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
