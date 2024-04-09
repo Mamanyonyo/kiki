@@ -549,7 +549,7 @@ movement_animator = NodePath("PlayerAnimator")
 sprite = NodePath("Sprite2D")
 book_hitbox = NodePath("Sprite2D/WeaponHitbox")
 middle = NodePath("Sprite2D/Middle")
-markers = NodePath("Sprite2D/PlayerHurtbox/ProjectileMarkers")
+markers = NodePath("Sprite2D/ProjectileMarkers")
 stats_component = NodePath("StatsComponent")
 
 [node name="CollisionHurtComponent" parent="." node_paths=PackedStringArray("health_component", "hurtbox", "stats_component") instance=ExtResource("2_7ygai")]
@@ -597,18 +597,18 @@ default_controller = NodePath("BookController")
 [node name="BookController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component")]
 script = ExtResource("4_qkfhb")
 fireball_scene = ExtResource("5_k4bht")
-generic_bullet_spawn = NodePath("../../Sprite2D/PlayerHurtbox/ProjectileMarkers/GenericBulletSpawn")
-generic_bullet_spawn_side = NodePath("../../Sprite2D/PlayerHurtbox/ProjectileMarkers/GenericBulletSpawnSide")
+generic_bullet_spawn = NodePath("../../Sprite2D/ProjectileMarkers/GenericBulletSpawn")
+generic_bullet_spawn_side = NodePath("../../Sprite2D/ProjectileMarkers/GenericBulletSpawnSide")
 stats_component = NodePath("../../StatsComponent")
 mana_component = NodePath("../../ManaComponent")
 
 [node name="StaffController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("viewer_marker", "beam_marker", "generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component")]
 script = ExtResource("8_o233k")
-viewer_marker = NodePath("../../Sprite2D/PlayerHurtbox/ProjectileMarkers/StaffBusterViewer")
-beam_marker = NodePath("../../Sprite2D/PlayerHurtbox/ProjectileMarkers/StaffBusterBeam")
+viewer_marker = NodePath("")
+beam_marker = NodePath("../../Sprite2D/ProjectileMarkers/StaffBusterBeam")
 fireball_scene = ExtResource("5_k4bht")
-generic_bullet_spawn = NodePath("../../Sprite2D/PlayerHurtbox/ProjectileMarkers/StaffBulletSpawn")
-generic_bullet_spawn_side = NodePath("../../Sprite2D/PlayerHurtbox/ProjectileMarkers/StaffBulletSpawnSide")
+generic_bullet_spawn = NodePath("../../Sprite2D/ProjectileMarkers/StaffBulletSpawn")
+generic_bullet_spawn_side = NodePath("../../Sprite2D/ProjectileMarkers/StaffBulletSpawnSide")
 stats_component = NodePath("../../StatsComponent")
 mana_component = NodePath("../../ManaComponent")
 
@@ -626,16 +626,33 @@ speed_scale = 2.0
 health_component = NodePath("../HealthComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(4, 0)
+position = Vector2(0, -16)
 texture = ExtResource("4_3kvbw")
-offset = Vector2(4, -2)
 hframes = 8
-vframes = 7
+vframes = 9
 frame = 41
 region_filter_clip_enabled = true
 
+[node name="ProjectileMarkers" type="Node2D" parent="Sprite2D"]
+position = Vector2(0, -2)
+
+[node name="StaffBulletSpawnSide" type="Marker2D" parent="Sprite2D/ProjectileMarkers"]
+position = Vector2(22, 5)
+
+[node name="StaffBulletSpawn" type="Marker2D" parent="Sprite2D/ProjectileMarkers"]
+position = Vector2(4, 23)
+
+[node name="GenericBulletSpawnSide" type="Marker2D" parent="Sprite2D/ProjectileMarkers"]
+position = Vector2(16, 1)
+
+[node name="GenericBulletSpawn" type="Marker2D" parent="Sprite2D/ProjectileMarkers"]
+position = Vector2(0, 19)
+
+[node name="StaffBusterBeam" type="Marker2D" parent="Sprite2D/ProjectileMarkers"]
+position = Vector2(5, 34)
+
 [node name="EventArea2D" type="Area2D" parent="Sprite2D"]
-position = Vector2(-4, -6)
+position = Vector2(0, 8)
 collision_layer = 48
 collision_mask = 0
 
@@ -644,34 +661,13 @@ position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_xg3yu")
 
 [node name="PlayerHurtbox" type="Area2D" parent="Sprite2D"]
-position = Vector2(-4, -9)
+position = Vector2(0, 6)
 collision_layer = 0
 collision_mask = 264
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/PlayerHurtbox"]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_hg7kp")
-
-[node name="ProjectileMarkers" type="Node2D" parent="Sprite2D/PlayerHurtbox"]
-position = Vector2(0, -9)
-
-[node name="StaffBulletSpawnSide" type="Marker2D" parent="Sprite2D/PlayerHurtbox/ProjectileMarkers"]
-position = Vector2(22, 5)
-
-[node name="StaffBulletSpawn" type="Marker2D" parent="Sprite2D/PlayerHurtbox/ProjectileMarkers"]
-position = Vector2(4, 23)
-
-[node name="GenericBulletSpawnSide" type="Marker2D" parent="Sprite2D/PlayerHurtbox/ProjectileMarkers"]
-position = Vector2(16, 1)
-
-[node name="GenericBulletSpawn" type="Marker2D" parent="Sprite2D/PlayerHurtbox/ProjectileMarkers"]
-position = Vector2(0, 19)
-
-[node name="StaffBusterViewer" type="Marker2D" parent="Sprite2D/PlayerHurtbox/ProjectileMarkers"]
-position = Vector2(5, 19)
-
-[node name="StaffBusterBeam" type="Marker2D" parent="Sprite2D/PlayerHurtbox/ProjectileMarkers"]
-position = Vector2(5, 34)
 
 [node name="Middle" type="Marker2D" parent="Sprite2D"]
 
@@ -681,12 +677,12 @@ monitoring = false
 target = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/WeaponHitbox"]
+visible = false
 position = Vector2(-9, 16)
 shape = SubResource("RectangleShape2D_xeg0d")
-disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -12)
+position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_5pqvn")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
