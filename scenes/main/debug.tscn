@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dr68fmyh4o88q"]
+[gd_scene load_steps=13 format=3 uid="uid://dr68fmyh4o88q"]
 
+[ext_resource type="Script" path="res://scenes/main/modulate.gd" id="1_1m5vi"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_7wu2c"]
 [ext_resource type="PackedScene" uid="uid://dxfu1qsn6132b" path="res://scenes/manager/experience_manager.tscn" id="2_mta20"]
 [ext_resource type="PackedScene" uid="uid://cpbg6qshhpf5y" path="res://scenes/manager/money_manager.tscn" id="3_aks2g"]
@@ -13,6 +14,11 @@
 [ext_resource type="Texture2D" uid="uid://cvpamhfcwh8cs" path="res://assets/icon/staff.png" id="11_f4gpj"]
 
 [node name="Main" type="Node2D"]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." groups=["modulate"]]
+light_mask = 0
+visibility_layer = 0
+script = ExtResource("1_1m5vi")
 
 [node name="Managers" type="Node" parent="."]
 
@@ -84,7 +90,8 @@ item_id = "staff"
 [node name="CollisionShape2D" parent="Entities/AnimatedPickable/Sprite2D/Pickable" index="0"]
 position = Vector2(0, -0.5)
 
-[node name="Foreground" type="Node2D" parent="." groups=["foreground_layer"]]
+[node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
+follow_viewport_enabled = true
 
 [editable path="UI"]
 [editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/StaminaBar"]

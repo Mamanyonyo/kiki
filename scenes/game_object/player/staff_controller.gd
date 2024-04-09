@@ -49,6 +49,8 @@ func on_end_beamer():
 	letters_instance.queue_free()
 	charges = 0
 	get_tree().get_first_node_in_group("camera").shake = false
+	get_tree().get_first_node_in_group("modulate").reset()
+	player.reparent(get_tree().get_first_node_in_group("entities_layer"))
 	
 
 func _on_player_animator_animation_finished(anim_name):
@@ -65,6 +67,8 @@ func _on_player_animator_animation_finished(anim_name):
 				letters_instance.global_position = player.global_position + Vector2.DOWN * 200
 			if charges == buster_charges_required-5:
 				spawn_circle(Vector2(30, 30), buster_timer.wait_time+2).set_opacity(0.6)
+				player.reparent(get_tree().get_first_node_in_group("foreground_layer"))
+				get_tree().get_first_node_in_group("modulate").change_opacity(0.2, 1)
 			if charges >= buster_charges_required:
 				player_animator.stop()
 				player.sprite.frame = 49
