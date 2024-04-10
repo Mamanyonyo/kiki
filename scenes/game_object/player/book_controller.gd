@@ -1,4 +1,4 @@
-extends WeaponController
+extends MagicWeaponController
 
 func Inputs():
 	melee_atack_listen("book_attack")

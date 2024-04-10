@@ -6,7 +6,7 @@ extends Node
 
 func _ready():
 	if display_name != null && display_name != "": return
-	var names = readJSON("res://resources/names.tres")
+	var names = DataImport.names_data
 	var possible_names = names["name"]["default"] as Array
 	var possible_surnames = [] as Array
 	
@@ -20,9 +20,3 @@ func _ready():
 	var random_surname = possible_surnames.pick_random()
 	
 	display_name = random_name + " " + random_surname
-
-func readJSON(json_file_path):
-	var file = FileAccess.open(json_file_path, FileAccess.READ)
-	var content = file.get_as_text()
-	var finish = JSON.parse_string(content)
-	return finish

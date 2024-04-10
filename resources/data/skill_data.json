@@ -1,0 +1,13 @@
+{
+	"fireball": {
+		"name": "Fireball",
+		"cost": 5,
+		"damage": 6
+	},
+	"hyperborea_buster": {
+		"name": "???????",
+		"cost": 999999,
+		"damage": 100,
+		"unique": true
+	}
+}

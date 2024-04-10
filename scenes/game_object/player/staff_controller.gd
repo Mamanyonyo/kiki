@@ -1,4 +1,4 @@
-extends WeaponController
+extends MagicWeaponController
 
 @export var beam_marker : Marker2D
 @export var beam_marker_side : Marker2D
@@ -21,14 +21,18 @@ func Inputs():
 	range_atack_listen("staff_attack_spell_aimed")
 	
 	if Input.is_key_pressed(KEY_C) && !player.attacking:
-		player.attacking = true
-		player.can_move = false
-		player.direction = Vector2.ZERO
-		player.movement_animator.stop()
-		prev_sprite = player.sprite.frame
-		spawn_circle(Vector2(2.5, 2.5), 0.8)
-		player.movement_animator.play("staff_attack_hyperborea_buster_charge_" + player.facing_str)
-		
+		try_spell_cast("hyperborea_buster")
+		#if !mana_component.cast_and_check(temp_mana_cost): return
+
+func hyperborea_buster():
+	player.attacking = true
+	player.can_move = false
+	player.direction = Vector2.ZERO
+	player.movement_animator.stop()
+	prev_sprite = player.sprite.frame
+	spawn_circle(Vector2(2.5, 2.5), 0.8)
+	player.movement_animator.play("staff_attack_hyperborea_buster_charge_" + player.facing_str)
+
 func spawn_circle(size: Vector2, time: float):
 	var circle = circle.instantiate()
 	circle_instances.push_back(circle)
