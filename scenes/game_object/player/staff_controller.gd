@@ -1,8 +1,7 @@
 extends WeaponController
 
-
-@export var viewer_marker : Marker2D
 @export var beam_marker : Marker2D
+@export var beam_marker_side : Marker2D
 @export var buster_charges_required : float = 14
 #@export var beam_duration : float = 5
 @onready var beam : PackedScene = load("res://scenes/effect/buster_beam.tscn")
@@ -28,7 +27,7 @@ func Inputs():
 		player.movement_animator.stop()
 		prev_sprite = player.sprite.frame
 		spawn_circle(Vector2(2.5, 2.5), 0.8)
-		player.movement_animator.play("staff_attack_hyperborea_buster_charge")
+		player.movement_animator.play("staff_attack_hyperborea_buster_charge_" + player.facing_str)
 		
 func spawn_circle(size: Vector2, time: float):
 	var circle = circle.instantiate()
@@ -53,10 +52,13 @@ func on_end_beamer():
 	player.reparent(get_tree().get_first_node_in_group("entities_layer"))
 	
 
-func _on_player_animator_animation_finished(anim_name):
-	match anim_name as String:
+func _on_player_animator_animation_finished(anim_name: String):
+	var name_arr : PackedStringArray = anim_name.split("_")
+	name_arr.remove_at(name_arr.size()-1)
+	var raw_name = "_".join(name_arr)
+	match raw_name as String:
 		"staff_attack_hyperborea_buster_charge":
-			player_animator.play("staff_attack_hyperborea_buster_charge_limit")
+			player_animator.play("staff_attack_hyperborea_buster_charge_limit_" + player.facing_str)
 			spawn_circle(Vector2(5, 5), 0.8)
 		"staff_attack_hyperborea_buster_charge_limit":
 			charges += 1
@@ -71,16 +73,24 @@ func _on_player_animator_animation_finished(anim_name):
 				get_tree().get_first_node_in_group("modulate").change_opacity(0.2, 1)
 			if charges >= buster_charges_required:
 				player_animator.stop()
-				player.sprite.frame = 49
 				beam_instance = beam.instantiate()
 				get_tree().get_first_node_in_group("foreground_layer").add_child(beam_instance)
 				beam_instance.rotation = player.get_facing_direction().angle()
-				beam_instance.global_position = beam_marker.global_position
+				match player.get_facing_direction():
+					Vector2.UP: 
+						player.sprite.frame = 67
+						beam_instance.global_position = beam_marker.global_position
+					Vector2.DOWN: 
+						player.sprite.frame = 49
+						beam_instance.global_position = beam_marker.global_position
+					_: 
+						player.sprite.frame = 58
+						beam_instance.global_position = beam_marker_side.global_position
 				buster_timer.start()
 				get_tree().get_first_node_in_group("camera").shake = true
 				return
 			else:
-				player_animator.play("staff_attack_hyperborea_buster_charge_limit")
+				player_animator.play("staff_attack_hyperborea_buster_charge_limit_" + player.facing_str)
 
 
 
