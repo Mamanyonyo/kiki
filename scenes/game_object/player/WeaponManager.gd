@@ -20,8 +20,6 @@ func equip_item(item: String):
 	if manager_name == current_weapon_controller.name && manager_name != default_controller.name:
 		current_weapon_controller.Unequip()
 		current_weapon_controller = default_controller
-		#WARNING hardcodeado
-		GameEvents.emit_item_equip("book")
 	elif controller != null:
 		current_weapon_controller.Unequip()
 		controller.Equip()

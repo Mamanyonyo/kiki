@@ -27,7 +27,8 @@ signal stat_update
 signal enemy_hit(enemy: BasicEnemy)
 signal item_equip(item_name: String)
 signal show_cg(image_path)
-signal stop_cg()
+signal stop_cg
+signal player_ready(player: Player)
 
 func emit_new_spawner(spawner):
 	new_spawner.emit(spawner)
@@ -82,3 +83,6 @@ func emit_show_cg(path: String):
 
 func emit_stop_cg():
 	stop_cg.emit()
+
+func emit_player_ready(player):
+	player_ready.emit(player)

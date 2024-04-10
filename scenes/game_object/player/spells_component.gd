@@ -1,8 +1,10 @@
-extends InventoryComponent
+class_name SpellsComponent extends InventoryComponent
 
 @export var weapon_manager : WeaponManager
 
 var available_spells = []
+
+signal available_spells_updated
 
 func _ready():
 	set_available_spells()
@@ -13,6 +15,7 @@ func set_available_spells():
 	for spell in items:
 		if weapon_manager.current_weapon_controller.has_method(spell):
 			available_spells.push_back(spell)
+	available_spells_updated.emit()
 
 func on_controller_item_equip():
 	set_available_spells()

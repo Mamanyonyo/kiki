@@ -678,6 +678,7 @@ generic_bullet_spawn = NodePath("../../Sprite2D/ProjectileMarkers/GenericBulletS
 generic_bullet_spawn_side = NodePath("../../Sprite2D/ProjectileMarkers/GenericBulletSpawnSide")
 stats_component = NodePath("../../StatsComponent")
 mana_component = NodePath("../../ManaComponent")
+weapon_name_animation_prefix = "book"
 
 [node name="StaffController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("beam_marker", "beam_marker_side", "generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component")]
 script = ExtResource("8_o233k")
@@ -688,6 +689,7 @@ generic_bullet_spawn = NodePath("../../Sprite2D/ProjectileMarkers/StaffBulletSpa
 generic_bullet_spawn_side = NodePath("../../Sprite2D/ProjectileMarkers/StaffBulletSpawnSide")
 stats_component = NodePath("../../StatsComponent")
 mana_component = NodePath("../../ManaComponent")
+weapon_name_animation_prefix = "staff"
 
 [node name="BusterTimer" type="Timer" parent="WeaponManager/StaffController"]
 wait_time = 5.0

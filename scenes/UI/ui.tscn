@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://du25e0wl2obi1"]
+[gd_scene load_steps=16 format=3 uid="uid://du25e0wl2obi1"]
 
 [ext_resource type="PackedScene" uid="uid://vflia6x4vuuy" path="res://scenes/UI/current_enemy_stats_ui.tscn" id="1_kbd2f"]
 [ext_resource type="Script" path="res://scenes/UI/arena_time_ui.gd" id="1_lhbw1"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scenes/UI/cg_display.gd" id="4_lkfg0"]
 [ext_resource type="Script" path="res://scenes/UI/Inventory_ui.gd" id="5_hiu8o"]
 [ext_resource type="Script" path="res://scenes/UI/ui_stat.gd" id="5_jo641"]
+[ext_resource type="Script" path="res://scenes/UI/spell_list.gd" id="8_yxdqq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g880s"]
 bg_color = Color(0, 0, 0, 1)
@@ -144,18 +145,27 @@ theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2"]
+[node name="PanelContainer" type="TabContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2"]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_s58cr")
+tab_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2/PanelContainer"]
+[node name="Inventory" type="MarginContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2/PanelContainer"]
 layout_mode = 2
 
-[node name="Inventory" type="GridContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2/PanelContainer/MarginContainer"]
+[node name="Inventory" type="GridContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2/PanelContainer/Inventory"]
 layout_mode = 2
 columns = 3
 script = ExtResource("5_hiu8o")
+
+[node name="Spells" type="MarginContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2/PanelContainer"]
+visible = false
+layout_mode = 2
+
+[node name="SpellList" type="VBoxContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2/PanelContainer/Spells"]
+layout_mode = 2
+script = ExtResource("8_yxdqq")
 
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer"]
 layout_mode = 2

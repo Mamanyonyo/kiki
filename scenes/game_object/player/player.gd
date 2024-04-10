@@ -33,6 +33,7 @@ func _ready() -> void:
 	sprite.frame_coords.y = 0
 	inventory_component.add_item("book")
 	book_hitbox.get_node("CollisionShape2D").set_deferred("disabled", true)
+	GameEvents.emit_player_ready(self)
 
 
 func _process(delta):

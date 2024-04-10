@@ -17,8 +17,7 @@ var prev_sprite : int
 var charges = 0
 
 func Inputs():
-	melee_atack_listen("staff_attack")
-	range_atack_listen("staff_attack_spell_aimed")
+	super.Inputs()
 	
 	if Input.is_key_pressed(KEY_C) && !player.attacking:
 		try_spell_cast("hyperborea_buster")
