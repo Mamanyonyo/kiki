@@ -76,8 +76,10 @@ func _on_player_animator_animation_finished(anim_name: String):
 				player.reparent(get_tree().get_first_node_in_group("foreground_layer"))
 				get_tree().get_first_node_in_group("modulate").change_opacity(0.2, 1)
 			if charges >= buster_charges_required:
+				var skill_data = get_skill_data("hyperborea_buster")
 				player_animator.stop()
 				beam_instance = beam.instantiate()
+				beam_instance.damage = skill_data.damage + stats_component.magic_damage
 				get_tree().get_first_node_in_group("foreground_layer").add_child(beam_instance)
 				beam_instance.rotation = player.get_facing_direction().angle()
 				match player.get_facing_direction():

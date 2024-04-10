@@ -48,7 +48,7 @@ func check_if_animation_worked(animation_name: String):
 func fireball():
 	var skill_data = get_skill_data("fireball")
 	var bullet_instance = fireball_scene.instantiate() as HitboxComponent
-	bullet_instance.damage = stats_component.magic_damage
+	bullet_instance.damage = skill_data.damage + stats_component.magic_damage
 	match player.get_rotation_in_degrees():
 		90: bullet_instance.global_position = generic_bullet_spawn.global_position
 		0: bullet_instance.global_position = generic_bullet_spawn_side.global_position
