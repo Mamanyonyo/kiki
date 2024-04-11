@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2e6i1t6yds5d"]
 
 [ext_resource type="StyleBox" uid="uid://bl3tliitd5tbl" path="res://scenes/UI/inventory_item_unequipped.tres" id="1_f6bmc"]
-[ext_resource type="Script" path="res://scenes/UI/inventory_equipable.gd" id="1_pwnym"]
+[ext_resource type="Script" path="res://scenes/UI/inventory_equipable_ui.gd" id="1_pwnym"]
 [ext_resource type="Texture2D" uid="uid://cvpamhfcwh8cs" path="res://assets/icon/staff.png" id="2_hqxvm"]
 
 [node name="InventoryItem" type="PanelContainer" node_paths=PackedStringArray("rect")]

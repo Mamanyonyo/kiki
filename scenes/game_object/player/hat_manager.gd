@@ -10,6 +10,7 @@ signal item_equip
 	#current_hat_controller.Inputs()
 
 func equip_item(item: String):
+	print(item)
 	#var uppercase_name = item[0].to_upper() + item.substr(1,-1)
 	#var manager_name = uppercase_name + "Controller"
 	#var controller = get_node(manager_name)

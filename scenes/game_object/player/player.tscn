@@ -738,6 +738,7 @@ stats_component = NodePath("../StatsComponent")
 
 [node name="InventoryComponent" parent="." instance=ExtResource("5_k2f8i")]
 editor_description = "items iniciales se pasan por el codigo : p"
+items = Array[String](["spellbook", "ghost_doll"])
 
 [node name="SpellsComponent" parent="." node_paths=PackedStringArray("weapon_manager") instance=ExtResource("5_k2f8i")]
 editor_description = "items iniciales se pasan por el codigo : p"
