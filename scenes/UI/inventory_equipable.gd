@@ -3,19 +3,24 @@ class_name InventoryItemUI extends PanelContainer
 @export var item_name : String
 @export var rect : TextureRect
 
+var weapon_manager : WeaponManager
+
 var active = false
 
 func _ready():
-	GameEvents.item_equip.connect(on_item_equip)
+	weapon_manager = get_tree().get_first_node_in_group("Player").get_node("WeaponManager")
+	weapon_manager.weapon_item_equip.connect(on_weapon_equip)
+	on_weapon_equip()
 
 func set_icon() -> void:
 	#if icon_texture != null: icon = icon_texture
 	var image = Image.load_from_file("res://assets/icon/" + item_name + ".png")
 	rect.texture = ImageTexture.create_from_image(image)
 	
-func on_item_equip(id):
+func on_weapon_equip():
 	var new_style_box : StyleBoxFlat
-	if !active && id == item_name:
+	var current_weapon : MagicWeaponController = weapon_manager.current_weapon_controller
+	if !active && current_weapon.item_id == item_name:
 		new_style_box = load("res://scenes/UI/inventory_item_equipped_border.tres")
 		active = true
 	else:
@@ -25,5 +30,4 @@ func on_item_equip(id):
 
 func _on_gui_input(event: InputEvent) -> void:
 	if(event.is_pressed()):
-		#TODO no handlear esto por game events caso de querer darle inventario a alguien mas
-		GameEvents.emit_item_equip(item_name)
+		weapon_manager.equip_item(item_name)

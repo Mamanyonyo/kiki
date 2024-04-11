@@ -3,6 +3,8 @@ class_name MagicWeaponController extends Node
 var player_animator : AnimationPlayer
 var player : Player
 
+@export var item_id : String
+
 @export var fireball_scene : PackedScene
 @export var generic_bullet_spawn : Marker2D
 @export var generic_bullet_spawn_side : Marker2D

@@ -33,7 +33,6 @@ func _ready() -> void:
 	previous_position = global_position
 	sprite.frame_coords.x = 0
 	sprite.frame_coords.y = 0
-	inventory_component.add_item("book")
 	book_hitbox.get_node("CollisionShape2D").set_deferred("disabled", true)
 	GameEvents.emit_player_ready(self)
 

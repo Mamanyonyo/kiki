@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://bxinbjgjiof0b"]
 
-[ext_resource type="Texture2D" uid="uid://pteswrehnae2" path="res://assets/icon/book.png" id="1_2br5r"]
 [ext_resource type="Script" path="res://scenes/game_object/interaction/animated_pickable.gd" id="1_c08jy"]
 [ext_resource type="PackedScene" uid="uid://7i0pkp8snsli" path="res://scenes/game_object/interaction/pickable.tscn" id="2_hrtcw"]
 [ext_resource type="Resource" uid="uid://b3nj8x4lxs8eb" path="res://resources/dialogue/interact/item_pickup.dialogue" id="2_xp3j7"]
+[ext_resource type="Texture2D" uid="uid://pteswrehnae2" path="res://assets/icon/spellbook.png" id="2_xu5wb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qtvy5"]
 size = Vector2(18, 25)
@@ -70,7 +70,7 @@ _data = {
 script = ExtResource("1_c08jy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_2br5r")
+texture = ExtResource("2_xu5wb")
 
 [node name="Pickable" parent="Sprite2D" instance=ExtResource("2_hrtcw")]
 dialogue = ExtResource("2_xp3j7")
