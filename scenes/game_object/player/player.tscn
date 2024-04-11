@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=45 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
 [ext_resource type="PackedScene" uid="uid://dced3yrcptsre" path="res://scenes/components/collision_hurt_component.tscn" id="2_7ygai"]
@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://duivxwbgh8hl2" path="res://scenes/components/hitbox_component.tscn" id="7_6vy27"]
 [ext_resource type="Script" path="res://scenes/game_object/player/staff_controller.gd" id="8_o233k"]
 [ext_resource type="PackedScene" uid="uid://b7hih6ibl1le8" path="res://scenes/UI/health_bar.tscn" id="8_tuvcl"]
+[ext_resource type="Texture2D" uid="uid://ib41xty2bsrn" path="res://assets/hat/frog.png" id="14_d37fx"]
+[ext_resource type="Script" path="res://scenes/game_object/player/hat_script.gd" id="15_qhexs"]
 
 [sub_resource type="Animation" id="Animation_ykp00"]
 length = 0.001
@@ -52,7 +54,19 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [41]
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/Hat:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -6)]
 }
 
 [sub_resource type="Animation" id="Animation_obi5d"]
@@ -151,6 +165,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(0, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Hat:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -5)]
 }
 
 [sub_resource type="Animation" id="Animation_2dfr1"]
@@ -277,6 +303,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(18, 22.2188), Vector2(29, 35), Vector2(44.5, 35.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D/Hat:position")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -6), Vector2(0, -5), Vector2(0, -6)]
 }
 
 [sub_resource type="Animation" id="Animation_xahum"]
@@ -418,6 +456,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(29.625, 18), Vector2(32, 30), Vector2(32, 34), Vector2(32, 47)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/Hat:position")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -6), Vector2(0, -5), Vector2(0, -6)]
+}
 
 [sub_resource type="Animation" id="Animation_vso7m"]
 resource_name = "staff_attack_spell_aimed_down"
@@ -519,6 +569,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(18, 22.2188), Vector2(29, 35), Vector2(44.5, 35.5)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D/Hat:position")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -6), Vector2(0, -5), Vector2(0, -6)]
+}
 
 [sub_resource type="Animation" id="Animation_tfhj5"]
 resource_name = "walk_down"
@@ -537,6 +599,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [1, 2, 0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Hat:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, -6)]
+}
 
 [sub_resource type="Animation" id="Animation_3qbfy"]
 resource_name = "walk_side"
@@ -552,6 +626,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [7, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Hat:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, -6)]
 }
 
 [sub_resource type="Animation" id="Animation_fhqsd"]
@@ -570,6 +656,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [4, 5, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Hat:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, -6)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s0len"]
@@ -706,8 +804,15 @@ position = Vector2(0, -16)
 texture = ExtResource("4_3kvbw")
 hframes = 8
 vframes = 9
-frame = 41
 region_filter_clip_enabled = true
+
+[node name="Hat" type="Sprite2D" parent="Sprite2D" node_paths=PackedStringArray("player")]
+editor_description = "y -6"
+position = Vector2(0, -6)
+texture = ExtResource("14_d37fx")
+hframes = 3
+script = ExtResource("15_qhexs")
+player = NodePath("../..")
 
 [node name="ProjectileMarkers" type="Node2D" parent="Sprite2D"]
 
@@ -774,6 +879,7 @@ health_component = NodePath("../../HealthComponent")
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_5pqvn")
 
+[connection signal="changed_facing_direction" from="." to="Sprite2D/Hat" method="_on_player_changed_facing_direction"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
 [connection signal="timeout" from="ManaComponent/RestoreTimer" to="ManaComponent" method="_on_restore_timer_timeout"]
@@ -782,3 +888,5 @@ shape = SubResource("CircleShape2D_5pqvn")
 [connection signal="timeout" from="WeaponManager/StaffController/BusterTimer" to="WeaponManager/StaffController" method="_on_buster_timer_timeout"]
 [connection signal="animation_finished" from="PlayerAnimator" to="." method="_on_player_animator_animation_finished"]
 [connection signal="animation_finished" from="PlayerAnimator" to="WeaponManager/StaffController" method="_on_player_animator_animation_finished"]
+[connection signal="animation_finished" from="PlayerAnimator" to="Sprite2D/Hat" method="_on_player_animator_animation_finished"]
+[connection signal="current_animation_changed" from="PlayerAnimator" to="Sprite2D/Hat" method="_on_player_animator_current_animation_changed"]

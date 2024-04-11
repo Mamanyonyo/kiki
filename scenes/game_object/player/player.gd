@@ -24,6 +24,8 @@ var facing_str = "down"
 var absolute_dir : Vector2 = Vector2.ZERO
 var direction : Vector2 = Vector2.ZERO
 
+signal changed_facing_direction
+
 #TODO limpiar
 
 # Called when the node enters the scene tree for the first time.
@@ -44,18 +46,21 @@ func _process(delta):
 				facing_str = "up"
 				sprite.scale.x = 1
 				markers.scale.y = -1
+				changed_facing_direction.emit()
 			Vector2(0, 1): 
 				movement_animator.play("walk_down")
 				facing_str = "down"
 				sprite.scale.x = 1
 				markers.scale.y = 1
+				changed_facing_direction.emit()
 			Vector2.ZERO:
 				match previous_dir:
 						Vector2.ZERO: 
 							movement_animator.stop(true)
 						Vector2(0, -1): 
 							sprite.frame_coords.x = 3
-						Vector2(0, 1): sprite.frame_coords.x = 0
+						Vector2(0, 1): 
+							sprite.frame_coords.x = 0
 						_:
 							sprite.frame_coords.x = 6
 							if previous_dir.x == -1 : sprite.scale.x = -1
@@ -67,6 +72,7 @@ func _process(delta):
 				else: sprite.scale.x = 1
 				facing_str = "side"
 				markers.scale.y = 1
+				changed_facing_direction.emit()
 	
 	previous_dir = absolute_dir
 	var target_velocity = direction * stats_component.speed
