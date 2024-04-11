@@ -8,7 +8,7 @@ signal available_spells_updated
 
 func _ready():
 	set_available_spells()
-	weapon_manager.weapon_item_equip.connect(on_controller_item_equip)
+	weapon_manager.item_equip.connect(on_controller_item_equip)
 
 func set_available_spells():
 	available_spells = []

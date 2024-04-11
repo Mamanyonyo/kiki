@@ -1,5 +1,10 @@
 {
-	"ghost_hat": {
+	"ghost_doll": {
+		"name": "Ghost Doll",
 		"offset": -6
+	},
+	"frog_hat": {
+		"name": "Frog Hat",
+		"static": false
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=45 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
 [ext_resource type="PackedScene" uid="uid://dced3yrcptsre" path="res://scenes/components/collision_hurt_component.tscn" id="2_7ygai"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://duivxwbgh8hl2" path="res://scenes/components/hitbox_component.tscn" id="7_6vy27"]
 [ext_resource type="Script" path="res://scenes/game_object/player/staff_controller.gd" id="8_o233k"]
 [ext_resource type="PackedScene" uid="uid://b7hih6ibl1le8" path="res://scenes/UI/health_bar.tscn" id="8_tuvcl"]
+[ext_resource type="Script" path="res://scenes/game_object/player/hat_manager.gd" id="13_2tayj"]
 [ext_resource type="Script" path="res://scenes/game_object/player/hat_script.gd" id="15_qhexs"]
 
 [sub_resource type="Animation" id="Animation_ykp00"]
@@ -794,6 +795,11 @@ weapon_name_animation_prefix = "staff"
 wait_time = 5.0
 one_shot = true
 
+[node name="HatManager" type="Node" parent="." node_paths=PackedStringArray("player", "hat_sprite")]
+script = ExtResource("13_2tayj")
+player = NodePath("..")
+hat_sprite = NodePath("../Sprite2D/Hat")
+
 [node name="PlayerAnimator" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_s0len")
@@ -807,11 +813,12 @@ hframes = 8
 vframes = 9
 region_filter_clip_enabled = true
 
-[node name="Hat" type="Sprite2D" parent="Sprite2D" node_paths=PackedStringArray("player")]
+[node name="Hat" type="Sprite2D" parent="Sprite2D" node_paths=PackedStringArray("player", "hat_manager")]
 editor_description = "y -6"
 position = Vector2(0, -6)
 script = ExtResource("15_qhexs")
 player = NodePath("../..")
+hat_manager = NodePath("../../HatManager")
 
 [node name="ProjectileMarkers" type="Node2D" parent="Sprite2D"]
 
@@ -885,6 +892,7 @@ shape = SubResource("CircleShape2D_5pqvn")
 [connection signal="timeout" from="StaminaComponent/DrainTimer" to="StaminaComponent" method="_on_timer_timeout"]
 [connection signal="timeout" from="StaminaComponent/RestoreTimer" to="StaminaComponent" method="_on_restore_timer_timeout"]
 [connection signal="timeout" from="WeaponManager/StaffController/BusterTimer" to="WeaponManager/StaffController" method="_on_buster_timer_timeout"]
+[connection signal="item_equip" from="HatManager" to="Sprite2D/Hat" method="_on_hat_manager_item_equip"]
 [connection signal="animation_finished" from="PlayerAnimator" to="." method="_on_player_animator_animation_finished"]
 [connection signal="animation_finished" from="PlayerAnimator" to="WeaponManager/StaffController" method="_on_player_animator_animation_finished"]
 [connection signal="animation_finished" from="PlayerAnimator" to="Sprite2D/Hat" method="_on_player_animator_animation_finished"]

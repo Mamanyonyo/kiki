@@ -9,7 +9,7 @@ var active = false
 
 func _ready():
 	weapon_manager = get_tree().get_first_node_in_group("Player").get_node("WeaponManager")
-	weapon_manager.weapon_item_equip.connect(on_weapon_equip)
+	weapon_manager.item_equip.connect(on_weapon_equip)
 	on_weapon_equip()
 
 func set_icon() -> void:
