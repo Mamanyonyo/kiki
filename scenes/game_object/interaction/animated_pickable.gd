@@ -1,4 +1,4 @@
-extends Node2D
+class_name AnimatedPickable extends Node2D
 
 #@onready var sprite = $Sprite2D
 #@onready var pickable = $Sprite2D/Pickable
@@ -12,3 +12,11 @@ func _ready():
 
 func _on_pickable_tree_exited() -> void:
 	queue_free()
+
+func set_data(id):
+	$Sprite2D/Pickable.set_data(id)
+	var icon = set_icon("res://assets/icon/" + id + ".png")
+
+func set_icon(path):
+	var image = Image.load_from_file(path)
+	$Sprite2D.texture = ImageTexture.create_from_image(image)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cijr8ph2qia6t"]
+[gd_scene load_steps=14 format=3 uid="uid://cijr8ph2qia6t"]
 
 [ext_resource type="Script" path="res://scenes/game_object/enemies/mini_boss/bathroom_ghost_boss.gd" id="1_6qcya"]
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="1_wfog3"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="3_jlwp6"]
+[ext_resource type="PackedScene" uid="uid://bxinbjgjiof0b" path="res://scenes/game_object/interaction/animated_pickable.tscn" id="3_sgtv4"]
 [ext_resource type="Script" path="res://scenes/components/state_machine/enemy/bathroom_ghost_boss/ghost_chase.gd" id="4_sqh22"]
 [ext_resource type="Script" path="res://scenes/components/state_machine/enemy/bathroom_ghost_boss/in_toilet.gd" id="5_blthg"]
 [ext_resource type="Texture2D" uid="uid://dfh8xqth57l17" path="res://assets/enemy/ghost.png" id="5_cpmfm"]
@@ -33,6 +34,10 @@ detection_range = 200.0
 max_speed = 100.0
 max_health = 150.0
 max_resistance = 2.0
+
+[node name="DropComponent" parent="." index="2"]
+droppeable = ExtResource("3_sgtv4")
+item_id = "ghost_doll"
 
 [node name="HitFlashComponent" parent="." index="4"]
 hit_flash_material = SubResource("ShaderMaterial_rdtpk")
@@ -78,7 +83,7 @@ stats_component = NodePath("../../StatsComponent")
 wait_time = 2.5
 one_shot = true
 
-[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+[node name="CollisionShape2D" parent="HurtboxComponent" index="1"]
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_kgmmg")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dr68fmyh4o88q"]
+[gd_scene load_steps=14 format=3 uid="uid://dr68fmyh4o88q"]
 
 [ext_resource type="Script" path="res://scenes/main/modulate.gd" id="1_1m5vi"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_7wu2c"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="9_lndom"]
 [ext_resource type="PackedScene" uid="uid://bxinbjgjiof0b" path="res://scenes/game_object/interaction/animated_pickable.tscn" id="10_ht2ms"]
 [ext_resource type="Texture2D" uid="uid://cvpamhfcwh8cs" path="res://assets/icon/staff.png" id="11_f4gpj"]
+[ext_resource type="PackedScene" uid="uid://myyxjkn2ktkh" path="res://scenes/areas/bathroom/boss_room.tscn" id="13_85dpl"]
 
 [node name="Main" type="Node2D"]
 
@@ -69,6 +70,10 @@ stats_component = NodePath("../../../../../../../../Entities/Player/StatsCompone
 [node name="MainArea" parent="Areas" instance=ExtResource("8_m0yyj")]
 position = Vector2(0, 433)
 
+[node name="BossRoom" parent="Areas" instance=ExtResource("13_85dpl")]
+position = Vector2(672, 80)
+health = 1.0
+
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 y_sort_enabled = true
 
@@ -93,6 +98,7 @@ follow_viewport_enabled = true
 [editable path="UI"]
 [editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/StaminaBar"]
 [editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/ManaBar"]
+[editable path="Areas/BossRoom"]
 [editable path="Entities/Player"]
 [editable path="Entities/AnimatedPickable"]
 [editable path="Entities/AnimatedPickable/Sprite2D/Pickable"]

@@ -1,0 +1,18 @@
+{
+	"spellbook": {
+		"name": "Homeconomicon",
+		"type": "weapon"
+	},
+	"staff": {
+		"name": "Raging Heart",
+		"type": "weapon"
+	},
+	"ghost_doll": {
+		"name": "Ghost Doll",
+		"type": "hat"
+	},
+	"frog_hat": {
+		"name": "Ghost Hat",
+		"type": "hat"
+	}
+}
