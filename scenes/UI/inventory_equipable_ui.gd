@@ -21,17 +21,19 @@ func set_icon() -> void:
 
 	
 func on_weapon_equip():
-	var current_weapon : MagicWeaponController = weapon_manager.current_weapon_controller
+	if DataImport.item_data[item_name].type != "weapon": return
+	var current_weapon : MagicWeaponController = weapon_manager.current_controller
 	on_item_equip(current_weapon.item_id)
 	
 func on_hat_equip():
-	on_item_equip(hat_manager.current_hat)
-	
-func on_item_equip(id: String):
-	if id == null || id == "": 
-		if DataImport.item_data[item_name].type != "hat": return
+	if DataImport.item_data[item_name].type != "hat": return
+	var current_hat : EquipmentController = hat_manager.current_controller
+	if current_hat == null: 
 		set_unactive()
 		return
+	on_item_equip(current_hat.item_id)
+	
+func on_item_equip(id: String):
 	if DataImport.item_data[item_name].type != DataImport.item_data[id].type: return
 	var new_style_box : StyleBoxFlat
 	if !active && id == item_name:

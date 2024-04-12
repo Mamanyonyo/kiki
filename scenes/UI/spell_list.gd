@@ -13,8 +13,8 @@ func on_available_spells_updated():
 		spell_ui.set_spell(spell)
 		add_child(spell_ui)
 
-func on_player_ready(player):
-	spells_component = player.get_node("SpellsComponent")
+func on_player_ready():
+	spells_component = get_tree().get_first_node_in_group("Player").get_node("SpellsComponent")
 	spells_component.available_spells_updated.connect(on_available_spells_updated)
 	on_available_spells_updated()
 

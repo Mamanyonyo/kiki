@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=46 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
 [ext_resource type="PackedScene" uid="uid://dced3yrcptsre" path="res://scenes/components/collision_hurt_component.tscn" id="2_7ygai"]
@@ -16,7 +16,8 @@
 [ext_resource type="Script" path="res://scenes/game_object/player/staff_controller.gd" id="8_o233k"]
 [ext_resource type="PackedScene" uid="uid://b7hih6ibl1le8" path="res://scenes/UI/health_bar.tscn" id="8_tuvcl"]
 [ext_resource type="Script" path="res://scenes/game_object/player/hat_manager.gd" id="13_2tayj"]
-[ext_resource type="Script" path="res://scenes/game_object/player/hat_script.gd" id="15_qhexs"]
+[ext_resource type="Script" path="res://scenes/game_object/player/equipment_controller.gd" id="14_qswat"]
+[ext_resource type="Script" path="res://scenes/game_object/player/hat_sprite.gd" id="16_q1fq0"]
 
 [sub_resource type="Animation" id="Animation_ykp00"]
 length = 0.001
@@ -764,42 +765,45 @@ one_shot = true
 [node name="RestoreTimer" type="Timer" parent="StaminaComponent"]
 autostart = true
 
-[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("player", "current_weapon_controller", "default_controller")]
+[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("player", "current_controller", "default_controller")]
 script = ExtResource("3_xj72i")
 player = NodePath("..")
-current_weapon_controller = NodePath("SpellbookController")
+current_controller = NodePath("SpellbookController")
 default_controller = NodePath("SpellbookController")
 
 [node name="SpellbookController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component")]
 script = ExtResource("4_qkfhb")
-item_id = "spellbook"
 fireball_scene = ExtResource("5_k4bht")
 generic_bullet_spawn = NodePath("../../Sprite2D/ProjectileMarkers/GenericBulletSpawn")
 generic_bullet_spawn_side = NodePath("../../Sprite2D/ProjectileMarkers/GenericBulletSpawnSide")
 stats_component = NodePath("../../StatsComponent")
 mana_component = NodePath("../../ManaComponent")
 weapon_name_animation_prefix = "book"
+item_id = "spellbook"
 
 [node name="StaffController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("beam_marker", "beam_marker_side", "generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component")]
 script = ExtResource("8_o233k")
 beam_marker = NodePath("../../Sprite2D/ProjectileMarkers/StaffBusterBeam")
 beam_marker_side = NodePath("../../Sprite2D/ProjectileMarkers/StaffBusterBeamSide")
-item_id = "staff"
 fireball_scene = ExtResource("5_k4bht")
 generic_bullet_spawn = NodePath("../../Sprite2D/ProjectileMarkers/StaffBulletSpawn")
 generic_bullet_spawn_side = NodePath("../../Sprite2D/ProjectileMarkers/StaffBulletSpawnSide")
 stats_component = NodePath("../../StatsComponent")
 mana_component = NodePath("../../ManaComponent")
 weapon_name_animation_prefix = "staff"
+item_id = "staff"
 
 [node name="BusterTimer" type="Timer" parent="WeaponManager/StaffController"]
 wait_time = 5.0
 one_shot = true
 
-[node name="HatManager" type="Node" parent="." node_paths=PackedStringArray("player", "hat_sprite")]
+[node name="HatManager" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("13_2tayj")
 player = NodePath("..")
-hat_sprite = NodePath("../Sprite2D/Hat")
+
+[node name="GhostDollController" type="Node" parent="HatManager"]
+script = ExtResource("14_qswat")
+item_id = "ghost_doll"
 
 [node name="PlayerAnimator" type="AnimationPlayer" parent="."]
 libraries = {
@@ -817,7 +821,7 @@ region_filter_clip_enabled = true
 [node name="Hat" type="Sprite2D" parent="Sprite2D" node_paths=PackedStringArray("player", "hat_manager")]
 editor_description = "y -6"
 position = Vector2(0, -6)
-script = ExtResource("15_qhexs")
+script = ExtResource("16_q1fq0")
 player = NodePath("../..")
 hat_manager = NodePath("../../HatManager")
 

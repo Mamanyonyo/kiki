@@ -84,5 +84,5 @@ func emit_show_cg(path: String):
 func emit_stop_cg():
 	stop_cg.emit()
 
-func emit_player_ready(player):
-	player_ready.emit(player)
+func emit_player_ready():
+	player_ready.emit()

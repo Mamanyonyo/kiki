@@ -13,7 +13,7 @@ func _ready():
 func set_available_spells():
 	available_spells = []
 	for spell in items:
-		if weapon_manager.current_weapon_controller.has_method(spell):
+		if weapon_manager.current_controller.has_method(spell):
 			available_spells.push_back(spell)
 	available_spells_updated.emit()
 

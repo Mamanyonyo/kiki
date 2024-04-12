@@ -1,6 +1,6 @@
 class_name QuantifiableStatBar extends ProgressBar
 
-@export var stat_component : Node
+var stat_component : Node
 @export var stat_name : String
 @onready var label : Label = $Label
 
@@ -8,7 +8,7 @@ func _ready():
 	#if stat_component == null:
 		#push_warning("NO STAT COMPONENT FOR QUANTIFIABLE STAT BAR")
 		#return
-	connect_signal()
+	GameEvents.player_ready.connect(on_player_ready)
 	
 func update_display():
 	value = stat_component.get_health_percent()
@@ -19,3 +19,10 @@ func on_quantifiable_stat_changed():
 
 func connect_signal():
 	stat_component[stat_name + "_changed"].connect(on_quantifiable_stat_changed)
+
+func on_player_ready():
+	stat_component = get_tree().get_first_node_in_group("Player").get_node(capitalize(stat_name)+"Component")
+	connect_signal()
+
+func capitalize(str):
+	return str[0].to_upper() + str.substr(1,-1)

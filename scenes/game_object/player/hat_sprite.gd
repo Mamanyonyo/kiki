@@ -15,11 +15,11 @@ func _on_player_changed_facing_direction() -> void:
 	position.y = default_y
 
 func _on_hat_manager_item_equip() -> void:
-	if hat_manager.current_hat == "":
+	if hat_manager.current_controller == null:
 		reset()
 		#hat_data = {}
 		return
-	var hat_data = DataImport.hat_data[hat_manager.current_hat] as Dictionary
+	var hat_data = DataImport.hat_data[hat_manager.current_controller.item_id] as Dictionary
 
 	if hat_data.has("static"):
 		hframes = 3
@@ -27,7 +27,7 @@ func _on_hat_manager_item_equip() -> void:
 	if hat_data.has("offset"): 
 		offset.y = hat_data.offset
 	
-	var image = Image.load_from_file("res://assets/hat/" + hat_manager.current_hat + ".png")
+	var image = Image.load_from_file("res://assets/hat/" + hat_manager.current_controller.item_id + ".png")
 	texture = ImageTexture.create_from_image(image)
 
 func _on_player_animator_animation_finished(anim_name: StringName) -> void:

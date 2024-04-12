@@ -43,27 +43,8 @@ experience_manager = NodePath("../../../../../../../Managers/ExperienceManager")
 [node name="MarginContainer" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer" index="1" node_paths=PackedStringArray("money_manager")]
 money_manager = NodePath("../../../../../../Managers/MoneyManager")
 
-[node name="HealthBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" index="0" node_paths=PackedStringArray("stat_component")]
-stat_component = NodePath("../../../../../../../../../Entities/Player/HealthComponent")
-
-[node name="StaminaBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" index="1" node_paths=PackedStringArray("stat_component")]
-stat_component = NodePath("../../../../../../../../../Entities/Player/StaminaComponent")
-
-[node name="ManaBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" index="2" node_paths=PackedStringArray("stat_component")]
+[node name="ManaBar" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer" index="2"]
 theme_override_font_sizes/font_size = 3
-stat_component = NodePath("../../../../../../../../../Entities/Player/ManaComponent")
-
-[node name="Stat" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer" index="0" node_paths=PackedStringArray("stats_component")]
-stats_component = NodePath("../../../../../../../../Entities/Player/StatsComponent")
-
-[node name="Stat2" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer" index="1" node_paths=PackedStringArray("stats_component")]
-stats_component = NodePath("../../../../../../../../Entities/Player/StatsComponent")
-
-[node name="Stat3" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer" index="2" node_paths=PackedStringArray("stats_component")]
-stats_component = NodePath("../../../../../../../../Entities/Player/StatsComponent")
-
-[node name="Stat4" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer" index="3" node_paths=PackedStringArray("stats_component")]
-stats_component = NodePath("../../../../../../../../Entities/Player/StatsComponent")
 
 [node name="Areas" type="Node2D" parent="." groups=["areas_node"]]
 
@@ -77,9 +58,6 @@ health = 1.0
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 y_sort_enabled = true
 
-[node name="Player" parent="Entities" instance=ExtResource("9_lndom")]
-position = Vector2(319, 64)
-
 [node name="AnimatedPickable" parent="Entities" instance=ExtResource("10_ht2ms")]
 position = Vector2(256, 71)
 
@@ -92,6 +70,9 @@ item_id = "staff"
 [node name="CollisionShape2D" parent="Entities/AnimatedPickable/Sprite2D/Pickable" index="0"]
 position = Vector2(0, -0.5)
 
+[node name="Player" parent="Entities" instance=ExtResource("9_lndom")]
+position = Vector2(160, 128)
+
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true
 
@@ -99,6 +80,5 @@ follow_viewport_enabled = true
 [editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/StaminaBar"]
 [editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/ManaBar"]
 [editable path="Areas/BossRoom"]
-[editable path="Entities/Player"]
 [editable path="Entities/AnimatedPickable"]
 [editable path="Entities/AnimatedPickable/Sprite2D/Pickable"]

@@ -18,8 +18,8 @@ func load_item(item):
 	item_ui_scene_instance.set_icon()
 	add_child(item_ui_scene_instance)
 
-func on_player_ready(player):
-	inventory_component = player.get_node("InventoryComponent")
+func on_player_ready():
+	inventory_component = get_tree().get_first_node_in_group("Player").get_node("InventoryComponent")
 	inventory_component.added_item.connect(on_added_item)
 	reload_inventory()
 
