@@ -163,6 +163,6 @@ func _on_player_animator_animation_finished(anim_name: StringName) -> void:
 func _on_health_component_died():
 	if GameEvents.tree:
 		stats_component.health = stats_component.max_health / 2
-		health_component.health_changed.emit()
+		health_component.changed.emit()
 		global_position = get_tree().get_first_node_in_group("tree").global_position + Vector2.DOWN * 30
 	else: queue_free()

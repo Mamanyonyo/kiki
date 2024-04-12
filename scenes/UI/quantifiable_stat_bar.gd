@@ -1,6 +1,6 @@
 class_name QuantifiableStatBar extends ProgressBar
 
-var stat_component : Node
+var stat_component : QuantifiableStatComponent
 @export var stat_name : String
 @onready var label : Label = $Label
 
@@ -11,18 +11,19 @@ func _ready():
 	GameEvents.player_ready.connect(on_player_ready)
 	
 func update_display():
-	value = stat_component.get_health_percent()
+	value = stat_component.get_percent()
 	label.text = str(stat_component.stats_component[stat_name]) + "/" + str(stat_component.stats_component["max_" + stat_name])
 
 func on_quantifiable_stat_changed():
 	update_display()
 
 func connect_signal():
-	stat_component[stat_name + "_changed"].connect(on_quantifiable_stat_changed)
+	stat_component.changed.connect(on_quantifiable_stat_changed)
 
 func on_player_ready():
 	stat_component = get_tree().get_first_node_in_group("Player").get_node(capitalize(stat_name)+"Component")
 	connect_signal()
+	update_display()
 
 func capitalize(str):
 	return str[0].to_upper() + str.substr(1,-1)

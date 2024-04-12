@@ -21,14 +21,14 @@ func Enter():
 	sprite.position.y = -16
 
 func Update(_delta):
-	if health_component.get_health_percent() < current_percentage_to_activate_attack:
+	if health_component.get_percent() < current_percentage_to_activate_attack:
 		current_percentage_to_activate_attack = current_percentage_to_activate_attack - percentage_to_activate_attack
 		transitioned.emit("ChaseClosestToilet")
 		return
 	super.Update(_delta)
 	
 
-	#if health_component.get_health_percent() < percentage_to_activate_attack && state == DEFAULT:
+	#if health_component.get_percent() < percentage_to_activate_attack && state == DEFAULT:
 		#state = CHASING_CLOSEST_TOILET
 		#percentage_to_activate_attack -= 0.25
 		#get_closest_toilet()

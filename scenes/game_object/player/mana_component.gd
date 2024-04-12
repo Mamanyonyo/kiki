@@ -1,10 +1,8 @@
-class_name ManaComponent extends Node
+class_name ManaComponent extends QuantifiableStatComponent
 
-@export var stats_component : StatsComponent
 @export var hat_manager : HatManager
 @onready var restore_timer = $RestoreTimer
 
-signal mana_changed
 
 func _process(_delta):
 	if stats_component.mana < stats_component.max_mana:
@@ -17,17 +15,12 @@ func cast_and_check(cost):
 		return true
 	if stats_component.mana - cost < 0: return false
 	stats_component.mana -= cost
-	mana_changed.emit()
+	changed.emit()
 	return true
-
-func get_health_percent():
-	if stats_component.mana <= 0: return 0
-	var division : float = stats_component.mana/stats_component.max_mana
-	return division
 
 func _on_restore_timer_timeout() -> void:
 	stats_component.mana += stats_component.mana_reg
 	if stats_component.mana >= stats_component.max_mana:
 		stats_component.mana = stats_component.max_mana
 		restore_timer.stop()
-	mana_changed.emit()
+	changed.emit()

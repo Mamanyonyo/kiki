@@ -734,11 +734,11 @@ max_mana = 30.0
 max_mana_reg = 5.0
 max_stamina = 50.0
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_s8m81")]
-stats_component = NodePath("../StatsComponent")
-
 [node name="InventoryComponent" parent="." instance=ExtResource("5_k2f8i")]
 editor_description = "items iniciales se pasan por el codigo : p"
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_s8m81")]
+stats_component = NodePath("../StatsComponent")
 
 [node name="SpellsComponent" parent="." node_paths=PackedStringArray("weapon_manager") instance=ExtResource("5_k2f8i")]
 editor_description = "items iniciales se pasan por el codigo : p"
@@ -746,10 +746,11 @@ script = ExtResource("6_i0a4a")
 weapon_manager = NodePath("../WeaponManager")
 items = Array[String](["fireball", "hyperborea_buster"])
 
-[node name="ManaComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component", "hat_manager")]
+[node name="ManaComponent" type="Node" parent="." node_paths=PackedStringArray("hat_manager", "stats_component")]
 script = ExtResource("6_w6t64")
-stats_component = NodePath("../StatsComponent")
 hat_manager = NodePath("../HatManager")
+stats_component = NodePath("../StatsComponent")
+stat_name = "mana"
 
 [node name="RestoreTimer" type="Timer" parent="ManaComponent"]
 autostart = true
@@ -757,6 +758,7 @@ autostart = true
 [node name="StaminaComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component")]
 script = ExtResource("6_183wu")
 stats_component = NodePath("../StatsComponent")
+stat_name = "stamina"
 
 [node name="DrainTimer" type="Timer" parent="StaminaComponent"]
 wait_time = 0.5
@@ -897,7 +899,6 @@ shape = SubResource("CircleShape2D_5pqvn")
 
 [connection signal="changed_facing_direction" from="." to="Sprite2D/Hat" method="_on_player_changed_facing_direction"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
-[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
 [connection signal="timeout" from="ManaComponent/RestoreTimer" to="ManaComponent" method="_on_restore_timer_timeout"]
 [connection signal="timeout" from="StaminaComponent/DrainTimer" to="StaminaComponent" method="_on_timer_timeout"]
 [connection signal="timeout" from="StaminaComponent/RestoreTimer" to="StaminaComponent" method="_on_restore_timer_timeout"]
