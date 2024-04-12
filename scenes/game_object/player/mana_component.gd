@@ -1,6 +1,7 @@
 class_name ManaComponent extends Node
 
 @export var stats_component : StatsComponent
+@export var hat_manager : HatManager
 @onready var restore_timer = $RestoreTimer
 
 signal mana_changed
@@ -11,6 +12,9 @@ func _process(_delta):
 		if restore_timer.is_stopped(): restore_timer.start()
 
 func cast_and_check(cost):
+	if hat_manager != null && hat_manager.current_controller != null && hat_manager.current_controller.item_id == "ghost_doll" && !hat_manager.current_controller.recharging:
+		hat_manager.current_controller.spell_casted()
+		return true
 	if stats_component.mana - cost < 0: return false
 	stats_component.mana -= cost
 	mana_changed.emit()

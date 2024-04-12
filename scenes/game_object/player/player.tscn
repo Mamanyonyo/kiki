@@ -16,7 +16,7 @@
 [ext_resource type="Script" path="res://scenes/game_object/player/staff_controller.gd" id="8_o233k"]
 [ext_resource type="PackedScene" uid="uid://b7hih6ibl1le8" path="res://scenes/UI/health_bar.tscn" id="8_tuvcl"]
 [ext_resource type="Script" path="res://scenes/game_object/player/hat_manager.gd" id="13_2tayj"]
-[ext_resource type="Script" path="res://scenes/game_object/player/equipment_controller.gd" id="14_qswat"]
+[ext_resource type="Script" path="res://scenes/game_object/player/ghost_doll_controller.gd" id="14_vx5k6"]
 [ext_resource type="Script" path="res://scenes/game_object/player/hat_sprite.gd" id="16_q1fq0"]
 
 [sub_resource type="Animation" id="Animation_ykp00"]
@@ -739,7 +739,6 @@ stats_component = NodePath("../StatsComponent")
 
 [node name="InventoryComponent" parent="." instance=ExtResource("5_k2f8i")]
 editor_description = "items iniciales se pasan por el codigo : p"
-items = Array[String](["spellbook", "ghost_doll"])
 
 [node name="SpellsComponent" parent="." node_paths=PackedStringArray("weapon_manager") instance=ExtResource("5_k2f8i")]
 editor_description = "items iniciales se pasan por el codigo : p"
@@ -747,9 +746,10 @@ script = ExtResource("6_i0a4a")
 weapon_manager = NodePath("../WeaponManager")
 items = Array[String](["fireball", "hyperborea_buster"])
 
-[node name="ManaComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component")]
+[node name="ManaComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component", "hat_manager")]
 script = ExtResource("6_w6t64")
 stats_component = NodePath("../StatsComponent")
+hat_manager = NodePath("../HatManager")
 
 [node name="RestoreTimer" type="Timer" parent="ManaComponent"]
 autostart = true
@@ -802,8 +802,12 @@ script = ExtResource("13_2tayj")
 player = NodePath("..")
 
 [node name="GhostDollController" type="Node" parent="HatManager"]
-script = ExtResource("14_qswat")
+script = ExtResource("14_vx5k6")
 item_id = "ghost_doll"
+
+[node name="Timer" type="Timer" parent="HatManager/GhostDollController"]
+wait_time = 300.0
+one_shot = true
 
 [node name="PlayerAnimator" type="AnimationPlayer" parent="."]
 libraries = {
@@ -898,6 +902,7 @@ shape = SubResource("CircleShape2D_5pqvn")
 [connection signal="timeout" from="StaminaComponent/RestoreTimer" to="StaminaComponent" method="_on_restore_timer_timeout"]
 [connection signal="timeout" from="WeaponManager/StaffController/BusterTimer" to="WeaponManager/StaffController" method="_on_buster_timer_timeout"]
 [connection signal="item_equip" from="HatManager" to="Sprite2D/Hat" method="_on_hat_manager_item_equip"]
+[connection signal="timeout" from="HatManager/GhostDollController/Timer" to="HatManager/GhostDollController" method="_on_timer_timeout"]
 [connection signal="animation_finished" from="PlayerAnimator" to="." method="_on_player_animator_animation_finished"]
 [connection signal="animation_finished" from="PlayerAnimator" to="WeaponManager/StaffController" method="_on_player_animator_animation_finished"]
 [connection signal="animation_finished" from="PlayerAnimator" to="Sprite2D/Hat" method="_on_player_animator_animation_finished"]
