@@ -8,6 +8,7 @@ extends MagicWeaponController
 @onready var letters_spawner : PackedScene = load("res://scenes/effect/cast_spawner_buster.tscn")
 @onready var circle : PackedScene = load("res://scenes/effect/buster_circle.tscn")
 @onready var buster_timer : Timer = $BusterTimer
+@export var spells_component : SpellsComponent
 
 var circle_instances : Array = []
 var beam_instance
@@ -24,6 +25,8 @@ func Inputs():
 		#if !mana_component.cast_and_check(temp_mana_cost): return
 
 func hyperborea_buster():
+	DataImport.skill_data["hyperborea_buster"].name = "Hyperborea Buster"
+	spells_component.available_spells_updated.emit()
 	player.attacking = true
 	player.can_move = false
 	player.direction = Vector2.ZERO

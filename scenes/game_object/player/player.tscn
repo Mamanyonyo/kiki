@@ -781,10 +781,11 @@ mana_component = NodePath("../../ManaComponent")
 weapon_name_animation_prefix = "book"
 item_id = "spellbook"
 
-[node name="StaffController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("beam_marker", "beam_marker_side", "generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component")]
+[node name="StaffController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("beam_marker", "beam_marker_side", "spells_component", "generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component")]
 script = ExtResource("8_o233k")
 beam_marker = NodePath("../../Sprite2D/ProjectileMarkers/StaffBusterBeam")
 beam_marker_side = NodePath("../../Sprite2D/ProjectileMarkers/StaffBusterBeamSide")
+spells_component = NodePath("../../SpellsComponent")
 fireball_scene = ExtResource("5_k4bht")
 generic_bullet_spawn = NodePath("../../Sprite2D/ProjectileMarkers/StaffBulletSpawn")
 generic_bullet_spawn_side = NodePath("../../Sprite2D/ProjectileMarkers/StaffBulletSpawnSide")
