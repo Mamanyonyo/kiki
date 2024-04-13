@@ -26,3 +26,8 @@ func _on_drain_timeout() -> void:
 		drain_timer.stop()
 		stats_component.damage = stats_component.max_damage
 	changed.emit()
+
+
+func _on_graze_component_grazed() -> void:
+	stats_component.drive += 3
+	changed.emit()
