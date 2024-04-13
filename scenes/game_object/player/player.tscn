@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=48 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
 [ext_resource type="PackedScene" uid="uid://dced3yrcptsre" path="res://scenes/components/collision_hurt_component.tscn" id="2_7ygai"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://46gkkjx61fwg" path="res://scenes/components/stats_component.tscn" id="2_t86h5"]
 [ext_resource type="Script" path="res://scenes/game_object/player/WeaponManager.gd" id="3_xj72i"]
 [ext_resource type="Texture2D" uid="uid://di40knpu0ut51" path="res://assets/character/kiki.png" id="4_3kvbw"]
+[ext_resource type="Script" path="res://scenes/game_object/player/player_stats_component.gd" id="4_chtgq"]
 [ext_resource type="Script" path="res://scenes/game_object/player/book_controller.gd" id="4_qkfhb"]
 [ext_resource type="PackedScene" uid="uid://cgu10pjnl7jka" path="res://scenes/components/inventory_component.tscn" id="5_k2f8i"]
 [ext_resource type="PackedScene" uid="uid://cgoukns1if586" path="res://scenes/game_object/projectile/bullet.tscn" id="5_k4bht"]
@@ -15,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://duivxwbgh8hl2" path="res://scenes/components/hitbox_component.tscn" id="7_6vy27"]
 [ext_resource type="Script" path="res://scenes/game_object/player/staff_controller.gd" id="8_o233k"]
 [ext_resource type="PackedScene" uid="uid://b7hih6ibl1le8" path="res://scenes/UI/health_bar.tscn" id="8_tuvcl"]
+[ext_resource type="Script" path="res://scenes/game_object/player/drive_component.gd" id="9_f35io"]
 [ext_resource type="Script" path="res://scenes/game_object/player/hat_manager.gd" id="13_2tayj"]
 [ext_resource type="Script" path="res://scenes/game_object/player/ghost_doll_controller.gd" id="14_vx5k6"]
 [ext_resource type="Script" path="res://scenes/game_object/player/hat_sprite.gd" id="16_q1fq0"]
@@ -728,11 +730,13 @@ hurtbox = NodePath("../Sprite2D/PlayerHurtbox")
 stats_component = NodePath("../StatsComponent")
 
 [node name="StatsComponent" parent="." instance=ExtResource("2_t86h5")]
-max_speed = 125.0
-max_health = 20.0
+script = ExtResource("4_chtgq")
 max_mana = 30.0
 max_mana_reg = 5.0
 max_stamina = 50.0
+max_drive = 100.0
+max_speed = 125.0
+max_health = 20.0
 
 [node name="InventoryComponent" parent="." instance=ExtResource("5_k2f8i")]
 editor_description = "items iniciales se pasan por el codigo : p"
@@ -766,6 +770,15 @@ one_shot = true
 
 [node name="RestoreTimer" type="Timer" parent="StaminaComponent"]
 autostart = true
+
+[node name="DriveComponent" type="Node" parent="." node_paths=PackedStringArray("player", "stats_component")]
+script = ExtResource("9_f35io")
+player = NodePath("..")
+stats_component = NodePath("../StatsComponent")
+stat_name = "drive"
+
+[node name="Drain" type="Timer" parent="DriveComponent"]
+wait_time = 0.1
 
 [node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("player", "current_controller", "default_controller")]
 script = ExtResource("3_xj72i")
@@ -881,7 +894,6 @@ shape = SubResource("CircleShape2D_hg7kp")
 [node name="WeaponHitbox" parent="Sprite2D" instance=ExtResource("7_6vy27")]
 z_as_relative = false
 monitoring = false
-target = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/WeaponHitbox"]
 visible = false
@@ -902,6 +914,7 @@ shape = SubResource("CircleShape2D_5pqvn")
 [connection signal="timeout" from="ManaComponent/RestoreTimer" to="ManaComponent" method="_on_restore_timer_timeout"]
 [connection signal="timeout" from="StaminaComponent/DrainTimer" to="StaminaComponent" method="_on_timer_timeout"]
 [connection signal="timeout" from="StaminaComponent/RestoreTimer" to="StaminaComponent" method="_on_restore_timer_timeout"]
+[connection signal="timeout" from="DriveComponent/Drain" to="DriveComponent" method="_on_drain_timeout"]
 [connection signal="timeout" from="WeaponManager/StaffController/BusterTimer" to="WeaponManager/StaffController" method="_on_buster_timer_timeout"]
 [connection signal="item_equip" from="HatManager" to="Sprite2D/Hat" method="_on_hat_manager_item_equip"]
 [connection signal="timeout" from="HatManager/GhostDollController/Timer" to="HatManager/GhostDollController" method="_on_timer_timeout"]

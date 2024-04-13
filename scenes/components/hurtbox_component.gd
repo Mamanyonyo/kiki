@@ -19,6 +19,10 @@ func check_deal_damage():
 		var hitbox_component = other_area as HitboxComponent
 		#if hitbox_component.target != 2 && hitbox_component.target != alignment: return
 		health_component.damage(hitbox_component.damage)
+		if other_area.attacker != null && other_area.attacker is Player:
+			var player : Player = other_area.attacker
+			player.did_damage.emit(hitbox_component.damage - stats_component.resistance)
+		##TODO emitir hit del enemigo con señar del player y borrar linea de abajo
 		GameEvents.emit_enemy_hit(get_parent())
 		var floating_text = floating_text_scene.instantiate() as Node2D
 		get_tree().get_first_node_in_group("foreground_layer").add_child(floating_text)

@@ -50,6 +50,7 @@ func fireball():
 	check_if_animation_worked(weapon_name_animation_prefix + "_attack_spell_aimed")
 	var skill_data = get_skill_data("fireball")
 	var bullet_instance = fireball_scene.instantiate() as HitboxComponent
+	bullet_instance.attacker = player
 	bullet_instance.damage = skill_data.damage + stats_component.magic_damage
 	match player.get_rotation_in_degrees():
 		90: bullet_instance.global_position = generic_bullet_spawn.global_position

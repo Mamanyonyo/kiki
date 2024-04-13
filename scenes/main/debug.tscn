@@ -83,6 +83,7 @@ follow_viewport_enabled = true
 [editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/HealthBar"]
 [editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/StaminaBar"]
 [editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/ManaBar"]
+[editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/DriveBar"]
 [editable path="Areas/BossRoom"]
 [editable path="Entities/AnimatedPickable"]
 [editable path="Entities/AnimatedPickable/Sprite2D/Pickable"]

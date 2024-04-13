@@ -25,6 +25,7 @@ var absolute_dir : Vector2 = Vector2.ZERO
 var direction : Vector2 = Vector2.ZERO
 
 signal changed_facing_direction
+signal did_damage(amount: int)
 
 #TODO limpiar
 

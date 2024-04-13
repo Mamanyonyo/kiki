@@ -82,6 +82,7 @@ func _on_player_animator_animation_finished(anim_name: String):
 				player_animator.stop()
 				beam_instance = beam.instantiate()
 				beam_instance.damage = skill_data.damage + stats_component.magic_damage
+				beam_instance.attacker = player
 				get_tree().get_first_node_in_group("foreground_layer").add_child(beam_instance)
 				beam_instance.rotation = player.get_facing_direction().angle()
 				match player.get_facing_direction():
