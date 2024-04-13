@@ -31,6 +31,9 @@ script = ExtResource("1_1m5vi")
 [node name="SpawnManager" parent="Managers" instance=ExtResource("4_op7ru")]
 script = ExtResource("5_mciro")
 
+[node name="SpawnManager2" parent="Managers" instance=ExtResource("4_op7ru")]
+script = ExtResource("5_mciro")
+
 [node name="GameCamera" parent="." node_paths=PackedStringArray("ui_box") instance=ExtResource("6_pwvlf")]
 ui_box = NodePath("../UI/CanvasLayer/BoxContainer")
 

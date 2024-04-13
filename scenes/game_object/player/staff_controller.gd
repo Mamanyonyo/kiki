@@ -79,6 +79,7 @@ func _on_player_animator_animation_finished(anim_name: String):
 				player_animator.stop()
 				beam_instance = beam.instantiate()
 				get_tree().get_first_node_in_group("foreground_layer").add_child(beam_instance)
+				beam_instance.damage = DataImport.skill_data["hyperborea_buster"].damage
 				beam_instance.rotation = player.get_facing_direction().angle()
 				match player.get_facing_direction():
 					Vector2.UP: 

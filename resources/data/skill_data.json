@@ -6,8 +6,8 @@
 	},
 	"hyperborea_buster": {
 		"name": "???????",
-		"cost": 999999,
-		"damage": 100,
+		"cost": 1,
+		"damage": 2,
 		"unique": true
 	}
 }
