@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=55 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
 [ext_resource type="PackedScene" uid="uid://dced3yrcptsre" path="res://scenes/components/collision_hurt_component.tscn" id="2_7ygai"]
@@ -10,14 +10,14 @@
 [ext_resource type="Script" path="res://scenes/game_object/player/book_controller.gd" id="4_qkfhb"]
 [ext_resource type="PackedScene" uid="uid://cgu10pjnl7jka" path="res://scenes/components/inventory_component.tscn" id="5_k2f8i"]
 [ext_resource type="PackedScene" uid="uid://cgoukns1if586" path="res://scenes/game_object/projectile/bullet.tscn" id="5_k4bht"]
-[ext_resource type="Script" path="res://scenes/game_object/player/StaminaComponent.gd" id="6_183wu"]
 [ext_resource type="Script" path="res://scenes/game_object/player/spells_component.gd" id="6_i0a4a"]
-[ext_resource type="Script" path="res://scenes/game_object/player/mana_component.gd" id="6_w6t64"]
 [ext_resource type="PackedScene" uid="uid://duivxwbgh8hl2" path="res://scenes/components/hitbox_component.tscn" id="7_6vy27"]
+[ext_resource type="PackedScene" uid="uid://cm28wqc1mja7p" path="res://scenes/components/mana_component.tscn" id="8_bg5pb"]
 [ext_resource type="Script" path="res://scenes/game_object/player/staff_controller.gd" id="8_o233k"]
 [ext_resource type="PackedScene" uid="uid://b7hih6ibl1le8" path="res://scenes/UI/health_bar.tscn" id="8_tuvcl"]
-[ext_resource type="Script" path="res://scenes/game_object/player/drive_component.gd" id="9_f35io"]
-[ext_resource type="Script" path="res://scenes/game_object/player/graze_component.gd" id="10_r0k1t"]
+[ext_resource type="PackedScene" uid="uid://dj7pw5jpbnu1b" path="res://scenes/components/stamina_component.tscn" id="9_0055o"]
+[ext_resource type="PackedScene" uid="uid://bgplu8dtefxg0" path="res://scenes/components/graze_component.tscn" id="10_rkm8t"]
+[ext_resource type="PackedScene" uid="uid://ct5b6cdjymiqn" path="res://scenes/components/drive_component.tscn" id="11_n5lds"]
 [ext_resource type="Script" path="res://scenes/game_object/player/hat_manager.gd" id="13_2tayj"]
 [ext_resource type="Script" path="res://scenes/game_object/player/ghost_doll_controller.gd" id="14_vx5k6"]
 [ext_resource type="Script" path="res://scenes/game_object/player/hat_sprite.gd" id="16_q1fq0"]
@@ -71,6 +71,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, -6)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_obi5d"]
@@ -674,6 +686,200 @@ tracks/1/keys = {
 "values": [Vector2(0, -5), Vector2(0, -6)]
 }
 
+[sub_resource type="Animation" id="Animation_x1v1f"]
+resource_name = "staff_drive_walk_down"
+length = 1.2
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [68, 69, 69]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Hat:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, -6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_y1lr7"]
+resource_name = "staff_drive_walk_side"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [72, 73]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Hat:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, -6)]
+}
+
+[sub_resource type="Animation" id="Animation_ocvo3"]
+resource_name = "staff_drive_walk_up"
+length = 1.2
+loop_mode = 1
+step = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [70, 71, 71]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Hat:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, -6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(-1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lq2jw"]
+resource_name = "staff_drive_walk_down_attack"
+length = 1.2
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [74, 75, 75]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Hat:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, -6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hoanc"]
+resource_name = "staff_drive_walk_side_attack"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [76, 77]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Hat:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, -6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s0len"]
 _data = {
 "RESET": SubResource("Animation_ykp00"),
@@ -695,6 +901,11 @@ _data = {
 "staff_attack_spell_aimed_side": SubResource("Animation_htwjv"),
 "staff_attack_spell_aimed_up": SubResource("Animation_7ddrh"),
 "staff_attack_up": SubResource("Animation_iqbwt"),
+"staff_drive_walk_down": SubResource("Animation_x1v1f"),
+"staff_drive_walk_down_attack": SubResource("Animation_lq2jw"),
+"staff_drive_walk_side": SubResource("Animation_y1lr7"),
+"staff_drive_walk_side_attack": SubResource("Animation_hoanc"),
+"staff_drive_walk_up": SubResource("Animation_ocvo3"),
 "walk_down": SubResource("Animation_tfhj5"),
 "walk_side": SubResource("Animation_3qbfy"),
 "walk_up": SubResource("Animation_fhqsd")
@@ -753,44 +964,26 @@ script = ExtResource("6_i0a4a")
 weapon_manager = NodePath("../WeaponManager")
 items = Array[String](["fireball", "hyperborea_buster"])
 
-[node name="ManaComponent" type="Node" parent="." node_paths=PackedStringArray("hat_manager", "stats_component")]
-script = ExtResource("6_w6t64")
+[node name="ManaComponent" parent="." node_paths=PackedStringArray("hat_manager", "stats_component") instance=ExtResource("8_bg5pb")]
 hat_manager = NodePath("../HatManager")
 stats_component = NodePath("../StatsComponent")
-stat_name = "mana"
 
-[node name="RestoreTimer" type="Timer" parent="ManaComponent"]
-autostart = true
-
-[node name="StaminaComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component")]
-script = ExtResource("6_183wu")
+[node name="StaminaComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("9_0055o")]
 stats_component = NodePath("../StatsComponent")
-stat_name = "stamina"
 
-[node name="DrainTimer" type="Timer" parent="StaminaComponent"]
-wait_time = 0.5
-one_shot = true
+[node name="GrazeComponent" parent="." instance=ExtResource("10_rkm8t")]
 
-[node name="RestoreTimer" type="Timer" parent="StaminaComponent"]
-autostart = true
-
-[node name="GrazeComponent" type="Node" parent="."]
-script = ExtResource("10_r0k1t")
-
-[node name="DriveComponent" type="Node" parent="." node_paths=PackedStringArray("player", "stats_component")]
-script = ExtResource("9_f35io")
+[node name="DriveComponent" parent="." node_paths=PackedStringArray("player", "weapon_manager", "stats_component") instance=ExtResource("11_n5lds")]
 player = NodePath("..")
+weapon_manager = NodePath("../WeaponManager")
 stats_component = NodePath("../StatsComponent")
-stat_name = "drive"
 
-[node name="Drain" type="Timer" parent="DriveComponent"]
-wait_time = 0.1
-
-[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("player", "current_controller", "default_controller")]
+[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("player", "current_controller", "default_controller", "drive_component")]
 script = ExtResource("3_xj72i")
 player = NodePath("..")
 current_controller = NodePath("SpellbookController")
 default_controller = NodePath("SpellbookController")
+drive_component = NodePath("../DriveComponent")
 
 [node name="SpellbookController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component")]
 script = ExtResource("4_qkfhb")
@@ -802,11 +995,13 @@ mana_component = NodePath("../../ManaComponent")
 weapon_name_animation_prefix = "book"
 item_id = "spellbook"
 
-[node name="StaffController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("beam_marker", "beam_marker_side", "spells_component", "generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component")]
+[node name="StaffController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("beam_marker", "beam_marker_side", "spells_component", "drive_component", "weapon_manager", "generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component")]
 script = ExtResource("8_o233k")
 beam_marker = NodePath("../../Sprite2D/ProjectileMarkers/StaffBusterBeam")
 beam_marker_side = NodePath("../../Sprite2D/ProjectileMarkers/StaffBusterBeamSide")
 spells_component = NodePath("../../SpellsComponent")
+drive_component = NodePath("../../DriveComponent")
+weapon_manager = NodePath("..")
 fireball_scene = ExtResource("5_k4bht")
 generic_bullet_spawn = NodePath("../../Sprite2D/ProjectileMarkers/StaffBulletSpawn")
 generic_bullet_spawn_side = NodePath("../../Sprite2D/ProjectileMarkers/StaffBulletSpawnSide")
@@ -817,6 +1012,10 @@ item_id = "staff"
 
 [node name="BusterTimer" type="Timer" parent="WeaponManager/StaffController"]
 wait_time = 5.0
+one_shot = true
+
+[node name="DriveHitTime" type="Timer" parent="WeaponManager/StaffController"]
+wait_time = 0.25
 one_shot = true
 
 [node name="HatManager" type="Node" parent="." node_paths=PackedStringArray("player")]
@@ -841,7 +1040,7 @@ speed_scale = 2.0
 position = Vector2(0, -16)
 texture = ExtResource("4_3kvbw")
 hframes = 8
-vframes = 9
+vframes = 10
 region_filter_clip_enabled = true
 
 [node name="Hat" type="Sprite2D" parent="Sprite2D" node_paths=PackedStringArray("player", "hat_manager")]
@@ -910,7 +1109,6 @@ z_as_relative = false
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/WeaponHitbox"]
-visible = false
 position = Vector2(-9, 16)
 shape = SubResource("RectangleShape2D_xeg0d")
 
@@ -925,11 +1123,10 @@ shape = SubResource("CircleShape2D_5pqvn")
 
 [connection signal="changed_facing_direction" from="." to="Sprite2D/Hat" method="_on_player_changed_facing_direction"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
-[connection signal="timeout" from="ManaComponent/RestoreTimer" to="ManaComponent" method="_on_restore_timer_timeout"]
-[connection signal="timeout" from="StaminaComponent/DrainTimer" to="StaminaComponent" method="_on_timer_timeout"]
-[connection signal="timeout" from="StaminaComponent/RestoreTimer" to="StaminaComponent" method="_on_restore_timer_timeout"]
 [connection signal="grazed" from="GrazeComponent" to="DriveComponent" method="_on_graze_component_grazed"]
-[connection signal="timeout" from="DriveComponent/Drain" to="DriveComponent" method="_on_drain_timeout"]
+[connection signal="drive_finish" from="DriveComponent" to="." method="_on_drive_component_drive_finish"]
+[connection signal="drive_finish" from="DriveComponent" to="WeaponManager" method="_on_drive_component_drive_finish"]
+[connection signal="drive_start" from="DriveComponent" to="WeaponManager" method="_on_drive_component_drive_start"]
 [connection signal="timeout" from="WeaponManager/StaffController/BusterTimer" to="WeaponManager/StaffController" method="_on_buster_timer_timeout"]
 [connection signal="item_equip" from="HatManager" to="Sprite2D/Hat" method="_on_hat_manager_item_equip"]
 [connection signal="timeout" from="HatManager/GhostDollController/Timer" to="HatManager/GhostDollController" method="_on_timer_timeout"]
@@ -937,5 +1134,3 @@ shape = SubResource("CircleShape2D_5pqvn")
 [connection signal="animation_finished" from="PlayerAnimator" to="WeaponManager/StaffController" method="_on_player_animator_animation_finished"]
 [connection signal="animation_finished" from="PlayerAnimator" to="Sprite2D/Hat" method="_on_player_animator_animation_finished"]
 [connection signal="current_animation_changed" from="PlayerAnimator" to="Sprite2D/Hat" method="_on_player_animator_current_animation_changed"]
-[connection signal="area_entered" from="Sprite2D/PlayerHurtbox/GrazeArea" to="GrazeComponent" method="_on_graze_area_area_entered"]
-[connection signal="body_entered" from="Sprite2D/PlayerHurtbox/GrazeArea" to="GrazeComponent" method="_on_graze_area_body_entered"]

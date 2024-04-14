@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj7pw5jpbnu1b"]
+
+[ext_resource type="Script" path="res://scenes/game_object/player/StaminaComponent.gd" id="1_rolxb"]
+
+[node name="StaminaComponent" type="Node" node_paths=PackedStringArray("stats_component")]
+script = ExtResource("1_rolxb")
+stats_component = NodePath("")
+stat_name = "stamina"
+
+[node name="DrainTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="RestoreTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="DrainTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="RestoreTimer" to="." method="_on_restore_timer_timeout"]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://ct5b6cdjymiqn"]
+
+[ext_resource type="Script" path="res://scenes/game_object/player/drive_component.gd" id="1_806as"]
+
+[node name="DriveComponent" type="Node"]
+script = ExtResource("1_806as")
+stat_name = "drive"
+
+[node name="Drain" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="Drain" to="." method="_on_drain_timeout"]

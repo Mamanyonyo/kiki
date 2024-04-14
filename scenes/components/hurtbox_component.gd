@@ -5,7 +5,6 @@ class_name HurtboxComponent
 @export var health_component: HealthComponent
 @onready var damage_timer : Timer = $DamageIntervalTimer
 #@export_enum("PLAYER", "ENEMY") var alignment = 1
-var floating_text_scene: PackedScene = preload("res://scenes/UI/floating_text.tscn")
 var colliding_areas = []
 
 func check_deal_damage():
@@ -22,13 +21,6 @@ func check_deal_damage():
 		if other_area.attacker != null && other_area.attacker is Player:
 			var player : Player = other_area.attacker
 			player.did_damage.emit(hitbox_component.damage - stats_component.resistance)
-		##TODO emitir hit del enemigo con señar del player y borrar linea de abajo
-		GameEvents.emit_enemy_hit(get_parent())
-		var floating_text = floating_text_scene.instantiate() as Node2D
-		get_tree().get_first_node_in_group("foreground_layer").add_child(floating_text)
-		
-		floating_text.global_position = global_position
-		floating_text.start(str(hitbox_component.damage - stats_component.resistance))
 		damage_timer.start()
 		
 func _on_area_entered(other_area: Area2D):

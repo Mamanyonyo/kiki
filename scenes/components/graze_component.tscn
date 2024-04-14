@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgplu8dtefxg0"]
+
+[ext_resource type="Script" path="res://scenes/game_object/player/graze_component.gd" id="1_tw6or"]
+
+[node name="GrazeComponent" type="Node"]
+script = ExtResource("1_tw6or")

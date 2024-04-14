@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm28wqc1mja7p"]
+
+[ext_resource type="Script" path="res://scenes/game_object/player/mana_component.gd" id="1_77wgn"]
+
+[node name="ManaComponent" type="Node"]
+script = ExtResource("1_77wgn")
+stat_name = "mana"
+
+[node name="RestoreTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="RestoreTimer" to="." method="_on_restore_timer_timeout"]

@@ -13,6 +13,8 @@ func _ready():
 	hat_manager = get_tree().get_first_node_in_group("Player").get_node("HatManager")
 	weapon_manager.item_equip.connect(on_weapon_equip)
 	hat_manager.item_equip.connect(on_hat_equip)
+	on_hat_equip()
+	on_weapon_equip()
 
 func set_icon() -> void:
 	#if icon_texture != null: icon = icon_texture

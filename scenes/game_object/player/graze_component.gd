@@ -1,7 +1,5 @@
 extends Node
 
-@export var graze_area: Area2D
-
 signal grazed
 
 var collided = []
@@ -12,7 +10,6 @@ func check_collision_and_shit(thing: Node2D):
 			return
 	collided.push_back(thing.get_instance_id())
 	grazed.emit()
-	print("grazed")
 
 func _on_graze_area_area_entered(area: Area2D) -> void:
 	check_collision_and_shit(area)

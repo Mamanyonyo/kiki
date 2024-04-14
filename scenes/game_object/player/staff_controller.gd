@@ -1,4 +1,4 @@
-extends MagicWeaponController
+class_name StaffController extends MagicWeaponController
 
 @export var beam_marker : Marker2D
 @export var beam_marker_side : Marker2D
@@ -9,6 +9,9 @@ extends MagicWeaponController
 @onready var circle : PackedScene = load("res://scenes/effect/buster_circle.tscn")
 @onready var buster_timer : Timer = $BusterTimer
 @export var spells_component : SpellsComponent
+@export var drive_component : DriveComponent
+@export var weapon_manager : WeaponManager
+@export var drive_attack_range : float = 100
 
 var circle_instances : Array = []
 var beam_instance
@@ -18,11 +21,13 @@ var prev_sprite : int
 var charges = 0
 
 func Inputs():
-	super.Inputs()
-	
-	if Input.is_key_pressed(KEY_C) && !player.attacking:
-		try_spell_cast("hyperborea_buster")
-		#if !mana_component.cast_and_check(temp_mana_cost): return
+	if(!drive_component.drive):
+		super.Inputs()
+		if Input.is_key_pressed(KEY_C) && !player.attacking:
+			try_spell_cast("hyperborea_buster")
+			#if !mana_component.cast_and_check(temp_mana_cost): return
+	else:
+		Inputs_drive()
 
 func hyperborea_buster():
 	DataImport.skill_data["hyperborea_buster"].name = "Hyperborea Buster"
@@ -101,7 +106,42 @@ func _on_player_animator_animation_finished(anim_name: String):
 			else:
 				player_animator.play("staff_attack_hyperborea_buster_charge_limit_" + player.facing_str)
 
-
-
 func _on_buster_timer_timeout():
 	on_end_beamer()
+
+func _on_drive_component_drive_start():
+	if weapon_manager.current_controller.item_id != item_id: return
+	Drive_enter()
+
+func Drive_enter():
+	stats_component.damage += stats_component.magic_damage
+	player.sprite_down = 68
+	player.sprite_up = 70
+	player.sprite_side = 72
+	player.walk_down_animation_name = "staff_drive_walk_down"
+	player.walk_side_animation_name = "staff_drive_walk_side"
+	player.walk_up_animation_name = "staff_drive_walk_up"
+
+func Drive_exit():
+	stats_component.damage = stats_component.max_damage
+
+func Inputs_drive():
+	if Input.is_action_pressed("attack"):
+		if $DriveHitTime.is_stopped():
+			var enemies : Array = get_tree().get_nodes_in_group("Enemy")
+			#var enemies_in_range : Array = []
+			var hit = false
+			for enemy : BasicEnemy in enemies:
+				if enemy.global_position.distance_to(player.global_position) < drive_attack_range:
+					#enemies_in_range.push_back(enemy)
+					enemy.health_component.damage(stats_component.damage/2)
+					hit = true
+			if hit:
+				match player.get_facing_direction():
+					Vector2.DOWN:
+						player.sprite.frame = 74
+					Vector2.LEFT: 
+						player.sprite.frame = 76
+					Vector2.RIGHT: 
+						player.sprite.frame = 76
+		$DriveHitTime.start()

@@ -24,6 +24,22 @@ var facing_str = "down"
 var absolute_dir : Vector2 = Vector2.ZERO
 var direction : Vector2 = Vector2.ZERO
 
+@export var sprite_side_default: float = 7
+@export var sprite_down_default: float = 0
+@export var sprite_up_default: float = 4
+
+@export var default_walk_up_animation_name : String = "walk_up"
+@export var default_walk_side_animation_name: String = "walk_side"
+@export var default_walk_down_animation_name: String = "walk_down"
+
+var walk_up_animation_name : String
+var walk_side_animation_name : String
+var walk_down_animation_name : String
+
+var sprite_side : float
+var sprite_up : float
+var sprite_down : float
+
 signal changed_facing_direction
 signal did_damage(amount: int)
 
@@ -31,9 +47,9 @@ signal did_damage(amount: int)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	set_default_animations_and_sprites()
 	previous_position = global_position
-	sprite.frame_coords.x = 0
-	sprite.frame_coords.y = 0
+	sprite.frame = sprite_down_default
 	book_hitbox.get_node("CollisionShape2D").set_deferred("disabled", true)
 	GameEvents.emit_player_ready()
 
@@ -42,13 +58,13 @@ func _process(delta):
 	if !attacking && can_move:
 		match absolute_dir:
 			Vector2(0, -1): 
-				movement_animator.play("walk_up")
+				movement_animator.play(walk_up_animation_name)
 				facing_str = "up"
 				sprite.scale.x = 1
 				markers.scale.y = -1
 				changed_facing_direction.emit()
 			Vector2(0, 1): 
-				movement_animator.play("walk_down")
+				movement_animator.play(walk_down_animation_name)
 				facing_str = "down"
 				sprite.scale.x = 1
 				markers.scale.y = 1
@@ -58,15 +74,15 @@ func _process(delta):
 						Vector2.ZERO: 
 							movement_animator.stop(true)
 						Vector2(0, -1): 
-							sprite.frame_coords.x = 3
+							sprite.frame = sprite_up
 						Vector2(0, 1): 
-							sprite.frame_coords.x = 0
+							sprite.frame = sprite_down
 						_:
-							sprite.frame_coords.x = 6
+							sprite.frame_coords.x = sprite_side
 							if previous_dir.x == -1 : sprite.scale.x = -1
 							else: sprite.scale.x = 1
 			_:
-				movement_animator.play("walk_side")
+				movement_animator.play(walk_side_animation_name)
 				if absolute_dir.x == -1: 
 					sprite.scale.x = -1
 				else: sprite.scale.x = 1
@@ -153,6 +169,14 @@ func correct_sprite_on_facing_str():
 			sprite.frame_coords.x = 6
 		"up":
 			sprite.frame_coords.x = 3
+			
+func set_default_animations_and_sprites():
+	sprite_side = sprite_side_default
+	sprite_down = sprite_down_default
+	sprite_up = sprite_up_default
+	walk_up_animation_name = default_walk_up_animation_name
+	walk_side_animation_name = default_walk_side_animation_name
+	walk_down_animation_name = default_walk_down_animation_name
 
 func _on_player_animator_animation_finished(anim_name: StringName) -> void:
 	##WARNING temporal
@@ -167,3 +191,7 @@ func _on_health_component_died():
 		health_component.changed.emit()
 		global_position = get_tree().get_first_node_in_group("tree").global_position + Vector2.DOWN * 30
 	else: queue_free()
+
+
+func _on_drive_component_drive_finish():
+	set_default_animations_and_sprites()
