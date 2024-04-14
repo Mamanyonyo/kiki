@@ -9,10 +9,13 @@ signal item_equip
 func _ready():
 	if default_controller != null:
 		current_controller = default_controller
+		
+func _process(delta):
+	if current_controller != null: current_controller.Process(delta)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if current_controller != null: 
-		current_controller.Inputs()
+		current_controller.Inputs(event)
 
 func equip_item(item: String):
 	if default_controller != null:

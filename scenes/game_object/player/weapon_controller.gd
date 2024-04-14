@@ -15,15 +15,9 @@ func _ready() -> void:
 	player_animator = player.movement_animator
 	stats_component = player.stats_component
 
-func Inputs():
+func Inputs(event):
 	melee_atack_listen()
 	range_atack_listen()
-
-func Equip():
-	pass
-	
-func Unequip():
-	pass
 
 func melee_atack_listen():
 	if Input.is_action_just_pressed("attack") && !player.attacking:

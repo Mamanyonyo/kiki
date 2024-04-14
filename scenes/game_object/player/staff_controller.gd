@@ -20,14 +20,15 @@ var letters_instance : SpawnerBusterLettersEffect
 var prev_sprite : int
 var charges = 0
 
-func Inputs():
+func Inputs(event):
 	if(!drive_component.drive):
-		super.Inputs()
+		super.Inputs(event)
 		if Input.is_key_pressed(KEY_C) && !player.attacking:
 			try_spell_cast("hyperborea_buster")
 			#if !mana_component.cast_and_check(temp_mana_cost): return
-	else:
-		Inputs_drive()
+
+func Process(_delta):
+	if drive_component.drive: Inputs_drive()
 
 func hyperborea_buster():
 	DataImport.skill_data["hyperborea_buster"].name = "Hyperborea Buster"
@@ -115,15 +116,21 @@ func _on_drive_component_drive_start():
 
 func Drive_enter():
 	stats_component.damage += stats_component.magic_damage
+	drive_set_sprites_and_animations()
+	
+func drive_set_sprites():
 	player.sprite_down = 68
 	player.sprite_up = 70
 	player.sprite_side = 72
-	drive_set_animations()
 	
 func drive_set_animations():
 	player.walk_down_animation_name = "staff_drive_walk_down"
 	player.walk_side_animation_name = "staff_drive_walk_side"
 	player.walk_up_animation_name = "staff_drive_walk_up"
+	
+func drive_set_sprites_and_animations():
+	drive_set_sprites()
+	drive_set_animations()
 
 func Drive_exit():
 	stats_component.damage = stats_component.max_damage
@@ -141,26 +148,14 @@ func Inputs_drive():
 					enemy.health_component.damage(stats_component.damage/2)
 					hit = true
 			if hit:
-				match player.absolute_dir:
-					Vector2.DOWN:
-						player.walk_down_animation_name = "staff_drive_walk_down_attack"
-					Vector2.LEFT:
-						player.walk_side_animation_name = "staff_drive_walk_side_attack"
-					Vector2.RIGHT:
-						player.walk_side_animation_name = "staff_drive_walk_side_attack"
-					Vector2.ZERO:
-						drive_set_animations()
-						match player.get_facing_direction():
-							Vector2.DOWN:
-								player.sprite.frame = 74
-							Vector2.LEFT: 
-								player.sprite.frame = 76
-							Vector2.RIGHT: 
-								player.sprite.frame = 76
-			else: 
-				drive_set_animations()
+				player.walk_down_animation_name = "staff_drive_walk_down_attack"
+				player.walk_side_animation_name = "staff_drive_walk_side_attack"
+				player.sprite_down = 74
+				player.sprite_side = 76
+			else: drive_set_sprites_and_animations()
+				
 	else:
-		drive_set_animations()
+		drive_set_sprites_and_animations()
 
 func try_spell_cast(spell):
 	if drive_component.drive: return

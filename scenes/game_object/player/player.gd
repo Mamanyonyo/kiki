@@ -73,12 +73,13 @@ func _process(delta):
 				match previous_dir:
 						Vector2.ZERO: 
 							movement_animator.stop(true)
+							correct_sprite_on_facing_str()
 						Vector2(0, -1): 
 							sprite.frame = sprite_up
 						Vector2(0, 1): 
 							sprite.frame = sprite_down
 						_:
-							sprite.frame_coords.x = sprite_side
+							sprite.frame = sprite_side
 							if previous_dir.x == -1 : sprite.scale.x = -1
 							else: sprite.scale.x = 1
 			_:
@@ -164,19 +165,25 @@ func correct_sprite_on_facing_str():
 	sprite.frame_coords.y = 0
 	match facing_str:
 		"down": 
-			sprite.frame_coords.x = 0
+			sprite.frame = sprite_down
 		"side":
-			sprite.frame_coords.x = 6
+			sprite.frame= sprite_side
 		"up":
-			sprite.frame_coords.x = 3
+			sprite.frame = sprite_up
 			
 func set_default_animations_and_sprites():
-	sprite_side = sprite_side_default
-	sprite_down = sprite_down_default
-	sprite_up = sprite_up_default
+	set_default_animations()
+	set_default_sprites()
+
+func set_default_animations():
 	walk_up_animation_name = default_walk_up_animation_name
 	walk_side_animation_name = default_walk_side_animation_name
 	walk_down_animation_name = default_walk_down_animation_name
+	
+func set_default_sprites():
+	sprite_side = sprite_side_default
+	sprite_down = sprite_down_default
+	sprite_up = sprite_up_default
 
 func _on_player_animator_animation_finished(anim_name: StringName) -> void:
 	##WARNING temporal
@@ -194,4 +201,4 @@ func _on_health_component_died():
 
 
 func _on_drive_component_drive_finish():
-	set_default_animations_and_sprites()
+	set_default_animations_and_sprites()     
