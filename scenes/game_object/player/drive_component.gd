@@ -2,6 +2,7 @@ class_name DriveComponent extends QuantifiableStatComponent
 
 @export var player : Player
 @export var weapon_manager : WeaponManager
+@export var heat_on_graze : float = 3
 @onready var drain_timer = $Drain
 
 signal drive_start
@@ -23,10 +24,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 func on_damage_done_by_this_nigger(dmg: int):
 	if dmg < 0: return
-	stats_component.drive += dmg
-	if stats_component.drive > stats_component.max_drive: stats_component.drive = stats_component.max_drive
+	add_heat(dmg)
 	changed.emit()
 
+func add_heat(amount):
+	stats_component.drive += amount
+	if stats_component.drive > stats_component.max_drive: stats_component.drive = stats_component.max_drive
 
 func _on_drain_timeout() -> void:
 	stats_component.drive -= 1
@@ -43,7 +46,7 @@ func drive_stop():
 	changed.emit()
 
 func _on_graze_component_grazed() -> void:
-	stats_component.drive += 3
+	add_heat(heat_on_graze)
 	changed.emit()
 
 func _on_weapon_manager_item_equip():

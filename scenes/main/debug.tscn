@@ -76,6 +76,9 @@ position = Vector2(160, 128)
 [node name="InventoryComponent" parent="Entities/Player" index="2"]
 items = Array[String](["spellbook", "ghost_doll", "staff"])
 
+[node name="Drain" parent="Entities/Player/DriveComponent" index="0"]
+wait_time = 5.0
+
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true
 
@@ -88,3 +91,4 @@ follow_viewport_enabled = true
 [editable path="Entities/AnimatedPickable"]
 [editable path="Entities/AnimatedPickable/Sprite2D/Pickable"]
 [editable path="Entities/Player"]
+[editable path="Entities/Player/DriveComponent"]

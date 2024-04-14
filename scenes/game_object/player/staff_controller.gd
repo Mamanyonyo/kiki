@@ -118,6 +118,9 @@ func Drive_enter():
 	player.sprite_down = 68
 	player.sprite_up = 70
 	player.sprite_side = 72
+	drive_set_animations()
+	
+func drive_set_animations():
 	player.walk_down_animation_name = "staff_drive_walk_down"
 	player.walk_side_animation_name = "staff_drive_walk_side"
 	player.walk_up_animation_name = "staff_drive_walk_up"
@@ -128,6 +131,7 @@ func Drive_exit():
 func Inputs_drive():
 	if Input.is_action_pressed("attack"):
 		if $DriveHitTime.is_stopped():
+			$DriveHitTime.start()
 			var enemies : Array = get_tree().get_nodes_in_group("Enemy")
 			#var enemies_in_range : Array = []
 			var hit = false
@@ -137,11 +141,27 @@ func Inputs_drive():
 					enemy.health_component.damage(stats_component.damage/2)
 					hit = true
 			if hit:
-				match player.get_facing_direction():
+				match player.absolute_dir:
 					Vector2.DOWN:
-						player.sprite.frame = 74
-					Vector2.LEFT: 
-						player.sprite.frame = 76
-					Vector2.RIGHT: 
-						player.sprite.frame = 76
-		$DriveHitTime.start()
+						player.walk_down_animation_name = "staff_drive_walk_down_attack"
+					Vector2.LEFT:
+						player.walk_side_animation_name = "staff_drive_walk_side_attack"
+					Vector2.RIGHT:
+						player.walk_side_animation_name = "staff_drive_walk_side_attack"
+					Vector2.ZERO:
+						drive_set_animations()
+						match player.get_facing_direction():
+							Vector2.DOWN:
+								player.sprite.frame = 74
+							Vector2.LEFT: 
+								player.sprite.frame = 76
+							Vector2.RIGHT: 
+								player.sprite.frame = 76
+			else: 
+				drive_set_animations()
+	else:
+		drive_set_animations()
+
+func try_spell_cast(spell):
+	if drive_component.drive: return
+	super.try_spell_cast(spell)
