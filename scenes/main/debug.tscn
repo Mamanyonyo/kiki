@@ -96,9 +96,6 @@ items = Array[String](["spellbook", "ghost_doll", "staff"])
 [node name="Drain" parent="Entities/Player/DriveComponent" index="0"]
 wait_time = 5.0
 
-[node name="HatManager" parent="Entities/Player" index="10"]
-player = null
-
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true
 

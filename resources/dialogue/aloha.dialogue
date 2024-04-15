@@ -1,5 +1,17 @@
 ~ default
 Bathroom Girl: In the entrails of this world, there are all kinds of strange things. Isn't it wonderful?
+=> choices
+##TODO default_talked sistema para no repetir dialogo?
+
+~ quest
+Bathroom Girl: It's hard to use the bathroom right now. Get rid of all the suspicios toilet and I'll give you something useful.
+
+~ choices
+- Tanomu => quest
+- Talk => talk
+- Bye => END
+
+~ talk
 Kiki: I wonder.
 Bathroom Girl: This is a world of diarrhoea
 Kiki: I find your statement to be rude, but I will take it into consideration.
@@ -7,4 +19,3 @@ Bathroom Girl: This place hasn't been reached by the influence of the banchou, b
 Kiki: I'll be fine, but thanks. By the way, why are you here?
 Bathroom Girl: I don't really get along with that bunch over there.
 Kiki: Understood. Good luck then.
-=> END!
