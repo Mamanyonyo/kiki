@@ -91,7 +91,7 @@ position = Vector2(0, -0.5)
 position = Vector2(160, 128)
 
 [node name="InventoryComponent" parent="Entities/Player" index="2"]
-items = Array[String](["spellbook", "ghost_doll", "staff"])
+items = Array[String](["spellbook", "ghost_doll", "staff", "toilet_paper"])
 
 [node name="Drain" parent="Entities/Player/DriveComponent" index="0"]
 wait_time = 5.0

@@ -4,11 +4,9 @@
 [ext_resource type="Script" path="res://scenes/UI/inventory_equipable_ui.gd" id="1_pwnym"]
 [ext_resource type="Texture2D" uid="uid://cvpamhfcwh8cs" path="res://assets/icon/staff.png" id="2_hqxvm"]
 
-[node name="InventoryItem" type="PanelContainer" node_paths=PackedStringArray("rect")]
+[node name="InventoryItem" type="PanelContainer"]
 theme_override_styles/panel = ExtResource("1_f6bmc")
 script = ExtResource("1_pwnym")
-item_name = "staff"
-rect = NodePath("TextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(36, 52)

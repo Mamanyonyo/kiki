@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://4cdhdu7q1t6b"]
+[gd_scene load_steps=16 format=3 uid="uid://4cdhdu7q1t6b"]
 
 [ext_resource type="Script" path="res://scenes/areas/bathroom/entrance.gd" id="1_11t6b"]
 [ext_resource type="TileSet" uid="uid://dwsf4rskaeij1" path="res://resources/tileset/bathroom_tileset.tres" id="1_udgdm"]
@@ -10,7 +10,19 @@
 [ext_resource type="PackedScene" uid="uid://cw7lc3f4loa8l" path="res://scenes/game_object/interaction/generic_interactable.tscn" id="6_81tjq"]
 [ext_resource type="PackedScene" uid="uid://cqum04ci6tbk3" path="res://assets/enemy/toilet_mimic.tscn" id="7_ki1af"]
 [ext_resource type="Resource" uid="uid://potni4op01ji" path="res://resources/dialogue/interact/bathroom/manji.dialogue" id="7_rj5hl"]
+[ext_resource type="PackedScene" uid="uid://cvna333r0otin" path="res://scenes/areas/bathroom/toilet_quest_death.tscn" id="7_x6cgd"]
+[ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="8_dj4mo"]
 [ext_resource type="Resource" uid="uid://5hq16yrd2p8p" path="res://resources/dialogue/interact/bathroom/sigil.dialogue" id="11_ucpv7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5bbdn"]
+resource_local_to_scene = true
+shader = ExtResource("8_dj4mo")
+shader_parameter/lerp_percent = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n84df"]
+resource_local_to_scene = true
+shader = ExtResource("8_dj4mo")
+shader_parameter/lerp_percent = 0.0
 
 [node name="BathroomEntrance" type="Node2D"]
 script = ExtResource("1_11t6b")
@@ -45,12 +57,22 @@ scene_area_path = "res://scenes/areas/bathroom/north.tscn"
 position = Vector2(2680, -307)
 detection_range = 100.0
 
+[node name="ToiletQuestComponent" parent="TileMap/Entities/ToiletMimic" instance=ExtResource("7_x6cgd")]
+
+[node name="HitFlashComponent" parent="TileMap/Entities/ToiletMimic" index="5"]
+hit_flash_material = SubResource("ShaderMaterial_5bbdn")
+
 [node name="BathroomGirlNPC" parent="TileMap/Entities" instance=ExtResource("3_h3erb")]
 position = Vector2(1776, -269)
 
 [node name="ToiletMimic2" parent="TileMap/Entities" instance=ExtResource("7_ki1af")]
 position = Vector2(920, -162)
 detection_range = 100.0
+
+[node name="ToiletQuestComponent" parent="TileMap/Entities/ToiletMimic2" instance=ExtResource("7_x6cgd")]
+
+[node name="HitFlashComponent" parent="TileMap/Entities/ToiletMimic2" index="5"]
+hit_flash_material = SubResource("ShaderMaterial_n84df")
 
 [node name="GenericInteractable" parent="TileMap" instance=ExtResource("6_81tjq")]
 position = Vector2(1112, -248)
@@ -69,3 +91,5 @@ position = Vector2(2856, -248)
 dialogue = ExtResource("11_ucpv7")
 
 [editable path="TileMap/Entities/Door2"]
+[editable path="TileMap/Entities/ToiletMimic"]
+[editable path="TileMap/Entities/ToiletMimic2"]

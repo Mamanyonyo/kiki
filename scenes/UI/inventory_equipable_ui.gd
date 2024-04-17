@@ -1,7 +1,4 @@
-class_name InventoryItemUI extends PanelContainer
-
-@export var item_name : String
-@export var rect : TextureRect
+class_name EquipmentItemUI extends InventoryItem
 
 var weapon_manager : WeaponManager
 var hat_manager : HatManager
@@ -16,12 +13,6 @@ func _ready():
 	on_hat_equip()
 	on_weapon_equip()
 
-func set_icon() -> void:
-	#if icon_texture != null: icon = icon_texture
-	var image = Image.load_from_file("res://assets/icon/" + item_name + ".png")
-	rect.texture = ImageTexture.create_from_image(image)
-
-	
 func on_weapon_equip():
 	if DataImport.item_data[item_name].type != "weapon": return
 	var current_weapon : MagicWeaponController = weapon_manager.current_controller

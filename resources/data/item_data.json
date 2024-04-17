@@ -14,5 +14,9 @@
 	"frog_hat": {
 		"name": "Ghost Hat",
 		"type": "hat"
+	},
+	"toilet_paper": {
+		"name": "Mystic Toliet Paper",
+		"type": "consumable"
 	}
 }

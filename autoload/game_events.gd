@@ -1,5 +1,7 @@
 extends Node
 
+var toilet_killed_quest_total = 0
+var toilet_killed_quest = 0
 var last_obtained_item = ""
 var door_amount = 0
 var correct_toilets = 0

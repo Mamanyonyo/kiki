@@ -1,5 +1,6 @@
 extends GridContainer
-@onready var item_ui_scene : PackedScene = preload("res://scenes/UI/inventory_item.tscn")
+@onready var equipable_ui_scene : PackedScene = preload("res://scenes/UI/inventory_item.tscn")
+@onready var consumable_ui_scene : PackedScene = preload("res://scenes/UI/inventory_item_consumable.tscn")
 
 var inventory_component : InventoryComponent
 
@@ -13,14 +14,20 @@ func reload_inventory():
 		load_item(item)
 
 func load_item(item):
-	var item_ui_scene_instance : InventoryItemUI = item_ui_scene.instantiate()
+	if DataImport.item_data[item].type == "consumable":
+		instance_scene(consumable_ui_scene, item)
+	else:
+		instance_scene(equipable_ui_scene, item)
+
+func instance_scene(scene, item):
+	var item_ui_scene_instance = scene.instantiate()
 	item_ui_scene_instance.item_name = item
 	item_ui_scene_instance.set_icon()
 	add_child(item_ui_scene_instance)
 
 func on_player_ready():
 	inventory_component = get_tree().get_first_node_in_group("Player").get_node("InventoryComponent")
-	inventory_component.added_item.connect(on_added_item)
+	inventory_component.updated_inventory.connect(on_added_item)
 	reload_inventory()
 
 func remove_all_children():
@@ -28,5 +35,5 @@ func remove_all_children():
 		self.remove_child(n)
 		n.queue_free()
 
-func on_added_item(_item):
+func on_added_item():
 	reload_inventory()
