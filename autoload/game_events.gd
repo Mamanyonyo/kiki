@@ -2,6 +2,8 @@ extends Node
 
 var toilet_killed_quest_total = 0
 var toilet_killed_quest = 0
+var toilet_killed_quest_finish = false
+
 var last_obtained_item = ""
 var door_amount = 0
 var correct_toilets = 0
@@ -31,6 +33,7 @@ signal item_equip(item_name: String)
 signal show_cg(image_path)
 signal stop_cg
 signal player_ready(player: Player)
+signal quest_finished(quest_id: String)
 
 func emit_new_spawner(spawner):
 	new_spawner.emit(spawner)
@@ -88,3 +91,6 @@ func emit_stop_cg():
 
 func emit_player_ready():
 	player_ready.emit()
+
+func emit_quest_finish(quest_id):
+	quest_finished.emit(quest_id)

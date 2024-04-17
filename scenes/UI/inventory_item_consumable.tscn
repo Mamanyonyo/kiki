@@ -4,9 +4,10 @@
 [ext_resource type="Script" path="res://scenes/UI/consumable_item_ui.gd" id="2_cy7rd"]
 [ext_resource type="Texture2D" uid="uid://cvpamhfcwh8cs" path="res://assets/icon/staff.png" id="3_df3a0"]
 
-[node name="InventoryItem" type="PanelContainer"]
+[node name="InventoryItem" type="PanelContainer" node_paths=PackedStringArray("rect")]
 theme_override_styles/panel = ExtResource("1_5w2nr")
 script = ExtResource("2_cy7rd")
+rect = NodePath("TextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(36, 52)

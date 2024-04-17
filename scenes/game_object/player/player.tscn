@@ -1,7 +1,8 @@
-[gd_scene load_steps=56 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=57 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
 [ext_resource type="PackedScene" uid="uid://dced3yrcptsre" path="res://scenes/components/collision_hurt_component.tscn" id="2_7ygai"]
+[ext_resource type="Script" path="res://scenes/game_object/player/player_quest_component.gd" id="2_64lh2"]
 [ext_resource type="PackedScene" uid="uid://cquarnyd0pw5t" path="res://scenes/components/health_component.tscn" id="2_s8m81"]
 [ext_resource type="PackedScene" uid="uid://46gkkjx61fwg" path="res://scenes/components/stats_component.tscn" id="2_t86h5"]
 [ext_resource type="Script" path="res://scenes/game_object/player/WeaponManager.gd" id="3_xj72i"]
@@ -926,6 +927,10 @@ book_hitbox = NodePath("Sprite2D/WeaponHitbox")
 middle = NodePath("Sprite2D/Middle")
 markers = NodePath("Sprite2D/ProjectileMarkers")
 stats_component = NodePath("StatsComponent")
+
+[node name="QuestComponent" type="Node" parent="." node_paths=PackedStringArray("inventory_manager")]
+script = ExtResource("2_64lh2")
+inventory_manager = NodePath("../InventoryComponent")
 
 [node name="CollisionHurtComponent" parent="." node_paths=PackedStringArray("health_component", "hurtbox", "stats_component") instance=ExtResource("2_7ygai")]
 health_component = NodePath("../HealthComponent")
