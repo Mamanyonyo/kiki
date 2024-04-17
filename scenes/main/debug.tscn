@@ -90,8 +90,11 @@ position = Vector2(0, -0.5)
 [node name="Player" parent="Entities" instance=ExtResource("9_lndom")]
 position = Vector2(160, 128)
 
-[node name="InventoryComponent" parent="Entities/Player" index="2"]
-items = Array[String](["spellbook", "ghost_doll", "staff"])
+[node name="InventoryComponent" parent="Entities/Player" index="3"]
+items = Array[String](["spellbook", "ghost_doll", "staff", "toilet_paper"])
+
+[node name="SpellsComponent" parent="Entities/Player" index="5"]
+items = Array[String](["fireball"])
 
 [node name="Drain" parent="Entities/Player/DriveComponent" index="0"]
 wait_time = 5.0

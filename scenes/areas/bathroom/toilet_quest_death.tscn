@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvna333r0otin"]
+
+[ext_resource type="Script" path="res://scenes/areas/bathroom/toilet_quest_death.gd" id="1_ibfpe"]
+
+[node name="ToiletQuestComponent" type="Node"]
+script = ExtResource("1_ibfpe")

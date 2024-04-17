@@ -4,7 +4,14 @@ Bathroom Girl: In the entrails of this world, there are all kinds of strange thi
 ##TODO default_talked sistema para no repetir dialogo?
 
 ~ quest
-Bathroom Girl: It's hard to use the bathroom right now. Get rid of all the suspicios toilet and I'll give you something useful.
+if toilet_killed_quest_total == toilet_killed_quest and !toilet_killed_quest_finish: 
+	Bathroom Girl: Thanks.
+	do emit_quest_finish("toilet_mimic")
+	set toilet_killed_quest_finish = true
+elif toilet_killed_quest_finish:
+	Bathroom Girl: Nothing else to ask.
+else:
+	It's hard to use the bathroom right now. Get rid of all the suspicios toilet and I'll give you something useful.
 
 ~ choices
 - Tanomu => quest

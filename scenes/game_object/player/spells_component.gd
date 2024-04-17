@@ -17,5 +17,9 @@ func set_available_spells():
 			available_spells.push_back(spell)
 	available_spells_updated.emit()
 
+func add_item(item):
+	super.add_item(item)
+	set_available_spells()
+
 func on_controller_item_equip():
 	set_available_spells()
