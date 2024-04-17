@@ -65,6 +65,18 @@ health = 1.0
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 y_sort_enabled = true
 
+[node name="Player" parent="Entities" instance=ExtResource("9_lndom")]
+position = Vector2(160, 128)
+
+[node name="InventoryComponent" parent="Entities/Player" index="3"]
+items = Array[String](["spellbook", "ghost_doll", "staff", "toilet_paper"])
+
+[node name="SpellsComponent" parent="Entities/Player" index="5"]
+items = Array[String](["fireball"])
+
+[node name="Drain" parent="Entities/Player/DriveComponent" index="0"]
+wait_time = 5.0
+
 [node name="BasicEnemy" parent="Entities" instance=ExtResource("11_nrnc8")]
 position = Vector2(104, 52)
 
@@ -87,18 +99,6 @@ item_id = "staff"
 [node name="CollisionShape2D" parent="Entities/AnimatedPickable/Sprite2D/Pickable" index="0"]
 position = Vector2(0, -0.5)
 
-[node name="Player" parent="Entities" instance=ExtResource("9_lndom")]
-position = Vector2(160, 128)
-
-[node name="InventoryComponent" parent="Entities/Player" index="3"]
-items = Array[String](["spellbook", "ghost_doll", "staff", "toilet_paper"])
-
-[node name="SpellsComponent" parent="Entities/Player" index="5"]
-items = Array[String](["fireball"])
-
-[node name="Drain" parent="Entities/Player/DriveComponent" index="0"]
-wait_time = 5.0
-
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true
 
@@ -108,8 +108,8 @@ follow_viewport_enabled = true
 [editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/ManaBar"]
 [editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/DriveBar"]
 [editable path="Areas/BossRoom"]
+[editable path="Entities/Player"]
+[editable path="Entities/Player/DriveComponent"]
 [editable path="Entities/BasicEnemy"]
 [editable path="Entities/AnimatedPickable"]
 [editable path="Entities/AnimatedPickable/Sprite2D/Pickable"]
-[editable path="Entities/Player"]
-[editable path="Entities/Player/DriveComponent"]

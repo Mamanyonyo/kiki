@@ -1,0 +1,122 @@
+[gd_scene load_steps=10 format=3 uid="uid://u1eixj1u5y0k"]
+
+[ext_resource type="Script" path="res://scenes/effect/cast_circle.gd" id="1_cy01q"]
+[ext_resource type="Texture2D" uid="uid://vivnv55e0lvc" path="res://assets/effect/cast_circle.png" id="2_547om"]
+
+[sub_resource type="Animation" id="Animation_nwb8a"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hipke"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lc7xt"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_icbhx"]
+_data = {
+"RESET": SubResource("Animation_hipke"),
+"fade_in": SubResource("Animation_lc7xt"),
+"fade_out": SubResource("Animation_nwb8a")
+}
+
+[sub_resource type="Animation" id="Animation_2wk2k"]
+resource_name = "spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_381hw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b1qdn"]
+_data = {
+"RESET": SubResource("Animation_381hw"),
+"spin": SubResource("Animation_2wk2k")
+}
+
+[node name="CastCircle" type="Node2D"]
+z_as_relative = false
+script = ExtResource("1_cy01q")
+
+[node name="FadeInAndOut" type="AnimationPlayer" parent="."]
+root_node = NodePath("../SpinPlayer")
+libraries = {
+"": SubResource("AnimationLibrary_icbhx")
+}
+autoplay = "RESET"
+
+[node name="SpinPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b1qdn")
+}
+autoplay = "spin"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_547om")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[connection signal="animation_finished" from="FadeInAndOut" to="." method="_on_fade_in_and_out_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

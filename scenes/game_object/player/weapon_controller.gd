@@ -9,6 +9,7 @@ var player : Player
 @export var stats_component : StatsComponent
 @export var mana_component : ManaComponent
 @export var weapon_name_animation_prefix : String
+@onready var cast_circle_scene = preload("res://scenes/effect/cast_circle.tscn")
 
 func _ready() -> void:
 	player = get_parent().player
@@ -59,4 +60,9 @@ func get_skill_data(name):
 
 func try_spell_cast(name):
 	var skill_data = get_skill_data(name)
-	if mana_component.cast_and_check(skill_data.cost): call(name)
+	if mana_component.cast_and_check(skill_data.cost): 
+		var circle_instance = cast_circle_scene.instantiate() as Node2D
+		get_tree().get_first_node_in_group("floor_layer").add_child(circle_instance)
+		circle_instance.global_position = player.global_position
+		call(name)
+		

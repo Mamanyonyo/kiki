@@ -47,6 +47,8 @@ money_manager = NodePath("../../../../../../Managers/MoneyManager")
 [node name="MainArea" parent="Areas" instance=ExtResource("11_sxqim")]
 position = Vector2(0, 433)
 
+[node name="Floor" type="Node2D" parent="." groups=["floor_layer"]]
+
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 y_sort_enabled = true
 
