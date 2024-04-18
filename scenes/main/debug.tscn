@@ -62,6 +62,8 @@ position = Vector2(0, 433)
 position = Vector2(672, 80)
 health = 1.0
 
+[node name="Floor" type="Node2D" parent="." groups=["floor_layer"]]
+
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 y_sort_enabled = true
 

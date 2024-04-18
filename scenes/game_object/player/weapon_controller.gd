@@ -62,7 +62,7 @@ func try_spell_cast(name):
 	var skill_data = get_skill_data(name)
 	if mana_component.cast_and_check(skill_data.cost): 
 		var circle_instance = cast_circle_scene.instantiate() as Node2D
-		get_tree().get_first_node_in_group("floor_layer").add_child(circle_instance)
+		player.get_node("PlayerFloor").add_child(circle_instance)
 		circle_instance.global_position = player.global_position
 		call(name)
 		
