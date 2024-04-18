@@ -21,3 +21,7 @@ func readJSON(json_file_path):
 	var content = file.get_as_text()
 	var finish = JSON.parse_string(content)
 	return finish
+	
+func reset_property(data_var: Dictionary, filename: String, item: String, property: String):
+	var fs_read = readJSON(filename)
+	data_var[item][property] = fs_read[item][property]

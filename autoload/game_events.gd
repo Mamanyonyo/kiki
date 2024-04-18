@@ -12,6 +12,7 @@ var tree = true
 var wave_in_course = false
 var wave_limit = false
 var wave = 0
+var debug = false
 
 signal experience_vial_collected(exp: float)
 signal money_collected(money: int)

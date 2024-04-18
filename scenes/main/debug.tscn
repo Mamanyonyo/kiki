@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://dr68fmyh4o88q"]
+[gd_scene load_steps=18 format=3 uid="uid://dr68fmyh4o88q"]
 
 [ext_resource type="Script" path="res://scenes/main/modulate.gd" id="1_1m5vi"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_7wu2c"]
+[ext_resource type="Script" path="res://scenes/main/debug.gd" id="1_trn0f"]
 [ext_resource type="PackedScene" uid="uid://dxfu1qsn6132b" path="res://scenes/manager/experience_manager.tscn" id="2_mta20"]
 [ext_resource type="PackedScene" uid="uid://cpbg6qshhpf5y" path="res://scenes/manager/money_manager.tscn" id="3_aks2g"]
 [ext_resource type="PackedScene" uid="uid://ca2gvkwc20xwd" path="res://scenes/manager/spawn_manager.tscn" id="4_op7ru"]
@@ -21,7 +22,8 @@ resource_local_to_scene = true
 shader = ExtResource("12_7bgx4")
 shader_parameter/lerp_percent = 0.0
 
-[node name="Main" type="Node2D"]
+[node name="Debug" type="Node2D"]
+script = ExtResource("1_trn0f")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." groups=["modulate"]]
 light_mask = 0
@@ -70,6 +72,9 @@ y_sort_enabled = true
 [node name="Player" parent="Entities" instance=ExtResource("9_lndom")]
 position = Vector2(160, 128)
 
+[node name="StatsComponent" parent="Entities/Player" index="2"]
+max_mana = 400.0
+
 [node name="InventoryComponent" parent="Entities/Player" index="3"]
 items = Array[String](["spellbook", "ghost_doll", "staff", "toilet_paper"])
 
@@ -78,6 +83,12 @@ items = Array[String](["fireball", "teleport"])
 
 [node name="Drain" parent="Entities/Player/DriveComponent" index="0"]
 wait_time = 5.0
+
+[node name="SpellbookController" parent="Entities/Player/WeaponManager" index="0" node_paths=PackedStringArray("tp_timer")]
+tp_timer = NodePath("../Timers/Teleport")
+
+[node name="StaffController" parent="Entities/Player/WeaponManager" index="1" node_paths=PackedStringArray("tp_timer")]
+tp_timer = NodePath("../Timers/Teleport")
 
 [node name="BasicEnemy" parent="Entities" instance=ExtResource("11_nrnc8")]
 position = Vector2(104, 52)

@@ -10,7 +10,9 @@ var player : Player
 @export var mana_component : ManaComponent
 @export var weapon_name_animation_prefix : String
 @export var spell_component : SpellsComponent
+@export var tp_timer : Timer
 @onready var cast_circle_scene = preload("res://scenes/effect/cast_circle.tscn")
+
 
 func _ready() -> void:
 	player = get_parent().player
@@ -62,6 +64,8 @@ func fireball():
 	get_tree().get_first_node_in_group("entities_layer").add_child(bullet_instance)
 	
 func teleport():
+	tp_timer.start()
+	DataImport.skill_data["teleport"].cost = DataImport.skill_data["teleport"].cost * 2
 	var previous_pos = player.global_position
 	player.global_position = player.get_global_mouse_position()
 	var space_state = player.get_world_2d().direct_space_state
@@ -73,8 +77,7 @@ func teleport():
 		query.exclude = [player]
 		var result = space_state.intersect_ray(query)
 		if result: hit.push_front(result)
-			
-	if hit.size() != directions.size():
+	if hit.size() != directions.size() && !GameEvents.debug:
 		player.global_position = previous_pos
 		player.health_component.damage(3)
 		##TODO tpear al player al tile mas cercano
