@@ -9,5 +9,9 @@
 		"cost": 999999,
 		"damage": 50,
 		"unique": true
+	},
+	"teleport": {
+		"name": "Teleport",
+		"cost": 10
 	}
 }

@@ -104,11 +104,7 @@ func _unhandled_input(event):
 		absolute_dir = Vector2(ceil(direction.x), ceil(direction.y))
 		check_interaction()
 		check_run()
-	check_tp()
-	
-func check_tp():
-	if Input.is_action_just_pressed("teleport"):
-		global_position = get_global_mouse_position()
+		
 		
 func check_run():
 	if Input.is_action_just_pressed("run"):

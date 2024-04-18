@@ -9,6 +9,7 @@ var player : Player
 @export var stats_component : StatsComponent
 @export var mana_component : ManaComponent
 @export var weapon_name_animation_prefix : String
+@export var spell_component : SpellsComponent
 @onready var cast_circle_scene = preload("res://scenes/effect/cast_circle.tscn")
 
 func _ready() -> void:
@@ -19,6 +20,7 @@ func _ready() -> void:
 func Inputs(event):
 	melee_atack_listen()
 	range_atack_listen()
+	teleport_listen()
 
 func melee_atack_listen():
 	if Input.is_action_just_pressed("attack") && !player.attacking:
@@ -28,8 +30,12 @@ func melee_atack_listen():
 		check_if_animation_worked(weapon_name_animation_prefix + "_attack")
 
 func range_atack_listen():
-	if Input.is_action_just_pressed("attack2") && !player.attacking:
+	if Input.is_action_just_pressed("attack2") && !player.attacking && !Input.is_action_just_pressed("teleport"):
 		try_spell_cast("fireball")
+		
+func teleport_listen():
+	if Input.is_action_just_pressed("teleport"):
+		try_spell_cast("teleport")
 
 func play_and_set_attacking_state(animation_prefix: String):
 	player.attacking = true
@@ -55,10 +61,29 @@ func fireball():
 	bullet_instance.rotation_degrees = player.get_rotation_in_degrees()
 	get_tree().get_first_node_in_group("entities_layer").add_child(bullet_instance)
 	
+func teleport():
+	var previous_pos = player.global_position
+	player.global_position = player.get_global_mouse_position()
+	var space_state = player.get_world_2d().direct_space_state
+	var RAYCAST_DISTANCE = 5000
+	var directions = [Vector2.UP + Vector2.LEFT, Vector2.UP + Vector2.RIGHT, Vector2.RIGHT + Vector2.DOWN, Vector2.DOWN + Vector2.LEFT, Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
+	var hit = []
+	for direction in directions:
+		var query = PhysicsRayQueryParameters2D.create(player.global_position, player.global_position + direction * RAYCAST_DISTANCE, pow(2, 1-1) + pow(2, 7-1))
+		query.exclude = [player]
+		var result = space_state.intersect_ray(query)
+		if result: hit.push_front(result)
+			
+	if hit.size() != directions.size():
+		player.global_position = previous_pos
+		player.health_component.damage(3)
+		##TODO tpear al player al tile mas cercano
+	
 func get_skill_data(name):
 	return DataImport.skill_data[name]
 
 func try_spell_cast(name):
+	if !spell_component.available_spells.has(name): return
 	var skill_data = get_skill_data(name)
 	if mana_component.cast_and_check(skill_data.cost): 
 		var circle_instance = cast_circle_scene.instantiate() as Node2D
