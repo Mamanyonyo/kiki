@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dr68fmyh4o88q"]
+[gd_scene load_steps=19 format=3 uid="uid://dr68fmyh4o88q"]
 
 [ext_resource type="Script" path="res://scenes/main/modulate.gd" id="1_1m5vi"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_7wu2c"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="11_nrnc8"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="12_7bgx4"]
 [ext_resource type="PackedScene" uid="uid://myyxjkn2ktkh" path="res://scenes/areas/bathroom/boss_room.tscn" id="13_85dpl"]
+[ext_resource type="PackedScene" uid="uid://yghr1h03msg0" path="res://scenes/effect/paralyze.tscn" id="17_w3jio"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5obt7"]
 resource_local_to_scene = true
@@ -79,15 +80,12 @@ max_mana = 400.0
 items = Array[String](["spellbook", "ghost_doll", "staff", "toilet_paper"])
 
 [node name="SpellsComponent" parent="Entities/Player" index="5"]
-items = Array[String](["fireball", "teleport"])
+items = Array[String](["fireball", "teleport", "paralyze"])
 
 [node name="Drain" parent="Entities/Player/DriveComponent" index="0"]
 wait_time = 5.0
 
 [node name="SpellbookController" parent="Entities/Player/WeaponManager" index="0" node_paths=PackedStringArray("tp_timer")]
-tp_timer = NodePath("../Timers/Teleport")
-
-[node name="StaffController" parent="Entities/Player/WeaponManager" index="1" node_paths=PackedStringArray("tp_timer")]
 tp_timer = NodePath("../Timers/Teleport")
 
 [node name="BasicEnemy" parent="Entities" instance=ExtResource("11_nrnc8")]
@@ -111,6 +109,9 @@ item_id = "staff"
 
 [node name="CollisionShape2D" parent="Entities/AnimatedPickable/Sprite2D/Pickable" index="0"]
 position = Vector2(0, -0.5)
+
+[node name="Paralyze" parent="Entities" instance=ExtResource("17_w3jio")]
+position = Vector2(104, 47)
 
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true

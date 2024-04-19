@@ -4,8 +4,8 @@ class_name HurtboxComponent
 @export var stats_component: StatsComponent
 @export var health_component: HealthComponent
 @onready var damage_timer : Timer = $DamageIntervalTimer
-#@export_enum("PLAYER", "ENEMY") var alignment = 1
 var colliding_areas = []
+var paralyzer
 
 func check_deal_damage():
 	if colliding_areas.size() == 0 || !damage_timer.is_stopped(): return
@@ -21,6 +21,15 @@ func check_deal_damage():
 		if other_area.attacker != null && other_area.attacker is Player:
 			var player : Player = other_area.attacker
 			player.did_damage.emit(hitbox_component.damage - stats_component.resistance)
+		if other_area.altered_state == "paralyze":
+			if other_area is ParalyzeSpell && other_area.leaving == false && paralyzer == null && other_area.grabbing == false && get_parent().can_move:
+				var parent : Node2D = get_parent()
+				parent.can_move = false
+				$ParalyzeTimer.start(other_area.effect_duration)
+				other_area.grab()
+				paralyzer = other_area
+				parent.global_position = other_area.global_position
+				
 		damage_timer.start()
 		
 func _on_area_entered(other_area: Area2D):
@@ -33,3 +42,15 @@ func _on_damage_interval_timer_timeout() -> void:
 	
 func _on_area_exited(left: Node2D) -> void:
 	colliding_areas = colliding_areas.filter(func(body): return left.get_instance_id() != body.get_instance_id())
+
+
+func _on_paralyze_timer_timeout() -> void:
+	get_parent().can_move = true
+	if paralyzer != null && paralyzer is ParalyzeSpell:
+		paralyzer.leave()
+		paralyzer = null
+
+
+func _on_health_component_died() -> void:
+	if paralyzer != null && paralyzer is ParalyzeSpell:
+		paralyzer.leave()

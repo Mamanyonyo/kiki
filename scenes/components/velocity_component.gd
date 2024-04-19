@@ -15,7 +15,7 @@ func _ready():
 func accelerate_to_objective():
 	var owner_node2d = owner as Node2D
 	if owner_node2d == null: return
-	##en el futuro, reescribir esto de la forma en que se use el movimiento de siempre para chasear,
+	##TODO en el futuro, reescribir esto de la forma en que se use el movimiento de siempre para chasear,
 	##pero cuando se este colisionando con el terreno, se haga pathfinding
 	var direction = owner_node2d.to_local(navigation_agent.get_next_path_position()).normalized()
 	accelerate_in_direction(direction)
@@ -26,6 +26,7 @@ func accelerate_in_direction(direction: Vector2):
 	velocity = velocity.lerp(desired_velocity, 1 - exp(-acceleration * get_process_delta_time()))
 
 func move(character_body: CharacterBody2D):
+	if !get_parent().can_move: return
 	character_body.velocity = velocity
 	character_body.move_and_slide()
 	velocity = character_body.velocity

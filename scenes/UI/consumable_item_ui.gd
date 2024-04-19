@@ -11,5 +11,3 @@ func _on_gui_input(event: InputEvent) -> void:
 	if(event.is_pressed()):
 		match DataImport.consumable_data[item_name].type:
 			"scroll": item_manager.learn_spell(DataImport.consumable_data[item_name].spell)
-			
-	inventory_component

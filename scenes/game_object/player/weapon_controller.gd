@@ -12,6 +12,7 @@ var player : Player
 @export var spell_component : SpellsComponent
 @export var tp_timer : Timer
 @onready var cast_circle_scene = preload("res://scenes/effect/cast_circle.tscn")
+@onready var paralyze_scene = preload("res://scenes/effect/paralyze.tscn")
 
 
 func _ready() -> void:
@@ -23,6 +24,7 @@ func Inputs(event):
 	melee_atack_listen()
 	range_atack_listen()
 	teleport_listen()
+	paralyze_listen()
 
 func melee_atack_listen():
 	if Input.is_action_just_pressed("attack") && !player.attacking:
@@ -38,6 +40,11 @@ func range_atack_listen():
 func teleport_listen():
 	if Input.is_action_just_pressed("teleport"):
 		try_spell_cast("teleport")
+		
+func paralyze_listen():
+	if Input.is_key_pressed(KEY_V) && !player.attacking:
+		play_and_set_attacking_state(weapon_name_animation_prefix + "_attack_spell_aimed")
+		try_spell_cast("paralyze")
 
 func play_and_set_attacking_state(animation_prefix: String):
 	player.attacking = true
@@ -81,12 +88,19 @@ func teleport():
 		player.global_position = previous_pos
 		player.health_component.damage(3)
 		##TODO tpear al player al tile mas cercano
+
+func paralyze():
+	var paralyze_instance = paralyze_scene.instantiate()
+	get_tree().get_first_node_in_group("entities_layer").add_child(paralyze_instance)
+	paralyze_instance.global_position = player.get_global_mouse_position()
 	
 func get_skill_data(name):
 	return DataImport.skill_data[name]
 
 func try_spell_cast(name):
-	if !spell_component.available_spells.has(name): return
+	if !spell_component.available_spells.has(name):
+		print("No tiene hechizo " + name) 
+		return
 	var skill_data = get_skill_data(name)
 	if mana_component.cast_and_check(skill_data.cost): 
 		var circle_instance = cast_circle_scene.instantiate() as Node2D

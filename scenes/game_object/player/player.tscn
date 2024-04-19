@@ -983,7 +983,7 @@ current_controller = NodePath("SpellbookController")
 default_controller = NodePath("SpellbookController")
 drive_component = NodePath("../DriveComponent")
 
-[node name="SpellbookController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component", "spell_component")]
+[node name="SpellbookController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component", "spell_component", "tp_timer")]
 script = ExtResource("4_qkfhb")
 fireball_scene = ExtResource("5_k4bht")
 generic_bullet_spawn = NodePath("../../Sprite2D/ProjectileMarkers/GenericBulletSpawn")
@@ -992,9 +992,10 @@ stats_component = NodePath("../../StatsComponent")
 mana_component = NodePath("../../ManaComponent")
 weapon_name_animation_prefix = "book"
 spell_component = NodePath("../../SpellsComponent")
+tp_timer = NodePath("../../HatManager/GhostDollController/Timer")
 item_id = "spellbook"
 
-[node name="StaffController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("beam_marker", "beam_marker_side", "spells_component", "drive_component", "weapon_manager", "generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component", "spell_component")]
+[node name="StaffController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("beam_marker", "beam_marker_side", "spells_component", "drive_component", "weapon_manager", "generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component", "spell_component", "tp_timer")]
 script = ExtResource("8_o233k")
 beam_marker = NodePath("../../Sprite2D/ProjectileMarkers/StaffBusterBeam")
 beam_marker_side = NodePath("../../Sprite2D/ProjectileMarkers/StaffBusterBeamSide")
@@ -1008,6 +1009,7 @@ stats_component = NodePath("../../StatsComponent")
 mana_component = NodePath("../../ManaComponent")
 weapon_name_animation_prefix = "staff"
 spell_component = NodePath("../../SpellsComponent")
+tp_timer = NodePath("../Timers/Teleport")
 item_id = "staff"
 
 [node name="BusterTimer" type="Timer" parent="WeaponManager/StaffController"]

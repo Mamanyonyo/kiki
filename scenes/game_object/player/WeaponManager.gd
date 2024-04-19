@@ -22,8 +22,8 @@ func equip_item(item: String):
 		if current_controller.has_method("Drive_exit"): current_controller.Drive_exit()
 		if current_controller.item_id == default_controller.item_id && item == default_controller.item_id: return
 	var controller : EquipmentController
-	for controller_node : EquipmentController in get_children():
-		if controller_node.item_id == item: 
+	for controller_node in get_children():
+		if controller_node is EquipmentController && controller_node.item_id == item: 
 			controller = controller_node
 		pass
 	if current_controller != null && item == current_controller.item_id:

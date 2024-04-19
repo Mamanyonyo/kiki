@@ -11,6 +11,10 @@ script = ExtResource("1_wrd1s")
 wait_time = 0.5
 one_shot = true
 
+[node name="ParalyzeTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="timeout" from="DamageIntervalTimer" to="." method="_on_damage_interval_timer_timeout"]
+[connection signal="timeout" from="ParalyzeTimer" to="." method="_on_paralyze_timer_timeout"]
