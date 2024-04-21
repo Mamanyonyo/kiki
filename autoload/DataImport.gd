@@ -6,7 +6,6 @@ var names_data : Dictionary
 var skill_data : Dictionary
 var hat_data : Dictionary
 var item_data : Dictionary
-##TODO HACER ICONOS DEFAULT PARA CONSUMIBLED IE SCROLLS
 var consumable_data : Dictionary
 
 func _ready():

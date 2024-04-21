@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://du25e0wl2obi1"]
+[gd_scene load_steps=18 format=3 uid="uid://du25e0wl2obi1"]
 
 [ext_resource type="PackedScene" uid="uid://vflia6x4vuuy" path="res://scenes/UI/current_enemy_stats_ui.tscn" id="1_kbd2f"]
 [ext_resource type="Script" path="res://scenes/UI/arena_time_ui.gd" id="1_lhbw1"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cbur6iuxfrur2" path="res://assets/image/sigil_map.png" id="3_a6sub"]
 [ext_resource type="Script" path="res://scenes/UI/money_counter.gd" id="3_bmyku"]
 [ext_resource type="Script" path="res://scenes/UI/cg_display.gd" id="4_lkfg0"]
+[ext_resource type="PackedScene" uid="uid://xbbxsewa71bb" path="res://scenes/UI/shop_ui.tscn" id="5_5ou3h"]
 [ext_resource type="Script" path="res://scenes/UI/Inventory_ui.gd" id="5_hiu8o"]
 [ext_resource type="Script" path="res://scenes/UI/ui_stat.gd" id="5_jo641"]
 [ext_resource type="Script" path="res://scenes/UI/spell_list.gd" id="8_yxdqq"]
@@ -51,7 +52,6 @@ anchor_bottom = 1.0
 offset_right = -150.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 script = ExtResource("1_lhbw1")
 time_display = NodePath("MarginContainer/TimeDisplay")
 
@@ -71,6 +71,7 @@ text = "Timer
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Screen"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_bottom = 35
 
 [node name="CGDisplay" type="TextureRect" parent="CanvasLayer/Screen/MarginContainer2"]
@@ -78,8 +79,17 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = ExtResource("3_a6sub")
 script = ExtResource("4_lkfg0")
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/Screen"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Shop" parent="CanvasLayer/Screen/MarginContainer3" instance=ExtResource("5_5ou3h")]
+layout_mode = 2
 
 [node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
 anchors_preset = 11

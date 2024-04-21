@@ -1,4 +1,6 @@
-extends Node
+class_name MoneyManager extends Node
+
+##WARNING dick poronga
 
 @export var money = 0
 

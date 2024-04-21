@@ -14,10 +14,13 @@ func reload_inventory():
 		load_item(item)
 
 func load_item(item):
-	if DataImport.item_data[item].type == "consumable":
+	if DataImport.item_data.has(item):
+		if DataImport.item_data[item].type == "consumable":
+			instance_scene(consumable_ui_scene, item)
+		else:
+			instance_scene(equipable_ui_scene, item)
+	elif DataImport.skill_data.has(item):
 		instance_scene(consumable_ui_scene, item)
-	else:
-		instance_scene(equipable_ui_scene, item)
 
 func instance_scene(scene, item):
 	var item_ui_scene_instance = scene.instantiate()

@@ -29,6 +29,7 @@ func check_deal_damage():
 				other_area.grab()
 				paralyzer = other_area
 				parent.global_position = other_area.global_position
+			return
 				
 		damage_timer.start()
 		

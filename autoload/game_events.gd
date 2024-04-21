@@ -35,6 +35,8 @@ signal show_cg(image_path)
 signal stop_cg
 signal player_ready(player: Player)
 signal quest_finished(quest_id: String)
+signal load_shop(name: String)
+signal shop_open(shop: ShopComponent)
 
 func emit_new_spawner(spawner):
 	new_spawner.emit(spawner)
@@ -95,3 +97,9 @@ func emit_player_ready():
 
 func emit_quest_finish(quest_id):
 	quest_finished.emit(quest_id)
+
+func emit_load_shop(name):
+	load_shop.emit(name)
+
+func emit_shop_open(shop_component):
+	shop_open.emit(shop_component)

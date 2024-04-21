@@ -9,5 +9,14 @@ func _ready():
 
 func _on_gui_input(event: InputEvent) -> void:
 	if(event.is_pressed()):
-		match DataImport.consumable_data[item_name].type:
-			"scroll": item_manager.learn_spell(DataImport.consumable_data[item_name].spell)
+		if DataImport.consumable_data.has(item_name):
+			match DataImport.consumable_data[item_name].type:
+				"scroll": item_manager.learn_spell(DataImport.consumable_data[item_name].spell)
+		elif DataImport.skill_data.has(item_name):
+			item_manager.learn_spell(item_name)
+
+func set_icon() -> void:
+	var filename = item_name
+	if DataImport.skill_data.has(item_name): filename = "spell_default"
+	var image = Image.load_from_file("res://assets/icon/" + filename + ".png")
+	rect.texture = ImageTexture.create_from_image(image)

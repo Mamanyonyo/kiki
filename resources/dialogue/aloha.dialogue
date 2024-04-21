@@ -16,6 +16,7 @@ else:
 ~ choices
 - Tanomu => quest
 - Talk => talk
+- Shop => buy
 - Bye => END
 
 ~ talk
@@ -26,3 +27,6 @@ Bathroom Girl: This place hasn't been reached by the influence of the banchou, b
 Kiki: I'll be fine, but thanks. By the way, why are you here?
 Bathroom Girl: I don't really get along with that bunch over there.
 Kiki: Understood. Good luck then.
+
+~ buy
+do load_shop.emit("bathroom")

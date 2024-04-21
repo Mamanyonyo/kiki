@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqvwfrtfccx6h"]
+
+[ext_resource type="Script" path="res://scenes/components/shop_component.gd" id="1_37v6i"]
+
+[node name="ShopComponent" type="Node"]
+script = ExtResource("1_37v6i")

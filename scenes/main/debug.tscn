@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dr68fmyh4o88q"]
+[gd_scene load_steps=20 format=3 uid="uid://dr68fmyh4o88q"]
 
 [ext_resource type="Script" path="res://scenes/main/modulate.gd" id="1_1m5vi"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_7wu2c"]
@@ -17,6 +17,7 @@
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="12_7bgx4"]
 [ext_resource type="PackedScene" uid="uid://myyxjkn2ktkh" path="res://scenes/areas/bathroom/boss_room.tscn" id="13_85dpl"]
 [ext_resource type="PackedScene" uid="uid://yghr1h03msg0" path="res://scenes/effect/paralyze.tscn" id="17_w3jio"]
+[ext_resource type="PackedScene" uid="uid://dfqauk0kslf7r" path="res://scenes/game_object/npc/bathroom_girl_npc.tscn" id="18_l2pop"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5obt7"]
 resource_local_to_scene = true
@@ -46,6 +47,7 @@ script = ExtResource("5_mciro")
 ui_box = NodePath("../UI/CanvasLayer/BoxContainer")
 
 [node name="UI" parent="." groups=["ui"] instance=ExtResource("7_bo3jd")]
+mouse_filter = 1
 
 [node name="HBoxContainer" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer4" index="0" node_paths=PackedStringArray("experience_manager")]
 experience_manager = NodePath("../../../../../../../Managers/ExperienceManager")
@@ -77,10 +79,10 @@ position = Vector2(160, 128)
 max_mana = 400.0
 
 [node name="InventoryComponent" parent="Entities/Player" index="3"]
-items = Array[String](["spellbook", "ghost_doll", "staff", "toilet_paper"])
+items = Array[String](["spellbook", "ghost_doll", "staff", "toilet_paper", "paralyze"])
 
 [node name="SpellsComponent" parent="Entities/Player" index="5"]
-items = Array[String](["fireball", "teleport", "paralyze"])
+items = Array[String](["fireball", "teleport"])
 
 [node name="Drain" parent="Entities/Player/DriveComponent" index="0"]
 wait_time = 5.0
@@ -115,6 +117,9 @@ position = Vector2(104, 47)
 
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true
+
+[node name="BathroomGirlNPC" parent="." instance=ExtResource("18_l2pop")]
+position = Vector2(201, 27)
 
 [editable path="UI"]
 [editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/HealthBar"]
