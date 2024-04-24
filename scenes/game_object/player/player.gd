@@ -7,7 +7,6 @@ const ACCELERATION_SMOOTHING = 25
 @export var sprite: Sprite2D
 
 @export var book_hitbox: Area2D
-
 @export var middle: Marker2D
 
 @export var markers : Node2D

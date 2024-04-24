@@ -929,6 +929,8 @@ middle = NodePath("Sprite2D/Middle")
 markers = NodePath("Sprite2D/ProjectileMarkers")
 stats_component = NodePath("StatsComponent")
 
+[node name="SpriteManager" type="Node" parent="."]
+
 [node name="QuestComponent" type="Node" parent="." node_paths=PackedStringArray("inventory_manager")]
 script = ExtResource("2_64lh2")
 inventory_manager = NodePath("../InventoryComponent")

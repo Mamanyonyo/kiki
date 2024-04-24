@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bvhmy0cf8uhf2" path="res://scenes/components/state_machine/enemy/chase_player.tscn" id="11_iup4t"]
 [ext_resource type="PackedScene" uid="uid://dmh2u33x3o0cn" path="res://scenes/components/state_machine/enemy/back_to_original_position.tscn" id="12_yqsxc"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uwcqa"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ruqgd"]
 resource_local_to_scene = true
 shader = ExtResource("6_x8svc")
 shader_parameter/lerp_percent = 0.0
@@ -52,7 +52,7 @@ navigation_agent = NodePath("../NavigationAgent2D")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("5_07d4w")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_uwcqa")
+hit_flash_material = SubResource("ShaderMaterial_ruqgd")
 
 [node name="NameComponent" parent="." instance=ExtResource("8_ndg2k")]
 
@@ -79,6 +79,10 @@ wait_time = 0.3
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+texture = ExtResource("1_enlj8")
+
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("stats_component", "health_component") instance=ExtResource("4_to2db")]
 stats_component = NodePath("../StatsComponent")
 health_component = NodePath("../HealthComponent")
@@ -86,10 +90,6 @@ health_component = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_bquee")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -6)
-texture = ExtResource("1_enlj8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
