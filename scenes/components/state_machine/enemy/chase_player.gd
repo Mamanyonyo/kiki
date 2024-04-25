@@ -22,7 +22,6 @@ func Update(_delta):
 	if sprite_manager != null:
 		var parent = get_parent().get_parent() as BasicEnemy
 		sprite_manager.direction = parent.global_position.direction_to(player.global_position)
-		print(sprite_manager.direction)
 		sprite_manager.absolute_dir = Vector2(round(sprite_manager.direction.x), round(sprite_manager.direction.y))
 		
 	velocity_component.make_path_to_pos(player.global_position)

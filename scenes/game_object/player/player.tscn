@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=61 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
 [ext_resource type="PackedScene" uid="uid://bjk6og4ybld5d" path="res://scenes/components/sprite_manager.tscn" id="2_6pwh1"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://scenes/game_object/player/ghost_doll_controller.gd" id="14_vx5k6"]
 [ext_resource type="Script" path="res://scenes/game_object/player/hat_sprite.gd" id="16_q1fq0"]
 [ext_resource type="Script" path="res://scenes/game_object/player/timers.gd" id="18_cbevg"]
+[ext_resource type="PackedScene" uid="uid://civstynml3v51" path="res://scenes/components/hurtbox_component.tscn" id="26_tu18r"]
 
 [sub_resource type="Animation" id="Animation_ykp00"]
 length = 0.001
@@ -914,6 +915,9 @@ radius = 7.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xeg0d"]
 size = Vector2(25, 30.1094)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4tx4m"]
+radius = 8.06226
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_5pqvn"]
 radius = 5.0
 
@@ -1136,6 +1140,16 @@ attacker = NodePath("../..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/WeaponHitbox"]
 position = Vector2(-9, 16)
 shape = SubResource("RectangleShape2D_xeg0d")
+
+[node name="HurtboxComponent" parent="Sprite2D" node_paths=PackedStringArray("stats_component", "health_component") instance=ExtResource("26_tu18r")]
+position = Vector2(0, 3)
+collision_layer = 512
+collision_mask = 256
+stats_component = NodePath("../../StatsComponent")
+health_component = NodePath("../../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HurtboxComponent"]
+shape = SubResource("CircleShape2D_4tx4m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)

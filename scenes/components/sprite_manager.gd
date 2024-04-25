@@ -42,6 +42,7 @@ func _ready():
 		melee_hitbox.get_node("CollisionShape2D").set_deferred("disabled", true)
 	parent = get_parent()
 	previous_position = parent.global_position
+	animator.animation_finished.connect(_on_player_animator_animation_finished)
 	
 func _process(delta):
 	if !parent.attacking && parent.can_move:
@@ -127,3 +128,8 @@ func set_default_sprites():
 	sprite_down = sprite_down_default
 	sprite_up = sprite_up_default
 
+func _on_player_animator_animation_finished(anim_name: StringName) -> void:
+	if anim_name.contains("attack") && parent.can_move:
+		parent.attacking = false
+		if melee_hitbox != null: melee_hitbox.get_child(0).disabled = true
+		correct_sprite_on_facing_str()

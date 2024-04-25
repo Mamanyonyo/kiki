@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnjyr60lu0g2v"]
+
+[ext_resource type="Script" path="res://scenes/components/player_hurtbox_tracker.gd" id="1_gsrgd"]
+
+[node name="PlayerHurtboxTracker" type="Area2D"]
+collision_layer = 0
+collision_mask = 512
+script = ExtResource("1_gsrgd")
+animation_prefix = "orb_melee"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

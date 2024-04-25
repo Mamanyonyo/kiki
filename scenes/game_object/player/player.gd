@@ -75,12 +75,5 @@ func _on_health_component_died():
 		global_position = get_tree().get_first_node_in_group("tree").global_position + Vector2.DOWN * 30
 	else: queue_free()
 
-func _on_player_animator_animation_finished(anim_name: StringName) -> void:
-	##WARNING temporal
-	if anim_name.contains("attack") && can_move:
-		attacking = false
-		sprite_manager.melee_hitbox.get_child(0).disabled = true
-		sprite_manager.correct_sprite_on_facing_str()
-
 func _on_drive_component_drive_finish():
 	sprite_manager.set_default_animations_and_sprites()     
