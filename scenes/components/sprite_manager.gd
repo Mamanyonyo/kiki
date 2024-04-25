@@ -35,11 +35,14 @@ var direction : Vector2 = Vector2.ZERO
 signal changed_facing_direction
 
 
+##TODO crear un animador distinto para los ataques melee
+
 func _ready():
 	set_default_animations_and_sprites()
 	sprite.frame = sprite_down_default
 	if melee_hitbox != null: 
 		melee_hitbox.get_node("CollisionShape2D").set_deferred("disabled", true)
+		melee_hitbox.scale = Vector2(1, 1)
 	parent = get_parent()
 	previous_position = parent.global_position
 	animator.animation_finished.connect(_on_player_animator_animation_finished)
@@ -130,6 +133,7 @@ func set_default_sprites():
 
 func _on_player_animator_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("attack") && parent.can_move:
+		melee_hitbox.scale = Vector2(1, 1)
 		parent.attacking = false
 		if melee_hitbox != null: melee_hitbox.get_child(0).disabled = true
 		correct_sprite_on_facing_str()
