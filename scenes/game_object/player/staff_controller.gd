@@ -35,16 +35,16 @@ func hyperborea_buster():
 	spells_component.available_spells_updated.emit()
 	player.attacking = true
 	player.can_move = false
-	player.direction = Vector2.ZERO
-	player.movement_animator.stop()
-	prev_sprite = player.sprite.frame
+	sprite_manager.direction = Vector2.ZERO
+	sprite_manager.animator.stop()
+	prev_sprite = sprite_manager.sprite.frame
 	spawn_circle(Vector2(2.5, 2.5), 0.8)
-	player.movement_animator.play("staff_attack_hyperborea_buster_charge_" + player.facing_str)
+	sprite_manager.animator.play("staff_attack_hyperborea_buster_charge_" + sprite_manager.facing_str)
 
 func spawn_circle(size: Vector2, time: float):
 	var circle = circle.instantiate()
 	circle_instances.push_back(circle)
-	player.sprite.add_child(circle)
+	sprite_manager.sprite.add_child(circle)
 	circle.global_position = player.global_position
 	circle.enter(size, time)
 	return circle
@@ -52,7 +52,7 @@ func spawn_circle(size: Vector2, time: float):
 func on_end_beamer():
 	player.attacking = false
 	player.can_move = true
-	player.sprite.frame = prev_sprite
+	sprite_manager.sprite.frame = prev_sprite
 	for circle in circle_instances:
 		circle.queue_free()
 	circle_instances = []
@@ -70,7 +70,7 @@ func _on_player_animator_animation_finished(anim_name: String):
 	var raw_name = "_".join(name_arr)
 	match raw_name as String:
 		"staff_attack_hyperborea_buster_charge":
-			player_animator.play("staff_attack_hyperborea_buster_charge_limit_" + player.facing_str)
+			sprite_manager.animator.play("staff_attack_hyperborea_buster_charge_limit_" + sprite_manager.facing_str)
 			spawn_circle(Vector2(5, 5), 0.8)
 		"staff_attack_hyperborea_buster_charge_limit":
 			charges += 1
@@ -85,27 +85,27 @@ func _on_player_animator_animation_finished(anim_name: String):
 				get_tree().get_first_node_in_group("modulate").change_opacity(0.2, 1)
 			if charges >= buster_charges_required:
 				var skill_data = get_skill_data("hyperborea_buster")
-				player_animator.stop()
+				sprite_manager.animator.stop()
 				beam_instance = beam.instantiate()
 				beam_instance.damage = skill_data.damage + stats_component.magic_damage
 				beam_instance.attacker = player
 				get_tree().get_first_node_in_group("foreground_layer").add_child(beam_instance)
-				beam_instance.rotation = player.get_facing_direction().angle()
-				match player.get_facing_direction():
+				beam_instance.rotation = sprite_manager.get_facing_direction().angle()
+				match sprite_manager.get_facing_direction():
 					Vector2.UP: 
-						player.sprite.frame = 67
+						sprite_manager.sprite.frame = 67
 						beam_instance.global_position = beam_marker.global_position
 					Vector2.DOWN: 
-						player.sprite.frame = 49
+						sprite_manager.sprite.frame = 49
 						beam_instance.global_position = beam_marker.global_position
 					_: 
-						player.sprite.frame = 58
+						sprite_manager.sprite.frame = 58
 						beam_instance.global_position = beam_marker_side.global_position
 				buster_timer.start()
 				get_tree().get_first_node_in_group("camera").shake = true
 				return
 			else:
-				player_animator.play("staff_attack_hyperborea_buster_charge_limit_" + player.facing_str)
+				sprite_manager.animator.play("staff_attack_hyperborea_buster_charge_limit_" + sprite_manager.facing_str)
 
 func _on_buster_timer_timeout():
 	on_end_beamer()
@@ -119,14 +119,14 @@ func Drive_enter():
 	drive_set_sprites_and_animations()
 	
 func drive_set_sprites():
-	player.sprite_down = 68
-	player.sprite_up = 70
-	player.sprite_side = 72
+	sprite_manager.sprite_down = 68
+	sprite_manager.sprite_up = 70
+	sprite_manager.sprite_side = 72
 	
 func drive_set_animations():
-	player.walk_down_animation_name = "staff_drive_walk_down"
-	player.walk_side_animation_name = "staff_drive_walk_side"
-	player.walk_up_animation_name = "staff_drive_walk_up"
+	sprite_manager.walk_down_animation_name = "staff_drive_walk_down"
+	sprite_manager.walk_side_animation_name = "staff_drive_walk_side"
+	sprite_manager.walk_up_animation_name = "staff_drive_walk_up"
 	
 func drive_set_sprites_and_animations():
 	drive_set_sprites()
@@ -148,10 +148,10 @@ func Inputs_drive():
 					enemy.health_component.damage(stats_component.damage/2)
 					hit = true
 			if hit:
-				player.walk_down_animation_name = "staff_drive_walk_down_attack"
-				player.walk_side_animation_name = "staff_drive_walk_side_attack"
-				player.sprite_down = 74
-				player.sprite_side = 76
+				sprite_manager.walk_down_animation_name = "staff_drive_walk_down_attack"
+				sprite_manager.walk_side_animation_name = "staff_drive_walk_side_attack"
+				sprite_manager.sprite_down = 74
+				sprite_manager.sprite_side = 76
 			else: drive_set_sprites_and_animations()
 				
 	else:

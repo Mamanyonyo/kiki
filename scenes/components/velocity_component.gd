@@ -23,7 +23,8 @@ func accelerate_to_objective():
 
 func accelerate_in_direction(direction: Vector2):
 	var desired_velocity = direction * stats_component.speed
-	velocity = velocity.lerp(desired_velocity, 1 - exp(-acceleration * get_process_delta_time()))
+	var lerped_velocity = velocity.lerp(desired_velocity, 1 - exp(-acceleration * get_process_delta_time()))
+	velocity = lerped_velocity
 
 func move(character_body: CharacterBody2D):
 	if !get_parent().can_move: return

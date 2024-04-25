@@ -2,6 +2,7 @@ class_name StaminaComponent extends QuantifiableStatComponent
 
 @onready var timer = $DrainTimer
 @onready var restore_timer = $RestoreTimer
+@export var sprite_manager : SpriteManager
 
 var running = false
 var was_running = false
@@ -12,7 +13,7 @@ func _process(_delta):
 		was_running = true
 		restore_timer.paused = true
 		var parent = get_parent()
-		if parent.previous_position == parent.global_position: 
+		if sprite_manager.direction == parent.global_position: 
 			timer.paused = true
 			return
 		timer.paused = false

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjk6og4ybld5d"]
+
+[ext_resource type="Script" path="res://scenes/components/sprite_manager.gd" id="1_3jios"]
+
+[node name="SpriteManager" type="Node" node_paths=PackedStringArray("animator", "sprite", "melee_hitbox", "markers")]
+script = ExtResource("1_3jios")
+animator = NodePath("")
+sprite = NodePath("")
+melee_hitbox = NodePath("")
+markers = NodePath("")

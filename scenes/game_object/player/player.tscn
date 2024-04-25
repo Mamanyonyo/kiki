@@ -1,6 +1,7 @@
-[gd_scene load_steps=58 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=59 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
+[ext_resource type="PackedScene" uid="uid://bjk6og4ybld5d" path="res://scenes/components/sprite_manager.tscn" id="2_6pwh1"]
 [ext_resource type="PackedScene" uid="uid://dced3yrcptsre" path="res://scenes/components/collision_hurt_component.tscn" id="2_7ygai"]
 [ext_resource type="Script" path="res://scenes/game_object/player/player_quest_component.gd" id="2_64lh2"]
 [ext_resource type="PackedScene" uid="uid://cquarnyd0pw5t" path="res://scenes/components/health_component.tscn" id="2_s8m81"]
@@ -916,20 +917,20 @@ size = Vector2(25, 30.1094)
 [sub_resource type="CircleShape2D" id="CircleShape2D_5pqvn"]
 radius = 5.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "movement_animator", "sprite", "book_hitbox", "middle", "markers", "stats_component") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "middle", "stats_component") groups=["Player"]]
 collision_layer = 2
 collision_mask = 65
 motion_mode = 1
 script = ExtResource("1_qthq0")
 health_component = NodePath("HealthComponent")
-movement_animator = NodePath("PlayerAnimator")
-sprite = NodePath("Sprite2D")
-book_hitbox = NodePath("Sprite2D/WeaponHitbox")
 middle = NodePath("Sprite2D/Middle")
-markers = NodePath("Sprite2D/ProjectileMarkers")
 stats_component = NodePath("StatsComponent")
 
-[node name="SpriteManager" type="Node" parent="."]
+[node name="SpriteManager" parent="." node_paths=PackedStringArray("animator", "sprite", "melee_hitbox", "markers") instance=ExtResource("2_6pwh1")]
+animator = NodePath("../PlayerAnimator")
+sprite = NodePath("../Sprite2D")
+melee_hitbox = NodePath("../Sprite2D/WeaponHitbox")
+markers = NodePath("../Sprite2D/ProjectileMarkers")
 
 [node name="QuestComponent" type="Node" parent="." node_paths=PackedStringArray("inventory_manager")]
 script = ExtResource("2_64lh2")
@@ -965,7 +966,8 @@ items = Array[String](["fireball", "hyperborea_buster"])
 hat_manager = NodePath("../HatManager")
 stats_component = NodePath("../StatsComponent")
 
-[node name="StaminaComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("9_0055o")]
+[node name="StaminaComponent" parent="." node_paths=PackedStringArray("sprite_manager", "stats_component") instance=ExtResource("9_0055o")]
+sprite_manager = NodePath("../SpriteManager")
 stats_component = NodePath("../StatsComponent")
 
 [node name="GrazeComponent" parent="." instance=ExtResource("10_rkm8t")]
@@ -985,7 +987,7 @@ current_controller = NodePath("SpellbookController")
 default_controller = NodePath("SpellbookController")
 drive_component = NodePath("../DriveComponent")
 
-[node name="SpellbookController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component", "spell_component", "tp_timer")]
+[node name="SpellbookController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component", "spell_component", "tp_timer", "sprite_manager")]
 script = ExtResource("4_qkfhb")
 fireball_scene = ExtResource("5_k4bht")
 generic_bullet_spawn = NodePath("../../Sprite2D/ProjectileMarkers/GenericBulletSpawn")
@@ -995,9 +997,10 @@ mana_component = NodePath("../../ManaComponent")
 weapon_name_animation_prefix = "book"
 spell_component = NodePath("../../SpellsComponent")
 tp_timer = NodePath("../../HatManager/GhostDollController/Timer")
+sprite_manager = NodePath("../../SpriteManager")
 item_id = "spellbook"
 
-[node name="StaffController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("beam_marker", "beam_marker_side", "spells_component", "drive_component", "weapon_manager", "generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component", "spell_component", "tp_timer")]
+[node name="StaffController" type="Node" parent="WeaponManager" node_paths=PackedStringArray("beam_marker", "beam_marker_side", "spells_component", "drive_component", "weapon_manager", "generic_bullet_spawn", "generic_bullet_spawn_side", "stats_component", "mana_component", "spell_component", "tp_timer", "sprite_manager")]
 script = ExtResource("8_o233k")
 beam_marker = NodePath("../../Sprite2D/ProjectileMarkers/StaffBusterBeam")
 beam_marker_side = NodePath("../../Sprite2D/ProjectileMarkers/StaffBusterBeamSide")
@@ -1012,6 +1015,7 @@ mana_component = NodePath("../../ManaComponent")
 weapon_name_animation_prefix = "staff"
 spell_component = NodePath("../../SpellsComponent")
 tp_timer = NodePath("../Timers/Teleport")
+sprite_manager = NodePath("../../SpriteManager")
 item_id = "staff"
 
 [node name="BusterTimer" type="Timer" parent="WeaponManager/StaffController"]
@@ -1137,7 +1141,6 @@ shape = SubResource("RectangleShape2D_xeg0d")
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_5pqvn")
 
-[connection signal="changed_facing_direction" from="." to="Sprite2D/Hat" method="_on_player_changed_facing_direction"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="grazed" from="GrazeComponent" to="DriveComponent" method="_on_graze_component_grazed"]
 [connection signal="drive_finish" from="DriveComponent" to="." method="_on_drive_component_drive_finish"]

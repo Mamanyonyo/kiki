@@ -7,6 +7,7 @@ class_name BasicEnemy extends CharacterBody2D
 @onready var velocity_component: VelocityComponent = $VelocityComponent
 @onready var stats_component: StatsComponent = $StatsComponent
 
+var attacking = false
 var can_move = true
 
 func _on_health_component_died():

@@ -74,16 +74,19 @@ layer_0/tile_data = PackedInt32Array(1441831, 196609, 2, 1376295, 196609, 1, 131
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 y_sort_enabled = true
 
+[node name="BasicEnemy2" parent="Entities" instance=ExtResource("19_iahv3")]
+position = Vector2(369, 184)
+
 [node name="Player" parent="Entities" instance=ExtResource("9_lndom")]
 position = Vector2(160, 128)
 
-[node name="StatsComponent" parent="Entities/Player" index="2"]
+[node name="StatsComponent" parent="Entities/Player" index="3"]
 max_mana = 400.0
 
-[node name="InventoryComponent" parent="Entities/Player" index="3"]
+[node name="InventoryComponent" parent="Entities/Player" index="4"]
 items = Array[String](["spellbook", "ghost_doll", "staff", "toilet_paper", "paralyze"])
 
-[node name="SpellsComponent" parent="Entities/Player" index="5"]
+[node name="SpellsComponent" parent="Entities/Player" index="6"]
 items = Array[String](["fireball", "teleport"])
 
 [node name="Drain" parent="Entities/Player/DriveComponent" index="0"]
@@ -116,9 +119,6 @@ position = Vector2(0, -0.5)
 
 [node name="Paralyze" parent="Entities" instance=ExtResource("17_w3jio")]
 position = Vector2(104, 47)
-
-[node name="BasicEnemy2" parent="Entities" instance=ExtResource("19_iahv3")]
-position = Vector2(389, 183)
 
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true
