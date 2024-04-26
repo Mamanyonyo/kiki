@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cqq82b41jy0ns"]
+[gd_scene load_steps=20 format=3 uid="uid://cqq82b41jy0ns"]
 
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="1_23618"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="2_8nxvc"]
@@ -16,9 +16,6 @@ shader_parameter/lerp_percent = 0.0
 radius = 20.025
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nb2sr"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_1iqjk"]
-radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_37s31"]
 radius = 5.0
@@ -426,19 +423,12 @@ position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_nb2sr")
 disabled = true
 
-[node name="HurtboxComponent" parent="." index="11"]
-position = Vector2(0, -8)
-
-[node name="CollisionShape2D" parent="HurtboxComponent" index="2"]
-position = Vector2(0, -4)
-shape = SubResource("CircleShape2D_1iqjk")
-
-[node name="CollisionShape2D" parent="." index="12"]
+[node name="CollisionShape2D" parent="." index="11"]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_37s31")
 disabled = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="13"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="12"]
 libraries = {
 "": SubResource("AnimationLibrary_ji12v")
 }

@@ -3,6 +3,7 @@ class_name HurtboxComponent
 
 @export var stats_component: StatsComponent
 @export var health_component: HealthComponent
+@export var parent : CharacterBody2D
 @onready var damage_timer : Timer = $DamageIntervalTimer
 var colliding_areas = []
 var paralyzer
@@ -22,8 +23,7 @@ func check_deal_damage():
 			var player : Player = other_area.attacker
 			player.did_damage.emit(hitbox_component.damage - stats_component.resistance)
 		if other_area.altered_state == "paralyze":
-			if other_area is ParalyzeSpell && other_area.leaving == false && paralyzer == null && other_area.grabbing == false && get_parent().can_move:
-				var parent : Node2D = get_parent()
+			if other_area is ParalyzeSpell && other_area.leaving == false && paralyzer == null && other_area.grabbing == false && parent.can_move:
 				parent.can_move = false
 				$ParalyzeTimer.start(other_area.effect_duration)
 				other_area.grab()
@@ -46,7 +46,7 @@ func _on_area_exited(left: Node2D) -> void:
 
 
 func _on_paralyze_timer_timeout() -> void:
-	get_parent().can_move = true
+	parent.can_move = true
 	if paralyzer != null && paralyzer is ParalyzeSpell:
 		paralyzer.leave()
 		paralyzer = null

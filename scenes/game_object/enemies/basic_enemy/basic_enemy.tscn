@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bvhmy0cf8uhf2" path="res://scenes/components/state_machine/enemy/chase_player.tscn" id="11_iup4t"]
 [ext_resource type="PackedScene" uid="uid://dmh2u33x3o0cn" path="res://scenes/components/state_machine/enemy/back_to_original_position.tscn" id="12_yqsxc"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kd662"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sar7m"]
 resource_local_to_scene = true
 shader = ExtResource("6_x8svc")
 shader_parameter/lerp_percent = 0.0
@@ -52,7 +52,7 @@ navigation_agent = NodePath("../NavigationAgent2D")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("5_07d4w")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_kd662")
+hit_flash_material = SubResource("ShaderMaterial_sar7m")
 
 [node name="NameComponent" parent="." instance=ExtResource("8_ndg2k")]
 
@@ -83,11 +83,13 @@ wait_time = 0.3
 position = Vector2(0, -6)
 texture = ExtResource("1_enlj8")
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("stats_component", "health_component") instance=ExtResource("4_to2db")]
-stats_component = NodePath("../StatsComponent")
-health_component = NodePath("../HealthComponent")
+[node name="HurtboxComponent" parent="Sprite2D" node_paths=PackedStringArray("stats_component", "health_component", "parent") instance=ExtResource("4_to2db")]
+position = Vector2(0, 6)
+stats_component = NodePath("../../StatsComponent")
+health_component = NodePath("../../HealthComponent")
+parent = NodePath("../..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HurtboxComponent"]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_bquee")
 
@@ -96,5 +98,5 @@ position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_4ndia")
 
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
-[connection signal="died" from="HealthComponent" to="HurtboxComponent" method="_on_health_component_died"]
+[connection signal="died" from="HealthComponent" to="Sprite2D/HurtboxComponent" method="_on_health_component_died"]
 [connection signal="timeout" from="Timer" to="VelocityComponent" method="_on_timer_timeout"]

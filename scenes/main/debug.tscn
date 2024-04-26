@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dr68fmyh4o88q"]
+[gd_scene load_steps=22 format=3 uid="uid://dr68fmyh4o88q"]
 
 [ext_resource type="Script" path="res://scenes/main/modulate.gd" id="1_1m5vi"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_7wu2c"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cvpamhfcwh8cs" path="res://assets/icon/staff.png" id="11_f4gpj"]
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="11_nrnc8"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="12_7bgx4"]
+[ext_resource type="PackedScene" uid="uid://c0b3uwqc46qle" path="res://scenes/game_object/enemies/boss/yellow_orb_boss.tscn" id="12_36km2"]
 [ext_resource type="PackedScene" uid="uid://yghr1h03msg0" path="res://scenes/effect/paralyze.tscn" id="17_w3jio"]
 [ext_resource type="PackedScene" uid="uid://dfqauk0kslf7r" path="res://scenes/game_object/npc/bathroom_girl_npc.tscn" id="18_l2pop"]
 [ext_resource type="PackedScene" uid="uid://cqq82b41jy0ns" path="res://scenes/game_object/enemies/boss/unnamed_cult_girl_boss.tscn" id="19_iahv3"]
@@ -73,6 +74,9 @@ layer_0/tile_data = PackedInt32Array(1441831, 196609, 2, 1376295, 196609, 1, 131
 
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 y_sort_enabled = true
+
+[node name="BasicEnemy3" parent="Entities" instance=ExtResource("12_36km2")]
+position = Vector2(337, 214)
 
 [node name="BasicEnemy2" parent="Entities" instance=ExtResource("19_iahv3")]
 position = Vector2(369, 184)
