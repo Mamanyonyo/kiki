@@ -11,9 +11,10 @@ func _ready():
 			child.transitioned.connect(on_child_transition)
 		else:
 			push_warning("State machine contains child which is not 'State'")
+	if current_state != null: current_state.Enter()
 
 func _process(delta):
-	if current_state:
+	if current_state != null:
 		current_state.Update(delta)
 
 func on_child_transition(new_state_name: StringName):
