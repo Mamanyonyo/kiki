@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c0b3uwqc46qle"]
+[gd_scene load_steps=12 format=3 uid="uid://c0b3uwqc46qle"]
 
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="1_awnhh"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="2_rof5u"]
+[ext_resource type="Script" path="res://scenes/game_object/enemies/boss/yellow_orb_boss.gd" id="2_t1hsp"]
 [ext_resource type="Script" path="res://scenes/game_object/enemies/boss/spin_state.gd" id="3_io63q"]
 [ext_resource type="Texture2D" uid="uid://cs2grk3jav3dc" path="res://assets/character/cult_boss_girl_orb.png" id="3_rt4pl"]
+[ext_resource type="Script" path="res://scenes/game_object/enemies/boss/throw_state.gd" id="4_3unwj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yewo2"]
 resource_local_to_scene = true
@@ -51,7 +53,9 @@ _data = {
 "float": SubResource("Animation_0u8he")
 }
 
-[node name="BossOrb" instance=ExtResource("1_awnhh")]
+[node name="BossOrb" node_paths=PackedStringArray("state_machine") instance=ExtResource("1_awnhh")]
+script = ExtResource("2_t1hsp")
+state_machine = NodePath("BasicEnemyStateMachine")
 
 [node name="StatsComponent" parent="." index="0"]
 max_health = 100.0
@@ -62,13 +66,16 @@ hit_flash_material = SubResource("ShaderMaterial_yewo2")
 [node name="NameComponent" parent="." index="5"]
 types = Array[String]([])
 
-[node name="BasicEnemyStateMachine" parent="." index="6" node_paths=PackedStringArray("current_state")]
-current_state = NodePath("Spin")
-
 [node name="Spin" type="Node" parent="BasicEnemyStateMachine" index="0" node_paths=PackedStringArray("entity", "stats_component")]
 script = ExtResource("3_io63q")
 entity = NodePath("../..")
 stats_component = NodePath("../../StatsComponent")
+
+[node name="Throw" type="Node" parent="BasicEnemyStateMachine" index="5" node_paths=PackedStringArray("orb", "stats_component", "velocity_component")]
+script = ExtResource("4_3unwj")
+orb = NodePath("../..")
+stats_component = NodePath("../../StatsComponent")
+velocity_component = NodePath("../../VelocityComponent")
 
 [node name="Sprite2D" parent="." index="9"]
 position = Vector2(0, -8)

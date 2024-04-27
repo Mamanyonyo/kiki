@@ -1,9 +1,6 @@
 extends State
 
-@export var initial_angle : float
-
-@export var girl : CharacterBody2D
-@export var entity : BasicEnemy
+@export var entity : GirlCultBossOrb
 @export var radius = 20
 @export var speed = 5
 
@@ -11,8 +8,10 @@ extends State
 
 var d = 0.0
 
+var cvnny = false
+
 func Enter():
-	d = deg_to_rad(initial_angle) / speed
+	d = deg_to_rad(90 * entity.id) / speed
 	update_position()
 
 func Update(delta):
@@ -25,4 +24,4 @@ func update_position():
 	entity.global_position = Vector2(
 		sin(d * speed) * radius,
 		cos(d * speed) * radius
-	) + girl.global_position
+	) + entity.girl.global_position

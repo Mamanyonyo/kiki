@@ -10,6 +10,9 @@ class_name BasicEnemy extends CharacterBody2D
 var attacking = false
 var can_move = true
 
+func _ready():
+	pass
+
 func _on_health_component_died():
 	GameEvents.emit_enemy_died(wave_spawned)
 	queue_free()

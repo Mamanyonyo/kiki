@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dr68fmyh4o88q"]
+[gd_scene load_steps=14 format=3 uid="uid://dr68fmyh4o88q"]
 
 [ext_resource type="Script" path="res://scenes/main/modulate.gd" id="1_1m5vi"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_7wu2c"]
@@ -12,29 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="9_lndom"]
 [ext_resource type="Script" path="res://scenes/areas/area.gd" id="10_8tlst"]
 [ext_resource type="TileSet" uid="uid://dwsf4rskaeij1" path="res://resources/tileset/bathroom_tileset.tres" id="11_7vrct"]
-[ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="12_7bgx4"]
-[ext_resource type="PackedScene" uid="uid://c0b3uwqc46qle" path="res://scenes/game_object/enemies/boss/yellow_orb_boss.tscn" id="12_36km2"]
 [ext_resource type="PackedScene" uid="uid://cqq82b41jy0ns" path="res://scenes/game_object/enemies/boss/unnamed_cult_girl_boss.tscn" id="19_iahv3"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_olpxx"]
-resource_local_to_scene = true
-shader = ExtResource("12_7bgx4")
-shader_parameter/lerp_percent = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1coqm"]
-resource_local_to_scene = true
-shader = ExtResource("12_7bgx4")
-shader_parameter/lerp_percent = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xl70s"]
-resource_local_to_scene = true
-shader = ExtResource("12_7bgx4")
-shader_parameter/lerp_percent = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3pldi"]
-resource_local_to_scene = true
-shader = ExtResource("12_7bgx4")
-shader_parameter/lerp_percent = 0.0
 
 [node name="Debug" type="Node2D"]
 script = ExtResource("1_trn0f")
@@ -85,47 +63,9 @@ layer_0/tile_data = PackedInt32Array(1441831, 196609, 2, 1376295, 196609, 1, 131
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 y_sort_enabled = true
 
-[node name="BossOrb" parent="Entities" instance=ExtResource("12_36km2")]
-position = Vector2(432, 170)
-
-[node name="HitFlashComponent" parent="Entities/BossOrb" index="4"]
-hit_flash_material = SubResource("ShaderMaterial_olpxx")
-
-[node name="Spin" parent="Entities/BossOrb/BasicEnemyStateMachine" index="0" node_paths=PackedStringArray("girl")]
-girl = NodePath("../../../BossGirl")
-
-[node name="BossOrb2" parent="Entities" instance=ExtResource("12_36km2")]
-position = Vector2(432, 170)
-
-[node name="HitFlashComponent" parent="Entities/BossOrb2" index="4"]
-hit_flash_material = SubResource("ShaderMaterial_1coqm")
-
-[node name="Spin" parent="Entities/BossOrb2/BasicEnemyStateMachine" index="0" node_paths=PackedStringArray("girl")]
-initial_angle = 90.0
-girl = NodePath("../../../BossGirl")
-
-[node name="BossOrb3" parent="Entities" instance=ExtResource("12_36km2")]
-position = Vector2(432, 170)
-
-[node name="HitFlashComponent" parent="Entities/BossOrb3" index="4"]
-hit_flash_material = SubResource("ShaderMaterial_xl70s")
-
-[node name="Spin" parent="Entities/BossOrb3/BasicEnemyStateMachine" index="0" node_paths=PackedStringArray("girl")]
-initial_angle = 180.0
-girl = NodePath("../../../BossGirl")
-
-[node name="BossOrb4" parent="Entities" instance=ExtResource("12_36km2")]
-position = Vector2(432, 170)
-
-[node name="HitFlashComponent" parent="Entities/BossOrb4" index="4"]
-hit_flash_material = SubResource("ShaderMaterial_3pldi")
-
-[node name="Spin" parent="Entities/BossOrb4/BasicEnemyStateMachine" index="0" node_paths=PackedStringArray("girl")]
-initial_angle = 270.0
-girl = NodePath("../../../BossGirl")
-
 [node name="BossGirl" parent="Entities" instance=ExtResource("19_iahv3")]
-position = Vector2(397, 171)
+position = Vector2(411, 191)
+orb_number = 4
 
 [node name="Player" parent="Entities" instance=ExtResource("9_lndom")]
 position = Vector2(160, 128)
@@ -153,9 +93,5 @@ follow_viewport_enabled = true
 [editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/StaminaBar"]
 [editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/ManaBar"]
 [editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/DriveBar"]
-[editable path="Entities/BossOrb"]
-[editable path="Entities/BossOrb2"]
-[editable path="Entities/BossOrb3"]
-[editable path="Entities/BossOrb4"]
 [editable path="Entities/Player"]
 [editable path="Entities/Player/DriveComponent"]

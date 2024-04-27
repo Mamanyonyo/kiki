@@ -10,7 +10,7 @@ func _ready():
 			states[child.name] = child
 			child.transitioned.connect(on_child_transition)
 		else:
-			push_warning("State machine contains child which is not 'State'")
+			print("State machine contains child which is not 'State'")
 	if current_state != null: current_state.Enter()
 
 func _process(delta):
@@ -24,5 +24,5 @@ func on_child_transition(new_state_name: StringName):
 			current_state.Exit()
 			new_state.Enter()
 			current_state = new_state
-	else: 
-		push_warning("Called transition on a state that does not exist")
+	else:
+		print("Called transition on a state that does not exist: " + new_state_name)

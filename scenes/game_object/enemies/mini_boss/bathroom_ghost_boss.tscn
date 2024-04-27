@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cijr8ph2qia6t"]
+[gd_scene load_steps=13 format=3 uid="uid://cijr8ph2qia6t"]
 
 [ext_resource type="Script" path="res://scenes/game_object/enemies/mini_boss/bathroom_ghost_boss.gd" id="1_6qcya"]
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="1_wfog3"]
@@ -15,13 +15,10 @@ resource_local_to_scene = true
 shader = ExtResource("3_jlwp6")
 shader_parameter/lerp_percent = 0.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kgmmg"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_tgimq"]
 radius = 1.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bv1co"]
-radius = 8.06226
+[sub_resource type="CircleShape2D" id="CircleShape2D_kgmmg"]
 
 [node name="BathroomGhostBoss" node_paths=PackedStringArray("state_machine") instance=ExtResource("1_wfog3")]
 collision_mask = 0
@@ -71,12 +68,11 @@ JumpCDTimer = NodePath("../../JumpCD")
 stats = NodePath("../../StatsComponent")
 bonus_resistance = 5.0
 
-[node name="JumpAttack" type="Node" parent="BasicEnemyStateMachine" index="6" node_paths=PackedStringArray("boss", "sprite", "shape", "collision_shape", "velocity_component", "stats_component")]
+[node name="JumpAttack" type="Node" parent="BasicEnemyStateMachine" index="6" node_paths=PackedStringArray("boss", "sprite", "shape", "velocity_component", "stats_component")]
 script = ExtResource("7_6r6dc")
 boss = NodePath("../..")
 sprite = NodePath("../../Sprite2D")
 shape = NodePath("../../Sprite2D/EventArea2D/CollisionShape2D2")
-collision_shape = NodePath("../../CollisionShape2D")
 velocity_component = NodePath("../../VelocityComponent")
 stats_component = NodePath("../../StatsComponent")
 
@@ -84,11 +80,7 @@ stats_component = NodePath("../../StatsComponent")
 wait_time = 2.5
 one_shot = true
 
-[node name="CollisionShape2D" parent="HurtboxComponent" index="2"]
-position = Vector2(0, -15)
-shape = SubResource("CircleShape2D_kgmmg")
-
-[node name="Sprite2D" parent="." index="11"]
+[node name="Sprite2D" parent="." index="10"]
 position = Vector2(0, -16)
 texture = ExtResource("5_cpmfm")
 hframes = 3
@@ -104,9 +96,9 @@ position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_tgimq")
 disabled = true
 
-[node name="CollisionShape2D" parent="." index="12"]
+[node name="HurtboxComponent#CollisionShape2D" type="CollisionShape2D" parent="." index="11"]
 position = Vector2(0, -15)
-shape = SubResource("CircleShape2D_bv1co")
+shape = SubResource("CircleShape2D_kgmmg")
 
 [connection signal="timeout" from="JumpCD" to="BasicEnemyStateMachine/InToilet" method="_on_jump_cd_timeout"]
 [connection signal="body_shape_entered" from="Sprite2D/EventArea2D" to="." method="_on_event_area_2d_body_shape_entered"]
