@@ -6,6 +6,7 @@ class_name BasicEnemy extends CharacterBody2D
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var velocity_component: VelocityComponent = $VelocityComponent
 @onready var stats_component: StatsComponent = $StatsComponent
+@onready var state_machine: StateMachine = $BasicEnemyStateMachine
 
 var attacking = false
 var can_move = true

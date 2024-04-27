@@ -7,6 +7,8 @@ var i = 0
 
 var current_orbs : Array[GirlCultBossOrb] = []
 
+signal orbs_loaded
+
 func _ready() -> void:
 	super._ready()
 	
@@ -21,3 +23,4 @@ func _ready() -> void:
 func orb_ready():
 	current_orbs[i].init()
 	i += 1
+	if i == orb_number: orbs_loaded.emit()

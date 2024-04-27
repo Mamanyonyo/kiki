@@ -1,6 +1,5 @@
 class_name BathroomGhostBoss extends BasicEnemy
 
-@export var state_machine : StateMachine
 @export var permanent_speed_increment : float
 var tilemap : TileMap
 

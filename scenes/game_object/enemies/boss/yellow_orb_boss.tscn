@@ -53,9 +53,8 @@ _data = {
 "float": SubResource("Animation_0u8he")
 }
 
-[node name="BossOrb" node_paths=PackedStringArray("state_machine") instance=ExtResource("1_awnhh")]
+[node name="BossOrb" groups=["yellow_orb_boss"] instance=ExtResource("1_awnhh")]
 script = ExtResource("2_t1hsp")
-state_machine = NodePath("BasicEnemyStateMachine")
 
 [node name="StatsComponent" parent="." index="0"]
 max_health = 100.0

@@ -2,6 +2,8 @@ class_name StateMachine extends Node
 
 var states : Dictionary = {}
 
+signal new_state_entered(name: String)
+
 @export var current_state: State
 
 func _ready():
@@ -24,5 +26,6 @@ func on_child_transition(new_state_name: StringName):
 			current_state.Exit()
 			new_state.Enter()
 			current_state = new_state
+			new_state_entered.emit(new_state_name)
 	else:
 		print("Called transition on a state that does not exist: " + new_state_name)

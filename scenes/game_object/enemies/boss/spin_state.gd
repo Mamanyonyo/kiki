@@ -8,7 +8,8 @@ extends State
 
 var d = 0.0
 
-var cvnny = false
+func _ready():
+	entity.initialized.connect(on_init)
 
 func Enter():
 	d = deg_to_rad(90 * entity.id) / speed
@@ -25,3 +26,10 @@ func update_position():
 		sin(d * speed) * radius,
 		cos(d * speed) * radius
 	) + entity.girl.global_position
+
+func on_init():
+	entity.girl.state_machine.new_state_entered.connect(on_girl_changed_state)
+
+func on_girl_changed_state(new_state):
+	if entity.state_machine.current_state.name == name && new_state == "ChasePlayer":
+		Enter()

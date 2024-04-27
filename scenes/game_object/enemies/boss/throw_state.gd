@@ -1,7 +1,7 @@
 extends State
 
 @export var extra_distance : float = 10
-@export var orb : BasicEnemy
+@export var orb : GirlCultBossOrb
 @export var speed_boost = 400
 @export var stats_component : StatsComponent
 @export var velocity_component : VelocityComponent
@@ -10,6 +10,9 @@ var target_pos : Vector2
 #var target_dir : Vector2
 
 var returning = false
+
+func _ready():
+	orb.initialized.connect(on_init)
 
 func Enter():
 	stats_component.speed += speed_boost
@@ -31,3 +34,11 @@ func Update(delta):
 
 func Exit():
 	stats_component.speed = stats_component.max_speed
+	returning = false
+	
+func on_init():
+	orb.girl.state_machine.new_state_entered.connect(on_new_girl_state)
+
+
+func on_new_girl_state(new_state_name):
+	if new_state_name == "Throwing": transitioned.emit(name)
