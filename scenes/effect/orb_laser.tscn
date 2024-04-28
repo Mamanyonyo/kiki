@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwrg2y3mxtl2v"]
+
+[ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="1_1vwtk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mycue"]
+size = Vector2(836.854, 20)
+
+[node name="OrbLaser" type="Line2D"]
+scale = Vector2(1, 1.8)
+points = PackedVector2Array(0, 0, 800, 0)
+default_color = Color(0.180392, 0.0705882, 0.0117647, 1)
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("1_1vwtk")
+damage = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(386.446, 0)
+rotation = 3.14159
+scale = Vector2(0.923569, -1.40953)
+shape = SubResource("RectangleShape2D_mycue")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dr68fmyh4o88q"]
+[gd_scene load_steps=15 format=3 uid="uid://dr68fmyh4o88q"]
 
 [ext_resource type="Script" path="res://scenes/main/modulate.gd" id="1_1m5vi"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_7wu2c"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="9_lndom"]
 [ext_resource type="Script" path="res://scenes/areas/area.gd" id="10_8tlst"]
 [ext_resource type="TileSet" uid="uid://dwsf4rskaeij1" path="res://resources/tileset/bathroom_tileset.tres" id="11_7vrct"]
+[ext_resource type="PackedScene" uid="uid://c0b3uwqc46qle" path="res://scenes/game_object/enemies/boss/yellow_orb_boss.tscn" id="14_keeb8"]
 [ext_resource type="PackedScene" uid="uid://cqq82b41jy0ns" path="res://scenes/game_object/enemies/boss/unnamed_cult_girl_boss.tscn" id="19_iahv3"]
 
 [node name="Debug" type="Node2D"]
@@ -87,6 +88,9 @@ tp_timer = NodePath("../Timers/Teleport")
 
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true
+
+[node name="BossOrb" parent="." instance=ExtResource("14_keeb8")]
+position = Vector2(240, 201)
 
 [editable path="UI"]
 [editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/HealthBar"]
