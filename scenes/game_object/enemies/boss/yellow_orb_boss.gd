@@ -1,7 +1,7 @@
 class_name GirlCultBossOrb extends BasicEnemy
 
 @export var initial_state : String = "Spin"
-@export var girl : BasicEnemy
+@export var girl : UnnamedCultGirlBoss
 @export var center : Marker2D
 var id : float
 

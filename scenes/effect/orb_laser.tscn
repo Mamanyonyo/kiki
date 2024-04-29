@@ -11,6 +11,7 @@ points = PackedVector2Array(0, 0, 800, 0)
 default_color = Color(0.180392, 0.0705882, 0.0117647, 1)
 
 [node name="HitboxComponent" type="Area2D" parent="."]
+scale = Vector2(1, 0.311111)
 collision_layer = 256
 collision_mask = 0
 script = ExtResource("1_1vwtk")

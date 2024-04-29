@@ -8,9 +8,6 @@ extends State
 
 var target_pos : Vector2
 #var target_dir : Vector2
-
-var returning = false
-
 func _ready():
 	orb.initialized.connect(on_init)
 
@@ -23,18 +20,14 @@ func Enter():
 
 func Update(delta):
 	##TODO hacer que mientras se lance por los primeros segundos recalcule la direccion al player
-	if !returning:
-		if orb.global_position.distance_to(target_pos) <= 10: returning = true
-	else: 
-		velocity_component.make_path_to_pos(orb.girl.global_position)
-		if orb.global_position.distance_to(orb.girl.global_position) <= 5:
-			transitioned.emit("Spin")
+	if orb.global_position.distance_to(target_pos) <= 10: 
+		transitioned.emit("ReturnToGirl")
+		return
 	velocity_component.accelerate_to_objective()
 	
 
 func Exit():
 	stats_component.speed = stats_component.max_speed
-	returning = false
 	
 func on_init():
 	orb.girl.state_machine.new_state_entered.connect(on_new_girl_state)

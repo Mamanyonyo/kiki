@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c0b3uwqc46qle"]
+[gd_scene load_steps=16 format=3 uid="uid://c0b3uwqc46qle"]
 
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="1_awnhh"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="2_rof5u"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scenes/game_object/enemies/boss/go_to_player_pos_state.gd" id="6_wfryf"]
 [ext_resource type="Script" path="res://scenes/game_object/enemies/boss/shoot_laser_at_player_state.gd" id="7_qt3vr"]
 [ext_resource type="PackedScene" uid="uid://dwrg2y3mxtl2v" path="res://scenes/effect/orb_laser.tscn" id="8_2llc0"]
+[ext_resource type="Script" path="res://scenes/game_object/enemies/boss/return_to_girl_orb_state.gd" id="9_k8mvv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yewo2"]
 resource_local_to_scene = true
@@ -58,8 +59,9 @@ _data = {
 
 [node name="BossOrb" node_paths=PackedStringArray("center") groups=["yellow_orb_boss"] instance=ExtResource("1_awnhh")]
 script = ExtResource("2_t1hsp")
-initial_state = "GoToPlayerPos"
+initial_state = "Spin"
 center = NodePath("Sprite2D/Center")
+detection_range = 0.0
 
 [node name="StatsComponent" parent="." index="0"]
 max_health = 100.0
@@ -69,9 +71,6 @@ hit_flash_material = SubResource("ShaderMaterial_yewo2")
 
 [node name="NameComponent" parent="." index="5"]
 types = Array[String]([])
-
-[node name="BasicEnemyStateMachine" parent="." index="6" node_paths=PackedStringArray("current_state")]
-current_state = NodePath("GoToPlayerPos")
 
 [node name="Spin" type="Node" parent="BasicEnemyStateMachine" index="0" node_paths=PackedStringArray("entity", "stats_component")]
 script = ExtResource("3_io63q")
@@ -94,6 +93,16 @@ script = ExtResource("7_qt3vr")
 beam_scene = ExtResource("8_2llc0")
 orb = NodePath("../..")
 
+[node name="Timer" type="Timer" parent="BasicEnemyStateMachine/ShootLaserAtPlayer" index="0"]
+wait_time = 0.2
+one_shot = true
+
+[node name="ReturnToGirl" type="Node" parent="BasicEnemyStateMachine" index="8" node_paths=PackedStringArray("velocity_component", "stats_component", "orb")]
+script = ExtResource("9_k8mvv")
+velocity_component = NodePath("../../VelocityComponent")
+stats_component = NodePath("../../StatsComponent")
+orb = NodePath("../..")
+
 [node name="Sprite2D" parent="." index="9"]
 position = Vector2(0, -8)
 texture = ExtResource("3_rt4pl")
@@ -109,3 +118,5 @@ libraries = {
 "": SubResource("AnimationLibrary_0t1f6")
 }
 autoplay = "float"
+
+[connection signal="timeout" from="BasicEnemyStateMachine/ShootLaserAtPlayer/Timer" to="BasicEnemyStateMachine/ShootLaserAtPlayer" method="_on_timer_timeout"]

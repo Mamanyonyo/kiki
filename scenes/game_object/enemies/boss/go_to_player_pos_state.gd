@@ -5,6 +5,9 @@ extends State
 
 var objective_position : Vector2
 
+##TODO mover la siguiente orbe si se llegase a morir
+##TODO Arreglar wall stuck
+
 func Enter():
 	var player = get_tree().get_first_node_in_group("Player")
 	objective_position = player.global_position

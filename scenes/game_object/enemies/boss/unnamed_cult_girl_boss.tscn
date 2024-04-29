@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cqq82b41jy0ns"]
+[gd_scene load_steps=25 format=3 uid="uid://cqq82b41jy0ns"]
 
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="1_23618"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="2_8nxvc"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scenes/components/state_machine/enemy/chase_player_boss_boss.gd" id="6_gg5cm"]
 [ext_resource type="PackedScene" uid="uid://duivxwbgh8hl2" path="res://scenes/components/hitbox_component.tscn" id="6_uv64b"]
 [ext_resource type="Script" path="res://scenes/game_object/enemies/boss/throwing.gd" id="7_ww0iq"]
+[ext_resource type="Script" path="res://scenes/game_object/enemies/boss/unnamed_boss_girl_casting_state.gd" id="8_dkoud"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1wagt"]
 resource_local_to_scene = true
@@ -376,7 +377,7 @@ _data = {
 [node name="BossGirl" instance=ExtResource("1_23618")]
 script = ExtResource("2_d5bny")
 orb_scene = ExtResource("3_tqvhi")
-orb_number = 3
+orb_number = 4
 detection_range = 50000.0
 
 [node name="SpriteManager" parent="." index="0" node_paths=PackedStringArray("animator", "sprite", "melee_hitbox") instance=ExtResource("2_l7kmd")]
@@ -401,8 +402,9 @@ hit_flash_material = SubResource("ShaderMaterial_1wagt")
 types = Array[String]([])
 display_name = "Jefe Final (Nombre Por Definir)"
 
-[node name="ChasePlayer" parent="BasicEnemyStateMachine" index="2" node_paths=PackedStringArray("sprite_manager")]
+[node name="ChasePlayer" parent="BasicEnemyStateMachine" index="2" node_paths=PackedStringArray("girl", "sprite_manager")]
 script = ExtResource("6_gg5cm")
+girl = NodePath("../..")
 sprite_manager = NodePath("../../SpriteManager")
 
 [node name="Timer" type="Timer" parent="BasicEnemyStateMachine/ChasePlayer" index="0"]
@@ -414,6 +416,11 @@ script = ExtResource("7_ww0iq")
 sprite_manager = NodePath("../../SpriteManager")
 velocity_component = NodePath("../../VelocityComponent")
 girl = NodePath("../..")
+
+[node name="Casting" type="Node" parent="BasicEnemyStateMachine" index="5" node_paths=PackedStringArray("girl", "sprite_manager")]
+script = ExtResource("8_dkoud")
+girl = NodePath("../..")
+sprite_manager = NodePath("../../SpriteManager")
 
 [node name="Sprite2D" parent="." index="10"]
 position = Vector2(0, -16)
