@@ -21,13 +21,18 @@ func Exit():
 	returned = 0
 
 func on_orbs_loaded():
-	for orb in girl.current_orbs:
+	for orb : GirlCultBossOrb in girl.current_orbs:
 		orb.state_machine.new_state_entered.connect(on_orb_changed_state)
-
-##TODO cuidado porque si no se revisa el estado despues de que muera una orbe se puede quedar aca por siempre
+		orb.health_component.died.connect(on_orb_death)
 
 func on_orb_changed_state(new_orb_state_name):
 	if girl.state_machine.current_state != self || new_orb_state_name != "Spin": return
 	returned += 1
+	check_and_return_to_chase()
+
+func check_and_return_to_chase():
 	if returned >= get_tree().get_nodes_in_group("yellow_orb_boss").size():
 		transitioned.emit("ChasePlayer")
+
+func on_orb_death():
+	check_and_return_to_chase()

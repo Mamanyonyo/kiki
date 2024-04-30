@@ -2,13 +2,15 @@ extends State
 
 @export var beam_scene : PackedScene
 @export var orb : GirlCultBossOrb
+@export var health_component : HealthComponent
 var beam_instance : Line2D
 
 var target_pos : Vector2
 
 @onready var delay = $Timer
 
-##TODO eliminar laser al morir
+func _ready():
+	health_component.died.connect(on_death)
 
 func Enter():
 	var player = get_tree().get_first_node_in_group("Player") as Player
@@ -34,3 +36,7 @@ func _on_timer_timeout():
 	if next_orb_index >= orbs.size(): next_orb_index = 0
 	var next_orb : GirlCultBossOrb = orbs[next_orb_index]
 	next_orb.state_machine.on_child_transition("GoToPlayerPos")
+
+func on_death():
+	if orb.state_machine.current_state.name == name && beam_instance != null:
+		beam_instance.queue_free()

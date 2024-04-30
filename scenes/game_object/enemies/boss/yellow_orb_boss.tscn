@@ -83,15 +83,17 @@ orb = NodePath("../..")
 stats_component = NodePath("../../StatsComponent")
 velocity_component = NodePath("../../VelocityComponent")
 
-[node name="GoToPlayerPos" type="Node" parent="BasicEnemyStateMachine" index="6" node_paths=PackedStringArray("velocity_component", "orb")]
+[node name="GoToPlayerPos" type="Node" parent="BasicEnemyStateMachine" index="6" node_paths=PackedStringArray("velocity_component", "orb", "health_component")]
 script = ExtResource("6_wfryf")
 velocity_component = NodePath("../../VelocityComponent")
 orb = NodePath("../..")
+health_component = NodePath("../../HealthComponent")
 
-[node name="ShootLaserAtPlayer" type="Node" parent="BasicEnemyStateMachine" index="7" node_paths=PackedStringArray("orb")]
+[node name="ShootLaserAtPlayer" type="Node" parent="BasicEnemyStateMachine" index="7" node_paths=PackedStringArray("orb", "health_component")]
 script = ExtResource("7_qt3vr")
 beam_scene = ExtResource("8_2llc0")
 orb = NodePath("../..")
+health_component = NodePath("../../HealthComponent")
 
 [node name="Timer" type="Timer" parent="BasicEnemyStateMachine/ShootLaserAtPlayer" index="0"]
 wait_time = 0.2

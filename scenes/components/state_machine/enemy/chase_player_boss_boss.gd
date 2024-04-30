@@ -26,4 +26,5 @@ func Exit():
 
 
 func _on_timer_timeout() -> void:
+	if get_tree().get_nodes_in_group("yellow_orb_boss").size() == 0: return
 	transitioned.emit("Throwing")

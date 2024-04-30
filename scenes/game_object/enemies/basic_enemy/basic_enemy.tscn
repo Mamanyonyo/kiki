@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bvhmy0cf8uhf2" path="res://scenes/components/state_machine/enemy/chase_player.tscn" id="11_iup4t"]
 [ext_resource type="PackedScene" uid="uid://dmh2u33x3o0cn" path="res://scenes/components/state_machine/enemy/back_to_original_position.tscn" id="12_yqsxc"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_brmo8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kyl2y"]
 resource_local_to_scene = true
 shader = ExtResource("6_x8svc")
 shader_parameter/lerp_percent = 0.0
@@ -52,7 +52,7 @@ navigation_agent = NodePath("../NavigationAgent2D")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("5_07d4w")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_brmo8")
+hit_flash_material = SubResource("ShaderMaterial_kyl2y")
 
 [node name="NameComponent" parent="." instance=ExtResource("8_ndg2k")]
 
