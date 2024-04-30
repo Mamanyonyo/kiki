@@ -13,12 +13,19 @@ func _ready():
 	health_component.died.connect(on_death)
 
 func Enter():
+	var orbs = get_tree().get_nodes_in_group("yellow_orb_boss")
+	if orbs.size() == 1: 
+		orb.girl.state_machine.on_child_transition("ChasePlayer")
+		transitioned.emit("ReturnToGirl")
+		return
 	var player = get_tree().get_first_node_in_group("Player") as Player
 	target_pos = player.middle.global_position
 	delay.start()
 
 func Exit():
-	beam_instance.queue_free()
+	delay.stop()
+	if beam_instance != null: 
+		beam_instance.queue_free()
 
 
 func _on_timer_timeout():

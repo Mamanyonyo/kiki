@@ -27,7 +27,9 @@ func on_death():
 	if orb.state_machine.current_state.name != name: return
 	
 	var orbs = get_tree().get_nodes_in_group("yellow_orb_boss")
-	if orbs.size() == 1: orb.girl.state_machine.on_child_transition("ChasePlayer")
+	if orbs.size() == 1: 
+		orb.girl.state_machine.on_child_transition("ChasePlayer")
+		return
 	var i = 0
 	var this_orb_index : float
 	for current_orb : GirlCultBossOrb in orbs:
