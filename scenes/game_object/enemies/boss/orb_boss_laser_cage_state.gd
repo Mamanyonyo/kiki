@@ -18,11 +18,12 @@ func Enter():
 	if next_orb_index == orbs.size() : next_orb_index = 0
 	var angle_degrees = this_orb_index * 90
 	var angle = deg_to_rad(angle_degrees)
+	var looking_towards_orb_angle = deg_to_rad(angle_degrees + 180 + 45)
 	var rotation_vector = starting_direction.rotated(angle) as Vector2
+	var laser_rotation = looking_towards_orb_angle
 	orb.global_position = player.global_position + rotation_vector * distance_from_player
-	var next_orb = orbs[next_orb_index] as GirlCultBossOrb
-	var laser_target = next_orb.center.global_position
 	var laser_instance = laser_scene.instantiate() as Line2D
 	get_tree().get_first_node_in_group("entities_layer").add_child.call_deferred(laser_instance)
 	laser_instance.global_position = orb.center.global_position
-	laser_instance.look_at(laser_target)
+	laser_instance.points[1] = Vector2.RIGHT * (distance_from_player/2 + distance_from_player)
+	laser_instance.rotate(looking_towards_orb_angle)
