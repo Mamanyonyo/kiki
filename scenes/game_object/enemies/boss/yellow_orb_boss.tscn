@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c0b3uwqc46qle"]
+[gd_scene load_steps=19 format=3 uid="uid://c0b3uwqc46qle"]
 
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="1_awnhh"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="2_rof5u"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://scenes/game_object/enemies/boss/return_to_girl_orb_state.gd" id="9_k8mvv"]
 [ext_resource type="Script" path="res://scenes/game_object/enemies/boss/lock_in.gd" id="10_qplj8"]
 [ext_resource type="PackedScene" uid="uid://cgoukns1if586" path="res://scenes/game_object/projectile/bullet.tscn" id="11_c20go"]
+[ext_resource type="Script" path="res://scenes/game_object/enemies/boss/orb_boss_laser_cage_state.gd" id="12_b3a2x"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yewo2"]
 resource_local_to_scene = true
@@ -75,7 +76,7 @@ hit_flash_material = SubResource("ShaderMaterial_yewo2")
 types = Array[String]([])
 
 [node name="BasicEnemyStateMachine" parent="." index="6" node_paths=PackedStringArray("current_state")]
-current_state = NodePath("Spin")
+current_state = NodePath("LaserCage")
 
 [node name="Spin" type="Node" parent="BasicEnemyStateMachine" index="0" node_paths=PackedStringArray("entity", "stats_component")]
 script = ExtResource("3_io63q")
@@ -117,6 +118,11 @@ projectile = ExtResource("11_c20go")
 
 [node name="Timer" type="Timer" parent="BasicEnemyStateMachine/LockIn" index="0"]
 one_shot = true
+
+[node name="LaserCage" type="Node" parent="BasicEnemyStateMachine" index="10" node_paths=PackedStringArray("orb")]
+script = ExtResource("12_b3a2x")
+orb = NodePath("../..")
+laser_scene = ExtResource("8_2llc0")
 
 [node name="Sprite2D" parent="." index="9"]
 position = Vector2(0, -8)
