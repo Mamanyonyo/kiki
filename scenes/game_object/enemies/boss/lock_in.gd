@@ -25,8 +25,7 @@ func Update(_delta):
 	if shooting_interval.is_stopped():
 		var bullet_rotation = deg_to_rad(angle_degrees + 180)
 		var bullet_instance = projectile.instantiate() as HitboxComponent
-		bullet_instance.set_collision_layer_value(3, false)
-		bullet_instance.set_collision_layer_value(9, true)
+		bullet_instance.target_only_player()
 		bullet_instance.set_collision_mask_value(1, false)
 		bullet_instance.rotation = bullet_rotation
 		bullet_instance.damage = bullet_damage
