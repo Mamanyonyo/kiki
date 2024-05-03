@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="9_lndom"]
 [ext_resource type="Script" path="res://scenes/areas/area.gd" id="10_8tlst"]
 [ext_resource type="TileSet" uid="uid://dwsf4rskaeij1" path="res://resources/tileset/bathroom_tileset.tres" id="11_7vrct"]
-[ext_resource type="PackedScene" uid="uid://c0b3uwqc46qle" path="res://scenes/game_object/enemies/boss/yellow_orb_boss.tscn" id="13_og7fa"]
+[ext_resource type="PackedScene" uid="uid://cqq82b41jy0ns" path="res://scenes/game_object/enemies/boss/unnamed_cult_girl_boss.tscn" id="12_8742a"]
 
 [node name="Debug" type="Node2D"]
 script = ExtResource("1_trn0f")
@@ -63,6 +63,9 @@ layer_0/tile_data = PackedInt32Array(1441831, 196609, 2, 1376295, 196609, 1, 131
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 y_sort_enabled = true
 
+[node name="BossGirl" parent="Entities" instance=ExtResource("12_8742a")]
+position = Vector2(394, 205)
+
 [node name="Player" parent="Entities" instance=ExtResource("9_lndom")]
 position = Vector2(160, 128)
 
@@ -81,14 +84,6 @@ wait_time = 5.0
 
 [node name="SpellbookController" parent="Entities/Player/WeaponManager" index="0" node_paths=PackedStringArray("tp_timer")]
 tp_timer = NodePath("../Timers/Teleport")
-
-[node name="BossOrb4" parent="Entities" instance=ExtResource("13_og7fa")]
-
-[node name="BossOrb" parent="Entities" instance=ExtResource("13_og7fa")]
-
-[node name="BossOrb2" parent="Entities" instance=ExtResource("13_og7fa")]
-
-[node name="BossOrb3" parent="Entities" instance=ExtResource("13_og7fa")]
 
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true

@@ -1,25 +1,34 @@
-extends ChasePlayer
+class_name UnnamedCultGirlBossChase extends ChasePlayer
 
 @onready var timer : Timer = $Timer
 @export var girl : UnnamedCultGirlBoss
 
-var attacked = false
+@export var last_attack_threshold = 15
+@export var thresholds = [85, 55]
+@export var finish_thresholds = [60, 25]
+@export var orb_state = ["LaserCage", "GoToPlayerPos"]
+
+var last_attack_mode = false
+var current_attack_index = 0
 
 func Enter():
-	var percentage = get_percentage()
 	super.Enter()
-	if percentage > 50: timer.start()
-	else:
+	timer.start()
+	
+func Update(_delta):
+	var percentage = get_percentage()
+	
+	if current_attack_index < thresholds.size() && percentage < thresholds[current_attack_index]:
+		transitioned.emit("Casting")
+		return
+	
+	if percentage < last_attack_threshold && !last_attack_mode:
+		last_attack_mode = true
+		timer.stop()
 		for orb in girl.current_orbs:
 			if orb != null: 
 				orb.state_machine.on_child_transition("LockIn")
 	
-func Update(_delta):
-	var percentage = get_percentage()
-	if percentage < 75 && attacked == false:
-		attacked = true
-		transitioned.emit("Casting")
-		return
 	super.Update(_delta)
 	
 func Exit():

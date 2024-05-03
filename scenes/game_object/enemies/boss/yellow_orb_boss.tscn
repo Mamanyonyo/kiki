@@ -140,4 +140,5 @@ libraries = {
 }
 autoplay = "float"
 
+[connection signal="died" from="HealthComponent" to="BasicEnemyStateMachine/LaserCage" method="_on_health_component_died"]
 [connection signal="timeout" from="BasicEnemyStateMachine/ShootLaserAtPlayer/Timer" to="BasicEnemyStateMachine/ShootLaserAtPlayer" method="_on_timer_timeout"]

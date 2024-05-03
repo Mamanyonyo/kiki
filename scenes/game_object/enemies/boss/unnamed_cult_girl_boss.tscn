@@ -405,6 +405,10 @@ display_name = "Jefe Final (Nombre Por Definir)"
 [node name="ChasePlayer" parent="BasicEnemyStateMachine" index="2" node_paths=PackedStringArray("girl", "sprite_manager")]
 script = ExtResource("6_gg5cm")
 girl = NodePath("../..")
+last_attack_threshold = 15
+thresholds = [85, 55]
+finish_thresholds = [60, 25]
+orb_state = ["LaserCage", "GoToPlayerPos"]
 sprite_manager = NodePath("../../SpriteManager")
 
 [node name="Timer" type="Timer" parent="BasicEnemyStateMachine/ChasePlayer" index="0"]
@@ -417,10 +421,11 @@ sprite_manager = NodePath("../../SpriteManager")
 velocity_component = NodePath("../../VelocityComponent")
 girl = NodePath("../..")
 
-[node name="Casting" type="Node" parent="BasicEnemyStateMachine" index="5" node_paths=PackedStringArray("girl", "sprite_manager")]
+[node name="Casting" type="Node" parent="BasicEnemyStateMachine" index="5" node_paths=PackedStringArray("girl", "sprite_manager", "chase_state")]
 script = ExtResource("8_dkoud")
 girl = NodePath("../..")
 sprite_manager = NodePath("../../SpriteManager")
+chase_state = NodePath("../ChasePlayer")
 
 [node name="Sprite2D" parent="." index="10"]
 position = Vector2(0, -16)

@@ -26,3 +26,9 @@ func orb_ready():
 	boss_and_all_orbs_max_hp_sum += current_orbs[i].stats_component.max_health
 	i += 1
 	if i == orb_number: orbs_loaded.emit()
+
+func _on_health_component_died():
+	for orb in current_orbs:
+		if orb != null:
+			orb.health_component.death()
+	super._on_health_component_died()
