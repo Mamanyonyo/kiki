@@ -61,6 +61,8 @@ _data = {
 }
 
 [node name="BossOrb" node_paths=PackedStringArray("center") groups=["yellow_orb_boss"] instance=ExtResource("1_awnhh")]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("2_t1hsp")
 initial_state = "Spin"
 center = NodePath("Sprite2D/Center")
