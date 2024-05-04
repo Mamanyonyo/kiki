@@ -96,6 +96,13 @@ func get_facing_direction():
 		_: 
 			if(sprite.scale.x == -1): return Vector2.LEFT
 			return Vector2.RIGHT
+			
+func correct_facing_str(dir):
+	match dir:
+		Vector2.DOWN: facing_str = "down"
+		Vector2.UP: facing_str = "up"
+		Vector2.LEFT: facing_str = "side"
+		Vector2.RIGHT: facing_str = "side"
 	
 func get_rotation_in_degrees():
 	match facing_str:
@@ -113,7 +120,7 @@ func correct_sprite_on_facing_str():
 		"down": 
 			sprite.frame = sprite_down
 		"side":
-			sprite.frame= sprite_side
+			sprite.frame = sprite_side
 		"up":
 			sprite.frame = sprite_up
 			
@@ -130,6 +137,16 @@ func set_default_sprites():
 	sprite_side = sprite_side_default
 	sprite_down = sprite_down_default
 	sprite_up = sprite_up_default
+	
+func look_at(pos):
+	var direction_to = parent.global_position.direction_to(pos)
+	var look_at_absolute_dir = Vector2(round(direction_to.x), round(direction_to.y))
+	if look_at_absolute_dir == Vector2.LEFT: sprite.scale.x = -1
+	correct_facing_str(look_at_absolute_dir)
+	correct_sprite_on_facing_str()
+	direction = Vector2.ZERO
+	absolute_dir = Vector2.ZERO
+	previous_dir = Vector2.ZERO
 
 func _on_player_animator_animation_finished(anim_name: StringName) -> void:
 	if anim_name.contains("attack") && parent.can_move:

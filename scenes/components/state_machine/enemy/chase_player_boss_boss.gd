@@ -21,6 +21,8 @@ func Update(_delta):
 	if current_attack_index < thresholds.size() && percentage < thresholds[current_attack_index]:
 		transitioned.emit("Casting")
 		return
+		
+	print(percentage, last_attack_threshold)
 	
 	if percentage < last_attack_threshold && !last_attack_mode:
 		last_attack_mode = true

@@ -87,6 +87,7 @@ func teleport():
 		player.global_position = previous_pos
 		player.health_component.damage(3)
 		##TODO tpear al player al tile mas cercano
+		##TODO hacer que el player no se pueda quedar atrapado entre paredes cerradas viendo el tile del lado opuesto de la colision
 
 func paralyze():
 	var paralyze_instance = paralyze_scene.instantiate()

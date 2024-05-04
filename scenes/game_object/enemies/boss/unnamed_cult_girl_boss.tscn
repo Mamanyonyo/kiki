@@ -405,7 +405,7 @@ display_name = "Jefe Final (Nombre Por Definir)"
 [node name="ChasePlayer" parent="BasicEnemyStateMachine" index="2" node_paths=PackedStringArray("girl", "sprite_manager")]
 script = ExtResource("6_gg5cm")
 girl = NodePath("../..")
-last_attack_threshold = 15
+last_attack_threshold = 17
 thresholds = [85, 55]
 finish_thresholds = [60, 25]
 orb_state = ["LaserCage", "GoToPlayerPos"]
