@@ -45,3 +45,7 @@ func Exit():
 func _on_health_component_died():
 	if orb.state_machine.current_state.name != name: return
 	laser_instance.queue_free()
+	var orbs = get_tree().get_nodes_in_group("yellow_orb_boss")
+	var first_orb = orbs[0] as GirlCultBossOrb
+	if first_orb.girl.state_machine.current_state.name == "Casting" && !first_orb.girl.state_machine.current_state.leaving:
+		first_orb.girl.state_machine.current_state.leave()

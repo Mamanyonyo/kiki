@@ -68,10 +68,13 @@ func Update(_delta):
 			current_total_hp += orb.stats_component.health
 	var percentage = (current_total_hp * 100)/girl.boss_and_all_orbs_max_hp_sum
 	if percentage < chase_state.finish_thresholds[chase_state.current_attack_index]:
-		leaving = true
-		var orbs = get_tree().get_nodes_in_group("yellow_orb_boss")
-		for orb : GirlCultBossOrb in orbs:
-			orb.state_machine.on_child_transition("ReturnToGirl")
+		leave()
+
+func leave():
+	leaving = true
+	var orbs = get_tree().get_nodes_in_group("yellow_orb_boss")
+	for orb : GirlCultBossOrb in orbs:
+		orb.state_machine.on_child_transition("ReturnToGirl")
 
 func Exit():
 	chase_state.current_attack_index += 1
