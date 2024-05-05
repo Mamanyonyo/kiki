@@ -421,11 +421,12 @@ sprite_manager = NodePath("../../SpriteManager")
 velocity_component = NodePath("../../VelocityComponent")
 girl = NodePath("../..")
 
-[node name="Casting" type="Node" parent="BasicEnemyStateMachine" index="5" node_paths=PackedStringArray("girl", "sprite_manager", "chase_state")]
+[node name="Casting" type="Node" parent="BasicEnemyStateMachine" index="5" node_paths=PackedStringArray("girl", "sprite_manager", "chase_state", "animation_player")]
 script = ExtResource("8_dkoud")
 girl = NodePath("../..")
 sprite_manager = NodePath("../../SpriteManager")
 chase_state = NodePath("../ChasePlayer")
+animation_player = NodePath("../../AnimationPlayer")
 
 [node name="Sprite2D" parent="." index="10"]
 position = Vector2(0, -16)

@@ -6,6 +6,8 @@ extends State
 
 @export var tp_distance = 128
 
+@export var animation_player : AnimationPlayer
+
 var returned = 0
 var leaving = false
 
@@ -71,6 +73,7 @@ func Exit():
 	sprite_manager.set_default_sprites()
 	returned = 0
 	leaving = false
+	animation_player.play("glasses")
 
 func on_orbs_loaded():
 	for orb : GirlCultBossOrb in girl.current_orbs:
