@@ -6,7 +6,11 @@ extends State
 
 @export var tp_distance = 128
 
-@export var animation_player : AnimationPlayer
+@export var gesture_player : AnimationPlayer
+
+@onready var fireball_timer = $Fireball
+
+@export var projectile_scene : PackedScene
 
 var returned = 0
 var leaving = false
@@ -48,6 +52,7 @@ func Enter():
 						}
 			girl.global_position = player.global_position + farthest_hit.direction * tp_distance
 			sprite_manager.look_at(player.global_position)
+			fireball_timer.start()
 		"GoToPlayerPos":
 			var first_orb = get_tree().get_first_node_in_group("yellow_orb_boss") as GirlCultBossOrb
 			if !first_orb: return
@@ -73,7 +78,7 @@ func Exit():
 	sprite_manager.set_default_sprites()
 	returned = 0
 	leaving = false
-	animation_player.play("glasses")
+	fireball_timer.stop()
 
 func on_orbs_loaded():
 	for orb : GirlCultBossOrb in girl.current_orbs:
@@ -87,7 +92,20 @@ func on_orb_changed_state(new_orb_state_name):
 
 func check_and_return_to_chase():
 	if returned >= get_tree().get_nodes_in_group("yellow_orb_boss").size():
-		transitioned.emit("ChasePlayer")
+		gesture_player.play("glasses")
 
 func on_orb_death():
 	check_and_return_to_chase()
+
+func _on_gesture_player_animation_finished(anim_name):
+	if girl.state_machine.current_state.name == name && anim_name == "glasses":
+		transitioned.emit("ChasePlayer")
+
+
+func _on_fireball_timeout():
+	var fireball_instance = projectile_scene.instantiate() as HitboxComponent
+	fireball_instance.target_only_player()
+	get_tree().get_first_node_in_group("entities_layer").add_child(fireball_instance)
+	fireball_instance.global_position = girl.global_position + Vector2.UP * 16
+	var player = get_tree().get_first_node_in_group("Player") as Player
+	fireball_instance.look_at(player.middle.global_position)

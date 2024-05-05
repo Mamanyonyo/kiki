@@ -3,6 +3,8 @@ class_name SpriteManager extends Node
 @export var animator: AnimationPlayer
 @export var sprite: Sprite2D
 
+@export var gesture_animator : AnimationPlayer
+
 @export var melee_hitbox: HitboxComponent
 
 @export var sprite_side_default: float = 7
@@ -49,6 +51,7 @@ func _ready():
 	
 func _process(delta):
 	if !parent.attacking && parent.can_move:
+		if gesture_animator != null && gesture_animator.is_playing(): return
 		match absolute_dir:
 			Vector2(0, -1): 
 				animator.play(walk_up_animation_name)
@@ -64,7 +67,7 @@ func _process(delta):
 				changed_facing_direction.emit()
 			Vector2.ZERO:
 				match previous_dir:
-						Vector2.ZERO: 
+						Vector2.ZERO:
 							animator.stop(true)
 							correct_sprite_on_facing_str()
 						Vector2(0, -1): 
