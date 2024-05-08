@@ -1,20 +1,78 @@
-[gd_scene load_steps=13 format=3 uid="uid://byev3xgkkm41l"]
+[gd_scene load_steps=20 format=3 uid="uid://byev3xgkkm41l"]
 
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="1_r0o4k"]
 [ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="2_83n6m"]
 [ext_resource type="PackedScene" uid="uid://bjk6og4ybld5d" path="res://scenes/components/sprite_manager.tscn" id="2_s1wmq"]
-[ext_resource type="Texture2D" uid="uid://b8au4f0vl1hqp" path="res://assets/enemy/naginata_thug.png" id="4_xy6u6"]
+[ext_resource type="Texture2D" uid="uid://67obwltk6ih0" path="res://assets/enemy/naginata_thug.png" id="4_xy6u6"]
+[ext_resource type="PackedScene" uid="uid://cnjyr60lu0g2v" path="res://scenes/components/player_hurtbox_tracker.tscn" id="5_6mmlg"]
+[ext_resource type="PackedScene" uid="uid://duivxwbgh8hl2" path="res://scenes/components/hitbox_component.tscn" id="5_qje88"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ss288"]
 resource_local_to_scene = true
 shader = ExtResource("2_83n6m")
 shader_parameter/lerp_percent = 0.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvkbe"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ffwvf"]
 radius = 12.0416
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xxkx6"]
+radius = 38.0132
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_tm3x5"]
 radius = 6.0
+
+[sub_resource type="Animation" id="Animation_32nx5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/HitboxComponent/CollisionShape2D:shape:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(20, 20)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/HitboxComponent/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_cn0uu"]
 resource_name = "walk_down"
@@ -31,38 +89,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [1, 2, 3]
-}
-
-[sub_resource type="Animation" id="Animation_32nx5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_422m3"]
-resource_name = "walk_up"
-length = 0.6
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [4, 5, 6]
 }
 
 [sub_resource type="Animation" id="Animation_2cm6l"]
@@ -82,9 +108,185 @@ tracks/0/keys = {
 "values": [7, 8]
 }
 
+[sub_resource type="Animation" id="Animation_422m3"]
+resource_name = "walk_up"
+length = 0.6
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_ieaft"]
+resource_name = "melee_attack_side"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [15, 16, 17]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/HitboxComponent/CollisionShape2D:shape:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(28, 21), Vector2(33, 21), Vector2(36, 21)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/HitboxComponent/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(4, 0.5), Vector2(6.5, 0.5), Vector2(8, 0.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/HitboxComponent/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_fv8eb"]
+resource_name = "melee_attack_down"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [9, 10, 11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/HitboxComponent/CollisionShape2D:shape:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(20, 20), Vector2(20, 46), Vector2(20, 52)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/HitboxComponent/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 13), Vector2(0, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_4e2um"]
+resource_name = "melee_attack_up"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [12, 13, 14]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/HitboxComponent/CollisionShape2D:shape:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(20, 20), Vector2(20, 46), Vector2(20, 52)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/HitboxComponent/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -13), Vector2(0, -16)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mgxu2"]
 _data = {
 "RESET": SubResource("Animation_32nx5"),
+"melee_attack_down": SubResource("Animation_fv8eb"),
+"melee_attack_side": SubResource("Animation_ieaft"),
+"melee_attack_up": SubResource("Animation_4e2um"),
 "walk_down": SubResource("Animation_cn0uu"),
 "walk_side": SubResource("Animation_2cm6l"),
 "walk_up": SubResource("Animation_422m3")
@@ -92,10 +294,14 @@ _data = {
 
 [node name="BasicEnemy" instance=ExtResource("1_r0o4k")]
 
-[node name="SpriteManager" parent="." index="0" node_paths=PackedStringArray("animator", "sprite") instance=ExtResource("2_s1wmq")]
+[node name="SpriteManager" parent="." index="0" node_paths=PackedStringArray("animator", "sprite", "melee_hitbox") instance=ExtResource("2_s1wmq")]
 animator = NodePath("../AnimationPlayer")
 sprite = NodePath("../Sprite2D")
+melee_hitbox = NodePath("../Sprite2D/HitboxComponent")
 sprite_down_default = 1.0
+
+[node name="StatsComponent" parent="." index="1"]
+max_damage = 5.0
 
 [node name="HitFlashComponent" parent="." index="5"]
 hit_flash_material = SubResource("ShaderMaterial_ss288")
@@ -109,11 +315,27 @@ sprite_manager = NodePath("../../SpriteManager")
 [node name="Sprite2D" parent="." index="10"]
 position = Vector2(0, -20)
 texture = ExtResource("4_xy6u6")
-hframes = 3
-vframes = 3
+hframes = 5
+vframes = 4
+
+[node name="HitboxComponent" parent="Sprite2D" index="0" instance=ExtResource("5_qje88")]
+collision_layer = 256
+damage = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HitboxComponent" index="0"]
+shape = SubResource("RectangleShape2D_rvkbe")
 
 [node name="CollisionShape2D" parent="Sprite2D/HurtboxComponent" index="2"]
 shape = SubResource("CircleShape2D_ffwvf")
+
+[node name="PlayerHurtboxTracker" parent="Sprite2D" index="2" node_paths=PackedStringArray("sprite_manager", "parent", "stats_component") instance=ExtResource("5_6mmlg")]
+sprite_manager = NodePath("../../SpriteManager")
+parent = NodePath("../..")
+stats_component = NodePath("../../StatsComponent")
+animation_prefix = "melee_attack"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/PlayerHurtboxTracker" index="0"]
+shape = SubResource("CircleShape2D_xxkx6")
 
 [node name="CollisionShape2D" parent="." index="11"]
 position = Vector2(0, -5)
