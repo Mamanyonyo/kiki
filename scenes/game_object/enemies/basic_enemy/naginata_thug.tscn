@@ -1,0 +1,125 @@
+[gd_scene load_steps=13 format=3 uid="uid://byev3xgkkm41l"]
+
+[ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="1_r0o4k"]
+[ext_resource type="Shader" path="res://scenes/UI/hit_flash_component.gdshader" id="2_83n6m"]
+[ext_resource type="PackedScene" uid="uid://bjk6og4ybld5d" path="res://scenes/components/sprite_manager.tscn" id="2_s1wmq"]
+[ext_resource type="Texture2D" uid="uid://b8au4f0vl1hqp" path="res://assets/enemy/naginata_thug.png" id="4_xy6u6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ss288"]
+resource_local_to_scene = true
+shader = ExtResource("2_83n6m")
+shader_parameter/lerp_percent = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ffwvf"]
+radius = 12.0416
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tm3x5"]
+radius = 6.0
+
+[sub_resource type="Animation" id="Animation_cn0uu"]
+resource_name = "walk_down"
+length = 0.6
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_32nx5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_422m3"]
+resource_name = "walk_up"
+length = 0.6
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_2cm6l"]
+resource_name = "walk_side"
+length = 0.4
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [7, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mgxu2"]
+_data = {
+"RESET": SubResource("Animation_32nx5"),
+"walk_down": SubResource("Animation_cn0uu"),
+"walk_side": SubResource("Animation_2cm6l"),
+"walk_up": SubResource("Animation_422m3")
+}
+
+[node name="BasicEnemy" instance=ExtResource("1_r0o4k")]
+
+[node name="SpriteManager" parent="." index="0" node_paths=PackedStringArray("animator", "sprite") instance=ExtResource("2_s1wmq")]
+animator = NodePath("../AnimationPlayer")
+sprite = NodePath("../Sprite2D")
+sprite_down_default = 1.0
+
+[node name="HitFlashComponent" parent="." index="5"]
+hit_flash_material = SubResource("ShaderMaterial_ss288")
+
+[node name="NameComponent" parent="." index="6"]
+types = Array[String](["thug"])
+
+[node name="ChasePlayer" parent="BasicEnemyStateMachine" index="2" node_paths=PackedStringArray("sprite_manager")]
+sprite_manager = NodePath("../../SpriteManager")
+
+[node name="Sprite2D" parent="." index="10"]
+position = Vector2(0, -20)
+texture = ExtResource("4_xy6u6")
+hframes = 3
+vframes = 3
+
+[node name="CollisionShape2D" parent="Sprite2D/HurtboxComponent" index="2"]
+shape = SubResource("CircleShape2D_ffwvf")
+
+[node name="CollisionShape2D" parent="." index="11"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_tm3x5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="12"]
+libraries = {
+"": SubResource("AnimationLibrary_mgxu2")
+}
