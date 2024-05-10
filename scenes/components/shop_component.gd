@@ -34,6 +34,5 @@ func find_index(item_id):
 
 func on_load_shop(name):
 	if shop_name != name: return
-	
 	GameEvents.emit_shop_open(self)
 	
