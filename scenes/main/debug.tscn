@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dr68fmyh4o88q"]
+[gd_scene load_steps=13 format=3 uid="uid://dr68fmyh4o88q"]
 
 [ext_resource type="Script" path="res://scenes/main/modulate.gd" id="1_1m5vi"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_7wu2c"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://du25e0wl2obi1" path="res://scenes/UI/ui.tscn" id="7_bo3jd"]
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="9_lndom"]
 [ext_resource type="PackedScene" uid="uid://dbhqp6kk7g2ke" path="res://scenes/areas/main_area.tscn" id="10_eqyvd"]
+[ext_resource type="PackedScene" uid="uid://cvge35d7xmioq" path="res://scenes/game_object/experience_vial/experience_vial.tscn" id="12_b6k20"]
 
 [node name="Debug" type="Node2D"]
 script = ExtResource("1_trn0f")
@@ -50,8 +51,18 @@ y_sort_enabled = true
 [node name="Player" parent="Entities" instance=ExtResource("9_lndom")]
 position = Vector2(319, 64)
 
+[node name="InventoryComponent" parent="Entities/Player" index="4"]
+items = Array[String](["spellbook", "ghost_doll"])
+
+[node name="Node2D" parent="Entities" instance=ExtResource("12_b6k20")]
+position = Vector2(199, 78)
+value = 2000
+
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true
+
+[node name="Node2D" parent="." instance=ExtResource("12_b6k20")]
+position = Vector2(236, 97)
 
 [editable path="Managers/ArenaManager"]
 [editable path="Entities/Player"]

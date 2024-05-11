@@ -2,7 +2,7 @@ extends Node
 class_name ExperienceManager
 
 signal experience_updated
-signal leveled_up(current_level: float)
+signal leveled_up
 
 var current_experience = 0
 var current_level = 1
@@ -29,8 +29,9 @@ func level_up():
 	current_level += 1
 	available_points += 5
 	next_level_xp = 10 + current_level * 5
-	leveled_up.emit(current_level)
+	leveled_up.emit()
 	current_experience = 0 + sobra
+	experience_updated.emit()
 	level_up_check()
 	
 
