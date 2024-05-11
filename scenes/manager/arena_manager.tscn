@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/manager/arena_manager.gd" id="1_by3s7"]
 
-[node name="ArenaManager" type="Node"]
+[node name="ArenaManager" type="Node" groups=["wave_manager"]]
 script = ExtResource("1_by3s7")
 
 [node name="Timer" type="Timer" parent="."]

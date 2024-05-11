@@ -91,7 +91,7 @@ size_flags_vertical = 4
 [node name="Shop" parent="CanvasLayer/Screen/MarginContainer3" instance=ExtResource("5_5ou3h")]
 layout_mode = 2
 
-[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer" groups=["ui_box"]]
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0

@@ -5,6 +5,7 @@ extends HBoxContainer
 @onready var level_label: Label = $Label
 
 func _ready():
+	experience_manager = get_tree().get_first_node_in_group("experience_manager") as Node
 	experience_manager.experience_updated.connect(on_exp_updated)
 	update()
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ebogf22k6g7e"]
+
+[ext_resource type="Script" path="res://scenes/game_object/enemies/basic_enemy/WaveScaleComponent.gd" id="1_7msh4"]
+
+[node name="WaveScaleComponent" type="Node"]
+script = ExtResource("1_7msh4")

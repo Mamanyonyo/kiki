@@ -1,19 +1,17 @@
 extends Camera2D
 
-@export var ui_box : BoxContainer
 @export var random_strength: float = 30.0
 @export var shake_fade: float = 5.0
 var target_position = Vector2.ZERO
-
 var rng = RandomNumberGenerator.new()
-
 var thug_shaker_strength: float = 0.0
-
 var shake = false
+var ui_box : BoxContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	make_current();
+	ui_box = get_tree().get_first_node_in_group("ui_box")
 	
 func apply_shake():
 	thug_shaker_strength = random_strength

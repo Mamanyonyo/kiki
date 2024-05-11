@@ -16,7 +16,7 @@
 [node name="CanvasModulate" type="CanvasModulate" parent="." groups=["modulate"]]
 script = ExtResource("1_i124g")
 
-[node name="Managers" type="Node" parent="."]
+[node name="Managers" type="Node" parent="." groups=["managers_node"]]
 
 [node name="ArenaManager" parent="Managers" instance=ExtResource("1_qlqaq")]
 
@@ -27,20 +27,10 @@ script = ExtResource("1_i124g")
 [node name="SpawnManager" parent="Managers" instance=ExtResource("7_oq6j0")]
 script = ExtResource("8_xrb60")
 
-[node name="GameCamera" parent="." node_paths=PackedStringArray("ui_box") instance=ExtResource("1_2mbce")]
-ui_box = NodePath("../UI/CanvasLayer/BoxContainer")
+[node name="GameCamera" parent="." instance=ExtResource("1_2mbce")]
 
 [node name="UI" parent="." instance=ExtResource("1_hfgd7")]
 metadata/_edit_use_anchors_ = true
-
-[node name="Screen" parent="UI/CanvasLayer" index="0" node_paths=PackedStringArray("arena_time_manager")]
-arena_time_manager = NodePath("../../../Managers/ArenaManager")
-
-[node name="HBoxContainer" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer4" index="0" node_paths=PackedStringArray("experience_manager")]
-experience_manager = NodePath("../../../../../../../Managers/ExperienceManager")
-
-[node name="MarginContainer" parent="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer" index="1" node_paths=PackedStringArray("money_manager")]
-money_manager = NodePath("../../../../../../Managers/MoneyManager")
 
 [node name="Areas" type="Node2D" parent="." groups=["areas_node"]]
 
@@ -58,9 +48,4 @@ position = Vector2(319, 64)
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true
 
-[editable path="UI"]
-[editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/HealthBar"]
-[editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/StaminaBar"]
-[editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/ManaBar"]
-[editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/DriveBar"]
 [editable path="Entities/Player"]
