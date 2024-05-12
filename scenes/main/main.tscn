@@ -45,6 +45,9 @@ y_sort_enabled = true
 [node name="Player" parent="Entities" instance=ExtResource("3_hl5nt")]
 position = Vector2(319, 64)
 
+[node name="SpellbookController" parent="Entities/Player/WeaponManager" index="0" node_paths=PackedStringArray("tp_timer")]
+tp_timer = NodePath("../Timers/Teleport")
+
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true
 

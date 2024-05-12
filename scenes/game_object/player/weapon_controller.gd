@@ -107,4 +107,5 @@ func try_spell_cast(name):
 		player.get_node("PlayerFloor").add_child(circle_instance)
 		circle_instance.global_position = player.global_position
 		call(name)
-		
+	else:
+		print("not enough mana to cast " + name + " " + str(skill_data.cost))
