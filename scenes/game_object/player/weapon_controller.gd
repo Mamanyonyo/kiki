@@ -20,10 +20,11 @@ func _ready() -> void:
 	stats_component = player.stats_component
 
 func Inputs(event):
+	for spell in spell_component.available_spells:
+		if Input.is_action_just_pressed(spell) && !player.attacking:
+			try_spell_cast(spell)
+			return
 	melee_atack_listen()
-	range_atack_listen()
-	teleport_listen()
-	paralyze_listen()
 
 func melee_atack_listen():
 	if Input.is_action_just_pressed("attack") && !player.attacking:
@@ -31,19 +32,6 @@ func melee_atack_listen():
 		sprite_manager.melee_hitbox.damage = player.stats_component.damage
 		play_and_set_attacking_state(weapon_name_animation_prefix + "_attack")
 		check_if_animation_worked(weapon_name_animation_prefix + "_attack")
-
-func range_atack_listen():
-	if Input.is_action_just_pressed("attack2") && !player.attacking && !Input.is_action_just_pressed("teleport"):
-		try_spell_cast("fireball")
-		
-func teleport_listen():
-	if Input.is_action_just_pressed("teleport"):
-		try_spell_cast("teleport")
-		
-func paralyze_listen():
-	if Input.is_key_pressed(KEY_V) && !player.attacking:
-		play_and_set_attacking_state(weapon_name_animation_prefix + "_attack_spell_aimed")
-		try_spell_cast("paralyze")
 
 func play_and_set_attacking_state(animation_prefix: String):
 	player.attacking = true
@@ -70,6 +58,8 @@ func fireball():
 	get_tree().get_first_node_in_group("entities_layer").add_child(bullet_instance)
 	
 func teleport():
+	play_and_set_attacking_state(weapon_name_animation_prefix + "_attack_spell_aimed")
+	check_if_animation_worked(weapon_name_animation_prefix + "_attack_spell_aimed")
 	tp_timer.start()
 	DataImport.skill_data["teleport"].cost = DataImport.skill_data["teleport"].cost * 2
 	var previous_pos = player.global_position
@@ -90,6 +80,8 @@ func teleport():
 		##TODO hacer que el player no se pueda quedar atrapado entre paredes cerradas viendo el tile del lado opuesto de la colision
 
 func paralyze():
+	play_and_set_attacking_state(weapon_name_animation_prefix + "_attack_spell_aimed")
+	check_if_animation_worked(weapon_name_animation_prefix + "_attack_spell_aimed")
 	var paralyze_instance = paralyze_scene.instantiate()
 	get_tree().get_first_node_in_group("entities_layer").add_child(paralyze_instance)
 	paralyze_instance.global_position = player.get_global_mouse_position()
@@ -98,6 +90,7 @@ func get_skill_data(name):
 	return DataImport.skill_data[name]
 
 func try_spell_cast(name):
+	if player.attacking: return
 	if !spell_component.available_spells.has(name):
 		print("No tiene hechizo " + name) 
 		return
