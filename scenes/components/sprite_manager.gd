@@ -152,8 +152,10 @@ func look_at(pos):
 	previous_dir = Vector2.ZERO
 
 func _on_player_animator_animation_finished(anim_name: StringName) -> void:
-	if anim_name.contains("attack") && parent.can_move:
-		melee_hitbox.scale = Vector2(1, 1)
-		parent.attacking = false
-		if melee_hitbox != null: melee_hitbox.get_child(0).disabled = true
-		correct_sprite_on_facing_str()
+	if anim_name.contains("attack") && parent.can_move: cancel_attack()
+
+func cancel_attack():
+	melee_hitbox.scale = Vector2(1, 1)
+	parent.attacking = false
+	if melee_hitbox != null: melee_hitbox.get_child(0).disabled = true
+	correct_sprite_on_facing_str()
