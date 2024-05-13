@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://boh3510we3axq"]
+[gd_scene load_steps=11 format=3 uid="uid://boh3510we3axq"]
 
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="1_2mbce"]
 [ext_resource type="PackedScene" uid="uid://du25e0wl2obi1" path="res://scenes/UI/ui.tscn" id="1_hfgd7"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cpbg6qshhpf5y" path="res://scenes/manager/money_manager.tscn" id="6_g8io0"]
 [ext_resource type="PackedScene" uid="uid://ca2gvkwc20xwd" path="res://scenes/manager/spawn_manager.tscn" id="7_oq6j0"]
 [ext_resource type="Script" path="res://scenes/manager/spawn_manager.gd" id="8_xrb60"]
-[ext_resource type="PackedScene" uid="uid://dfqauk0kslf7r" path="res://scenes/game_object/npc/bathroom_girl_npc.tscn" id="11_la2yi"]
 [ext_resource type="PackedScene" uid="uid://dbhqp6kk7g2ke" path="res://scenes/areas/main_area.tscn" id="11_sxqim"]
 
 [node name="Main" type="Node2D"]
@@ -49,15 +48,4 @@ position = Vector2(319, 64)
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true
 
-<<<<<<< HEAD
-[node name="BathroomGirlNPC" parent="." instance=ExtResource("11_la2yi")]
-position = Vector2(205, 44)
-
-[editable path="UI"]
-[editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/HealthBar"]
-[editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/StaminaBar"]
-[editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/ManaBar"]
-[editable path="UI/CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer3/HBoxContainer/GridContainer/DriveBar"]
-=======
->>>>>>> 45f7cd745eabd61ac54a6bc92a01b3e32f32c8a0
 [editable path="Entities/Player"]
