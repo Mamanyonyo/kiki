@@ -9,6 +9,7 @@ const ACCELERATION_SMOOTHING = 25
 @export var stats_component: StatsComponent
 @onready var inventory_component : InventoryComponent = $InventoryComponent
 @onready var stamina_component : StaminaComponent = $StaminaComponent
+@onready var mana_component : ManaComponent = $ManaComponent
 @onready var sprite_manager : SpriteManager = $SpriteManager
 
 var attacking = false

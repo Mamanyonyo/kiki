@@ -2,9 +2,12 @@ extends MarginContainer
 
 @export var time_display: Label
 
-@export var arena_time_manager: Node
+var arena_time_manager: Node
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+func _ready():
+	arena_time_manager = get_tree().get_first_node_in_group("wave_manager")
+
 func _process(delta: float) -> void:
 	if arena_time_manager == null: return
 	var time_elapsed = arena_time_manager.get_remaining_time() as float

@@ -1,4 +1,4 @@
-extends StatsComponent
+class_name PlayerStatsComponent extends StatsComponent
 
 @export var max_mana : float = 1
 @export var max_mana_reg : float = 1

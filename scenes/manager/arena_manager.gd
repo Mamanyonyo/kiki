@@ -1,8 +1,8 @@
-extends Node
+class_name WaveManager extends Node
 
 @onready var timer = $Timer
 
-var wave_enemies = 20
+@export var wave_enemies = 20
 var remaining
 var spawned = 0
 

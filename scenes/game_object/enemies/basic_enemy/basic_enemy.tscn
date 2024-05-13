@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://cqurns0kyxmsl"]
+[gd_scene load_steps=20 format=3 uid="uid://cqurns0kyxmsl"]
 
 [ext_resource type="Texture2D" uid="uid://bktwmghtn2a6d" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.png" id="1_enlj8"]
 [ext_resource type="Script" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.gd" id="1_ms8tp"]
 [ext_resource type="PackedScene" uid="uid://cquarnyd0pw5t" path="res://scenes/components/health_component.tscn" id="2_5w0eh"]
+[ext_resource type="PackedScene" uid="uid://ebogf22k6g7e" path="res://scenes/components/wave_scale_component.tscn" id="2_tk522"]
 [ext_resource type="PackedScene" uid="uid://46gkkjx61fwg" path="res://scenes/components/stats_component.tscn" id="2_tx4kg"]
 [ext_resource type="PackedScene" uid="uid://c8y0bthj1r56h" path="res://scenes/components/drop_component.tscn" id="3_4vh70"]
 [ext_resource type="PackedScene" uid="uid://c1ooxaf6n4m4" path="res://scenes/components/velocity_component.tscn" id="4_eac18"]
@@ -16,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bvhmy0cf8uhf2" path="res://scenes/components/state_machine/enemy/chase_player.tscn" id="11_iup4t"]
 [ext_resource type="PackedScene" uid="uid://dmh2u33x3o0cn" path="res://scenes/components/state_machine/enemy/back_to_original_position.tscn" id="12_yqsxc"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_53qki"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s0ygl"]
 resource_local_to_scene = true
 shader = ExtResource("6_x8svc")
 shader_parameter/lerp_percent = 0.0
@@ -35,6 +36,10 @@ wall_min_slide_angle = 0.0
 script = ExtResource("1_ms8tp")
 detection_range = 140.0
 
+[node name="WaveScaleComponent" parent="." node_paths=PackedStringArray("stats_component", "drop_component") instance=ExtResource("2_tk522")]
+stats_component = NodePath("../StatsComponent")
+drop_component = NodePath("../DropComponent")
+
 [node name="StatsComponent" parent="." instance=ExtResource("2_tx4kg")]
 max_damage = 2
 max_speed = 60.0
@@ -52,7 +57,7 @@ navigation_agent = NodePath("../NavigationAgent2D")
 [node name="HitFlashComponent" parent="." node_paths=PackedStringArray("health_component", "sprite") instance=ExtResource("5_07d4w")]
 health_component = NodePath("../HealthComponent")
 sprite = NodePath("../Sprite2D")
-hit_flash_material = SubResource("ShaderMaterial_53qki")
+hit_flash_material = SubResource("ShaderMaterial_s0ygl")
 
 [node name="NameComponent" parent="." instance=ExtResource("8_ndg2k")]
 

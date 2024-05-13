@@ -1000,7 +1000,7 @@ stats_component = NodePath("../../StatsComponent")
 mana_component = NodePath("../../ManaComponent")
 weapon_name_animation_prefix = "book"
 spell_component = NodePath("../../SpellsComponent")
-tp_timer = NodePath("../../HatManager/GhostDollController/Timer")
+tp_timer = NodePath("../Timers/Teleport")
 sprite_manager = NodePath("../../SpriteManager")
 item_id = "spellbook"
 
@@ -1030,8 +1030,9 @@ one_shot = true
 wait_time = 0.25
 one_shot = true
 
-[node name="Timers" type="Node" parent="WeaponManager"]
+[node name="Timers" type="Node" parent="WeaponManager" node_paths=PackedStringArray("spell_component")]
 script = ExtResource("18_cbevg")
+spell_component = NodePath("../../SpellsComponent")
 
 [node name="Teleport" type="Timer" parent="WeaponManager/Timers"]
 wait_time = 10.0
@@ -1163,7 +1164,6 @@ shape = SubResource("CircleShape2D_5pqvn")
 [connection signal="drive_finish" from="DriveComponent" to="WeaponManager" method="_on_drive_component_drive_finish"]
 [connection signal="drive_start" from="DriveComponent" to="WeaponManager" method="_on_drive_component_drive_start"]
 [connection signal="timeout" from="WeaponManager/StaffController/BusterTimer" to="WeaponManager/StaffController" method="_on_buster_timer_timeout"]
-[connection signal="timeout" from="WeaponManager/Timers/Teleport" to="WeaponManager/Timers" method="_on_teleport_timeout"]
 [connection signal="item_equip" from="HatManager" to="Sprite2D/Hat" method="_on_hat_manager_item_equip"]
 [connection signal="timeout" from="HatManager/GhostDollController/Timer" to="HatManager/GhostDollController" method="_on_timer_timeout"]
 [connection signal="animation_finished" from="PlayerAnimator" to="." method="_on_player_animator_animation_finished"]
