@@ -1000,7 +1000,7 @@ stats_component = NodePath("../../StatsComponent")
 mana_component = NodePath("../../ManaComponent")
 weapon_name_animation_prefix = "book"
 spell_component = NodePath("../../SpellsComponent")
-tp_timer = NodePath("../../HatManager/GhostDollController/Timer")
+tp_timer = NodePath("../Timers/Teleport")
 sprite_manager = NodePath("../../SpriteManager")
 item_id = "spellbook"
 
@@ -1030,8 +1030,9 @@ one_shot = true
 wait_time = 0.25
 one_shot = true
 
-[node name="Timers" type="Node" parent="WeaponManager"]
+[node name="Timers" type="Node" parent="WeaponManager" node_paths=PackedStringArray("spell_component")]
 script = ExtResource("18_cbevg")
+spell_component = NodePath("../../SpellsComponent")
 
 [node name="Teleport" type="Timer" parent="WeaponManager/Timers"]
 wait_time = 10.0

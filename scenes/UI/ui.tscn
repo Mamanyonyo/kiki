@@ -159,10 +159,11 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 
 [node name="PanelContainer" type="TabContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2"]
-custom_minimum_size = Vector2(0, 150)
+custom_minimum_size = Vector2(131, 150)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_s58cr")
 tab_alignment = 1
+clip_tabs = false
 
 [node name="Inventory" type="MarginContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer2/PanelContainer"]
 layout_mode = 2

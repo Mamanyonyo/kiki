@@ -21,7 +21,8 @@ func _ready() -> void:
 
 func Inputs(event):
 	for spell in spell_component.available_spells:
-		if Input.is_action_just_pressed(spell) && !player.attacking:
+		if InputMap.has_action(spell) && Input.is_action_just_pressed(spell) && !player.attacking:
+			if Input.is_key_pressed(KEY_CTRL) && !InputMap.action_get_events(spell)[0].ctrl_pressed: continue
 			try_spell_cast(spell)
 			return
 	melee_atack_listen()
@@ -62,6 +63,7 @@ func teleport():
 	check_if_animation_worked(weapon_name_animation_prefix + "_attack_spell_aimed")
 	tp_timer.start()
 	DataImport.skill_data["teleport"].cost = DataImport.skill_data["teleport"].cost * 2
+	spell_component.available_spells_updated.emit()
 	var previous_pos = player.global_position
 	player.global_position = player.get_global_mouse_position()
 	var space_state = player.get_world_2d().direct_space_state

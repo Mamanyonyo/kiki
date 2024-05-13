@@ -6,7 +6,9 @@ var spell_id
 func set_spell(new_spell_id):
 	spell_id = new_spell_id
 	spell = DataImport.skill_data[new_spell_id]
-	text = spell.name
+	var key = InputMap.action_get_events(new_spell_id)[0].as_text()
+	var mana_cost = str(DataImport.skill_data[new_spell_id].cost)
+	text = spell.name + " " + key + " " + mana_cost + "MP"
 
 func _on_gui_input(event: InputEvent) -> void:
 	if(event.is_pressed()):
