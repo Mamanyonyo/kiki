@@ -11,7 +11,7 @@ size = Vector2(2, 16.125)
 
 [node name="Door" instance=ExtResource("1_tpbmm")]
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="4"]
 texture = ExtResource("2_1bsrw")
 
 [node name="CollisionShape2D" parent="Sprite2D/Area2D" index="0"]

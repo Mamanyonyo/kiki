@@ -1,7 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://8tpg5227nwx7"]
+[gd_scene load_steps=10 format=3 uid="uid://8tpg5227nwx7"]
 
 [ext_resource type="Script" path="res://scenes/game_object/door.gd" id="1_g2b1g"]
 [ext_resource type="Texture2D" uid="uid://1w1arecq3cnw" path="res://free_assets/Tiles/tile_0045.png" id="1_jh3gp"]
+[ext_resource type="PackedScene" uid="uid://cquarnyd0pw5t" path="res://scenes/components/health_component.tscn" id="2_qnqbo"]
+[ext_resource type="PackedScene" uid="uid://cw2upt4misqqn" path="res://scenes/components/name_component.tscn" id="3_vbk8u"]
+[ext_resource type="PackedScene" uid="uid://46gkkjx61fwg" path="res://scenes/components/stats_component.tscn" id="4_ug0t3"]
+[ext_resource type="PackedScene" uid="uid://civstynml3v51" path="res://scenes/components/hurtbox_component.tscn" id="5_miu7n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nxlux"]
+size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b3o43"]
 radius = 3.0
@@ -11,6 +18,23 @@ size = Vector2(16, 5)
 
 [node name="Door" type="Node2D"]
 script = ExtResource("1_g2b1g")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_qnqbo")]
+stats_component = NodePath("../StatsComponent")
+
+[node name="NameComponent" parent="." instance=ExtResource("3_vbk8u")]
+display_name = "Door"
+
+[node name="StatsComponent" parent="." instance=ExtResource("4_ug0t3")]
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("stats_component", "health_component", "parent") instance=ExtResource("5_miu7n")]
+stats_component = NodePath("../StatsComponent")
+health_component = NodePath("../HealthComponent")
+parent = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_nxlux")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(8, 8)
@@ -32,4 +56,5 @@ position = Vector2(0, 8)
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_vdeio")
 
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]

@@ -29,7 +29,7 @@ signal wave_enemy_spawned
 signal wave_enemy_limit_reached
 signal quantifiable_stat_changed(incoming_stat_name : String, current, max, percentage)
 signal stat_update
-signal enemy_hit(enemy: BasicEnemy)
+signal enemy_hit(enemy)
 signal item_equip(item_name: String)
 signal show_cg(image_path)
 signal stop_cg
@@ -80,7 +80,7 @@ func emit_quantifiable_stat_changed(incoming_stat_name: String, current, max, pe
 func emit_stat_update():
 	stat_update.emit()
 
-func emit_enemy_hit(enemy: BasicEnemy):
+func emit_enemy_hit(enemy):
 	enemy_hit.emit(enemy)
 
 func emit_item_equip(item: String):

@@ -27,3 +27,7 @@ func open_door(tried_id: int):
 	new_area_instance.global_position = new_area_pos
 	get_tree().get_first_node_in_group("areas_node").call_deferred("add_child", new_area_instance)
 	queue_free()
+
+
+func _on_health_component_died() -> void:
+	open_door(id)

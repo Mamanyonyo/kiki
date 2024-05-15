@@ -11,7 +11,7 @@ func damage(incoming_damage: float):
 	if final_damage < 0: final_damage = 0
 	stats_component.health -= final_damage
 	changed.emit()
-	if get_parent().is_in_group("Enemy"):
+	if !get_parent().is_in_group("Player"):
 		GameEvents.emit_enemy_hit(get_parent())
 		if final_damage > 0:
 			var floating_text = floating_text_scene.instantiate() as Node2D
