@@ -30,3 +30,4 @@ Kiki: Understood. Good luck then.
 
 ~ buy
 do load_shop.emit("bathroom")
+=> END

@@ -22,6 +22,7 @@ signal did_damage(amount: int)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameEvents.emit_player_ready()
+	DialogueManager.dialogue_ended.connect(on_dialogue_end)
 	
 	
 func _process(delta: float) -> void:
@@ -59,15 +60,16 @@ func check_interaction():
 		var result = space_state.intersect_ray(query)
 		if result != { }:
 			if result.collider.has_method("on_interact"):
+				can_move = false
+				sprite_manager.direction = Vector2.ZERO
+				sprite_manager.animator.stop()
+				sprite_manager.cancel_attack()
 				result.collider.on_interact()
 
 func get_movement_vector():
 	var x_movement = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var y_movement = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	return Vector2(x_movement, y_movement)
-
-func _on_area_2d_area_entered(area):
-	health_component.damage(5)
 
 func _on_health_component_died():
 	if GameEvents.tree:
@@ -78,3 +80,6 @@ func _on_health_component_died():
 
 func _on_drive_component_drive_finish():
 	sprite_manager.set_default_animations_and_sprites()     
+
+func on_dialogue_end(_dialogue):
+	can_move = true

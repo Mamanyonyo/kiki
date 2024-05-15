@@ -7,6 +7,7 @@ func set_spell(new_spell_id):
 	spell_id = new_spell_id
 	spell = DataImport.skill_data[new_spell_id]
 	var key = InputMap.action_get_events(new_spell_id)[0].as_text()
+	if key.find("(Physical)"): key = key.replace("(Physical)", "")
 	var mana_cost = str(DataImport.skill_data[new_spell_id].cost)
 	text = spell.name + " " + key + " " + mana_cost + "MP"
 

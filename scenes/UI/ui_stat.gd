@@ -26,7 +26,7 @@ func on_button_press():
 	stats_component.stat_up(stat_name, increment)
 	GameEvents.emit_stat_update()
 
-func on_level_up(_level):
+func on_level_up():
 	update()
 
 func on_player_ready():
