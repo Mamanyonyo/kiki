@@ -14,7 +14,7 @@ size = Vector2(74, 69)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnc03"]
 size = Vector2(60, 56)
 
-[node name="Tree" type="StaticBody2D" groups=["tree"]]
+[node name="Tree" type="StaticBody2D" groups=["Ally", "tree"]]
 script = ExtResource("1_mru27")
 
 [node name="CollisionHurtComponent" parent="." node_paths=PackedStringArray("health_component", "hurtbox", "stats_component") instance=ExtResource("2_ry08u")]
