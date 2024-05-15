@@ -43,6 +43,15 @@ script = ExtResource("5_mciro")
 [node name="MainArea" parent="Areas" instance=ExtResource("10_eqyvd")]
 position = Vector2(0, 433)
 
+[node name="MainArea2" parent="Areas" instance=ExtResource("10_eqyvd")]
+position = Vector2(-2, -61)
+
+[node name="MainArea3" parent="Areas" instance=ExtResource("10_eqyvd")]
+position = Vector2(-656, 82)
+
+[node name="MainArea4" parent="Areas" instance=ExtResource("10_eqyvd")]
+position = Vector2(652, 107)
+
 [node name="Floor" type="Node2D" parent="." groups=["floor_layer"]]
 
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
@@ -50,6 +59,9 @@ y_sort_enabled = true
 
 [node name="Player" parent="Entities" instance=ExtResource("9_lndom")]
 position = Vector2(319, 64)
+
+[node name="StatsComponent" parent="Entities/Player" index="3"]
+max_mana = 1e+18
 
 [node name="InventoryComponent" parent="Entities/Player" index="4"]
 items = Array[String](["spellbook", "ghost_doll"])
@@ -61,11 +73,11 @@ items = Array[String](["fireball", "hyperborea_buster", "teleport", "paralyze"])
 position = Vector2(199, 78)
 value = 2000
 
+[node name="Node2D2" parent="Entities" instance=ExtResource("12_b6k20")]
+position = Vector2(236, 97)
+
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true
-
-[node name="Node2D" parent="." instance=ExtResource("12_b6k20")]
-position = Vector2(236, 97)
 
 [editable path="Managers/ArenaManager"]
 [editable path="Entities/Player"]

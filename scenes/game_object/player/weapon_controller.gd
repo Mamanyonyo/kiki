@@ -70,16 +70,30 @@ func teleport():
 	var RAYCAST_DISTANCE = 5000
 	var directions = [Vector2.UP + Vector2.LEFT, Vector2.UP + Vector2.RIGHT, Vector2.RIGHT + Vector2.DOWN, Vector2.DOWN + Vector2.LEFT, Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
 	var hit = []
+	var valid = true
 	for direction in directions:
 		var query = PhysicsRayQueryParameters2D.create(player.global_position, player.global_position + direction * RAYCAST_DISTANCE, pow(2, 1-1) + pow(2, 7-1))
 		query.exclude = [player]
 		var result = space_state.intersect_ray(query)
-		if result: hit.push_front(result)
-	if hit.size() != directions.size() && !GameEvents.debug:
+		if result:
+			if !result.collider is TileMap: 
+				hit.push_front(result)
+				continue
+			var tilemap = result.collider as TileMap
+			var tile_coords = tilemap.get_coords_for_body_rid(result.rid)
+			var tile_layer = tilemap.get_layer_for_body_rid(result.rid)
+			var atlas_coords = tilemap.get_cell_atlas_coords(tile_layer, tile_coords) as Vector2i
+			if direction == Vector2.UP:
+					if (atlas_coords == Vector2i(2,1) || atlas_coords == Vector2i(2, 0)) || atlas_coords != Vector2i(1,0) && atlas_coords != Vector2i(3,0) && atlas_coords != Vector2i(3,1) && atlas_coords != Vector2i(3,2) && atlas_coords != Vector2i(2,2) && atlas_coords != Vector2i(1,2) && atlas_coords != Vector2i(1,1) && atlas_coords != Vector2i(1,0):
+						hit.push_front(result)
+					else: valid = false
+			else:
+				hit.push_front(result)
+		else: valid = false
+	if !valid && !GameEvents.debug:
 		player.global_position = previous_pos
 		player.health_component.damage(3)
 		##TODO tpear al player al tile mas cercano
-		##TODO hacer que el player no se pueda quedar atrapado entre paredes cerradas viendo el tile del lado opuesto de la colision
 
 func paralyze():
 	play_and_set_attacking_state(weapon_name_animation_prefix + "_attack_spell_aimed")

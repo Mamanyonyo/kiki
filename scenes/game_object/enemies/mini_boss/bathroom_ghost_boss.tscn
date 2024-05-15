@@ -15,35 +15,38 @@ resource_local_to_scene = true
 shader = ExtResource("3_jlwp6")
 shader_parameter/lerp_percent = 0.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_kgmmg"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_tgimq"]
 radius = 1.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kgmmg"]
-
-[node name="BathroomGhostBoss" node_paths=PackedStringArray("state_machine") instance=ExtResource("1_wfog3")]
+[node name="BathroomGhostBoss" instance=ExtResource("1_wfog3")]
 collision_mask = 0
 script = ExtResource("1_6qcya")
-state_machine = NodePath("BasicEnemyStateMachine")
 permanent_speed_increment = 30.0
 detection_range = 200.0
 
-[node name="StatsComponent" parent="." index="0"]
+[node name="StatsComponent" parent="." index="1"]
 max_speed = 100.0
 max_health = 150.0
 max_resistance = 2.0
 
-[node name="DropComponent" parent="." index="2"]
+[node name="DropComponent" parent="." index="3"]
 droppeable = ExtResource("3_sgtv4")
 item_id = "ghost_doll"
 
-[node name="HitFlashComponent" parent="." index="4"]
+[node name="HitFlashComponent" parent="." index="5"]
 hit_flash_material = SubResource("ShaderMaterial_rdtpk")
 
-[node name="NameComponent" parent="." index="5"]
+[node name="NameComponent" parent="." index="6"]
 types = Array[String]([])
 display_name = "Yuki"
 
-[node name="BasicEnemyStateMachine" parent="." index="6" node_paths=PackedStringArray("current_state")]
+[node name="JumpCD" type="Timer" parent="." index="7"]
+wait_time = 2.5
+one_shot = true
+
+[node name="BasicEnemyStateMachine" parent="." index="8" node_paths=PackedStringArray("current_state")]
 current_state = NodePath("ChasePlayer")
 
 [node name="ChasePlayer" parent="BasicEnemyStateMachine" index="2" node_paths=PackedStringArray("stats", "health_component", "shape", "sprite")]
@@ -76,11 +79,11 @@ shape = NodePath("../../Sprite2D/EventArea2D/CollisionShape2D2")
 velocity_component = NodePath("../../VelocityComponent")
 stats_component = NodePath("../../StatsComponent")
 
-[node name="JumpCD" type="Timer" parent="." index="7"]
-wait_time = 2.5
-one_shot = true
+[node name="HurtboxComponent#CollisionShape2D" type="CollisionShape2D" parent="." index="11"]
+position = Vector2(0, -15)
+shape = SubResource("CircleShape2D_kgmmg")
 
-[node name="Sprite2D" parent="." index="10"]
+[node name="Sprite2D" parent="." index="12"]
 position = Vector2(0, -16)
 texture = ExtResource("5_cpmfm")
 hframes = 3
@@ -95,10 +98,6 @@ collision_mask = 64
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_tgimq")
 disabled = true
-
-[node name="HurtboxComponent#CollisionShape2D" type="CollisionShape2D" parent="." index="11"]
-position = Vector2(0, -15)
-shape = SubResource("CircleShape2D_kgmmg")
 
 [connection signal="timeout" from="JumpCD" to="BasicEnemyStateMachine/InToilet" method="_on_jump_cd_timeout"]
 [connection signal="body_shape_entered" from="Sprite2D/EventArea2D" to="." method="_on_event_area_2d_body_shape_entered"]
