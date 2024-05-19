@@ -45,22 +45,24 @@ position = Vector2(336, 96)
 position = Vector2(1872, -80)
 scene_area_path = "res://scenes/areas/bathroom/south.tscn"
 direction = Vector2(0, 1)
+door_sprite_name = "bathroom"
 
-[node name="Sprite2D" parent="TileMap/Entities/Door2" index="0"]
+[node name="Sprite2D" parent="TileMap/Entities/Door2" index="4"]
 rotation = -1.5708
 
 [node name="Door" parent="TileMap/Entities" instance=ExtResource("2_xl0l5")]
 position = Vector2(1872, -304)
 scene_area_path = "res://scenes/areas/bathroom/north.tscn"
+door_sprite_name = "bathroom"
 
 [node name="ToiletMimic" parent="TileMap/Entities" instance=ExtResource("7_ki1af")]
 position = Vector2(2680, -307)
 detection_range = 100.0
 
-[node name="ToiletQuestComponent" parent="TileMap/Entities/ToiletMimic" instance=ExtResource("7_x6cgd")]
-
 [node name="HitFlashComponent" parent="TileMap/Entities/ToiletMimic" index="5"]
 hit_flash_material = SubResource("ShaderMaterial_5bbdn")
+
+[node name="ToiletQuestComponent" parent="TileMap/Entities/ToiletMimic" instance=ExtResource("7_x6cgd")]
 
 [node name="BathroomGirlNPC" parent="TileMap/Entities" instance=ExtResource("3_h3erb")]
 position = Vector2(1776, -269)
@@ -69,10 +71,10 @@ position = Vector2(1776, -269)
 position = Vector2(920, -162)
 detection_range = 100.0
 
-[node name="ToiletQuestComponent" parent="TileMap/Entities/ToiletMimic2" instance=ExtResource("7_x6cgd")]
-
 [node name="HitFlashComponent" parent="TileMap/Entities/ToiletMimic2" index="5"]
 hit_flash_material = SubResource("ShaderMaterial_n84df")
+
+[node name="ToiletQuestComponent" parent="TileMap/Entities/ToiletMimic2" instance=ExtResource("7_x6cgd")]
 
 [node name="GenericInteractable" parent="TileMap" instance=ExtResource("6_81tjq")]
 position = Vector2(1112, -248)

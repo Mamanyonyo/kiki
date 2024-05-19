@@ -5,12 +5,14 @@ extends Node2D
 @export var direction : Vector2 = Vector2.UP
 @export var gap : int = 16
 @export var id : int = 0
+@export var door_sprite_name = "wood"
 
 @onready var sprite = $Sprite2D
 
 var unlocks_area
 
 func _ready():
+	set_sprite()
 	unlocks_area = load(scene_area_path)
 	var game_events = GameEvents
 	game_events.door_amount += 1
@@ -55,3 +57,9 @@ func rotate_according_to_dir():
 
 func _on_health_component_died() -> void:
 	open_door(id)
+
+func set_sprite():
+	if direction != Vector2.UP: door_sprite_name += "_side"
+	var image = Image.load_from_file("res://assets/environment/door/" + door_sprite_name + ".png")
+	var texture = ImageTexture.create_from_image(image)
+	sprite.texture = texture
