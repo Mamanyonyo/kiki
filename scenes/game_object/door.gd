@@ -22,12 +22,29 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func open_door(tried_id: int):
 	if id != tried_id: return
+	check_and_remove_forward_tile(global_position)
 	var new_area_pos = global_position + (direction * gap)
 	var new_area_instance = unlocks_area.instantiate() as Node2D
 	new_area_instance.global_position = new_area_pos
 	get_tree().get_first_node_in_group("areas_node").call_deferred("add_child", new_area_instance)
 	queue_free()
 
+func check_and_remove_forward_tile(pos):
+	var space_state = get_world_2d().direct_space_state
+	var RAYCAST_DISTANCE = 5000
+	var query = PhysicsRayQueryParameters2D.create(pos + Vector2(1, 1), pos + direction * RAYCAST_DISTANCE + Vector2(1, 1), pow(2, 1-1) + pow(2, 7-1))
+	query.exclude = [self]
+	var result = space_state.intersect_ray(query)
+	if result && result.collider is TileMap:
+		var tilemap = result.collider as TileMap
+		var tile_coords = tilemap.get_coords_for_body_rid(result.rid)
+		var layers = tilemap.get_layers_count()
+		for layer in layers:
+			tilemap.erase_cell(layer, tile_coords)
+		tilemap.fix_invalid_tiles()
+		
+		var new_pos = to_global(tile_coords)
+		check_and_remove_forward_tile(new_pos)
 
 func _on_health_component_died() -> void:
 	open_door(id)
