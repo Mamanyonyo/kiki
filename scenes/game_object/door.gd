@@ -6,6 +6,8 @@ extends Node2D
 @export var gap : int = 16
 @export var id : int = 0
 
+@onready var sprite = $Sprite2D
+
 var unlocks_area
 
 func _ready():
@@ -16,6 +18,7 @@ func _ready():
 		id = game_events.door_amount
 		print("door at " + str(global_position) + " has default id (0). Setting id: " + str(id))
 	game_events.open_door.connect(open_door)
+	rotate_according_to_dir()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	GameEvents.emit_try_door_open(id, price)
@@ -45,6 +48,10 @@ func check_and_remove_forward_tile(pos):
 		
 		var new_pos = to_global(tile_coords)
 		check_and_remove_forward_tile(new_pos)
+		
+func rotate_according_to_dir():
+	if direction != Vector2.UP:
+		sprite.rotation = (-1 * direction).angle()
 
 func _on_health_component_died() -> void:
 	open_door(id)
