@@ -13,6 +13,7 @@ collision_layer = 129
 collision_mask = 0
 script = ExtResource("1_vd045")
 dialogue = ExtResource("2_bcevs")
+needed_toilet_for_quest = 2
 
 [node name="ShopComponent" parent="." instance=ExtResource("3_q63s6")]
 shop_name = "bathroom"

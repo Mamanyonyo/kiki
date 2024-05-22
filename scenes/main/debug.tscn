@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="6_pwvlf"]
 [ext_resource type="PackedScene" uid="uid://du25e0wl2obi1" path="res://scenes/UI/ui.tscn" id="7_bo3jd"]
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="9_lndom"]
-[ext_resource type="PackedScene" uid="uid://dbhqp6kk7g2ke" path="res://scenes/areas/main_area.tscn" id="10_eqyvd"]
+[ext_resource type="PackedScene" uid="uid://4cdhdu7q1t6b" path="res://scenes/areas/bathroom/entrance.tscn" id="10_vfynw"]
 [ext_resource type="PackedScene" uid="uid://cvge35d7xmioq" path="res://scenes/game_object/experience_vial/experience_vial.tscn" id="12_b6k20"]
 
 [node name="Debug" type="Node2D"]
@@ -40,8 +40,8 @@ script = ExtResource("5_mciro")
 
 [node name="Areas" type="Node2D" parent="." groups=["areas_node"]]
 
-[node name="MainArea" parent="Areas" instance=ExtResource("10_eqyvd")]
-position = Vector2(0, 433)
+[node name="BathroomEntrance" parent="Areas" instance=ExtResource("10_vfynw")]
+position = Vector2(-1610, 269)
 
 [node name="Floor" type="Node2D" parent="." groups=["floor_layer"]]
 
