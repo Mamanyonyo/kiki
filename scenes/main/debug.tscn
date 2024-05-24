@@ -41,7 +41,7 @@ script = ExtResource("5_mciro")
 [node name="Areas" type="Node2D" parent="." groups=["areas_node"]]
 
 [node name="BathroomEntrance" parent="Areas" instance=ExtResource("10_vfynw")]
-position = Vector2(-1610, 269)
+position = Vector2(-1605, 267)
 
 [node name="Floor" type="Node2D" parent="." groups=["floor_layer"]]
 
