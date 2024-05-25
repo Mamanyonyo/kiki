@@ -15,20 +15,19 @@ shader_parameter/lerp_percent = 0.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_v8xpa"]
 radius = 7.0
 
-[node name="ToiletMimic" node_paths=PackedStringArray("state_machine") instance=ExtResource("1_b2u0a")]
+[node name="ToiletMimic" instance=ExtResource("1_b2u0a")]
 script = ExtResource("2_iis20")
-state_machine = NodePath("BasicEnemyStateMachine")
 
-[node name="StatsComponent" parent="." index="0"]
+[node name="StatsComponent" parent="." index="1"]
 max_damage = 7
 
-[node name="VelocityComponent" parent="." index="3"]
+[node name="VelocityComponent" parent="." index="4"]
 acceleration = 40.0
 
-[node name="HitFlashComponent" parent="." index="4"]
+[node name="HitFlashComponent" parent="." index="5"]
 hit_flash_material = SubResource("ShaderMaterial_i8mdv")
 
-[node name="NameComponent" parent="." index="5"]
+[node name="NameComponent" parent="." index="6"]
 types = Array[String]([])
 
 [node name="Standby" parent="BasicEnemyStateMachine" index="0" node_paths=PackedStringArray("sprite")]
@@ -40,15 +39,10 @@ script = ExtResource("5_so4fu")
 sprite = NodePath("../../Sprite2D")
 range_mod = 3.0
 
-[node name="CollisionShape2D" parent="HurtboxComponent" index="1"]
-position = Vector2(0, -6)
-shape = SubResource("CircleShape2D_v8xpa")
-
 [node name="Sprite2D" parent="." index="10"]
 texture = ExtResource("3_qsfml")
 hframes = 2
 
-[node name="CollisionShape2D" parent="." index="11"]
-position = Vector2(0, -5)
-
-[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[node name="HurtboxComponent#CollisionShape2D" type="CollisionShape2D" parent="." index="11"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_v8xpa")

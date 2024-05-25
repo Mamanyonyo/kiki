@@ -8,6 +8,8 @@ func _ready():
 	GameEvents.toilet_puzzle_fail.connect(_on_puzzle_fail)
 
 func on_interact():
+	print("complete")
+	print(GameEvents.toilet_complete)
 	if GameEvents.toilet_complete:
 		return DialogueManager.show_dialogue_balloon(resource, "complete")
 	if flushed:

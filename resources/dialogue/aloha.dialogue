@@ -4,7 +4,7 @@ Bathroom Girl: In the entrails of this world, there are all kinds of strange thi
 ##TODO default_talked sistema para no repetir dialogo?
 
 ~ quest
-if toilet_killed_quest_total == toilet_killed_quest and !toilet_killed_quest_finish: 
+if toilet_killed_quest >= toilet_killed_quest_total and !toilet_killed_quest_finish: 
 	Bathroom Girl: Thanks.
 	do emit_quest_finish("toilet_mimic")
 	set toilet_killed_quest_finish = true
