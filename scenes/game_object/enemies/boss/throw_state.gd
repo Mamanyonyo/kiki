@@ -1,6 +1,6 @@
 extends State
 
-@export var extra_distance : float = 10
+@export var extra_distance : float = 32
 @export var orb : GirlCultBossOrb
 @export var speed_boost = 400
 @export var stats_component : StatsComponent
@@ -20,7 +20,7 @@ func Enter():
 
 func Update(delta):
 	##TODO hacer que mientras se lance por los primeros segundos recalcule la direccion al player
-	if orb.global_position.distance_to(target_pos) <= 10: 
+	if orb.global_position.distance_to(target_pos) <= 1: 
 		transitioned.emit("ReturnToGirl")
 		return
 	velocity_component.accelerate_to_objective()

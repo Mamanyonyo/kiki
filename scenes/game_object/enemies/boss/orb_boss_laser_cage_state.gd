@@ -26,7 +26,7 @@ func Enter():
 	laser_instance = laser_scene.instantiate()
 	get_tree().get_first_node_in_group("entities_layer").add_child.call_deferred(laser_instance)
 	laser_instance.global_position = orb.center.global_position
-	laser_instance.points[1] = Vector2.RIGHT * (distance_from_player/2 + distance_from_player)
+	laser_instance.points[1] = Vector2.RIGHT * (distance_from_player/2 + distance_from_player - 8)
 	laser_instance.rotate(looking_towards_orb_angle)
 	
 func Update(delta):
