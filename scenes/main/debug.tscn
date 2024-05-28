@@ -20,6 +20,8 @@ script = ExtResource("1_trn0f")
 [node name="CanvasModulate" type="CanvasModulate" parent="." groups=["modulate"]]
 script = ExtResource("1_1m5vi")
 
+[node name="Sound" type="Node" parent="." groups=["sound"]]
+
 [node name="Managers" type="Node" parent="."]
 
 [node name="ArenaManager" parent="Managers" instance=ExtResource("1_7wu2c")]

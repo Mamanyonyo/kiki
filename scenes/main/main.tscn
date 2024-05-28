@@ -16,6 +16,8 @@
 [node name="CanvasModulate" type="CanvasModulate" parent="." groups=["modulate"]]
 script = ExtResource("1_i124g")
 
+[node name="Sound" type="Node" parent="." groups=["sound"]]
+
 [node name="Managers" type="Node" parent="." groups=["managers_node"]]
 
 [node name="ArenaManager" parent="Managers" instance=ExtResource("1_qlqaq")]

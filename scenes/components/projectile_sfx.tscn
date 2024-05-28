@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnd36yjducis1"]
+
+[ext_resource type="AudioStream" uid="uid://cn6mreog4px8b" path="res://assets/sfx/magic-flame1.mp3" id="1_w8bap"]
+[ext_resource type="Script" path="res://scenes/components/projectile_sfx.gd" id="2_shu1y"]
+
+[node name="ProjectileSFX" type="AudioStreamPlayer"]
+stream = ExtResource("1_w8bap")
+autoplay = true
+script = ExtResource("2_shu1y")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
