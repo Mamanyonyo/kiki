@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/game_object/projectile/bullet.gd" id="1_fch70"]
 [ext_resource type="Texture2D" uid="uid://cjt62pcswv3xf" path="res://assets/projectile/fireball.png" id="1_hq8x1"]
-[ext_resource type="PackedScene" uid="uid://dnd36yjducis1" path="res://scenes/components/projectile_sfx.tscn" id="3_bhf2j"]
+[ext_resource type="PackedScene" uid="uid://dnd36yjducis1" path="res://scenes/components/sfx/projectile_sfx.tscn" id="3_w4g7s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5m6v6"]
 radius = 2.0
@@ -26,7 +26,7 @@ shape = SubResource("CircleShape2D_5m6v6")
 wait_time = 2.5
 autostart = true
 
-[node name="ProjectileSFX" parent="." instance=ExtResource("3_bhf2j")]
+[node name="ProjectileSFX" parent="." instance=ExtResource("3_w4g7s")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

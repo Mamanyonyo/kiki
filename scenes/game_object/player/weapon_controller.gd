@@ -13,6 +13,8 @@ var player : Player
 @onready var cast_circle_scene = preload("res://scenes/effect/cast_circle.tscn")
 @onready var paralyze_scene = preload("res://scenes/effect/paralyze.tscn")
 @export var sprite_manager : SpriteManager
+@onready var projectile_sfx_scene = preload("res://scenes/components/sfx/projectile_sfx.tscn")
+@onready var teleport_sfx_path = "res://assets/sfx/magic-gravity1.mp3"
 
 
 func _ready() -> void:
@@ -93,7 +95,9 @@ func teleport():
 	if !valid && !GameEvents.debug:
 		player.global_position = previous_pos
 		player.health_component.damage(3)
+		return
 		##TODO tpear al player al tile mas cercano
+	get_tree().get_first_node_in_group("sound").play("Teleport")
 
 func paralyze():
 	play_and_set_attacking_state(weapon_name_animation_prefix + "_attack_spell_aimed")

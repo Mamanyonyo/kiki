@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://m7weeqleby3x"]
+
+[ext_resource type="Script" path="res://scenes/components/sfx/looping_sfx.gd" id="2_y28xo"]
+
+[node name="LoopingSFX" type="Node"]
+script = ExtResource("2_y28xo")

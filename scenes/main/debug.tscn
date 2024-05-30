@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dr68fmyh4o88q"]
+[gd_scene load_steps=15 format=3 uid="uid://dr68fmyh4o88q"]
 
 [ext_resource type="Script" path="res://scenes/main/modulate.gd" id="1_1m5vi"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_7wu2c"]
 [ext_resource type="Script" path="res://scenes/main/debug.gd" id="1_trn0f"]
 [ext_resource type="PackedScene" uid="uid://dxfu1qsn6132b" path="res://scenes/manager/experience_manager.tscn" id="2_mta20"]
 [ext_resource type="PackedScene" uid="uid://cpbg6qshhpf5y" path="res://scenes/manager/money_manager.tscn" id="3_aks2g"]
+[ext_resource type="PackedScene" uid="uid://cqafyivvlnn1c" path="res://scenes/components/sfx/sound.tscn" id="3_ar0ou"]
 [ext_resource type="PackedScene" uid="uid://ca2gvkwc20xwd" path="res://scenes/manager/spawn_manager.tscn" id="4_op7ru"]
 [ext_resource type="Script" path="res://scenes/manager/spawn_manager.gd" id="5_mciro"]
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="6_pwvlf"]
@@ -20,7 +21,7 @@ script = ExtResource("1_trn0f")
 [node name="CanvasModulate" type="CanvasModulate" parent="." groups=["modulate"]]
 script = ExtResource("1_1m5vi")
 
-[node name="Sound" type="Node" parent="." groups=["sound"]]
+[node name="Sound" parent="." instance=ExtResource("3_ar0ou")]
 
 [node name="Managers" type="Node" parent="."]
 

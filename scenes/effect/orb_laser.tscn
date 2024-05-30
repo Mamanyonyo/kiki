@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwrg2y3mxtl2v"]
+[gd_scene load_steps=5 format=3 uid="uid://dwrg2y3mxtl2v"]
 
 [ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="1_1vwtk"]
 [ext_resource type="Texture2D" uid="uid://exoregn8rrsp" path="res://assets/effect/orb_laser.png" id="1_cteeg"]
+[ext_resource type="PackedScene" uid="uid://m7weeqleby3x" path="res://scenes/components/sfx/looping_sfx.tscn" id="3_6wwww"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mycue"]
 size = Vector2(836.854, 20)
@@ -25,3 +26,5 @@ position = Vector2(386.446, 0)
 rotation = 3.14159
 scale = Vector2(0.923569, -1.40953)
 shape = SubResource("RectangleShape2D_mycue")
+
+[node name="LoopingSFX" parent="." instance=ExtResource("3_6wwww")]

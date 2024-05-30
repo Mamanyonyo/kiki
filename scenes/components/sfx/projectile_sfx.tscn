@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnd36yjducis1"]
+
+[ext_resource type="Script" path="res://scenes/components/sfx/projectile_sfx.gd" id="2_717xp"]
+
+[node name="ProjectileSFX" type="Node"]
+script = ExtResource("2_717xp")

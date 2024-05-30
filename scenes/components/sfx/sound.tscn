@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqafyivvlnn1c"]
+
+[ext_resource type="Script" path="res://scenes/components/sfx/sound.gd" id="1_l2yjb"]
+[ext_resource type="AudioStream" uid="uid://bns0eyif7anuj" path="res://assets/sfx/magic-gravity1.mp3" id="2_fqy8r"]
+[ext_resource type="AudioStream" uid="uid://fxybcp5gpk28" path="res://assets/sfx/dark_magic1.wav" id="3_f0xcm"]
+[ext_resource type="AudioStream" uid="uid://cn6mreog4px8b" path="res://assets/sfx/magic-flame1.mp3" id="4_wkn8r"]
+
+[node name="Sound" type="Node" groups=["sound"]]
+script = ExtResource("1_l2yjb")
+
+[node name="Teleport" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_fqy8r")
+
+[node name="Laser" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_f0xcm")
+
+[node name="Fireball" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wkn8r")
