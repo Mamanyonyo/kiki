@@ -33,6 +33,8 @@ func _on_timer_timeout():
 	beam_instance.global_position = orb.center.global_position
 	get_tree().get_first_node_in_group("foreground_layer").add_child(beam_instance)
 	beam_instance.look_at(target_pos)
+	var sound_manager = get_tree().get_first_node_in_group("sound") as SoundManager
+	sound_manager.play("Laser")
 	var orbs = get_tree().get_nodes_in_group("yellow_orb_boss")
 	var i = 0
 	var this_orb_index : float
