@@ -1,4 +1,4 @@
-extends Node
+class_name SoundManager extends Node
 
 func play(sfx):
 	var sound_node = get_node(sfx) as AudioStreamPlayer
