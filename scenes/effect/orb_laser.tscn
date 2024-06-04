@@ -1,15 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwrg2y3mxtl2v"]
+[gd_scene load_steps=6 format=3 uid="uid://dwrg2y3mxtl2v"]
 
 [ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="1_1vwtk"]
 [ext_resource type="Texture2D" uid="uid://exoregn8rrsp" path="res://assets/effect/orb_laser.png" id="1_cteeg"]
+[ext_resource type="Texture2D" uid="uid://bqkh6rx4knfea" path="res://assets/effect/orb_laser_beg.png" id="2_3akb8"]
 [ext_resource type="PackedScene" uid="uid://m7weeqleby3x" path="res://scenes/components/sfx/looping_sfx.tscn" id="3_6wwww"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mycue"]
-size = Vector2(836.854, 20)
+size = Vector2(870.536, 22.804)
 
-[node name="OrbLaser" type="Line2D"]
-scale = Vector2(1, 1.8)
+[node name="Laser" type="Node2D"]
+z_as_relative = false
+
+[node name="Line" type="Line2D" parent="."]
+position = Vector2(9, 0)
 points = PackedVector2Array(0, 0, 800, 0)
+width = 9.0
+texture = ExtResource("1_cteeg")
+texture_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_3akb8")
+
+[node name="cont" type="Line2D" parent="Sprite2D"]
+position = Vector2(4, 0)
+points = PackedVector2Array(0, 0, 5, 0)
 width = 9.0
 texture = ExtResource("1_cteeg")
 texture_mode = 1
@@ -22,7 +37,7 @@ script = ExtResource("1_1vwtk")
 damage = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(386.446, 0)
+position = Vector2(398, -2.92919e-05)
 rotation = 3.14159
 scale = Vector2(0.923569, -1.40953)
 shape = SubResource("RectangleShape2D_mycue")

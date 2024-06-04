@@ -5,7 +5,7 @@ extends State
 @export var starting_direction = Vector2.RIGHT
 
 @export var laser_scene : PackedScene
-var laser_instance : Line2D
+var laser_instance : Node2D
 
 func Enter():
 	var player = get_tree().get_first_node_in_group("Player") as Player
@@ -24,9 +24,9 @@ func Enter():
 	var laser_rotation = looking_towards_orb_angle
 	orb.global_position = player.global_position + rotation_vector * distance_from_player
 	laser_instance = laser_scene.instantiate()
-	get_tree().get_first_node_in_group("entities_layer").add_child.call_deferred(laser_instance)
+	get_tree().get_first_node_in_group("floor_layer").add_child.call_deferred(laser_instance)
 	laser_instance.global_position = orb.center.global_position
-	laser_instance.points[1] = Vector2.RIGHT * (distance_from_player/2 + distance_from_player - 16)
+	laser_instance.get_node("Line").points[1] = Vector2.RIGHT * (distance_from_player/2 + distance_from_player - 12)
 	laser_instance.rotate(looking_towards_orb_angle)
 	
 func Update(delta):

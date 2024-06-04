@@ -3,7 +3,7 @@ extends State
 @export var beam_scene : PackedScene
 @export var orb : GirlCultBossOrb
 @export var health_component : HealthComponent
-var beam_instance : Line2D
+var beam_instance : Node2D
 
 var target_pos : Vector2
 
