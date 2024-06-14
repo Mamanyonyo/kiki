@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dr68fmyh4o88q"]
+[gd_scene load_steps=14 format=3 uid="uid://dr68fmyh4o88q"]
 
 [ext_resource type="Script" path="res://scenes/main/modulate.gd" id="1_1m5vi"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="1_7wu2c"]
@@ -13,15 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="9_lndom"]
 [ext_resource type="PackedScene" uid="uid://4cdhdu7q1t6b" path="res://scenes/areas/bathroom/entrance.tscn" id="10_vfynw"]
 [ext_resource type="PackedScene" uid="uid://cvge35d7xmioq" path="res://scenes/game_object/experience_vial/experience_vial.tscn" id="12_b6k20"]
-[ext_resource type="PackedScene" uid="uid://cqq82b41jy0ns" path="res://scenes/game_object/enemies/boss/unnamed_cult_girl_boss.tscn" id="13_12uxg"]
 
 [node name="Debug" type="Node2D"]
 script = ExtResource("1_trn0f")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." groups=["modulate"]]
 script = ExtResource("1_1m5vi")
-
-[node name="Sound" parent="." instance=ExtResource("3_ar0ou")]
 
 [node name="Managers" type="Node" parent="."]
 
@@ -37,6 +34,8 @@ wait_time = 2.0
 
 [node name="SpawnManager" parent="Managers" instance=ExtResource("4_op7ru")]
 script = ExtResource("5_mciro")
+
+[node name="Sound" parent="Managers" instance=ExtResource("3_ar0ou")]
 
 [node name="GameCamera" parent="." instance=ExtResource("6_pwvlf")]
 
@@ -70,9 +69,6 @@ value = 2000
 
 [node name="Node2D2" parent="Entities" instance=ExtResource("12_b6k20")]
 position = Vector2(236, 97)
-
-[node name="BossGirl" parent="Entities" instance=ExtResource("13_12uxg")]
-position = Vector2(71, 92)
 
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true

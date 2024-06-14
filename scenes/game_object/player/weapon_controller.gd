@@ -35,6 +35,8 @@ func melee_atack_listen():
 		sprite_manager.melee_hitbox.damage = player.stats_component.damage
 		play_and_set_attacking_state(weapon_name_animation_prefix + "_attack")
 		check_if_animation_worked(weapon_name_animation_prefix + "_attack")
+		var sound_manager = get_tree().get_first_node_in_group("sound") as SoundManager
+		sound_manager.play("Melee")
 
 func play_and_set_attacking_state(animation_prefix: String):
 	player.attacking = true

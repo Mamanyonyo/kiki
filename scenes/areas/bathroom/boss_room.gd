@@ -1,6 +1,5 @@
 extends Area
 
-@export var tilemap: TileMap
 @export var area_node: Area2D
 @export var boss_spawn_point: Marker2D
 @export var health : float

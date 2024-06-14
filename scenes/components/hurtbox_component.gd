@@ -18,6 +18,7 @@ func check_deal_damage():
 		
 		var hitbox_component = other_area as HitboxComponent
 		#if hitbox_component.target != 2 && hitbox_component.target != alignment: return
+		get_tree().get_first_node_in_group("sound").play("Hurt")
 		health_component.damage(hitbox_component.damage)
 		if other_area.attacker != null && other_area.attacker is Player:
 			var player : Player = other_area.attacker
