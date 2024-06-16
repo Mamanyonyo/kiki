@@ -3,7 +3,7 @@
 [ext_resource type="TileSet" uid="uid://dlfbbd7au4b0g" path="res://resources/tileset/tileset.tres" id="1_f5th2"]
 [ext_resource type="Script" path="res://scenes/areas/area.gd" id="2_5t5pw"]
 [ext_resource type="PackedScene" uid="uid://8tpg5227nwx7" path="res://scenes/game_object/door.tscn" id="2_tjjf3"]
-[ext_resource type="PackedScene" uid="uid://begx3mv0xqkc8" path="res://scenes/spawner/enemy_spawner.tscn" id="3_jacmy"]
+[ext_resource type="PackedScene" uid="uid://begx3mv0xqkc8" path="res://scenes/game_object/spawner/enemy_spawner.tscn" id="3_jacmy"]
 [ext_resource type="PackedScene" uid="uid://dhne4hrlxos48" path="res://scenes/game_object/tree.tscn" id="5_7puyr"]
 
 [node name="MainArea" type="Node2D"]

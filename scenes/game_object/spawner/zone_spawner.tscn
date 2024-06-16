@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckmil4filsbwu"]
+
+[ext_resource type="PackedScene" uid="uid://begx3mv0xqkc8" path="res://scenes/game_object/spawner/enemy_spawner.tscn" id="1_typbq"]
+[ext_resource type="Script" path="res://scenes/game_object/spawner/spawner_zone.gd" id="2_54m2o"]
+
+[node name="ZoneSpawner" instance=ExtResource("1_typbq")]
+script = ExtResource("2_54m2o")
+
+[node name="Sprite2D" parent="." index="1"]
+self_modulate = Color(0.705882, 0.0705882, 0.403922, 1)
+rotation = 0.0

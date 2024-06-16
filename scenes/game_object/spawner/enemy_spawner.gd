@@ -22,14 +22,16 @@ func enable():
 	timer.start()
 	sprite.frame_coords.x = 0
 	sprite.frame_coords.y = 0
+	
+func spawn():
+	var enemy_instance = enemy_scene.instantiate() as Node2D
+	var entities_layer = get_tree().get_first_node_in_group("entities_layer")
+	entities_layer.add_child(enemy_instance)
+	enemy_instance.global_position = global_position
+	enemy_instance.get_node("VelocityComponent").original_position = global_position
+	return enemy_instance
 
 func _on_timer_timeout() -> void:
 	if GameEvents.tree:
-		var enemy_instance = enemy_scene.instantiate() as Node2D
-		var entities_layer = get_tree().get_first_node_in_group("entities_layer")
-		entities_layer.add_child(enemy_instance)
-		enemy_instance.global_position = global_position
-		enemy_instance.get_node("VelocityComponent").original_position = global_position
-		enemy_instance.wave_spawned = true
+		spawn().wave_spawned = true
 		GameEvents.wave_enemy_spawned.emit()
-		animation_player.play("rotate")

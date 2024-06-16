@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://csnpgt4ytyyf1"]
+
+[ext_resource type="Texture2D" uid="uid://cbc4o3ptiw1xl" path="res://assets/environment/spawner_computer.png" id="1_w5dc1"]
+[ext_resource type="PackedScene" uid="uid://civstynml3v51" path="res://scenes/components/hurtbox_component.tscn" id="2_7u6la"]
+[ext_resource type="PackedScene" uid="uid://cquarnyd0pw5t" path="res://scenes/components/health_component.tscn" id="2_an7kn"]
+[ext_resource type="PackedScene" uid="uid://46gkkjx61fwg" path="res://scenes/components/stats_component.tscn" id="3_b7nng"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_30t71"]
+radius = 12.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mo033"]
+size = Vector2(16, 24)
+
+[node name="TerminalSpawner" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_w5dc1")
+
+[node name="HurtboxComponent" parent="Sprite2D" node_paths=PackedStringArray("stats_component", "health_component", "parent") instance=ExtResource("2_7u6la")]
+stats_component = NodePath("../../StatsComponent")
+health_component = NodePath("../../HealthComponent")
+parent = NodePath("../..")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Sprite2D/HurtboxComponent"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_30t71")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_an7kn")]
+stats_component = NodePath("../StatsComponent")
+
+[node name="StatsComponent" parent="." instance=ExtResource("3_b7nng")]
+max_damage = 0.0
+max_magic_damage = 0.0
+max_resistance = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mo033")

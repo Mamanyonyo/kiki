@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://begx3mv0xqkc8"]
 
-[ext_resource type="Script" path="res://scenes/spawner/enemy_spawner.gd" id="1_l6ae8"]
-[ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="2_g3ha2"]
-[ext_resource type="Texture2D" uid="uid://bmkqvlj8qsxby" path="res://assets/environment/spawner.png" id="3_4krm0"]
+[ext_resource type="Script" path="res://scenes/game_object/spawner/enemy_spawner.gd" id="1_5atta"]
+[ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="2_begn6"]
+[ext_resource type="Texture2D" uid="uid://bmkqvlj8qsxby" path="res://assets/environment/spawner.png" id="3_pivua"]
 
 [sub_resource type="Animation" id="Animation_hburq"]
 length = 0.001
@@ -30,8 +30,8 @@ _data = {
 }
 
 [node name="EnemySpawner" type="Node2D" node_paths=PackedStringArray("timer") groups=["spawner"]]
-script = ExtResource("1_l6ae8")
-enemy_scene = ExtResource("2_g3ha2")
+script = ExtResource("1_5atta")
+enemy_scene = ExtResource("2_begn6")
 timer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="."]
@@ -39,7 +39,7 @@ wait_time = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
-texture = ExtResource("3_4krm0")
+texture = ExtResource("3_pivua")
 hframes = 2
 vframes = 2
 region_rect = Rect2(0, 0, 16, 16)

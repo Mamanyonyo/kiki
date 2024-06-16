@@ -23,6 +23,7 @@ script = ExtResource("1_g2b1g")
 stats_component = NodePath("../StatsComponent")
 
 [node name="NameComponent" parent="." instance=ExtResource("3_vbk8u")]
+types = Array[String]([])
 display_name = "Door"
 
 [node name="StatsComponent" parent="." instance=ExtResource("4_ug0t3")]

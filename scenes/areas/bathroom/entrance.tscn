@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://dwsf4rskaeij1" path="res://resources/tileset/bathroom_tileset.tres" id="1_udgdm"]
 [ext_resource type="PackedScene" uid="uid://8tpg5227nwx7" path="res://scenes/game_object/door.tscn" id="2_xl0l5"]
 [ext_resource type="PackedScene" uid="uid://bws23s3k4deoc" path="res://scenes/game_object/door_side.tscn" id="3_4cjn1"]
-[ext_resource type="PackedScene" uid="uid://begx3mv0xqkc8" path="res://scenes/spawner/enemy_spawner.tscn" id="3_avtcf"]
+[ext_resource type="PackedScene" uid="uid://begx3mv0xqkc8" path="res://scenes/game_object/spawner/enemy_spawner.tscn" id="3_d46nx"]
 [ext_resource type="PackedScene" uid="uid://dfqauk0kslf7r" path="res://scenes/game_object/npc/bathroom_girl_npc.tscn" id="3_h3erb"]
 [ext_resource type="PackedScene" uid="uid://divmskqbylt27" path="res://scenes/game_object/interaction/bathrooms/toilet_puzzle.tscn" id="3_nw1ya"]
 [ext_resource type="PackedScene" uid="uid://cw7lc3f4loa8l" path="res://scenes/game_object/interaction/generic_interactable.tscn" id="6_81tjq"]
@@ -37,7 +37,7 @@ layer_2/tile_data = PackedInt32Array(-720837, 458753, 2, -655301, 458753, 3, -72
 [node name="Entities" type="Node2D" parent="TileMap"]
 position = Vector2(48, 16)
 
-[node name="EnemySpawner" parent="TileMap/Entities" instance=ExtResource("3_avtcf")]
+[node name="EnemySpawner" parent="TileMap/Entities" instance=ExtResource("3_d46nx")]
 position = Vector2(336, 96)
 
 [node name="Door2" parent="TileMap/Entities" instance=ExtResource("3_4cjn1")]
