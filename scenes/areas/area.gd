@@ -4,6 +4,9 @@ class_name Area extends Node
 
 var in_area = false
 
+signal entered
+signal left
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var entities_node = get_node("TileMap/Entities")
@@ -32,9 +35,11 @@ func _process(_float) -> void:
 func Enter():
 	in_area = true
 	print("Entered " + name)
+	entered.emit()
 	pass
 	
 func Leave():
 	in_area = false
 	print("Left " + name)
+	left.emit()
 	pass

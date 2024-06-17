@@ -5,6 +5,7 @@
 
 [node name="ZoneSpawner" instance=ExtResource("1_typbq")]
 script = ExtResource("2_54m2o")
+custom_det_range = 1000
 
 [node name="Sprite2D" parent="." index="1"]
 self_modulate = Color(0.705882, 0.0705882, 0.403922, 1)

@@ -66,7 +66,6 @@ collision_mask = 0
 script = ExtResource("2_t1hsp")
 initial_state = "Spin"
 center = NodePath("Sprite2D/Center")
-detection_range = 0.0
 
 [node name="StatsComponent" parent="." index="1"]
 max_health = 250.0

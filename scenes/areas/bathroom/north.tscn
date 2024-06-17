@@ -113,29 +113,121 @@ position = Vector2(47, -444)
 [node name="Landmine2" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
 position = Vector2(101, -509)
 
+[node name="Landmine32" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(102, -389)
+
+[node name="Landmine33" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(35, -412)
+
+[node name="Landmine34" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(70, -429)
+
+[node name="Landmine35" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(72, -472)
+
+[node name="Landmine36" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(18, -505)
+
+[node name="Landmine37" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(56, -624)
+
+[node name="Landmine38" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(88, -619)
+
+[node name="Landmine39" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(52, -681)
+
+[node name="Landmine40" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(28, -667)
+
+[node name="Landmine41" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(120, -686)
+
+[node name="Landmine42" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(84, -655)
+
+[node name="Landmine43" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(57, -661)
+
+[node name="Landmine44" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(90, -704)
+
+[node name="Landmine45" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(27, -711)
+
+[node name="Landmine46" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(11, -683)
+
+[node name="Landmine47" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(50, -724)
+
+[node name="Landmine48" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(119, -730)
+
+[node name="Landmine49" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(89, -680)
+
+[node name="Landmine50" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(135, -709)
+
+[node name="Landmine51" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(116, -263)
+
+[node name="Landmine52" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(123, -240)
+
+[node name="Landmine53" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(97, -236)
+
+[node name="Landmine54" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(30, -219)
+
+[node name="Landmine55" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(57, -204)
+
+[node name="Landmine56" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(84, -213)
+
+[node name="Landmine57" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(58, -276)
+
+[node name="Landmine58" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(21, -294)
+
+[node name="Landmine59" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(59, -355)
+
+[node name="Landmine60" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(45, -160)
+
+[node name="Landmine61" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
+position = Vector2(112, -151)
+
 [node name="Landmine3" parent="TileMap/Minefield" instance=ExtResource("3_nfksw")]
 position = Vector2(42, -532)
 
 [node name="Entities" type="Node2D" parent="TileMap"]
 
-[node name="ToiletPuzzle" parent="TileMap/Entities" instance=ExtResource("4_5rp12")]
-position = Vector2(72, -936)
-
-[node name="ToiletPuzzle2" parent="TileMap/Entities" instance=ExtResource("4_5rp12")]
-position = Vector2(-520, -824)
-
-[node name="ToiletPuzzle3" parent="TileMap/Entities" instance=ExtResource("4_5rp12")]
-position = Vector2(664, -807)
-
 [node name="SpawnerZone" parent="TileMap/Entities" instance=ExtResource("4_tlgwa")]
 position = Vector2(-64, -805)
 
-[node name="ZoneSpawner2" parent="TileMap/Entities" node_paths=PackedStringArray("terminal") instance=ExtResource("6_eexcx")]
-position = Vector2(176, -800)
-terminal = NodePath("../SpawnerZone")
+[node name="ToiletPuzzle" parent="TileMap" instance=ExtResource("4_5rp12")]
+position = Vector2(72, -936)
 
-[node name="ZoneSpawner" parent="TileMap/Entities" node_paths=PackedStringArray("terminal") instance=ExtResource("6_eexcx")]
-position = Vector2(8, -80)
-terminal = NodePath("../SpawnerZone")
+[node name="ToiletPuzzle2" parent="TileMap" instance=ExtResource("4_5rp12")]
+position = Vector2(-520, -824)
+
+[node name="ToiletPuzzle3" parent="TileMap" instance=ExtResource("4_5rp12")]
+position = Vector2(664, -807)
+
+[node name="ZoneSpawner2" parent="TileMap" node_paths=PackedStringArray("terminal", "parent_area") instance=ExtResource("6_eexcx")]
+position = Vector2(176, -800)
+terminal = NodePath("../Entities/SpawnerZone")
+parent_area = NodePath("../..")
+
+[node name="ZoneSpawner" parent="TileMap" node_paths=PackedStringArray("terminal", "parent_area") instance=ExtResource("6_eexcx")]
+position = Vector2(47, -75)
+terminal = NodePath("../Entities/SpawnerZone")
+parent_area = NodePath("../..")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

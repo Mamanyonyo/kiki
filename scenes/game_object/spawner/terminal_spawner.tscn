@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://csnpgt4ytyyf1"]
+[gd_scene load_steps=9 format=3 uid="uid://csnpgt4ytyyf1"]
 
+[ext_resource type="Script" path="res://scenes/game_object/spawner/terminal_spawner.gd" id="1_em6k8"]
 [ext_resource type="Texture2D" uid="uid://cbc4o3ptiw1xl" path="res://assets/environment/spawner_computer.png" id="1_w5dc1"]
 [ext_resource type="PackedScene" uid="uid://civstynml3v51" path="res://scenes/components/hurtbox_component.tscn" id="2_7u6la"]
 [ext_resource type="PackedScene" uid="uid://cquarnyd0pw5t" path="res://scenes/components/health_component.tscn" id="2_an7kn"]
 [ext_resource type="PackedScene" uid="uid://46gkkjx61fwg" path="res://scenes/components/stats_component.tscn" id="3_b7nng"]
+[ext_resource type="PackedScene" uid="uid://cw2upt4misqqn" path="res://scenes/components/name_component.tscn" id="5_b2364"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_30t71"]
 radius = 12.0
@@ -12,6 +14,7 @@ radius = 12.0
 size = Vector2(16, 24)
 
 [node name="TerminalSpawner" type="StaticBody2D"]
+script = ExtResource("1_em6k8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_w5dc1")
@@ -33,5 +36,10 @@ max_damage = 0.0
 max_magic_damage = 0.0
 max_resistance = 0.0
 
+[node name="NameComponent" parent="." instance=ExtResource("5_b2364")]
+types = Array[String]([])
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mo033")
+
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
