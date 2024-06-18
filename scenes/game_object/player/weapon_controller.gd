@@ -30,7 +30,7 @@ func Inputs(event):
 	melee_atack_listen()
 
 func melee_atack_listen():
-	if Input.is_action_just_pressed("attack") && !player.attacking:
+	if Input.is_action_just_pressed("attack") && !player.attacking && !player.interacting:
 		sprite_manager.melee_hitbox.get_child(0).disabled = false
 		sprite_manager.melee_hitbox.damage = player.stats_component.damage
 		play_and_set_attacking_state(weapon_name_animation_prefix + "_attack")

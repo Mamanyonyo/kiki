@@ -1,6 +1,7 @@
-[gd_scene load_steps=61 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=62 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
+[ext_resource type="Script" path="res://scenes/game_object/player/InteractionComponent.gd" id="2_5yryk"]
 [ext_resource type="PackedScene" uid="uid://bjk6og4ybld5d" path="res://scenes/components/sprite_manager.tscn" id="2_6pwh1"]
 [ext_resource type="PackedScene" uid="uid://dced3yrcptsre" path="res://scenes/components/collision_hurt_component.tscn" id="2_7ygai"]
 [ext_resource type="Script" path="res://scenes/game_object/player/player_quest_component.gd" id="2_64lh2"]
@@ -934,6 +935,8 @@ stats_component = NodePath("StatsComponent")
 animator = NodePath("../PlayerAnimator")
 sprite = NodePath("../Sprite2D")
 melee_hitbox = NodePath("../Sprite2D/WeaponHitbox")
+sprite_side_default = 6.0
+sprite_up_default = 3.0
 markers = NodePath("../Sprite2D/ProjectileMarkers")
 
 [node name="QuestComponent" type="Node" parent="." node_paths=PackedStringArray("inventory_manager")]
@@ -1050,6 +1053,11 @@ item_id = "ghost_doll"
 [node name="Timer" type="Timer" parent="HatManager/GhostDollController"]
 wait_time = 300.0
 one_shot = true
+
+[node name="InteractionComponent" type="Node" parent="." node_paths=PackedStringArray("player", "sprite_component")]
+script = ExtResource("2_5yryk")
+player = NodePath("..")
+sprite_component = NodePath("../SpriteManager")
 
 [node name="PlayerAnimator" type="AnimationPlayer" parent="."]
 libraries = {

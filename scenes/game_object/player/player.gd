@@ -14,6 +14,7 @@ const ACCELERATION_SMOOTHING = 25
 
 var attacking = false
 var can_move = true
+var interacting = false
 
 signal did_damage(amount: int)
 
@@ -35,7 +36,6 @@ func _unhandled_input(event):
 		var movement_vector = get_movement_vector()
 		sprite_manager.direction = movement_vector.normalized()
 		sprite_manager.absolute_dir = Vector2(ceil(sprite_manager.direction.x), ceil(sprite_manager.direction.y))
-		check_interaction()
 		check_run()
 		
 		
@@ -51,20 +51,6 @@ func check_run():
 	elif Input.is_action_just_released("run"):
 		stats_component.speed = stats_component.max_speed
 		stamina_component.running = false
-
-func check_interaction():
-	if Input.is_action_just_pressed("attack"):
-		var space_state = get_world_2d().direct_space_state
-		var query = PhysicsRayQueryParameters2D.create(middle.global_position, middle.global_position + sprite_manager.get_facing_direction() * 20)
-		query.collision_mask = 0x80
-		var result = space_state.intersect_ray(query)
-		if result != { }:
-			if result.collider.has_method("on_interact"):
-				can_move = false
-				sprite_manager.direction = Vector2.ZERO
-				sprite_manager.animator.stop()
-				sprite_manager.cancel_attack()
-				result.collider.on_interact()
 
 func get_movement_vector():
 	var x_movement = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
