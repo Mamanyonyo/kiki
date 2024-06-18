@@ -8,6 +8,7 @@ class_name EnemySpawner extends Node2D
 
 func _ready():
 	GameEvents.emit_new_spawner(self)
+	call_deferred("reparent", get_tree().get_first_node_in_group("floor_layer"))
 	
 func disable():
 	timer.autostart = false
