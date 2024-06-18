@@ -43,7 +43,7 @@ func open_door(tried_id: int):
 		for n in wall_height-1:
 			for layer in layers:
 				tilemap.erase_cell(layer, current_tile)
-		current_tile += Vector2i(direction)
+			current_tile += Vector2i(direction)
 	
 	var new_area_pos = global_position + (direction * tile_size * gap_tiles_door_spawn)
 	var new_area_instance = unlocks_area.instantiate() as Node2D
