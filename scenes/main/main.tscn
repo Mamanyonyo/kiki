@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://boh3510we3axq"]
+[gd_scene load_steps=14 format=3 uid="uid://boh3510we3axq"]
 
 [ext_resource type="PackedScene" uid="uid://bbr11er26thtr" path="res://scenes/manager/canvas_modulate.tscn" id="1_1m3k1"]
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="1_2mbce"]
@@ -9,7 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://cpbg6qshhpf5y" path="res://scenes/manager/money_manager.tscn" id="6_g8io0"]
 [ext_resource type="PackedScene" uid="uid://cqafyivvlnn1c" path="res://scenes/components/sfx/sound.tscn" id="7_0prbt"]
 [ext_resource type="PackedScene" uid="uid://ca2gvkwc20xwd" path="res://scenes/manager/spawn_manager.tscn" id="7_oq6j0"]
+[ext_resource type="PackedScene" uid="uid://ik8qc0h2fhf" path="res://scenes/manager/pause_manager.tscn" id="8_pyes6"]
 [ext_resource type="Script" path="res://scenes/manager/spawn_manager.gd" id="8_xrb60"]
+[ext_resource type="Script" path="res://scenes/manager/pause_manager.gd" id="9_qg4wj"]
 [ext_resource type="PackedScene" uid="uid://dbhqp6kk7g2ke" path="res://scenes/areas/main_area.tscn" id="11_sxqim"]
 
 [node name="Main" type="Node2D"]
@@ -19,6 +21,7 @@
 [node name="Managers" type="Node" parent="." groups=["managers_node"]]
 
 [node name="ArenaManager" parent="Managers" instance=ExtResource("1_qlqaq")]
+process_mode = 1
 
 [node name="ExperienceManager" parent="Managers" instance=ExtResource("2_ne1l0")]
 
@@ -29,25 +32,31 @@ script = ExtResource("8_xrb60")
 
 [node name="Sound" parent="Managers" instance=ExtResource("7_0prbt")]
 
+[node name="PauseManager" parent="Managers" instance=ExtResource("8_pyes6")]
+script = ExtResource("9_qg4wj")
+
 [node name="GameCamera" parent="." instance=ExtResource("1_2mbce")]
 
 [node name="UI" parent="." instance=ExtResource("1_hfgd7")]
 metadata/_edit_use_anchors_ = true
 
-[node name="Areas" type="Node2D" parent="." groups=["areas_node"]]
+[node name="Pausable" type="Node2D" parent="."]
+process_mode = 1
 
-[node name="MainArea" parent="Areas" instance=ExtResource("11_sxqim")]
+[node name="Areas" type="Node2D" parent="Pausable" groups=["areas_node"]]
+
+[node name="MainArea" parent="Pausable/Areas" instance=ExtResource("11_sxqim")]
 position = Vector2(0, 433)
 
-[node name="Floor" type="Node2D" parent="." groups=["floor_layer"]]
+[node name="Floor" type="Node2D" parent="Pausable" groups=["floor_layer"]]
 
-[node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
+[node name="Entities" type="Node2D" parent="Pausable" groups=["entities_layer"]]
 y_sort_enabled = true
 
-[node name="Player" parent="Entities" instance=ExtResource("3_hl5nt")]
+[node name="Player" parent="Pausable/Entities" instance=ExtResource("3_hl5nt")]
 position = Vector2(319, 64)
 
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true
 
-[editable path="Entities/Player"]
+[editable path="Pausable/Entities/Player"]
