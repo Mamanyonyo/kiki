@@ -72,11 +72,13 @@ func get_movement_vector():
 	return Vector2(x_movement, y_movement)
 
 func _on_health_component_died():
-	if GameEvents.tree:
+	var tree = get_tree().get_first_node_in_group("tree")
+	if GameEvents.tree && tree:
 		stats_component.health = stats_component.max_health / 2
 		health_component.changed.emit()
-		global_position = get_tree().get_first_node_in_group("tree").global_position + Vector2.DOWN * 30
-	else: queue_free()
+		global_position = tree.global_position + Vector2.DOWN * 30
+	else: 
+		get_tree().change_scene_to_file("res://scenes/title.tscn")
 
 func _on_drive_component_drive_finish():
 	sprite_manager.set_default_animations_and_sprites()     
