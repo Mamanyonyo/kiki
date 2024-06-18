@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbr11er26thtr"]
+
+[ext_resource type="Script" path="res://scenes/main/modulate.gd" id="1_pvjes"]
+
+[node name="CanvasModulate" type="CanvasModulate" groups=["modulate"]]
+script = ExtResource("1_pvjes")

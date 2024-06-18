@@ -6,8 +6,9 @@ func change_and_reset(opacity, time, reset_time):
 
 func change_opacity(opacity, time):
 	var tween = create_tween()
-	tween.tween_property(self, "color:a", opacity, time)
+	var modulate_color = Color(opacity, opacity, opacity, 1)
+	tween.tween_property(self, "color", modulate_color, time)
 	return tween
 	
 func reset():
-	color.a = 1
+	color = Color.WHITE
