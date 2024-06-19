@@ -6,9 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7anii"]
 size = Vector2(160, 112)
 
-[node name="BossRoom" type="Node2D" node_paths=PackedStringArray("tilemap", "area_node", "boss_spawn_point")]
+[node name="BossRoom" type="Node2D" node_paths=PackedStringArray("area_node", "boss_spawn_point")]
 script = ExtResource("1_0m5ep")
-tilemap = NodePath("TileMap")
 area_node = NodePath("TileMap/Area2D")
 boss_spawn_point = NodePath("TileMap/Area2D/CollisionShape2D/Marker2D")
 

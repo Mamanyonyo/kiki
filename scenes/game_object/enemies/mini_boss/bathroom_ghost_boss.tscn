@@ -71,11 +71,12 @@ JumpCDTimer = NodePath("../../JumpCD")
 stats = NodePath("../../StatsComponent")
 bonus_resistance = 5.0
 
-[node name="JumpAttack" type="Node" parent="BasicEnemyStateMachine" index="6" node_paths=PackedStringArray("boss", "sprite", "shape", "velocity_component", "stats_component")]
+[node name="JumpAttack" type="Node" parent="BasicEnemyStateMachine" index="6" node_paths=PackedStringArray("boss", "sprite", "shape", "collision_shape", "velocity_component", "stats_component")]
 script = ExtResource("7_6r6dc")
 boss = NodePath("../..")
 sprite = NodePath("../../Sprite2D")
 shape = NodePath("../../Sprite2D/EventArea2D/CollisionShape2D2")
+collision_shape = NodePath("../../CollisionShape2D")
 velocity_component = NodePath("../../VelocityComponent")
 stats_component = NodePath("../../StatsComponent")
 
