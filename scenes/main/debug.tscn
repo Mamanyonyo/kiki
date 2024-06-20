@@ -1,20 +1,62 @@
-[gd_scene load_steps=5 format=3 uid="uid://djbnlvt2kxh6q"]
+[gd_scene load_steps=14 format=3 uid="uid://cysw024ja3ol7"]
 
-[ext_resource type="PackedScene" uid="uid://boh3510we3axq" path="res://scenes/main/main.tscn" id="1_r20fi"]
-[ext_resource type="Script" path="res://scenes/main/debug.gd" id="1_trn0f"]
-[ext_resource type="PackedScene" uid="uid://dfqauk0kslf7r" path="res://scenes/game_object/npc/bathroom_girl_npc.tscn" id="3_cid1p"]
-[ext_resource type="PackedScene" uid="uid://myyxjkn2ktkh" path="res://scenes/areas/bathroom/boss_room.tscn" id="3_jvj8a"]
+[ext_resource type="PackedScene" uid="uid://bbr11er26thtr" path="res://scenes/manager/canvas_modulate.tscn" id="1_i0tgm"]
+[ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="2_0ux23"]
+[ext_resource type="PackedScene" uid="uid://dxfu1qsn6132b" path="res://scenes/manager/experience_manager.tscn" id="3_od48t"]
+[ext_resource type="PackedScene" uid="uid://dgndrfwq422ym" path="res://scenes/areas/bathroom/south.tscn" id="3_ybc8h"]
+[ext_resource type="PackedScene" uid="uid://cpbg6qshhpf5y" path="res://scenes/manager/money_manager.tscn" id="4_rfnc7"]
+[ext_resource type="PackedScene" uid="uid://ca2gvkwc20xwd" path="res://scenes/manager/spawn_manager.tscn" id="5_0vfuo"]
+[ext_resource type="Script" path="res://scenes/manager/spawn_manager.gd" id="6_gnb0c"]
+[ext_resource type="PackedScene" uid="uid://cqafyivvlnn1c" path="res://scenes/components/sfx/sound.tscn" id="7_qeup0"]
+[ext_resource type="PackedScene" uid="uid://ik8qc0h2fhf" path="res://scenes/manager/pause_manager.tscn" id="8_nm2oi"]
+[ext_resource type="Script" path="res://scenes/manager/pause_manager.gd" id="9_8d654"]
+[ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="10_oq4em"]
+[ext_resource type="PackedScene" uid="uid://du25e0wl2obi1" path="res://scenes/UI/ui.tscn" id="11_qj680"]
+[ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="13_8b11r"]
 
-[node name="Main" instance=ExtResource("1_r20fi")]
-script = ExtResource("1_trn0f")
+[node name="Main" type="Node2D"]
 
-[node name="Areas" parent="Pausable" index="0"]
-position = Vector2(-1449, -1378)
+[node name="CanvasModulate" parent="." instance=ExtResource("1_i0tgm")]
 
-[node name="BossRoom" parent="Pausable/Areas" index="1" instance=ExtResource("3_jvj8a")]
-position = Vector2(1462, 1377)
+[node name="Managers" type="Node" parent="." groups=["managers_node"]]
 
-[node name="BathroomGirlNPC" parent="." index="6" instance=ExtResource("3_cid1p")]
-position = Vector2(291, 4)
+[node name="ArenaManager" parent="Managers" instance=ExtResource("2_0ux23")]
+process_mode = 1
+
+[node name="ExperienceManager" parent="Managers" instance=ExtResource("3_od48t")]
+
+[node name="MoneyManager" parent="Managers" instance=ExtResource("4_rfnc7")]
+
+[node name="SpawnManager" parent="Managers" instance=ExtResource("5_0vfuo")]
+script = ExtResource("6_gnb0c")
+
+[node name="Sound" parent="Managers" instance=ExtResource("7_qeup0")]
+
+[node name="PauseManager" parent="Managers" instance=ExtResource("8_nm2oi")]
+script = ExtResource("9_8d654")
+
+[node name="GameCamera" parent="." instance=ExtResource("10_oq4em")]
+
+[node name="UI" parent="." instance=ExtResource("11_qj680")]
+metadata/_edit_use_anchors_ = true
+
+[node name="Pausable" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="Areas" type="Node2D" parent="Pausable" groups=["areas_node"]]
+
+[node name="BathroomSouth" parent="Pausable/Areas" instance=ExtResource("3_ybc8h")]
+position = Vector2(-892, -325)
+
+[node name="Floor" type="Node2D" parent="Pausable" groups=["floor_layer"]]
+
+[node name="Entities" type="Node2D" parent="Pausable" groups=["entities_layer"]]
+y_sort_enabled = true
+
+[node name="Player" parent="Pausable/Entities" instance=ExtResource("13_8b11r")]
+position = Vector2(319, 64)
+
+[node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
+follow_viewport_enabled = true
 
 [editable path="Pausable/Entities/Player"]
