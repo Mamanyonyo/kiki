@@ -10,7 +10,7 @@ extends State
 @export var max_random_time_range: float = 3
 
 func Enter():
-	boss.change_tile_based_on_tilemap_pos(boss.tile)
+	boss.change_tile_based_on_tilemap_pos(false)
 	stats.resistance += bonus_resistance
 	boss.global_position = boss.tilemap.global_position + Vector2(boss.tilemap.local_to_map(boss.tilemap.map_to_local(boss.tile))) * 16 + Vector2(8, 8)
 	sprite.visible = false

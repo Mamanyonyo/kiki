@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://bbr11er26thtr" path="res://scenes/manager/canvas_modulate.tscn" id="1_i0tgm"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="2_0ux23"]
 [ext_resource type="PackedScene" uid="uid://dxfu1qsn6132b" path="res://scenes/manager/experience_manager.tscn" id="3_od48t"]
-[ext_resource type="PackedScene" uid="uid://dgndrfwq422ym" path="res://scenes/areas/bathroom/south.tscn" id="3_ybc8h"]
 [ext_resource type="PackedScene" uid="uid://cpbg6qshhpf5y" path="res://scenes/manager/money_manager.tscn" id="4_rfnc7"]
 [ext_resource type="PackedScene" uid="uid://ca2gvkwc20xwd" path="res://scenes/manager/spawn_manager.tscn" id="5_0vfuo"]
 [ext_resource type="Script" path="res://scenes/manager/spawn_manager.gd" id="6_gnb0c"]
@@ -12,6 +11,7 @@
 [ext_resource type="Script" path="res://scenes/manager/pause_manager.gd" id="9_8d654"]
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="10_oq4em"]
 [ext_resource type="PackedScene" uid="uid://du25e0wl2obi1" path="res://scenes/UI/ui.tscn" id="11_qj680"]
+[ext_resource type="PackedScene" uid="uid://c3tekaoycx3t" path="res://scenes/areas/bathroom/south_west.tscn" id="12_fujia"]
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="13_8b11r"]
 
 [node name="Main" type="Node2D"]
@@ -45,8 +45,8 @@ process_mode = 1
 
 [node name="Areas" type="Node2D" parent="Pausable" groups=["areas_node"]]
 
-[node name="BathroomSouth" parent="Pausable/Areas" instance=ExtResource("3_ybc8h")]
-position = Vector2(-892, -325)
+[node name="BathroomSouthWest" parent="Pausable/Areas" instance=ExtResource("12_fujia")]
+position = Vector2(2129, 42)
 
 [node name="Floor" type="Node2D" parent="Pausable" groups=["floor_layer"]]
 

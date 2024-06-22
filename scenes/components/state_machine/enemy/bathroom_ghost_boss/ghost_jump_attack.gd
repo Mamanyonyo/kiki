@@ -28,7 +28,7 @@ func Enter():
 	sprite.frame_coords.y = 1
 	sprite.look_at(player_center)
 	objective_direction = (player_center - boss.global_position).normalized()
-	boss.change_tile_based_on_tilemap_pos(boss.tile, true)
+	boss.change_tile_based_on_tilemap_pos(true)
 	
 func Update(_delta):
 	boss.global_position += objective_direction * _delta * stats_component.speed
