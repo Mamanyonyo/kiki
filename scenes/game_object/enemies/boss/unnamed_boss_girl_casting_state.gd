@@ -33,7 +33,7 @@ func Enter():
 			var player_pos = player.global_position
 			var space_state = girl.get_world_2d().direct_space_state
 			var RAYCAST_DISTANCE = 5000
-			var directions = [Vector2.UP + Vector2.LEFT, Vector2.DOWN, Vector2.RIGHT]
+			var directions = [Vector2.UP, Vector2.LEFT, Vector2.DOWN, Vector2.RIGHT]
 			var farthest_hit = {
 				"position": Vector2(0, 0),
 				"distance": 0,

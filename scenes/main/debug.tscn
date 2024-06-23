@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cysw024ja3ol7"]
+[gd_scene load_steps=13 format=3 uid="uid://cysw024ja3ol7"]
 
 [ext_resource type="PackedScene" uid="uid://bbr11er26thtr" path="res://scenes/manager/canvas_modulate.tscn" id="1_i0tgm"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="2_0ux23"]
@@ -8,15 +8,16 @@
 [ext_resource type="Script" path="res://scenes/manager/spawn_manager.gd" id="6_gnb0c"]
 [ext_resource type="PackedScene" uid="uid://cqafyivvlnn1c" path="res://scenes/components/sfx/sound.tscn" id="7_qeup0"]
 [ext_resource type="PackedScene" uid="uid://ik8qc0h2fhf" path="res://scenes/manager/pause_manager.tscn" id="8_nm2oi"]
-[ext_resource type="Script" path="res://scenes/manager/pause_manager.gd" id="9_8d654"]
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="10_oq4em"]
 [ext_resource type="PackedScene" uid="uid://du25e0wl2obi1" path="res://scenes/UI/ui.tscn" id="11_qj680"]
-[ext_resource type="PackedScene" uid="uid://c3tekaoycx3t" path="res://scenes/areas/bathroom/south_west.tscn" id="12_fujia"]
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="13_8b11r"]
+[ext_resource type="PackedScene" uid="uid://myyxjkn2ktkh" path="res://scenes/areas/bathroom/boss_room.tscn" id="13_daltv"]
 
 [node name="Main" type="Node2D"]
 
 [node name="CanvasModulate" parent="." instance=ExtResource("1_i0tgm")]
+
+[node name="GameCamera" parent="." instance=ExtResource("10_oq4em")]
 
 [node name="Managers" type="Node" parent="." groups=["managers_node"]]
 
@@ -33,9 +34,6 @@ script = ExtResource("6_gnb0c")
 [node name="Sound" parent="Managers" instance=ExtResource("7_qeup0")]
 
 [node name="PauseManager" parent="Managers" instance=ExtResource("8_nm2oi")]
-script = ExtResource("9_8d654")
-
-[node name="GameCamera" parent="." instance=ExtResource("10_oq4em")]
 
 [node name="UI" parent="." instance=ExtResource("11_qj680")]
 metadata/_edit_use_anchors_ = true
@@ -45,8 +43,8 @@ process_mode = 1
 
 [node name="Areas" type="Node2D" parent="Pausable" groups=["areas_node"]]
 
-[node name="BathroomSouthWest" parent="Pausable/Areas" instance=ExtResource("12_fujia")]
-position = Vector2(2129, 42)
+[node name="BossRoom" parent="Pausable/Areas" instance=ExtResource("13_daltv")]
+position = Vector2(222, 47)
 
 [node name="Floor" type="Node2D" parent="Pausable" groups=["floor_layer"]]
 

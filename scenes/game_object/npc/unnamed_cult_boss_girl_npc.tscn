@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bt3q14jfiviy1"]
+
+[ext_resource type="Script" path="res://scenes/game_object/npc/unnamed_cult_boss_girl_npc.gd" id="1_t0foo"]
+[ext_resource type="PackedScene" uid="uid://cqq82b41jy0ns" path="res://scenes/game_object/enemies/boss/unnamed_cult_girl_boss.tscn" id="2_8oa4n"]
+[ext_resource type="Texture2D" uid="uid://bio4lfxxcgbux" path="res://assets/character/unnamed_cult_girl_boss/unnamed_cult_girl_boss.png" id="4_ruh62"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ekk0"]
+size = Vector2(9.01764, 8.30659)
+
+[node name="UnnamedCultGirlBoss" type="StaticBody2D"]
+collision_layer = 129
+collision_mask = 0
+script = ExtResource("1_t0foo")
+boss_girl_scene = ExtResource("2_8oa4n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_ruh62")
+flip_h = true
+hframes = 5
+vframes = 5
+frame = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+scale = Vector2(1.6179, 1.66335)
+shape = SubResource("RectangleShape2D_2ekk0")
