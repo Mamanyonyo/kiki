@@ -175,7 +175,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_vfh16"]
 resource_name = "book_attack_spell_aimed_down"
-length = 0.4
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -203,7 +203,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_2dfr1"]
 resource_name = "book_attack_spell_aimed_side"
-length = 0.4
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -219,7 +219,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_wynwj"]
 resource_name = "book_attack_spell_aimed_up"
-length = 0.4
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -493,7 +493,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_vso7m"]
 resource_name = "staff_attack_spell_aimed_down"
-length = 0.4
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -509,7 +509,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_htwjv"]
 resource_name = "staff_attack_spell_aimed_side"
-length = 0.4
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -525,7 +525,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_7ddrh"]
 resource_name = "staff_attack_spell_aimed_up"
-length = 0.4
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -967,7 +967,7 @@ stats_component = NodePath("../StatsComponent")
 editor_description = "items iniciales se pasan por el codigo : p"
 script = ExtResource("6_i0a4a")
 weapon_manager = NodePath("../WeaponManager")
-items = Array[String](["fireball", "hyperborea_buster"])
+items = Array[String](["fireball"])
 
 [node name="ManaComponent" parent="." node_paths=PackedStringArray("hat_manager", "stats_component") instance=ExtResource("8_bg5pb")]
 hat_manager = NodePath("../HatManager")
@@ -1054,10 +1054,11 @@ item_id = "ghost_doll"
 wait_time = 300.0
 one_shot = true
 
-[node name="InteractionComponent" type="Node" parent="." node_paths=PackedStringArray("player", "sprite_component")]
+[node name="InteractionComponent" type="Node" parent="." node_paths=PackedStringArray("player", "sprite_component", "interaction_marker")]
 script = ExtResource("2_5yryk")
 player = NodePath("..")
 sprite_component = NodePath("../SpriteManager")
+interaction_marker = NodePath("../Sprite2D/Interaction")
 
 [node name="PlayerAnimator" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1113,6 +1114,10 @@ gizmo_extents = 3.0
 position = Vector2(29, 3)
 gizmo_extents = 3.0
 
+[node name="Interaction" type="Marker2D" parent="Sprite2D"]
+position = Vector2(0, 6)
+gizmo_extents = 2.0
+
 [node name="Middle" type="Marker2D" parent="Sprite2D"]
 
 [node name="EventArea2D" type="Area2D" parent="Sprite2D"]
@@ -1158,6 +1163,7 @@ collision_mask = 256
 stats_component = NodePath("../../StatsComponent")
 health_component = NodePath("../../HealthComponent")
 parent = NodePath("../..")
+damage_timer_enable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HurtboxComponent"]
 shape = SubResource("CircleShape2D_4tx4m")

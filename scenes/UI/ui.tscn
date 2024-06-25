@@ -288,6 +288,7 @@ theme_override_font_sizes/font_size = 8
 text = "+"
 
 [node name="Stat4" type="HBoxContainer" parent="CanvasLayer/BoxContainer/ColorRect/VBoxContainer/MarginContainer5/GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6

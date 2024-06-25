@@ -20,7 +20,7 @@ func on_stats_component_ready():
 	for prop in script_properties:
 		if prop.type == 3:
 			stats_component[prop.name] += increments * default_stat_increment
-	drop_component.experience = increments * drop_component.experience
+	if drop_component: drop_component.experience = increments * drop_component.experience
 
 ##TODO escalar al terminar wave
 func on_wave_end():

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://8tpg5227nwx7"]
+[gd_scene load_steps=11 format=3 uid="uid://8tpg5227nwx7"]
 
 [ext_resource type="Script" path="res://scenes/game_object/door.gd" id="1_g2b1g"]
 [ext_resource type="Texture2D" uid="uid://1w1arecq3cnw" path="res://free_assets/Tiles/tile_0045.png" id="1_jh3gp"]
 [ext_resource type="PackedScene" uid="uid://cquarnyd0pw5t" path="res://scenes/components/health_component.tscn" id="2_qnqbo"]
 [ext_resource type="PackedScene" uid="uid://cw2upt4misqqn" path="res://scenes/components/name_component.tscn" id="3_vbk8u"]
 [ext_resource type="PackedScene" uid="uid://46gkkjx61fwg" path="res://scenes/components/stats_component.tscn" id="4_ug0t3"]
+[ext_resource type="PackedScene" uid="uid://ebogf22k6g7e" path="res://scenes/components/wave_scale_component.tscn" id="5_0wdm2"]
 [ext_resource type="PackedScene" uid="uid://civstynml3v51" path="res://scenes/components/hurtbox_component.tscn" id="5_miu7n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nxlux"]
@@ -27,6 +28,10 @@ types = Array[String]([])
 display_name = "Door"
 
 [node name="StatsComponent" parent="." instance=ExtResource("4_ug0t3")]
+
+[node name="WaveScaleComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("5_0wdm2")]
+stats_component = NodePath("../StatsComponent")
+default_stat_increment = 5
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("stats_component", "health_component", "parent") instance=ExtResource("5_miu7n")]
 stats_component = NodePath("../StatsComponent")

@@ -25,8 +25,8 @@ func _ready():
 	game_events.open_door.connect(open_door)
 	rotate_according_to_dir()
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	GameEvents.emit_try_door_open(id, price)
+#func _on_area_2d_area_entered(area: Area2D) -> void:
+	#GameEvents.emit_try_door_open(id, price)
 
 func open_door(tried_id: int):
 	if id != tried_id: return

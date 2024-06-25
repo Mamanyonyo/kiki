@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dnd36yjducis1" path="res://scenes/components/sfx/projectile_sfx.tscn" id="3_w4g7s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5m6v6"]
-radius = 2.0
+radius = 8.0
 
 [node name="Bullet" type="Area2D" groups=["projectile"]]
 y_sort_enabled = true
@@ -19,7 +19,7 @@ position = Vector2(7, 0)
 texture = ExtResource("1_hq8x1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(9, 0)
+position = Vector2(7, 0)
 shape = SubResource("CircleShape2D_5m6v6")
 
 [node name="Timer" type="Timer" parent="."]

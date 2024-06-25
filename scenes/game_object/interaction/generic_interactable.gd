@@ -7,13 +7,12 @@ class_name GenericInteractable extends Node2D
 
 signal finish
 
+func ready():
+	DialogueManager.dialogue_ended.connect(on_finish_dialogue)
 
 func interaction():
-	if dialogue:
-		DialogueManager.show_dialogue_balloon(dialogue, title)
-		DialogueManager.dialogue_ended.connect(on_finish_dialogue)
-	else: 
-		finish_interaction()
+	if dialogue: DialogueManager.show_dialogue_balloon(dialogue, title)
+	else: finish_interaction()
 	
 func finish_interaction():
 	finish.emit()

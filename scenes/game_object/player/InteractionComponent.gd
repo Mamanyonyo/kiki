@@ -2,6 +2,7 @@ extends Node
 
 @export var player : Player
 @export var sprite_component : SpriteManager
+@export var interaction_marker : Marker2D
 
 func _ready():
 	DialogueManager.dialogue_ended.connect(on_dialogue_end)
@@ -12,7 +13,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func check_interaction():
 	if Input.is_action_just_pressed("attack"):
 		var space_state = player.get_world_2d().direct_space_state
-		var query = PhysicsRayQueryParameters2D.create(player.middle.global_position, player.middle.global_position + player.sprite_manager.get_facing_direction() * 20)
+		var query = PhysicsRayQueryParameters2D.create(interaction_marker.global_position, interaction_marker.global_position + player.sprite_manager.get_facing_direction() * 20)
 		query.collision_mask = 0x80
 		var result = space_state.intersect_ray(query)
 		if result != { }:

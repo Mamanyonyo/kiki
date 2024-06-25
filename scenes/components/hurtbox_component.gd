@@ -4,12 +4,13 @@ class_name HurtboxComponent
 @export var stats_component: StatsComponent
 @export var health_component: HealthComponent
 @export var parent : Node2D
+@export var damage_timer_enable = false
 @onready var damage_timer : Timer = $DamageIntervalTimer
 var colliding_areas = []
 var paralyzer
 
 func check_deal_damage():
-	if colliding_areas.size() == 0 || !damage_timer.is_stopped(): return
+	if colliding_areas.size() == 0 || (damage_timer_enable && !damage_timer.is_stopped()): return
 	
 	for other_area in colliding_areas:
 		if other_area.is_in_group("projectile"):
