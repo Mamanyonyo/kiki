@@ -70,6 +70,4 @@ func _on_health_component_died() -> void:
 
 func set_sprite():
 	if direction != Vector2.UP: door_sprite_name += "_side"
-	var image = Image.load_from_file("res://assets/environment/door/" + door_sprite_name + ".png")
-	var texture = ImageTexture.create_from_image(image)
-	sprite.texture = texture
+	sprite.texture = load("res://assets/environment/door/" + door_sprite_name + ".png")

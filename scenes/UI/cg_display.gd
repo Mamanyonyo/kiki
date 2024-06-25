@@ -12,8 +12,7 @@ func _process(delta: float) -> void:
 	pass
 
 func on_show_cg(path):
-	var image = Image.load_from_file(path)
-	texture = ImageTexture.create_from_image(image)
+	texture = load(path)
 	visible = true
 	
 func on_stop_cg():

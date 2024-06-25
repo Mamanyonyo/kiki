@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://boh3510we3axq"]
+[gd_scene load_steps=13 format=3 uid="uid://boh3510we3axq"]
 
 [ext_resource type="PackedScene" uid="uid://bbr11er26thtr" path="res://scenes/manager/canvas_modulate.tscn" id="1_1m3k1"]
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="1_2mbce"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://ca2gvkwc20xwd" path="res://scenes/manager/spawn_manager.tscn" id="7_oq6j0"]
 [ext_resource type="PackedScene" uid="uid://ik8qc0h2fhf" path="res://scenes/manager/pause_manager.tscn" id="8_pyes6"]
 [ext_resource type="Script" path="res://scenes/manager/spawn_manager.gd" id="8_xrb60"]
-[ext_resource type="Script" path="res://scenes/manager/pause_manager.gd" id="9_qg4wj"]
 [ext_resource type="PackedScene" uid="uid://dbhqp6kk7g2ke" path="res://scenes/areas/main_area.tscn" id="11_sxqim"]
 
 [node name="Main" type="Node2D"]
@@ -33,7 +32,6 @@ script = ExtResource("8_xrb60")
 [node name="Sound" parent="Managers" instance=ExtResource("7_0prbt")]
 
 [node name="PauseManager" parent="Managers" instance=ExtResource("8_pyes6")]
-script = ExtResource("9_qg4wj")
 
 [node name="GameCamera" parent="." instance=ExtResource("1_2mbce")]
 

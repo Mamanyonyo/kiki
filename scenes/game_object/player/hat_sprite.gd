@@ -27,8 +27,7 @@ func _on_hat_manager_item_equip() -> void:
 	if hat_data.has("offset"): 
 		offset.y = hat_data.offset
 	
-	var image = Image.load_from_file("res://assets/hat/" + hat_manager.current_controller.item_id + ".png")
-	texture = ImageTexture.create_from_image(image)
+	texture = load("res://assets/hat/" + hat_manager.current_controller.item_id + ".png")
 
 func _on_player_animator_animation_finished(anim_name: StringName) -> void:
 	position.y = default_y

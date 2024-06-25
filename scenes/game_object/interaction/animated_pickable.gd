@@ -18,5 +18,4 @@ func set_data(id):
 	var icon = set_icon("res://assets/icon/" + id + ".png")
 
 func set_icon(path):
-	var image = Image.load_from_file(path)
-	$Sprite2D.texture = ImageTexture.create_from_image(image)
+	$Sprite2D.texture = load(path)

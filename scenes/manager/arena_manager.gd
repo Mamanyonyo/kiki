@@ -9,6 +9,8 @@ var spawned = 0
 func _ready():
 	GameEvents.enemy_died.connect(on_enemy_died)
 	GameEvents.wave_enemy_spawned.connect(on_wave_enemy_spawned)
+	GameEvents.wave_in_course = false
+	GameEvents.wave = 0
 	timer.start()
 
 func get_remaining_time():

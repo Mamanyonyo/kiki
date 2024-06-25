@@ -26,8 +26,7 @@ func set_data(new_item_name, new_price, new_shop_component):
 func set_icon() -> void:
 	var filename = item_name
 	if DataImport.skill_data.has(item_name): filename = "spell_default"
-	var image = Image.load_from_file("res://assets/icon/" + filename + ".png")
-	rect.texture = ImageTexture.create_from_image(image)
+	rect.texture = load("res://assets/icon/" + filename + ".png")
 
 
 func _on_gui_input(event: InputEvent) -> void:
