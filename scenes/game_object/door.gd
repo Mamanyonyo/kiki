@@ -7,6 +7,7 @@ extends Node2D
 @export var wall_height : int = 0
 @export var id : int = 0
 @export var door_sprite_name = "wood"
+@export var set_sprite_by_img_name = true
 
 @onready var sprite = $Sprite2D
 
@@ -69,5 +70,6 @@ func _on_health_component_died() -> void:
 	open_door(id)
 
 func set_sprite():
+	if !set_sprite_by_img_name: return
 	if direction != Vector2.UP: door_sprite_name += "_side"
 	sprite.texture = load("res://assets/environment/door/" + door_sprite_name + ".png")

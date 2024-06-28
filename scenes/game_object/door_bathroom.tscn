@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://ciwgpa6iih4sf"]
+
+[ext_resource type="PackedScene" uid="uid://8tpg5227nwx7" path="res://scenes/game_object/door.tscn" id="1_k7hdy"]
+[ext_resource type="Texture2D" uid="uid://dduq10mcvns81" path="res://assets/environment/door/bathroom.png" id="2_q0phu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3tfgn"]
+size = Vector2(16, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tr1ak"]
+radius = 3.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6bgys"]
+size = Vector2(16, 19)
+
+[node name="Door" instance=ExtResource("1_k7hdy")]
+
+[node name="CollisionShape2D" parent="HurtboxComponent" index="2"]
+position = Vector2(8, 17)
+shape = SubResource("RectangleShape2D_3tfgn")
+
+[node name="Sprite2D" parent="." index="5"]
+position = Vector2(8, 16)
+texture = ExtResource("2_q0phu")
+
+[node name="CollisionShape2D" parent="Sprite2D/Area2D" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_tr1ak")
+
+[node name="CollisionShape2D" parent="Sprite2D/StaticBody2D" index="0"]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_6bgys")

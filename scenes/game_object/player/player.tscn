@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=63 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
 [ext_resource type="Script" path="res://scenes/game_object/player/InteractionComponent.gd" id="2_5yryk"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" path="res://scenes/game_object/player/ghost_doll_controller.gd" id="14_vx5k6"]
 [ext_resource type="Script" path="res://scenes/game_object/player/hat_sprite.gd" id="16_q1fq0"]
 [ext_resource type="Script" path="res://scenes/game_object/player/timers.gd" id="18_cbevg"]
+[ext_resource type="PackedScene" uid="uid://u1eixj1u5y0k" path="res://scenes/effect/cast_circle.tscn" id="24_4brpu"]
 [ext_resource type="PackedScene" uid="uid://civstynml3v51" path="res://scenes/components/hurtbox_component.tscn" id="26_tu18r"]
 
 [sub_resource type="Animation" id="Animation_ykp00"]
@@ -923,6 +924,7 @@ radius = 8.06226
 radius = 5.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "middle", "stats_component") groups=["Ally", "Player"]]
+y_sort_enabled = true
 collision_layer = 2
 collision_mask = 65
 motion_mode = 1
@@ -1066,15 +1068,8 @@ libraries = {
 }
 speed_scale = 2.0
 
-[node name="PlayerFloor" type="Node2D" parent="." groups=["floor_layer"]]
-z_as_relative = false
-position = Vector2(-8, 0)
-
-[node name="HealthBar" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_tuvcl")]
-health_component = NodePath("../HealthComponent")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_as_relative = false
+z_index = 1
 position = Vector2(0, -16)
 texture = ExtResource("4_3kvbw")
 hframes = 8
@@ -1168,10 +1163,21 @@ damage_timer_enable = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/HurtboxComponent"]
 shape = SubResource("CircleShape2D_4tx4m")
 
+[node name="HealthBar" parent="Sprite2D" node_paths=PackedStringArray("health_component", "sprite_component") instance=ExtResource("8_tuvcl")]
+offset_top = 16.0
+offset_bottom = 20.0
+health_component = NodePath("../../HealthComponent")
+sprite_component = NodePath("../../SpriteManager")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_5pqvn")
 
+[node name="PlayerFloor" type="Node2D" parent="." groups=["floor_layer"]]
+
+[node name="CastCircle" parent="PlayerFloor" instance=ExtResource("24_4brpu")]
+
+[connection signal="changed_facing_direction" from="SpriteManager" to="Sprite2D/HealthBar" method="_on_sprite_manager_changed_facing_direction"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="grazed" from="GrazeComponent" to="DriveComponent" method="_on_graze_component_grazed"]
 [connection signal="drive_finish" from="DriveComponent" to="." method="_on_drive_component_drive_finish"]

@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="13_8b11r"]
 
 [node name="Main" type="Node2D"]
+y_sort_enabled = true
 
 [node name="CanvasModulate" parent="." instance=ExtResource("1_i0tgm")]
 
@@ -40,19 +41,15 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Pausable" type="Node2D" parent="."]
 process_mode = 1
-
-[node name="Areas" type="Node2D" parent="Pausable" groups=["areas_node"]]
-
-[node name="BathroomEntrance" parent="Pausable/Areas" instance=ExtResource("11_q75vo")]
-position = Vector2(-2407, 281)
-
-[node name="Floor" type="Node2D" parent="Pausable" groups=["floor_layer"]]
+y_sort_enabled = true
 
 [node name="Entities" type="Node2D" parent="Pausable" groups=["entities_layer"]]
+z_index = 1
+z_as_relative = false
 y_sort_enabled = true
 
 [node name="Player" parent="Pausable/Entities" instance=ExtResource("13_8b11r")]
-position = Vector2(319, 64)
+position = Vector2(314, 189)
 
 [node name="StatsComponent" parent="Pausable/Entities/Player" index="3"]
 max_mana = 9.22337e+18
@@ -60,6 +57,15 @@ max_mana_reg = 9.22337e+18
 
 [node name="SpellsComponent" parent="Pausable/Entities/Player" index="6"]
 items = Array[String](["fireball", "teleport"])
+
+[node name="Areas" type="Node2D" parent="Pausable" groups=["areas_node"]]
+y_sort_enabled = true
+
+[node name="BathroomEntrance" parent="Pausable/Areas" instance=ExtResource("11_q75vo")]
+y_sort_enabled = true
+position = Vector2(-2407, 281)
+
+[node name="Floor" type="Node2D" parent="Pausable" groups=["floor_layer"]]
 
 [node name="Foreground" type="CanvasLayer" parent="." groups=["foreground_layer"]]
 follow_viewport_enabled = true

@@ -119,7 +119,6 @@ _data = {
 }
 
 [node name="CastCircle" type="Node2D"]
-z_as_relative = false
 script = ExtResource("1_cy01q")
 
 [node name="FadeInAndOut" type="AnimationPlayer" parent="."]
@@ -136,7 +135,6 @@ libraries = {
 autoplay = "spin"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_as_relative = false
 texture = ExtResource("2_547om")
 
 [node name="Timer" type="Timer" parent="."]
