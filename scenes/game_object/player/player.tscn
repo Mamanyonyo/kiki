@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://bt0gofikr4hk1"]
+[gd_scene load_steps=62 format=3 uid="uid://bt0gofikr4hk1"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_qthq0"]
 [ext_resource type="Script" path="res://scenes/game_object/player/InteractionComponent.gd" id="2_5yryk"]
@@ -26,7 +26,6 @@
 [ext_resource type="Script" path="res://scenes/game_object/player/ghost_doll_controller.gd" id="14_vx5k6"]
 [ext_resource type="Script" path="res://scenes/game_object/player/hat_sprite.gd" id="16_q1fq0"]
 [ext_resource type="Script" path="res://scenes/game_object/player/timers.gd" id="18_cbevg"]
-[ext_resource type="PackedScene" uid="uid://u1eixj1u5y0k" path="res://scenes/effect/cast_circle.tscn" id="24_4brpu"]
 [ext_resource type="PackedScene" uid="uid://civstynml3v51" path="res://scenes/components/hurtbox_component.tscn" id="26_tu18r"]
 
 [sub_resource type="Animation" id="Animation_ykp00"]
@@ -1172,10 +1171,6 @@ sprite_component = NodePath("../../SpriteManager")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_5pqvn")
-
-[node name="PlayerFloor" type="Node2D" parent="." groups=["floor_layer"]]
-
-[node name="CastCircle" parent="PlayerFloor" instance=ExtResource("24_4brpu")]
 
 [connection signal="changed_facing_direction" from="SpriteManager" to="Sprite2D/HealthBar" method="_on_sprite_manager_changed_facing_direction"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
