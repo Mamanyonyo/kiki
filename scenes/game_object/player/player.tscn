@@ -1067,10 +1067,12 @@ libraries = {
 }
 speed_scale = 2.0
 
+[node name="PlayerFloor" type="Node2D" parent="."]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 1
-position = Vector2(0, -16)
+y_sort_enabled = true
 texture = ExtResource("4_3kvbw")
+offset = Vector2(0, -16)
 hframes = 8
 vframes = 10
 region_filter_clip_enabled = true
@@ -1083,6 +1085,7 @@ player = NodePath("../..")
 hat_manager = NodePath("../../HatManager")
 
 [node name="ProjectileMarkers" type="Node2D" parent="Sprite2D"]
+position = Vector2(0, -15)
 
 [node name="StaffBulletSpawnSide" type="Marker2D" parent="Sprite2D/ProjectileMarkers"]
 position = Vector2(22, 5)
@@ -1109,13 +1112,14 @@ position = Vector2(29, 3)
 gizmo_extents = 3.0
 
 [node name="Interaction" type="Marker2D" parent="Sprite2D"]
-position = Vector2(0, 6)
+position = Vector2(0, -9)
 gizmo_extents = 2.0
 
 [node name="Middle" type="Marker2D" parent="Sprite2D"]
+position = Vector2(0, -15)
 
 [node name="EventArea2D" type="Area2D" parent="Sprite2D"]
-position = Vector2(0, 8)
+position = Vector2(0, -7)
 collision_layer = 48
 collision_mask = 0
 
@@ -1124,7 +1128,7 @@ position = Vector2(0, -6)
 shape = SubResource("CircleShape2D_xg3yu")
 
 [node name="PlayerHurtbox" type="Area2D" parent="Sprite2D"]
-position = Vector2(0, 6)
+position = Vector2(0, -9)
 collision_layer = 0
 collision_mask = 264
 
@@ -1142,6 +1146,7 @@ shape = SubResource("CircleShape2D_6eogp")
 
 [node name="WeaponHitbox" parent="Sprite2D" node_paths=PackedStringArray("attacker") instance=ExtResource("7_6vy27")]
 z_as_relative = false
+position = Vector2(0, -15)
 monitoring = false
 attacker = NodePath("../..")
 
@@ -1151,7 +1156,7 @@ shape = SubResource("RectangleShape2D_xeg0d")
 disabled = true
 
 [node name="HurtboxComponent" parent="Sprite2D" node_paths=PackedStringArray("stats_component", "health_component", "parent") instance=ExtResource("26_tu18r")]
-position = Vector2(0, 3)
+position = Vector2(0, -12)
 collision_layer = 512
 collision_mask = 256
 stats_component = NodePath("../../StatsComponent")
@@ -1163,8 +1168,8 @@ damage_timer_enable = true
 shape = SubResource("CircleShape2D_4tx4m")
 
 [node name="HealthBar" parent="Sprite2D" node_paths=PackedStringArray("health_component", "sprite_component") instance=ExtResource("8_tuvcl")]
-offset_top = 16.0
-offset_bottom = 20.0
+offset_top = 1.0
+offset_bottom = 5.0
 health_component = NodePath("../../HealthComponent")
 sprite_component = NodePath("../../SpriteManager")
 
