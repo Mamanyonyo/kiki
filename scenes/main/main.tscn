@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dbhqp6kk7g2ke" path="res://scenes/areas/main_area.tscn" id="11_sxqim"]
 
 [node name="Main" type="Node2D"]
+y_sort_enabled = true
 
 [node name="CanvasModulate" parent="." instance=ExtResource("1_1m3k1")]
 
@@ -40,8 +41,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Pausable" type="Node2D" parent="."]
 process_mode = 1
+y_sort_enabled = true
 
 [node name="Areas" type="Node2D" parent="Pausable" groups=["areas_node"]]
+y_sort_enabled = true
 
 [node name="MainArea" parent="Pausable/Areas" instance=ExtResource("11_sxqim")]
 position = Vector2(0, 433)
@@ -49,6 +52,7 @@ position = Vector2(0, 433)
 [node name="Floor" type="Node2D" parent="Pausable" groups=["floor_layer"]]
 
 [node name="Entities" type="Node2D" parent="Pausable" groups=["entities_layer"]]
+z_index = 1
 y_sort_enabled = true
 
 [node name="Player" parent="Pausable/Entities" instance=ExtResource("3_hl5nt")]

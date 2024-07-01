@@ -77,12 +77,13 @@ func teleport():
 	var valid = true
 	for direction in directions:
 		var query = PhysicsRayQueryParameters2D.create(player.global_position, player.global_position + direction * RAYCAST_DISTANCE, pow(2, 1-1) + pow(2, 7-1))
-		query.exclude = [player]
 		var result = space_state.intersect_ray(query)
 		if result:
 			if !result.collider is TileMap: 
 				hit.push_front(result)
 				continue
+			if result.position.distance_to(player.global_position) <= 1:
+					valid = false
 			var tilemap = result.collider as TileMap
 			var tile_coords = tilemap.get_coords_for_body_rid(result.rid)
 			var tile_layer = tilemap.get_layer_for_body_rid(result.rid)
@@ -93,10 +94,16 @@ func teleport():
 					else: valid = false
 			else:
 				hit.push_front(result)
+			var click_coords_to_local = tilemap.local_to_map(tilemap.to_local(player.global_position))
+			for layer in tilemap.get_layers_count():
+				var tile_data = tilemap.get_cell_tile_data(layer, click_coords_to_local) as TileData
+				if tile_data:
+					if tile_data.get_collision_polygons_count(0) > 0 || tile_data.get_collision_polygons_count(1) > 0: 
+						valid = false
 		else: valid = false
 	if !valid && !GameEvents.debug:
 		player.global_position = previous_pos
-		player.health_component.damage(3)
+		#player.health_component.damage(3)
 		return
 		##TODO tpear al player al tile mas cercano
 	get_tree().get_first_node_in_group("sound").play("Teleport")

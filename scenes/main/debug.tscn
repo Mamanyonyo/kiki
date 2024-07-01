@@ -9,8 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cqafyivvlnn1c" path="res://scenes/components/sfx/sound.tscn" id="7_qeup0"]
 [ext_resource type="PackedScene" uid="uid://ik8qc0h2fhf" path="res://scenes/manager/pause_manager.tscn" id="8_nm2oi"]
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="10_oq4em"]
-[ext_resource type="PackedScene" uid="uid://4cdhdu7q1t6b" path="res://scenes/areas/bathroom/entrance.tscn" id="11_q75vo"]
 [ext_resource type="PackedScene" uid="uid://du25e0wl2obi1" path="res://scenes/UI/ui.tscn" id="11_qj680"]
+[ext_resource type="PackedScene" uid="uid://dbhqp6kk7g2ke" path="res://scenes/areas/main_area.tscn" id="12_g3wav"]
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="13_8b11r"]
 
 [node name="Main" type="Node2D"]
@@ -61,9 +61,8 @@ items = Array[String](["fireball", "teleport"])
 [node name="Areas" type="Node2D" parent="Pausable" groups=["areas_node"]]
 y_sort_enabled = true
 
-[node name="BathroomEntrance" parent="Pausable/Areas" instance=ExtResource("11_q75vo")]
-y_sort_enabled = true
-position = Vector2(-2407, 281)
+[node name="MainArea" parent="Pausable/Areas" instance=ExtResource("12_g3wav")]
+position = Vector2(-72.0575, 571.439)
 
 [node name="Floor" type="Node2D" parent="Pausable" groups=["floor_layer"]]
 
