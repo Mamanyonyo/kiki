@@ -22,7 +22,7 @@ func fight_start():
 	top = block_layer + 1
 	tilemap.add_layer(top)
 	ghost_instance.top = block_layer + 1
-	ghost_health_comp.died.connect(on_ghost_death)
+	ghost_instance.tree_exited.connect(on_ghost_left)
 	var entities_layer = get_tree().get_first_node_in_group("entities_layer")
 	entities_layer.call_deferred("add_child", ghost_instance)
 	set_deferred("monitoring", false)
@@ -32,6 +32,6 @@ func _on_area_entered(area):
 		tilemap.set_layer_enabled(block_layer, true)
 		fight_start()
 		
-func on_ghost_death():
+func on_ghost_left():
 	tilemap.set_layer_enabled(block_layer, false)
 	tilemap.set_layer_enabled(top, false)

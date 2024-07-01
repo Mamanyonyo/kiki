@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvxtsfqgtf12l"]
+
+[ext_resource type="Script" path="res://scenes/components/free_on_player_death.gd" id="1_3q2ca"]
+
+[node name="FreeOnPlayerDeath" type="Node"]
+script = ExtResource("1_3q2ca")

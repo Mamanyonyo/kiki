@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cijr8ph2qia6t"]
+[gd_scene load_steps=14 format=3 uid="uid://cijr8ph2qia6t"]
 
 [ext_resource type="Script" path="res://scenes/game_object/enemies/mini_boss/bathroom_ghost_boss.gd" id="1_6qcya"]
 [ext_resource type="PackedScene" uid="uid://cqurns0kyxmsl" path="res://scenes/game_object/enemies/basic_enemy/basic_enemy.tscn" id="1_wfog3"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scenes/components/state_machine/enemy/bathroom_ghost_boss/ghost_chase.gd" id="4_sqh22"]
 [ext_resource type="Script" path="res://scenes/components/state_machine/enemy/bathroom_ghost_boss/in_toilet.gd" id="5_blthg"]
 [ext_resource type="Texture2D" uid="uid://dfh8xqth57l17" path="res://assets/enemy/ghost.png" id="5_cpmfm"]
+[ext_resource type="PackedScene" uid="uid://bvxtsfqgtf12l" path="res://scenes/components/free_on_player_death.tscn" id="5_pguf1"]
 [ext_resource type="Script" path="res://scenes/components/state_machine/enemy/bathroom_ghost_boss/chase_closest_toilet.gd" id="5_tmgdx"]
 [ext_resource type="Script" path="res://scenes/components/state_machine/enemy/bathroom_ghost_boss/ghost_jump_attack.gd" id="7_6r6dc"]
 
@@ -42,11 +43,13 @@ hit_flash_material = SubResource("ShaderMaterial_rdtpk")
 types = Array[String]([])
 display_name = "Yuki"
 
-[node name="JumpCD" type="Timer" parent="." index="7"]
+[node name="FreeOnPlayerDeath" parent="." index="7" instance=ExtResource("5_pguf1")]
+
+[node name="JumpCD" type="Timer" parent="." index="8"]
 wait_time = 2.5
 one_shot = true
 
-[node name="BasicEnemyStateMachine" parent="." index="8" node_paths=PackedStringArray("current_state")]
+[node name="BasicEnemyStateMachine" parent="." index="9" node_paths=PackedStringArray("current_state")]
 current_state = NodePath("ChasePlayer")
 
 [node name="ChasePlayer" parent="BasicEnemyStateMachine" index="2" node_paths=PackedStringArray("stats", "health_component", "shape", "sprite")]
@@ -80,11 +83,11 @@ collision_shape = NodePath("../../CollisionShape2D")
 velocity_component = NodePath("../../VelocityComponent")
 stats_component = NodePath("../../StatsComponent")
 
-[node name="HurtboxComponent#CollisionShape2D" type="CollisionShape2D" parent="." index="11"]
+[node name="HurtboxComponent#CollisionShape2D" type="CollisionShape2D" parent="." index="12"]
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_kgmmg")
 
-[node name="Sprite2D" parent="." index="12"]
+[node name="Sprite2D" parent="." index="13"]
 position = Vector2(0, -16)
 texture = ExtResource("5_cpmfm")
 hframes = 3
