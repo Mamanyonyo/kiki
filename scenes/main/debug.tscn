@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cysw024ja3ol7"]
+[gd_scene load_steps=14 format=3 uid="uid://cysw024ja3ol7"]
 
 [ext_resource type="PackedScene" uid="uid://bbr11er26thtr" path="res://scenes/manager/canvas_modulate.tscn" id="1_i0tgm"]
 [ext_resource type="PackedScene" uid="uid://bn8lxmboaxj3i" path="res://scenes/manager/arena_manager.tscn" id="2_0ux23"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bcr2gfqx53gbd" path="res://scenes/game_camera/game_camera.tscn" id="10_oq4em"]
 [ext_resource type="PackedScene" uid="uid://du25e0wl2obi1" path="res://scenes/UI/ui.tscn" id="11_qj680"]
 [ext_resource type="PackedScene" uid="uid://dbhqp6kk7g2ke" path="res://scenes/areas/main_area.tscn" id="12_g3wav"]
+[ext_resource type="PackedScene" uid="uid://byev3xgkkm41l" path="res://scenes/game_object/enemies/basic_enemy/naginata_thug.tscn" id="12_m7p6k"]
 [ext_resource type="PackedScene" uid="uid://bt0gofikr4hk1" path="res://scenes/game_object/player/player.tscn" id="13_8b11r"]
 
 [node name="Main" type="Node2D"]
@@ -57,6 +58,9 @@ max_mana_reg = 9.22337e+18
 
 [node name="SpellsComponent" parent="Pausable/Entities/Player" index="6"]
 items = Array[String](["fireball", "teleport"])
+
+[node name="BasicEnemy" parent="Pausable/Entities" instance=ExtResource("12_m7p6k")]
+position = Vector2(254, 191)
 
 [node name="Areas" type="Node2D" parent="Pausable" groups=["areas_node"]]
 y_sort_enabled = true

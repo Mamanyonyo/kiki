@@ -20,9 +20,6 @@ radius = 12.0416
 [sub_resource type="CircleShape2D" id="CircleShape2D_xxkx6"]
 radius = 38.0132
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_tm3x5"]
-radius = 6.0
-
 [sub_resource type="Animation" id="Animation_32nx5"]
 length = 0.001
 tracks/0/type = "value"
@@ -292,6 +289,9 @@ _data = {
 "walk_up": SubResource("Animation_422m3")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tm3x5"]
+radius = 6.0
+
 [node name="BasicEnemy" instance=ExtResource("1_r0o4k")]
 
 [node name="SpriteManager" parent="." index="0" node_paths=PackedStringArray("animator", "sprite", "melee_hitbox") instance=ExtResource("2_s1wmq")]
@@ -300,19 +300,19 @@ sprite = NodePath("../Sprite2D")
 melee_hitbox = NodePath("../Sprite2D/HitboxComponent")
 sprite_down_default = 1.0
 
-[node name="StatsComponent" parent="." index="1"]
+[node name="StatsComponent" parent="." index="2"]
 max_damage = 5.0
 
-[node name="HitFlashComponent" parent="." index="5"]
+[node name="HitFlashComponent" parent="." index="6"]
 hit_flash_material = SubResource("ShaderMaterial_ss288")
 
-[node name="NameComponent" parent="." index="6"]
+[node name="NameComponent" parent="." index="7"]
 types = Array[String](["thug"])
 
 [node name="ChasePlayer" parent="BasicEnemyStateMachine" index="2" node_paths=PackedStringArray("sprite_manager")]
 sprite_manager = NodePath("../../SpriteManager")
 
-[node name="Sprite2D" parent="." index="10"]
+[node name="Sprite2D" parent="." index="11"]
 position = Vector2(0, -20)
 texture = ExtResource("4_xy6u6")
 hframes = 5
@@ -337,11 +337,11 @@ animation_prefix = "melee_attack"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/PlayerHurtboxTracker" index="0"]
 shape = SubResource("CircleShape2D_xxkx6")
 
-[node name="CollisionShape2D" parent="." index="11"]
-position = Vector2(0, -5)
-shape = SubResource("CircleShape2D_tm3x5")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="12"]
 libraries = {
 "": SubResource("AnimationLibrary_mgxu2")
 }
+
+[node name="CollisionShape2D" parent="." index="13"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_tm3x5")
