@@ -8,5 +8,4 @@ func _ready() -> void:
 	GameEvents.toilet_puzzle_complete.connect(on_complete)
 	
 func on_complete():
-	process_mode = 0 # = Mode: Inherit
 	show()

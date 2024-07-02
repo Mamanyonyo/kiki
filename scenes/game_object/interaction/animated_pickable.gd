@@ -9,13 +9,14 @@ func _ready():
 	var anim : Animation = player.get_animation("float")
 	anim.loop_mode = Animation.LOOP_LINEAR
 	player.play("float")
-
-func _on_pickable_tree_exited() -> void:
-	queue_free()
-
+	
 func set_data(id):
 	$Sprite2D/Pickable.set_data(id)
-	var icon = set_icon("res://assets/icon/" + id + ".png")
+	set_icon("res://assets/icon/" + id + ".png")
 
 func set_icon(path):
 	$Sprite2D.texture = load(path)
+
+
+func _on_pickable_picked_up() -> void:
+	queue_free()

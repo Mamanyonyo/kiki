@@ -207,6 +207,7 @@ position = Vector2(112, -151)
 position = Vector2(42, -532)
 
 [node name="Entities" type="Node2D" parent="TileMap"]
+position = Vector2(76, -40)
 
 [node name="SpawnerZone" parent="TileMap/Entities" instance=ExtResource("4_tlgwa")]
 position = Vector2(-64, -805)

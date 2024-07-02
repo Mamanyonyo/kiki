@@ -15,7 +15,7 @@ func _ready() -> void:
 		var main_entities_node = get_tree().get_first_node_in_group("entities_layer")
 		for entity in entities_node_array:
 			entity.reparent(main_entities_node)
-		entities_node.queue_free()
+		#entities_node.queue_free()
 	else: print("area " + name + " has no entities node")
 	if has_method("my_ready"):
 		call("my_ready")

@@ -67,9 +67,12 @@ _data = {
 }
 
 [node name="AnimatedPickable" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_c08jy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
 texture = ExtResource("2_xu5wb")
 
 [node name="Pickable" parent="Sprite2D" instance=ExtResource("2_hrtcw")]
